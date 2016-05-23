@@ -32,6 +32,7 @@ class LBMainViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
         locationService.startUpdatingUserLocation()
         self.mapView.showsUserLocation = true
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
