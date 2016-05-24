@@ -26,10 +26,11 @@ class LBContainerViewController: UIViewController {
         }
     }
     var rightViewController: LBBeaconRangingViewController?
-    let centerPanelExpandedOffset: CGFloat = 300 //!!!!BOUNDS CALCULATION FOR DEVICES
+    let centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 300
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
         centerViewController = UIStoryboard.centerViewController()
         centerViewController.delegate = self
         centerNavigationController = UINavigationController(rootViewController: centerViewController)
@@ -40,7 +41,7 @@ class LBContainerViewController: UIViewController {
         //WiFi-Button Implementation
         let button   = UIButton(type: UIButtonType.System) as UIButton
         //right position for button: x, y, width, height!!!
-        button.frame = CGRectMake(300, 300, 100, 50)
+        button.frame = CGRectMake(screenSize.width - 150, screenSize.height - 300, 100, 50)
         button.backgroundColor = UIColor.greenColor()
         button.setTitle("Test Button", forState: UIControlState.Normal)
         button.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
