@@ -10,12 +10,18 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol LBMainViewControllerDelegate {
+    func toggleRightPanel()
+    func collapseSidePanel()
+}
+
 class LBMainViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
     
     var currentBeacons = [CLBeacon]()
     private var locationService = LBLocationService()
+    var delegate: LBMainViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +32,7 @@ class LBMainViewController: UIViewController {
         let radarButton = UIButton()
         radarButton.frame = CGRectMake(0, 0, 22, 22)
         radarButton.setImage(radar, forState: .Normal)
-        radarButton.addTarget(self, action: #selector(LBMainViewController.showBeaconRangingView), forControlEvents: .TouchUpInside)
+        radarButton.addTarget(self, action: #selector(LBMainViewController.triggerBeaconRangingView), forControlEvents: .TouchUpInside)
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = radarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
@@ -42,10 +48,14 @@ class LBMainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func showBeaconRangingView()
+    @IBAction func triggerBeaconRangingView(sender: UITabBarItem)
     {
+        //show
+        delegate?.toggleRightPanel()
+        //hide
         
     }
+    
     
 }
 
@@ -184,6 +194,11 @@ extension LBMainViewController: LBLocationServiceDelegate
         }
     }
 
+}
+
+extension LBMainViewController: LBBeaconRangingViewControllerDelegate
+{
+    
 }
 
     

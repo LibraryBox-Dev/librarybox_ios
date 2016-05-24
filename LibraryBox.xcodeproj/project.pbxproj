@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */; };
+		63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */; };
+		63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */; };
+		63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 63BB3FB21CF3B38D00EF88E8 /* TODO */; };
 		63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */; };
 		63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */; };
 		63E33EA01CF2E7A9005F6F5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E33E9E1CF2E7A9005F6F5C /* Main.storyboard */; };
@@ -37,6 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBContainerViewController.swift; sourceTree = "<group>"; };
+		63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBeaconRangingView.swift; sourceTree = "<group>"; };
+		63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBeaconRangingViewController.swift; sourceTree = "<group>"; };
+		63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LibraryBox-Bridging-Header.h"; sourceTree = "<group>"; };
+		63BB3FB21CF3B38D00EF88E8 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		63E33E971CF2E7A9005F6F5C /* LibraryBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LibraryBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBMainViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +90,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63BB3FA21CF3A12300EF88E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		63BB3FA51CF3A41900EF88E8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		63BB3FAC1CF3B03800EF88E8 /* External */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
 		63E33E8E1CF2E7A9005F6F5C = {
 			isa = PBXGroup;
 			children = (
@@ -105,7 +137,10 @@
 		63E33E991CF2E7A9005F6F5C /* LibraryBox */ = {
 			isa = PBXGroup;
 			children = (
+				63BB3FAC1CF3B03800EF88E8 /* External */,
+				63BB3FA21CF3A12300EF88E8 /* Views */,
 				63E33ECA1CF2E870005F6F5C /* Controllers */,
+				63BB3FA51CF3A41900EF88E8 /* Helpers */,
 				63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */,
 				63E33ECB1CF2E87B005F6F5C /* Resources */,
 				63E33ECC1CF2E882005F6F5C /* Supporting FIles */,
@@ -135,7 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */,
-				63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */,
+				63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */,
+				636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -153,8 +189,10 @@
 		63E33ECC1CF2E882005F6F5C /* Supporting FIles */ = {
 			isa = PBXGroup;
 			children = (
+				63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */,
 				63E33EA61CF2E7A9005F6F5C /* Info.plist */,
 				63E33ED01CF2F93E005F6F5C /* Licenses */,
+				63BB3FB21CF3B38D00EF88E8 /* TODO */,
 			);
 			name = "Supporting FIles";
 			sourceTree = "<group>";
@@ -273,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E33EA51CF2E7A9005F6F5C /* LaunchScreen.storyboard in Resources */,
+				63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */,
 				63E33EA21CF2E7A9005F6F5C /* Assets.xcassets in Resources */,
 				63E33ED11CF2F93E005F6F5C /* Licenses in Resources */,
 				63E33EA01CF2E7A9005F6F5C /* Main.storyboard in Resources */,
@@ -301,8 +340,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */,
+				63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */,
 				63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */,
 				63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */,
+				636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */,
+				63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,10 +488,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = LibraryBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LibraryBox/LibraryBox-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -457,10 +502,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = LibraryBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LibraryBox/LibraryBox-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -529,6 +576,7 @@
 				63E33EC11CF2E7A9005F6F5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63E33EC21CF2E7A9005F6F5C /* Build configuration list for PBXNativeTarget "LibraryBoxTests" */ = {
 			isa = XCConfigurationList;
@@ -537,6 +585,7 @@
 				63E33EC41CF2E7A9005F6F5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63E33EC51CF2E7A9005F6F5C /* Build configuration list for PBXNativeTarget "LibraryBoxUITests" */ = {
 			isa = XCConfigurationList;
@@ -545,6 +594,7 @@
 				63E33EC71CF2E7A9005F6F5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
