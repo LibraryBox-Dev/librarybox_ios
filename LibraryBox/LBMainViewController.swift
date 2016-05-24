@@ -18,7 +18,7 @@ protocol LBMainViewControllerDelegate {
 class LBMainViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-    
+
     var currentBeacons = [CLBeacon]()
     private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
@@ -38,7 +38,6 @@ class LBMainViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
         locationService.startUpdatingUserLocation()
         self.mapView.showsUserLocation = true
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -50,13 +49,8 @@ class LBMainViewController: UIViewController {
 
     @IBAction func triggerBeaconRangingView(sender: UITabBarItem)
     {
-        //show
         delegate?.toggleRightPanel()
-        //hide
-        
     }
-    
-    
 }
 
 extension LBMainViewController: MKMapViewDelegate {

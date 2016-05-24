@@ -19,7 +19,6 @@ class LBContainerViewController: UIViewController {
     
     var centerNavigationController: UINavigationController!
     var centerViewController: LBMainViewController!
-    
     var currentState: SlideOutState = .Collapsed {
         didSet {
             let needsShowShadow = currentState != .Collapsed
@@ -27,7 +26,6 @@ class LBContainerViewController: UIViewController {
         }
     }
     var rightViewController: LBBeaconRangingViewController?
-    
     let centerPanelExpandedOffset: CGFloat = 300 //!!!!BOUNDS CALCULATION FOR DEVICES
     
     override func viewDidLoad() {
@@ -38,6 +36,15 @@ class LBContainerViewController: UIViewController {
         view.addSubview(centerNavigationController.view)
         addChildViewController(centerNavigationController)
         centerNavigationController.didMoveToParentViewController(self)
+        
+        //WiFi-Button Implementation
+        let button   = UIButton(type: UIButtonType.System) as UIButton
+        //right position for button: x, y, width, height!!!
+        button.frame = CGRectMake(300, 300, 100, 50)
+        button.backgroundColor = UIColor.greenColor()
+        button.setTitle("Test Button", forState: UIControlState.Normal)
+        button.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(button)
     }
     
     func showShadowForCenterViewController(needsShowShadow: Bool) {
@@ -48,9 +55,12 @@ class LBContainerViewController: UIViewController {
         }
     }
     
+    @IBAction func wifiButtonClicked(sender: UIButton)
+    {
+        
+    }
+    
 }
-
-// MARK: CenterViewController delegate
 
 extension LBContainerViewController: LBMainViewControllerDelegate {
     
@@ -105,7 +115,6 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     }
     
 }
-
 
 private extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
