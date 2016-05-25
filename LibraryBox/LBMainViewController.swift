@@ -39,7 +39,6 @@ class LBMainViewController: UIViewController {
         rightBarButton.customView = radarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
         locationService.startUpdatingUserLocation()
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     

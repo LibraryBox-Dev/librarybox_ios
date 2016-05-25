@@ -18,7 +18,7 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
     private var outerRingShape: CAShapeLayer!
     private var circleBGShape: CAShapeLayer!
     
-    var lineWidth: CGFloat = 5.0{
+    var lineWidth: CGFloat = 3.0{
         didSet {
             updateLayerProperties()
         }
@@ -115,7 +115,7 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
         return CGRectInset(self.bounds, lineWidth/2, lineWidth/2)
     }
     
-    func createImage(rect: CGRect) -> UIImage{
+    private func createImage(rect: CGRect) -> UIImage{
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext();
         CGContextSetFillColorWithColor(context,  UIColor.clearColor().CGColor);
@@ -128,12 +128,22 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
     
     private func scanning(){
         self.titleLabel?.removeFromSuperview()
-        //CAAnimation
+        let wifiFillColorAnimation = CABasicAnimation(keyPath: "fillColor")
+        wifiFillColorAnimation.toValue = connectionColor.CGColor
+        wifiFillColorAnimation.duration = 1.5
+        wifiFillColorAnimation.autoreverses = true
+        wifiFillColorAnimation.repeatCount = .infinity
+        if (self.outerRingShape) != nil
+        {
+            outerRingShape.addAnimation(wifiFillColorAnimation, forKey: "scanFill")
+        }
     }
     
     private func connectionReady(){
+        outerRingShape.removeAllAnimations()
         self.addSubview(self.titleLabel!)
         //CAAnimation
+        
     }
     
     
