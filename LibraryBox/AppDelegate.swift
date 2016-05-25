@@ -22,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             watchSession!.delegate = self
             watchSession!.activateSession()
         }
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let containerViewController = LBContainerViewController()
+        window!.rootViewController = containerViewController
+        window!.makeKeyAndVisible()
+
         // Override point for customization after application launch.
         return true
     }

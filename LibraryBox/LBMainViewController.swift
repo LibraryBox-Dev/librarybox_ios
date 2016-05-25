@@ -10,15 +10,24 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol LBMainViewControllerDelegate {
+    func toggleRightPanel()
+    func collapseSidePanel()
+    func startScanningAnimation()
+}
+
 class LBMainViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
+    //@IBOutlet weak var mapContainerView: UIView!
     
     var currentBeacons = [CLBeacon]()
     private var locationService = LBLocationService()
+    var delegate: LBMainViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mapView.showsUserLocation = true
         let userLocationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
         self.navigationItem.leftBarButtonItem = userLocationButton
         self.navigationItem.title = "LibraryBox"
@@ -26,27 +35,30 @@ class LBMainViewController: UIViewController {
         let radarButton = UIButton()
         radarButton.frame = CGRectMake(0, 0, 22, 22)
         radarButton.setImage(radar, forState: .Normal)
-        radarButton.addTarget(self, action: #selector(LBMainViewController.showBeaconRangingView), forControlEvents: .TouchUpInside)
+        radarButton.addTarget(self, action: #selector(LBMainViewController.triggerBeaconRangingView), forControlEvents: .TouchUpInside)
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = radarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
+        locationService.delegate = self
         locationService.startUpdatingUserLocation()
-        self.mapView.showsUserLocation = true
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        //self.mapView.frame = self.view.bounds
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    func showBeaconRangingView()
+    @IBAction func triggerBeaconRangingView(sender: UITabBarItem)
     {
-        
+        delegate?.toggleRightPanel()
     }
-    
 }
 
 extension LBMainViewController: MKMapViewDelegate {
@@ -84,9 +96,13 @@ extension LBMainViewController: LBLocationServiceDelegate
 {
     func monitoringStartedSuccessfully() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            
             //custom wifi-connection view monitoringAnimation
+            
             //self.monitoringActivityIndicator.startAnimating()
         }
+        delegate?.startScanningAnimation()
+
     }
     
     func monitoringStoppedSuccessfully() {
@@ -184,6 +200,11 @@ extension LBMainViewController: LBLocationServiceDelegate
         }
     }
 
+}
+
+extension LBMainViewController: LBBeaconRangingViewControllerDelegate
+{
+    
 }
 
     

@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e32-Ky-Vjv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--Beacon Ranging View Controller-->
+        <scene sceneID="3WB-Mp-cZw">
+            <objects>
+                <viewController storyboardIdentifier="BeaconRangingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nZj-d2-Fod" customClass="LBBeaconRangingViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eGV-SG-eMH"/>
+                        <viewControllerLayoutGuide type="bottom" id="jOa-qc-3Ti"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sxY-65-kub">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-TR-8cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1400" y="1014"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LBMainViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LBMainViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,44 +35,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qtv-IG-Qle">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TbR-BC-Bt2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Qtv-IG-Qle" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="950-eE-jKa"/>
-                            <constraint firstItem="Qtv-IG-Qle" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ASb-Q4-8Mu"/>
-                            <constraint firstAttribute="trailing" secondItem="Qtv-IG-Qle" secondAttribute="trailing" id="Wxz-fV-r07"/>
-                            <constraint firstItem="Qtv-IG-Qle" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Yg5-ta-CDd"/>
+                            <constraint firstItem="TbR-BC-Bt2" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="DQV-jt-rjc"/>
+                            <constraint firstItem="TbR-BC-Bt2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="coG-E5-N6a"/>
+                            <constraint firstItem="TbR-BC-Bt2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="pIs-te-G52"/>
+                            <constraint firstAttribute="trailing" secondItem="TbR-BC-Bt2" secondAttribute="trailing" id="yng-AL-f2P"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nXq-Pe-T0t"/>
                     <connections>
-                        <outlet property="mapView" destination="Qtv-IG-Qle" id="jOP-xP-lMG"/>
+                        <outlet property="mapView" destination="TbR-BC-Bt2" id="X2g-FR-XUc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1117" y="429"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Im1-64-yWy">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e32-Ky-Vjv" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YZ9-Mi-yVP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="meF-EC-8JG"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wML-uW-tNZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="305" y="1089"/>
+            <point key="canvasLocation" x="689" y="985"/>
         </scene>
     </scenes>
 </document>
