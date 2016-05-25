@@ -27,6 +27,7 @@ class LBContainerViewController: UIViewController {
     }
     var rightViewController: LBBeaconRangingViewController?
     var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 300
+    var wifiButton: LBWIFIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +39,18 @@ class LBContainerViewController: UIViewController {
         centerNavigationController.didMoveToParentViewController(self)
         
         //WiFi-Button Implementation
-        let button   = UIButton(type: UIButtonType.System) as UIButton
-        button.sizeToFit()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = UIColor.greenColor()
-        button.setTitle("Test Button", forState: UIControlState.Normal)
-        button.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(button)
+        self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
+        self.wifiButton.lineWidth = 5.0
+        self.wifiButton.connectionColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
+        self.wifiButton.scanningColor = self.view.tintColor
+        self.wifiButton.readyToConnect = false
+        self.wifiButton.setTitle("Connect", forState: UIControlState.Normal)
+        self.wifiButton.setTitleColor(self.view.tintColor, forState: UIControlState.Normal)
+        self.wifiButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(self.wifiButton)
         
-        let buttonDict = ["button":button]
+        let buttonDict = ["button":self.wifiButton]
         let buttonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[button]-50-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
         let buttonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-100-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
         self.view.addConstraints(buttonVerticalConstraint)
@@ -80,7 +84,8 @@ class LBContainerViewController: UIViewController {
     @IBAction func wifiButtonClicked(sender: UIButton)
     {
         //To be tested
-        UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
+        //UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
+        self.wifiButton.readyToConnect = true
     }
     
 }
