@@ -18,13 +18,13 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
     private var outerRingShape: CAShapeLayer!
     private var circleBGShape: CAShapeLayer!
     
-    var lineWidth: CGFloat = 3.0{
+    var lineWidth: CGFloat = 2.0{
         didSet {
             updateLayerProperties()
         }
     }
     
-    var connectionColor: UIColor = UIColor(red: 0.0, green: 100/255, blue: 1.0, alpha: 1) {
+    var connectionColor: UIColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1) {
         didSet {
             updateLayerProperties()
         }

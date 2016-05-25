@@ -13,6 +13,7 @@ import CoreLocation
 protocol LBMainViewControllerDelegate {
     func toggleRightPanel()
     func collapseSidePanel()
+    func startScanningAnimation()
 }
 
 class LBMainViewController: UIViewController {
@@ -94,9 +95,13 @@ extension LBMainViewController: LBLocationServiceDelegate
 {
     func monitoringStartedSuccessfully() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            
             //custom wifi-connection view monitoringAnimation
+            
             //self.monitoringActivityIndicator.startAnimating()
         }
+        delegate?.startScanningAnimation()
+
     }
     
     func monitoringStoppedSuccessfully() {
