@@ -157,7 +157,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     func startScanningAnimation()
     {
         self.wifiButton.readyToConnect = false
-    }
+            }
     
 }
 
