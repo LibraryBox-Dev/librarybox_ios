@@ -26,11 +26,10 @@ class LBContainerViewController: UIViewController {
         }
     }
     var rightViewController: LBBeaconRangingViewController?
-    let centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 300
+    var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 300
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
         centerViewController = UIStoryboard.centerViewController()
         centerViewController.delegate = self
         centerNavigationController = UINavigationController(rootViewController: centerViewController)
@@ -40,13 +39,35 @@ class LBContainerViewController: UIViewController {
         
         //WiFi-Button Implementation
         let button   = UIButton(type: UIButtonType.System) as UIButton
-        //right position for button: x, y, width, height!!!
-        button.frame = CGRectMake(screenSize.width - 150, screenSize.height - 300, 100, 50)
+        button.sizeToFit()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.greenColor()
         button.setTitle("Test Button", forState: UIControlState.Normal)
         button.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
+        
+        let buttonDict = ["button":button]
+        let buttonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[button]-50-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
+        let buttonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-100-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
+        self.view.addConstraints(buttonVerticalConstraint)
+        self.view.addConstraints(buttonHorizontalConstraint)
+        self.view.setNeedsUpdateConstraints()
+        
     }
+    
+    override func viewWillTransitionToSize(size: CGSize,
+                                           withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        // Code here will execute before the rotation begins.
+        // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
+        coordinator.animateAlongsideTransition({ (context) -> Void in
+            
+            },
+            completion: { (context) -> Void in
+                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 300
+                                                // Code here will execute after the rotation has finished.
+                                                // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
+        }) }
     
     func showShadowForCenterViewController(needsShowShadow: Bool) {
         if (needsShowShadow) {
@@ -58,7 +79,8 @@ class LBContainerViewController: UIViewController {
     
     @IBAction func wifiButtonClicked(sender: UIButton)
     {
-        
+        //To be tested
+        UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
     }
     
 }

@@ -18,13 +18,15 @@ protocol LBMainViewControllerDelegate {
 class LBMainViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-
+    //@IBOutlet weak var mapContainerView: UIView!
+    
     var currentBeacons = [CLBeacon]()
     private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mapView.showsUserLocation = true
         let userLocationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
         self.navigationItem.leftBarButtonItem = userLocationButton
         self.navigationItem.title = "LibraryBox"
@@ -37,11 +39,16 @@ class LBMainViewController: UIViewController {
         rightBarButton.customView = radarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
         locationService.startUpdatingUserLocation()
-        self.mapView.showsUserLocation = true
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        //self.mapView.frame = self.view.bounds
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
