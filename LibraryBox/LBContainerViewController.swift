@@ -38,14 +38,13 @@ class LBContainerViewController: UIViewController {
         addChildViewController(centerNavigationController)
         centerNavigationController.didMoveToParentViewController(self)
         
-        //TESTING BUTTON
-        let button   = UIButton(type: UIButtonType.System) as UIButton
-        button.frame = CGRectMake(100, 100, 100, 50)
-        button.backgroundColor = UIColor.greenColor()
-        button.setTitle("Test Button", forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(testAction), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        self.view.addSubview(button)
+//        TESTING BUTTON
+//        let button   = UIButton(type: UIButtonType.System) as UIButton
+//        button.frame = CGRectMake(100, 100, 100, 50)
+//        button.backgroundColor = UIColor.greenColor()
+//        button.setTitle("Test Button", forState: UIControlState.Normal)
+//        button.addTarget(self, action: #selector(testAction), forControlEvents: UIControlEvents.TouchUpInside)
+//        self.view.addSubview(button)
         
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -96,10 +95,10 @@ class LBContainerViewController: UIViewController {
         self.wifiButton.readyToConnect = true
     }
     
-    @IBAction func testAction(sender: UIButton)
-    {
-        self.wifiButton.readyToConnect = false
-    }
+//    @IBAction func testAction(sender: UIButton)
+//    {
+//        self.wifiButton.readyToConnect = false
+//    }
     
 }
 

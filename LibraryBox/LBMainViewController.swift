@@ -39,6 +39,7 @@ class LBMainViewController: UIViewController {
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = radarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
+        locationService.delegate = self
         locationService.startUpdatingUserLocation()
         // Do any additional setup after loading the view, typically from a nib.
     }
