@@ -47,7 +47,7 @@ class LBContainerViewController: UIViewController {
 //        self.view.addSubview(button)
         
         //WiFi-Button Implementation
-        self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
         self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
         self.wifiButton.lineWidth = 2.0
         self.wifiButton.connectionColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
@@ -59,7 +59,7 @@ class LBContainerViewController: UIViewController {
 
         let buttonDict = ["button":self.wifiButton]
         let buttonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[button]-50-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
-        let buttonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-100-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
+        let buttonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-50-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
         self.view.addConstraints(buttonVerticalConstraint)
         self.view.addConstraints(buttonHorizontalConstraint)
         self.view.setNeedsUpdateConstraints()
