@@ -14,6 +14,7 @@ class testBeacon
     }
 }
 
+
 let beacon1 = testBeacon(newProximity: 1,newAccuracy: 3)
 let beacon2 = testBeacon(newProximity: 1,newAccuracy: 8)
 let beacon3 = testBeacon(newProximity: 1,newAccuracy: 14)
