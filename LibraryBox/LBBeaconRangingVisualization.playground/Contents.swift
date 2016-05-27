@@ -38,17 +38,24 @@ class RangingView: UIView
         super.init(coder: aDecoder)!
     }
     
+    func convertToLogScale(data: Double, screenY0:CGFloat, screenY1:CGFloat, dataY0:Double, dataY1:CGFloat) ->CGFloat{
+        
+        return screenY0 + (log(CGFloat(data)) - log(CGFloat(dataY0))) / (log(CGFloat(dataY1)) - log(CGFloat(dataY0))) * (screenY1 - screenY0)
+    }
+    
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        let amountOfBeacons: CGFloat = CGFloat(sortedBeacons.count)
+        //let amountOfBeacons: CGFloat = CGFloat(sortedBeacons.count)
         //if max beacons > 20 cut => 20 beacons
         let startPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect)+25)
         let endPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect)-25)
-        let distance: CGFloat = CGRectGetMaxY(rect)-50
-        let distanceBetweenBeacons: CGFloat = distance/amountOfBeacons
+        //let distance: CGFloat = CGRectGetMaxY(rect)-50
+        //let distanceBetweenBeacons: CGFloat = distance/amountOfBeacons
         
         //UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()
+        let flipVertical:CGAffineTransform = CGAffineTransformMake(1,0,0,-1,0,rect.size.height)
+        CGContextConcatCTM(context, flipVertical)
         
         let shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
         let shadowOffset = CGSizeMake(2.0, 2.0)
@@ -65,45 +72,45 @@ class RangingView: UIView
         {
             if(aBeacon.accuracy >= 0.0)
             {
-             //var centerPoint = CGPointMake(CGRectGetMidX(rect), y1)
-                var startAngle: Float = Float(2 * M_PI)
-                var endAngle: Float = 0.0
+                print(aBeacon.accuracy)
+                let beaconY: CGFloat = self.convertToLogScale(aBeacon.accuracy, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+                print(beaconY)
+                let centerPoint = CGPointMake(CGRectGetMidX(rect), beaconY)
+                var startAngle: CGFloat = CGFloat(Float(2 * M_PI))
+                var endAngle: CGFloat = 0.0
+                let strokeWidth: CGFloat = 1.0
+                let radius = CGFloat((CGFloat(rect.size.width/5) - CGFloat(strokeWidth)) / 2)
                 
-                // Drawing code
-                // Set the radius
-                let strokeWidth = 1.0
-                let radius = CGFloat((CGFloat(self.frame.size.width) - CGFloat(strokeWidth)) / 2)
+                UIColor.whiteColor().setStroke()
                 
-                // Get the context
+                print(aBeacon.proximity)
+                switch aBeacon.proximity {
+                case 0:
+                    UIColor.clearColor().setFill()
+                case 1:
+                    UIColor.blueColor().setFill()
+                case 2:
+                    UIColor.lightGrayColor().setFill()
+                default:
+                    UIColor.clearColor().setFill()
+                }
+                startAngle = startAngle - CGFloat(Float(M_PI_2))
+                endAngle = endAngle - CGFloat(Float(M_PI_2))
                 
-                // Set the stroke color
-                CGContextSetStrokeColorWithColor(context, Colors.primaryColor().CGColor)
-                
-                // Set the line width
-                CGContextSetLineWidth(context, CGFloat(strokeWidth))
-                
-                // Set the fill color (if you are filling the circle)
-                CGContextSetFillColorWithColor(context, UIColor.clearColor().CGColor)
-                
-                // Rotate the angles so that the inputted angles are intuitive like the clock face: the top is 0 (or 2π), the right is π/2, the bottom is π and the left is 3π/2.
-                // In essence, this appears like a unit circle rotated π/2 anti clockwise.
-                startAngle = startAngle - Float(M_PI_2)
-                endAngle = endAngle - Float(M_PI_2)
-                
-                // Draw the arc around the circle
-                CGContextAddArc(context, center.x, center.y, CGFloat(radius), CGFloat(startAngle), CGFloat(endAngle), 0)
-                
-                // Draw the arc
-                CGContextDrawPath(context, kCGPathStroke) // or kCGPathFillStroke to fill and stroke the circle
+                let circlePath: UIBezierPath = UIBezierPath()
+                circlePath.addArcWithCenter(centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+                circlePath.lineWidth=strokeWidth
+                circlePath.fill()
+                circlePath.stroke()
             }
             
-            print(aBeacon.accuracy)
+            
         }
-        
-        
-        
-        
         CGContextEndTransparencyLayer(context)
+        
+        
+        
+        
         
         //let image = UIGraphicsGetImageFromCurrentImageContext()
         //UIGraphicsEndImageContext()
