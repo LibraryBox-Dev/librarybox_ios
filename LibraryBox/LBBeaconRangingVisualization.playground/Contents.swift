@@ -23,7 +23,7 @@ let beacon5 = testBeacon(newProximity: 2,newAccuracy: 55)
 let beacon6 = testBeacon(newProximity: 0,newAccuracy: -2)
 
 var beacons: [testBeacon] = [beacon1, beacon2, beacon3, beacon4, beacon5, beacon6]
-let sortedBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
+var sortedBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
 
 class RangingView: UIView
 {
@@ -45,14 +45,17 @@ class RangingView: UIView
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        //let amountOfBeacons: CGFloat = CGFloat(sortedBeacons.count)
-        //if max beacons > 20 cut => 20 beacons
+        let amountOfBeacons = sortedBeacons.count
+        var beaconsToDraw: ArraySlice<testBeacon>
+        if(amountOfBeacons > 20)
+        {
+            beaconsToDraw = sortedBeacons[0...19]
+        }
+        else{
+            beaconsToDraw = sortedBeacons[0...amountOfBeacons]
+        }
         let startPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect)+25)
         let endPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect)-25)
-        //let distance: CGFloat = CGRectGetMaxY(rect)-50
-        //let distanceBetweenBeacons: CGFloat = distance/amountOfBeacons
-        
-        //UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         let context = UIGraphicsGetCurrentContext()
         let flipVertical:CGAffineTransform = CGAffineTransformMake(1,0,0,-1,0,rect.size.height)
         CGContextConcatCTM(context, flipVertical)
@@ -68,7 +71,7 @@ class RangingView: UIView
         
         CGContextBeginTransparencyLayer(context, nil)
         
-        for aBeacon in sortedBeacons
+        for aBeacon in beaconsToDraw
         {
             if(aBeacon.accuracy >= 0.0)
             {
@@ -107,13 +110,6 @@ class RangingView: UIView
             
         }
         CGContextEndTransparencyLayer(context)
-        
-        
-        
-        
-        
-        //let image = UIGraphicsGetImageFromCurrentImageContext()
-        //UIGraphicsEndImageContext()
     }
 }
 
