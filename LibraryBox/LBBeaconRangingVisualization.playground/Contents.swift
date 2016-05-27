@@ -45,15 +45,6 @@ class RangingView: UIView
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        let amountOfBeacons = sortedBeacons.count
-        var beaconsToDraw: ArraySlice<testBeacon>
-        if(amountOfBeacons > 20)
-        {
-            beaconsToDraw = sortedBeacons[0...19]
-        }
-        else{
-            beaconsToDraw = sortedBeacons[0...amountOfBeacons]
-        }
         let startPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect)+25)
         let endPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect)-25)
         let context = UIGraphicsGetCurrentContext()
@@ -71,7 +62,7 @@ class RangingView: UIView
         
         CGContextBeginTransparencyLayer(context, nil)
         
-        for aBeacon in beaconsToDraw
+        for aBeacon in sortedBeacons
         {
             if(aBeacon.accuracy >= 0.0)
             {
