@@ -21,7 +21,6 @@ class LBBeaconRangingViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.checkOrientation()
-        
     }
     
     override func viewWillTransitionToSize(size: CGSize,

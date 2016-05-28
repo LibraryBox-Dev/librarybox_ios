@@ -18,7 +18,7 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
     private var outerRingShape: CAShapeLayer!
     private var circleBGShape: CAShapeLayer!
     
-    var lineWidth: CGFloat = 2.0{
+    var lineWidth: CGFloat = 3.0{
         didSet {
             updateLayerProperties()
         }
@@ -107,11 +107,25 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
             outerRingShape.fillColor = UIColor.clearColor().CGColor
             outerRingShape.position = CGPoint(x: CGRectGetWidth(self.bounds)/2, y: CGRectGetHeight(self.bounds)/2)
             outerRingShape.transform = CATransform3DIdentity
-            outerRingShape.opacity = 0.8
+            outerRingShape.opacity = 1.0
             self.layer.addSublayer(outerRingShape)
         }
         
         
+    }
+    
+    func turnOffBGOpacity()
+    {
+        if circleBGShape != nil {
+            circleBGShape.opacity = 1.0
+        }
+    }
+    
+    func turnOnBGOpacity()
+    {
+        if circleBGShape != nil {
+            circleBGShape.opacity = 0.4
+        }
     }
     
     private func frameWithInset() -> CGRect {
@@ -130,7 +144,7 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
     }
     
     private func scanning(){
-        self.titleLabel?.removeFromSuperview()
+        //self.titleLabel?.removeFromSuperview()
         let wifiFillColorAnimation = CABasicAnimation(keyPath: "fillColor")
         wifiFillColorAnimation.toValue = connectionColor.CGColor
         wifiFillColorAnimation.duration = 1.5
@@ -144,7 +158,7 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
     
     private func connectionReady(){
         outerRingShape.removeAllAnimations()
-        self.addSubview(self.titleLabel!)
+        //self.addSubview(self.titleLabel!)
         //CAAnimation
         
     }

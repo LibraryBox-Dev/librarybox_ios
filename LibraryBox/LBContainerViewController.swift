@@ -49,7 +49,7 @@ class LBContainerViewController: UIViewController {
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
-        self.wifiButton.lineWidth = 2.0
+        self.wifiButton.lineWidth = 3.0
         self.wifiButton.connectionColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
         self.wifiButton.scanningColor = self.view.tintColor
         //self.wifiButton.setTitle("Connect", forState: UIControlState.Normal)
@@ -108,6 +108,10 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         let notExpanded = (currentState != .RightPanelExpanded)
         if notExpanded {
             addRightPanelViewController()
+            self.wifiButton.turnOffBGOpacity()
+        }
+        else{
+            self.wifiButton.turnOnBGOpacity()
         }
         animateRightPanel(notExpanded)
     }
