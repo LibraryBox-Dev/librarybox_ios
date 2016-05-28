@@ -62,8 +62,8 @@ class LBBeaconRangingView: UIView
         super.drawRect(rect)
         let startPGradient = CGPoint.zero
         let endPGradient = CGPoint(x:0, y:self.bounds.height)
-        let startPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect)+25)
-        let endPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect)-25)
+        let startPoint: CGPoint = CGPointMake(rect.size.width - 100, CGRectGetMinY(rect)+150)
+        let endPoint: CGPoint = CGPointMake(rect.size.width - 100, CGRectGetMaxY(rect)-80)
         let context = UIGraphicsGetCurrentContext()
         let colors = [startColor.CGColor, endColor.CGColor]
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -101,11 +101,11 @@ class LBBeaconRangingView: UIView
                 print(aBeacon.accuracy)
                 let beaconY: CGFloat = self.convertToLogScale(aBeacon.accuracy, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
                 print(beaconY)
-                let centerPoint = CGPointMake(CGRectGetMidX(rect), beaconY)
+                let centerPoint = CGPointMake(rect.size.width - 100, beaconY)
                 var startAngle: CGFloat = CGFloat(Float(2 * M_PI))
                 var endAngle: CGFloat = 0.0
                 let strokeWidth: CGFloat = 3.0
-                let radius = CGFloat((CGFloat(rect.size.width/5) - CGFloat(strokeWidth)) / 2)
+                let radius = CGFloat((CGFloat(rect.size.width/25) - CGFloat(strokeWidth)) / 2)
                 UIColor.whiteColor().setStroke()
                 print(aBeacon.proximity)
                 switch aBeacon.proximity {
