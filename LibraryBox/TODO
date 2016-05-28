@@ -1,5 +1,9 @@
 FIX: _BSMachError on device rotation => MKMapView
 FIX: Auto Layout for different devices
 
-FIX: WifiButton: insert wifi sign on scan, text on connect
 
+* Wifi Button Styling
+* Ranging View Delegate
+* Open-Box button
+* Map Pinning
+* WatchKit 
