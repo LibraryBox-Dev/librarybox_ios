@@ -26,7 +26,7 @@ class LBContainerViewController: UIViewController {
         }
     }
     var rightViewController: LBBeaconRangingViewController?
-    var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 300
+    var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 100
     var wifiButton: LBWIFIButton!
     
     override func viewDidLoad() {
@@ -47,19 +47,19 @@ class LBContainerViewController: UIViewController {
 //        self.view.addSubview(button)
         
         //WiFi-Button Implementation
-        self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+        self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
         self.wifiButton.lineWidth = 2.0
         self.wifiButton.connectionColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
         self.wifiButton.scanningColor = self.view.tintColor
-        self.wifiButton.setTitle("Connect", forState: UIControlState.Normal)
-        self.wifiButton.setTitleColor(self.view.tintColor, forState: UIControlState.Normal)
+        //self.wifiButton.setTitle("Connect", forState: UIControlState.Normal)
+        //self.wifiButton.setTitleColor(self.view.tintColor, forState: UIControlState.Normal)
         self.wifiButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.wifiButton)
 
         let buttonDict = ["button":self.wifiButton]
-        let buttonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[button]-50-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
-        let buttonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-50-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
+        let buttonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[button]-25-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
+        let buttonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-25-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
         self.view.addConstraints(buttonVerticalConstraint)
         self.view.addConstraints(buttonHorizontalConstraint)
         self.view.setNeedsUpdateConstraints()
@@ -75,7 +75,7 @@ class LBContainerViewController: UIViewController {
             
             },
             completion: { (context) -> Void in
-                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 300
+                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
                                                 // Code here will execute after the rotation has finished.
                                                 // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }

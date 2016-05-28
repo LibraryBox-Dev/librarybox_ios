@@ -56,8 +56,8 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
         self.clipsToBounds = true
         let image = createImage(self.bounds)
         self.setBackgroundImage(image, forState: UIControlState.Normal)
-        let wifiImage = UIImage(named: "wifi")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        self.setImage(wifiImage, forState: UIControlState.Normal)
+        //let wifiImage = UIImage(named: "wifi")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        //self.setImage(wifiImage, forState: UIControlState.Normal)
 
     }
     

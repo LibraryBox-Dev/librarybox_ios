@@ -21,11 +21,11 @@ class testBeacon
     }
 }
 
-let beacon1 = testBeacon(newProximity: 1,newAccuracy: 3)
-let beacon2 = testBeacon(newProximity: 1,newAccuracy: 8)
-let beacon3 = testBeacon(newProximity: 1,newAccuracy: 14)
-let beacon4 = testBeacon(newProximity: 2,newAccuracy: 30)
-let beacon5 = testBeacon(newProximity: 2,newAccuracy: 55)
+let beacon1 = testBeacon(newProximity: 1,newAccuracy: 0.3)
+let beacon2 = testBeacon(newProximity: 2,newAccuracy: 1.5)
+let beacon3 = testBeacon(newProximity: 2,newAccuracy: 4.8)
+let beacon4 = testBeacon(newProximity: 3,newAccuracy: 30.456666)
+let beacon5 = testBeacon(newProximity: 3,newAccuracy: 55.246356723)
 let beacon6 = testBeacon(newProximity: 0,newAccuracy: -2)
 
 var beacons: [testBeacon] = [beacon1, beacon2, beacon3, beacon4, beacon5, beacon6]
@@ -43,6 +43,7 @@ class LBBeaconRangingView: UIView
     @IBInspectable var nearColor: UIColor = UIColor.blueColor()
     @IBInspectable var farColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var defaultColor: UIColor = UIColor.clearColor()
+    var yOffset: CGFloat = 80.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,8 +63,8 @@ class LBBeaconRangingView: UIView
         super.drawRect(rect)
         let startPGradient = CGPoint.zero
         let endPGradient = CGPoint(x:0, y:self.bounds.height)
-        let startPoint: CGPoint = CGPointMake(rect.size.width - 100, CGRectGetMinY(rect)+150)
-        let endPoint: CGPoint = CGPointMake(rect.size.width - 100, CGRectGetMaxY(rect)-80)
+        let startPoint: CGPoint = CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+95)
+        let endPoint: CGPoint = CGPointMake(rect.size.width - 50, CGRectGetMaxY(rect)-yOffset)
         let context = UIGraphicsGetCurrentContext()
         let colors = [startColor.CGColor, endColor.CGColor]
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -87,7 +88,7 @@ class LBBeaconRangingView: UIView
                                     shadow.CGColor)
         CGContextBeginTransparencyLayer(context, nil)
         let linePath: UIBezierPath = UIBezierPath()
-        linePath.moveToPoint(startPoint)
+        linePath.moveToPoint(CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+75))
         linePath.addLineToPoint(endPoint)
         linePath.lineWidth = 6.0
         linePath.lineCapStyle = CGLineCap.Round
@@ -99,21 +100,30 @@ class LBBeaconRangingView: UIView
             if(aBeacon.accuracy >= 0.0)
             {
                 print(aBeacon.accuracy)
-                let beaconY: CGFloat = self.convertToLogScale(aBeacon.accuracy, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+                let beaconY: CGFloat
+                if(aBeacon.accuracy < 1.0)
+                    {
+                    beaconY = self.convertToLogScale(1.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+                }else
+                    {
+                    beaconY = self.convertToLogScale(aBeacon.accuracy, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+                }
                 print(beaconY)
-                let centerPoint = CGPointMake(rect.size.width - 100, beaconY)
+                let centerPoint = CGPointMake(rect.size.width - 50, beaconY)
                 var startAngle: CGFloat = CGFloat(Float(2 * M_PI))
                 var endAngle: CGFloat = 0.0
                 let strokeWidth: CGFloat = 3.0
-                let radius = CGFloat((CGFloat(rect.size.width/25) - CGFloat(strokeWidth)) / 2)
+                let radius = CGFloat((25.0 - CGFloat(strokeWidth)) / 2)
                 UIColor.whiteColor().setStroke()
                 print(aBeacon.proximity)
                 switch aBeacon.proximity {
                 case 0:
-                    immediateColor.setFill()
+                    defaultColor.setFill()
                 case 1:
-                    nearColor.setFill()
+                    immediateColor.setFill()
                 case 2:
+                    nearColor.setFill()
+                case 3:
                     farColor.setFill()
                 default:
                     defaultColor.setFill()
