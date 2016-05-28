@@ -27,8 +27,13 @@ var sortedBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
 
 class RangingView: UIView
 {
-
-
+    //labels
+    //color adjustments
+    @IBInspectable var endColor: UIColor = UIColor.darkGrayColor()
+    @IBInspectable var startColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable let shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -45,22 +50,39 @@ class RangingView: UIView
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
+        let startPGradient = CGPoint.zero
+        let endPGradient = CGPoint(x:0, y:self.bounds.height)
         let startPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect)+25)
         let endPoint: CGPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect)-25)
         let context = UIGraphicsGetCurrentContext()
+        let colors = [startColor.CGColor, endColor.CGColor]
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let colorLocations:[CGFloat] = [0.0, 1.0]
+        let gradient = CGGradientCreateWithColors(colorSpace,
+                                                  colors,
+                                                  colorLocations)
+        CGContextDrawLinearGradient(context,
+                                    gradient,
+                                    startPGradient,
+                                    endPGradient,
+                                    CGGradientDrawingOptions.DrawsAfterEndLocation)
+        CGContextSaveGState(context)
         let flipVertical:CGAffineTransform = CGAffineTransformMake(1,0,0,-1,0,rect.size.height)
         CGContextConcatCTM(context, flipVertical)
-        
-        let shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
         let shadowOffset = CGSizeMake(2.0, 2.0)
         let shadowBlurRadius: CGFloat = 5
-        
         CGContextSetShadowWithColor(context,
                                     shadowOffset,
                                     shadowBlurRadius,
                                     shadow.CGColor)
-        
         CGContextBeginTransparencyLayer(context, nil)
+        let linePath: UIBezierPath = UIBezierPath()
+        linePath.moveToPoint(startPoint)
+        linePath.addLineToPoint(endPoint)
+        linePath.lineWidth = 6.0
+        linePath.lineCapStyle = CGLineCap.Round
+        UIColor.whiteColor().setStroke()
+        linePath.stroke()
         
         for aBeacon in sortedBeacons
         {
@@ -72,11 +94,9 @@ class RangingView: UIView
                 let centerPoint = CGPointMake(CGRectGetMidX(rect), beaconY)
                 var startAngle: CGFloat = CGFloat(Float(2 * M_PI))
                 var endAngle: CGFloat = 0.0
-                let strokeWidth: CGFloat = 1.0
+                let strokeWidth: CGFloat = 3.0
                 let radius = CGFloat((CGFloat(rect.size.width/5) - CGFloat(strokeWidth)) / 2)
-                
                 UIColor.whiteColor().setStroke()
-                
                 print(aBeacon.proximity)
                 switch aBeacon.proximity {
                 case 0:
@@ -90,17 +110,15 @@ class RangingView: UIView
                 }
                 startAngle = startAngle - CGFloat(Float(M_PI_2))
                 endAngle = endAngle - CGFloat(Float(M_PI_2))
-                
                 let circlePath: UIBezierPath = UIBezierPath()
                 circlePath.addArcWithCenter(centerPoint, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
                 circlePath.lineWidth=strokeWidth
                 circlePath.fill()
                 circlePath.stroke()
             }
-            
-            
         }
         CGContextEndTransparencyLayer(context)
+        CGContextRestoreGState(context)
     }
 }
 

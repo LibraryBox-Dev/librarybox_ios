@@ -13,10 +13,27 @@
                         <viewControllerLayoutGuide type="top" id="eGV-SG-eMH"/>
                         <viewControllerLayoutGuide type="bottom" id="jOa-qc-3Ti"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sxY-65-kub">
+                    <view key="view" contentMode="scaleToFill" id="sxY-65-kub" customClass="LBBeaconRangingView" customModule="LibraryBox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" red="0.79626145289633499" green="0.79626145289633499" blue="0.79626145289633499" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="nearColor">
+                                <color key="value" red="0.0" green="0.6537957553" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="farColor">
+                                <color key="value" red="0.63663793099999999" green="0.79876077590000005" blue="0.53914331900000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" red="0.97733274201026865" green="0.97595625830645383" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadow">
+                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-TR-8cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

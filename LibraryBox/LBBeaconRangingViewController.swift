@@ -16,7 +16,7 @@ protocol LBBeaconRangingViewControllerDelegate {
 class LBBeaconRangingViewController: UIViewController
 {
 
-    var rangingView: UIView = LBBeaconRangingView()
+    //var rangingView: LBBeaconRangingView = LBBeaconRangingView()
     var delegate: LBBeaconRangingViewControllerDelegate?
     
     
