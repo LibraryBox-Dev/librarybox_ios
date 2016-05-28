@@ -5,5 +5,6 @@ FIX: Auto Layout for different devices
 * Wifi Button Styling
 * Ranging View Delegate
 * Open-Box button
+* Overlays: Beacon distance, LibBox
 * Map Pinning
-* WatchKit 
+* WatchKit
