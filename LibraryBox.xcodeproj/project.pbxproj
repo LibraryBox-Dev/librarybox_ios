@@ -11,6 +11,7 @@
 		637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
+		63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */; };
 		63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */; };
 		63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */; };
 		63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 63BB3FB21CF3B38D00EF88E8 /* TODO */; };
@@ -49,6 +50,7 @@
 		637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBWIFIButton.swift; sourceTree = "<group>"; };
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
 		63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRoundedButton.swift; sourceTree = "<group>"; };
+		63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningButton.swift; sourceTree = "<group>"; };
 		63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBeaconRangingView.swift; sourceTree = "<group>"; };
 		63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBeaconRangingViewController.swift; sourceTree = "<group>"; };
 		63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LibraryBox-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */,
 				637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */,
 				63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */,
+				63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */,
 				63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */,
 				63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */,
+				63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,6 +29,7 @@ class LBContainerViewController: UIViewController {
     var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 100
     var wifiButton: LBWIFIButton!
     var boxButton: LBBoxButton!
+    var mapPinButton: LBPinningButton!
     let beaconKeyPath = "currentBeaconKeyPath"
     
     override func viewDidLoad() {
@@ -85,6 +86,25 @@ class LBContainerViewController: UIViewController {
         self.view.addConstraints(boxButtonHorizontalConstraint)
         self.view.addConstraints(boxButtonWidthConstraint)
         self.view.addConstraints(boxButtonHeightConstraint)
+        self.view.setNeedsUpdateConstraints()
+        
+        //Pinning-Button Implementation
+        self.mapPinButton = LBPinningButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        self.mapPinButton.translatesAutoresizingMaskIntoConstraints = false
+        self.mapPinButton.lineWidth = 3.0
+        self.mapPinButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
+        self.mapPinButton.inactiveColor = self.view.tintColor
+        //self.mapPinButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(self.mapPinButton)
+        let thirdButtonDict = ["pinningButton":self.mapPinButton]
+        let pinButtonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|-25-[pinningButton]", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: thirdButtonDict)
+        let pinButtonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[pinningButton]-25-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: thirdButtonDict)
+        let pinButtonWidthConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[pinningButton(50)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: thirdButtonDict)
+        let pinButtonHeightConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[pinningButton(50)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: thirdButtonDict)
+        self.view.addConstraints(pinButtonVerticalConstraint)
+        self.view.addConstraints(pinButtonHorizontalConstraint)
+        self.view.addConstraints(pinButtonWidthConstraint)
+        self.view.addConstraints(pinButtonHeightConstraint)
         self.view.setNeedsUpdateConstraints()
         
     }
