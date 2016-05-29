@@ -32,13 +32,13 @@ class LBContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        centerViewController = UIStoryboard.centerViewController()
-        centerViewController.delegate = self
-        centerViewController.addObserver(self, forKeyPath: beaconKeyPath, options: [NSKeyValueObservingOptions.Old, NSKeyValueObservingOptions.New], context: nil)
-        centerNavigationController = UINavigationController(rootViewController: centerViewController)
-        view.addSubview(centerNavigationController.view)
-        addChildViewController(centerNavigationController)
-        centerNavigationController.didMoveToParentViewController(self)
+        self.centerViewController = UIStoryboard.centerViewController()
+        self.centerViewController.delegate = self
+        self.centerViewController.addObserver(self, forKeyPath: beaconKeyPath, options: [NSKeyValueObservingOptions.Old, NSKeyValueObservingOptions.New], context: nil)
+        self.centerNavigationController = UINavigationController(rootViewController: centerViewController)
+        view.addSubview(self.centerNavigationController.view)
+        addChildViewController(self.centerNavigationController)
+        self.centerNavigationController.didMoveToParentViewController(self)
         
 //        TESTING BUTTON
 //        let button   = UIButton(type: UIButtonType.System) as UIButton
@@ -70,7 +70,13 @@ class LBContainerViewController: UIViewController {
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == beaconKeyPath {
-            //UPDATE BEACONS IN RangingView if not nil
+            if (self.rightViewController != nil) {
+                if let beaconRangingView = self.rightViewController!.view as? LBBeaconRangingView
+                {
+                    beaconRangingView.beacons = self.centerViewController.currentBeacons
+                    beaconRangingView.setNeedsDisplay()
+                }
+            }
         }
     }
     
@@ -88,8 +94,8 @@ class LBContainerViewController: UIViewController {
                                                 // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
     
-    func showShadowForCenterViewController(needsShowShadow: Bool) {
-        if (needsShowShadow) {
+    func showShadowForCenterViewController(needsToShowShadow: Bool) {
+        if (needsToShowShadow) {
             centerNavigationController.view.layer.shadowOpacity = 0.8
         } else {
             centerNavigationController.view.layer.shadowOpacity = 0.0
@@ -109,7 +115,7 @@ class LBContainerViewController: UIViewController {
 //    }
     
     deinit {
-        centerViewController.removeObserver(self, forKeyPath: beaconKeyPath)
+        self.centerViewController.removeObserver(self, forKeyPath: beaconKeyPath)
     }
     
 }
@@ -125,13 +131,13 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         else{
             self.wifiButton.turnOnBGOpacity()
         }
-        animateRightPanel(notExpanded)
+        self.animateRightPanel(notExpanded)
     }
     
     func collapseSidePanel() {
         switch (currentState) {
         case .RightPanelExpanded:
-            toggleRightPanel()
+            self.toggleRightPanel()
         default:
             break
         }
@@ -139,14 +145,14 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     
     func addChildSidePanelController(sidePanelController: LBBeaconRangingViewController) {
         view.insertSubview(sidePanelController.view, atIndex: 0)
-        addChildViewController(sidePanelController)
+        self.addChildViewController(sidePanelController)
         sidePanelController.didMoveToParentViewController(self)
     }
     
     func addRightPanelViewController() {
-        if (rightViewController == nil) {
-            rightViewController = UIStoryboard.rightPanelViewController()
-            addChildSidePanelController(rightViewController!)
+        if (self.rightViewController == nil) {
+            self.rightViewController = UIStoryboard.rightPanelViewController()
+            self.addChildSidePanelController(self.rightViewController!)
         }
     }
     
