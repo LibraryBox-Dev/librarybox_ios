@@ -9,15 +9,10 @@
 import Foundation
 import UIKit
 
-protocol LBBeaconRangingViewControllerDelegate {
-    //func animalSelected(animal: Animal)
-}
+
 
 class LBBeaconRangingViewController: UIViewController
-{
-
-    var delegate: LBBeaconRangingViewControllerDelegate?
-    
+{    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.checkOrientation()
@@ -39,19 +34,16 @@ class LBBeaconRangingViewController: UIViewController
         private func checkOrientation()
         {
             let orientation: UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
+            let aView = self.view as? LBBeaconRangingView
             switch orientation
             {
             case UIInterfaceOrientation.Portrait:
-                let aView = self.view as? LBBeaconRangingView
                 aView!.yOffset = 80.0
             case UIInterfaceOrientation.LandscapeLeft:
-                let aView = self.view as? LBBeaconRangingView
                 aView!.yOffset = 40.0
             case UIInterfaceOrientation.LandscapeRight:
-                let aView = self.view as? LBBeaconRangingView
                 aView!.yOffset = 40.0
             default:
-                let aView = self.view as? LBBeaconRangingView
                 aView!.yOffset = 80.0
             }
             self.view.setNeedsDisplay()

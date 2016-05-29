@@ -35,7 +35,6 @@ var sortedBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
 class LBBeaconRangingView: UIView
 {
     //labels
-    //color adjustments
     @IBInspectable var endColor: UIColor = UIColor.darkGrayColor()
     @IBInspectable var startColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)

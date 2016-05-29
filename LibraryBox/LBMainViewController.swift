@@ -24,6 +24,7 @@ class LBMainViewController: UIViewController {
     var currentBeacons = [CLBeacon]()
     private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
+    let beaconKeyPath = "currentBeaconKeyPath"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,18 +195,13 @@ extension LBMainViewController: LBLocationServiceDelegate
     func rangingBeaconsInRange(beacons: [CLBeacon]!, inRegion region: CLBeaconRegion!) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.currentBeacons = beacons
-            
-            //Custom ranging view => update() -> show beacon distances
-            
+            self.setValue(self.currentBeacons, forKeyPath: self.beaconKeyPath)
         }
     }
 
 }
 
-extension LBMainViewController: LBBeaconRangingViewControllerDelegate
-{
-    
-}
+
 
     
 

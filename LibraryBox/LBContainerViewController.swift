@@ -28,11 +28,13 @@ class LBContainerViewController: UIViewController {
     var rightViewController: LBBeaconRangingViewController?
     var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 100
     var wifiButton: LBWIFIButton!
+    let beaconKeyPath = "currentBeaconKeyPath"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         centerViewController = UIStoryboard.centerViewController()
         centerViewController.delegate = self
+        centerViewController.addObserver(self, forKeyPath: beaconKeyPath, options: [NSKeyValueObservingOptions.Old, NSKeyValueObservingOptions.New], context: nil)
         centerNavigationController = UINavigationController(rootViewController: centerViewController)
         view.addSubview(centerNavigationController.view)
         addChildViewController(centerNavigationController)
@@ -64,6 +66,12 @@ class LBContainerViewController: UIViewController {
         self.view.addConstraints(buttonHorizontalConstraint)
         self.view.setNeedsUpdateConstraints()
         
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if keyPath == beaconKeyPath {
+            //UPDATE BEACONS IN RangingView if not nil
+        }
     }
     
     override func viewWillTransitionToSize(size: CGSize,
@@ -100,6 +108,10 @@ class LBContainerViewController: UIViewController {
 //        self.wifiButton.readyToConnect = false
 //    }
     
+    deinit {
+        centerViewController.removeObserver(self, forKeyPath: beaconKeyPath)
+    }
+    
 }
 
 extension LBContainerViewController: LBMainViewControllerDelegate {
@@ -126,7 +138,6 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     }
     
     func addChildSidePanelController(sidePanelController: LBBeaconRangingViewController) {
-        sidePanelController.delegate = centerViewController
         view.insertSubview(sidePanelController.view, atIndex: 0)
         addChildViewController(sidePanelController)
         sidePanelController.didMoveToParentViewController(self)
@@ -161,7 +172,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     func startScanningAnimation()
     {
         self.wifiButton.readyToConnect = false
-            }
+    }
     
 }
 
