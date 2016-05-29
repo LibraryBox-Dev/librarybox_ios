@@ -75,7 +75,7 @@ class LBContainerViewController: UIViewController {
         self.boxButton.lineWidth = 3.0
         self.boxButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
         self.boxButton.inactiveColor = self.view.tintColor
-        //self.boxButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        self.boxButton.addTarget(self, action:#selector(boxButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.boxButton)
         let secondButtonDict = ["superview":self.view, "secondButton":self.boxButton]
         let boxButtonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[superview]-(<=1)-[secondButton]", options:NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: secondButtonDict)
@@ -148,6 +148,14 @@ class LBContainerViewController: UIViewController {
         //To be tested
         //UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
         self.wifiButton.readyToActivate = true
+    }
+    
+    @IBAction func boxButtonClicked(sender: UIButton)
+    {
+        self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
+        self.wifiButton.hidden = true
+        self.boxButton.hidden = true
+        self.mapPinButton.hidden = true
     }
     
 //    @IBAction func testAction(sender: UIButton)
