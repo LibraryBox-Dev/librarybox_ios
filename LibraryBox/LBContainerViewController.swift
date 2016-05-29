@@ -52,18 +52,19 @@ class LBContainerViewController: UIViewController {
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
         self.wifiButton.lineWidth = 3.0
-        self.wifiButton.connectionColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
-        self.wifiButton.scanningColor = self.view.tintColor
-        //self.wifiButton.setTitle("Connect", forState: UIControlState.Normal)
-        //self.wifiButton.setTitleColor(self.view.tintColor, forState: UIControlState.Normal)
+        self.wifiButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
+        self.wifiButton.inactiveColor = self.view.tintColor
         self.wifiButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.wifiButton)
-
         let buttonDict = ["button":self.wifiButton]
         let buttonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[button]-25-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
         let buttonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-25-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
+        let buttonWidthConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[button(50)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
+        let buttonHeightConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button(50)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
         self.view.addConstraints(buttonVerticalConstraint)
         self.view.addConstraints(buttonHorizontalConstraint)
+        self.view.addConstraints(buttonWidthConstraint)
+        self.view.addConstraints(buttonHeightConstraint)
         self.view.setNeedsUpdateConstraints()
         
     }
@@ -106,7 +107,7 @@ class LBContainerViewController: UIViewController {
     {
         //To be tested
         //UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
-        self.wifiButton.readyToConnect = true
+        self.wifiButton.readyToActivate = true
     }
     
 //    @IBAction func testAction(sender: UIButton)
@@ -177,7 +178,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     
     func startScanningAnimation()
     {
-        self.wifiButton.readyToConnect = false
+        self.wifiButton.readyToActivate = false
     }
     
 }

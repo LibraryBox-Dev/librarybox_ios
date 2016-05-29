@@ -98,6 +98,8 @@ class LBBeaconRangingView: UIView
         
         for aBeacon in sortedBeacons
         {
+            
+            
             if(aBeacon.accuracy >= 0.0)
             {
                 print(aBeacon.accuracy)

@@ -137,6 +137,8 @@ extension LBMainViewController: LBLocationServiceDelegate
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
 
+    // RANGING API MAY NOT BE USED IN THE BACKGROUND => frontmost and the user is interacting with your app
+    
     func rangingStartedSuccessfully() {
         currentBeacons = []
         
@@ -195,6 +197,12 @@ extension LBMainViewController: LBLocationServiceDelegate
     func rangingBeaconsInRange(beacons: [CLBeacon]!, inRegion region: CLBeaconRegion!) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.currentBeacons = beacons
+            
+            // instance variable _filteredAccuracy keeps the value from the last calculation.
+            // filterFactor is a constant between 0 and 1.
+            //float filterFactor = 0.2;
+            //_filteredAccuracy = (accuracy * filterFactor) + (_filteredAccuracy * (1.0 - filterFactor));
+            
             self.setValue(self.currentBeacons, forKeyPath: self.beaconKeyPath)
         }
     }
