@@ -28,6 +28,7 @@ class LBContainerViewController: UIViewController {
     var rightViewController: LBBeaconRangingViewController?
     var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 100
     var wifiButton: LBWIFIButton!
+    var boxButton: LBBoxButton!
     let beaconKeyPath = "currentBeaconKeyPath"
     
     override func viewDidLoad() {
@@ -65,6 +66,25 @@ class LBContainerViewController: UIViewController {
         self.view.addConstraints(buttonHorizontalConstraint)
         self.view.addConstraints(buttonWidthConstraint)
         self.view.addConstraints(buttonHeightConstraint)
+        self.view.setNeedsUpdateConstraints()
+        
+        //Box-Button Implementation
+        self.boxButton = LBBoxButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        self.boxButton.translatesAutoresizingMaskIntoConstraints = false
+        self.boxButton.lineWidth = 3.0
+        self.boxButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
+        self.boxButton.inactiveColor = self.view.tintColor
+        //self.boxButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(self.boxButton)
+        let secondButtonDict = ["superview":self.view, "secondButton":self.boxButton]
+        let boxButtonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[superview]-(<=1)-[secondButton]", options:NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: secondButtonDict)
+        let boxButtonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[secondButton]-25-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: secondButtonDict)
+        let boxButtonWidthConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[secondButton(100)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: secondButtonDict)
+        let boxButtonHeightConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[secondButton(100)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: secondButtonDict)
+        self.view.addConstraints(boxButtonVerticalConstraint)
+        self.view.addConstraints(boxButtonHorizontalConstraint)
+        self.view.addConstraints(boxButtonWidthConstraint)
+        self.view.addConstraints(boxButtonHeightConstraint)
         self.view.setNeedsUpdateConstraints()
         
     }

@@ -12,6 +12,12 @@ import UIKit
 @IBDesignable
 class LBBoxButton: LBRoundedButton {
 
-    
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+        if let image = UIImage(named: "LibraryBox_box") {
+            self.setImage(image, forState: .Normal)
+        }
+    }
     
 }
