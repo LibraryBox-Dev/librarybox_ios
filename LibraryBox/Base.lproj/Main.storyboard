@@ -67,26 +67,45 @@
                     <navigationItem key="navigationItem" id="nXq-Pe-T0t"/>
                     <connections>
                         <outlet property="mapView" destination="TbR-BC-Bt2" id="X2g-FR-XUc"/>
-                        <segue destination="ZZi-rL-LK7" kind="show" identifier="boxContent" id="S7M-tG-47I"/>
+                        <segue destination="h2k-nN-aMG" kind="show" identifier="boxContent" id="pVf-9b-uz6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="637" y="875"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="YnS-6E-rZK">
+        <!--Box Web View Controller-->
+        <scene sceneID="zui-xi-jyu">
             <objects>
-                <viewController id="ZZi-rL-LK7" sceneMemberID="viewController">
-                    <webView key="view" contentMode="scaleToFill" scalesPageToFit="YES" id="gwE-8J-rTV">
+                <viewController id="h2k-nN-aMG" customClass="LBBoxWebViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1fM-I8-jgL"/>
+                        <viewControllerLayoutGuide type="bottom" id="TAo-by-DiP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FDY-9E-hMS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                    </webView>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ClM-Zy-mHL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ClM-Zy-mHL" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="Wuk-KS-W4q"/>
+                            <constraint firstItem="ClM-Zy-mHL" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="dpY-z6-w5D"/>
+                            <constraint firstItem="ClM-Zy-mHL" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="top" id="fhV-mU-tW9"/>
+                            <constraint firstAttribute="trailing" secondItem="ClM-Zy-mHL" secondAttribute="trailing" id="icv-zC-IGJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="ClM-Zy-mHL" id="7HK-6a-AaN"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SYc-PW-Mfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Uk-yk-xXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="637" y="1648"/>
+            <point key="canvasLocation" x="628" y="1621"/>
         </scene>
     </scenes>
 </document>
