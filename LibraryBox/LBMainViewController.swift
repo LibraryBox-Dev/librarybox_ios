@@ -22,9 +22,11 @@ class LBMainViewController: UIViewController {
     //@IBOutlet weak var mapContainerView: UIView!
     
     var currentBeacons = [CLBeacon]()
+    var currentFilteredBeaconSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
+    var _beaconFilteredSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
-    let beaconKeyPath = "currentBeaconKeyPath"
+    let beaconKeyPath = "currentBeaconDistanceSigmaKeyPath"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,13 +205,23 @@ extension LBMainViewController: LBLocationServiceDelegate
     func rangingBeaconsInRange(beacons: [CLBeacon]!, inRegion region: CLBeaconRegion!) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.currentBeacons = beacons
-            
-            // instance variable _filteredAccuracy keeps the value from the last calculation.
-            // filterFactor is a constant between 0 and 1.
-            //float filterFactor = 0.2;
-            //_filteredAccuracy = (accuracy * filterFactor) + (_filteredAccuracy * (1.0 - filterFactor));
-            
-            self.setValue(self.currentBeacons, forKeyPath: self.beaconKeyPath)
+            let sortedBeacons = self.currentBeacons.sort({ $0.accuracy < $1.accuracy})
+            let filterFactor: Double = 0.2
+            for (index, value) in sortedBeacons.enumerate()
+            {
+                if (index < 20)
+                {
+                    let beacon: CLBeacon = value
+                    var previousFilteredAccuracy = self._beaconFilteredSigmaDistances[index]
+                    if(previousFilteredAccuracy < 0.1)
+                    {
+                        previousFilteredAccuracy = beacon.accuracy
+                    }
+                    let _filteredAccuracy: Double = (beacon.accuracy * filterFactor) + (previousFilteredAccuracy * (1.0 - filterFactor))
+                    self.currentFilteredBeaconSigmaDistances[index] = _filteredAccuracy
+                }
+            }
+            self.setValue(self.currentFilteredBeaconSigmaDistances, forKeyPath: self.beaconKeyPath)
         }
     }
 

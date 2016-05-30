@@ -30,7 +30,7 @@ class LBContainerViewController: UIViewController {
     var wifiButton: LBWIFIButton!
     var boxButton: LBBoxButton!
     var mapPinButton: LBPinningButton!
-    let beaconKeyPath = "currentBeaconKeyPath"
+    let beaconKeyPath = "currentBeaconDistanceSigmaKeyPath"
     var rangingViewExpandedStateStore: Bool = false
     
     override func viewDidLoad() {
@@ -109,7 +109,7 @@ class LBContainerViewController: UIViewController {
             if (self.rightViewController != nil) {
                 if let beaconRangingView = self.rightViewController!.view as? LBBeaconRangingView
                 {
-                    beaconRangingView.beacons = self.centerViewController.currentBeacons
+                    beaconRangingView.beaconSigmaDistances = self.centerViewController.currentFilteredBeaconSigmaDistances
                     beaconRangingView.setNeedsDisplay()
                 }
             }

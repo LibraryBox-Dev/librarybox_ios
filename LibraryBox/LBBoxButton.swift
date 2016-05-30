@@ -33,8 +33,6 @@ class LBBoxButton: LBRoundedButton {
         layer.borderColor = UIColor.clearColor().CGColor
         layer.transform = CATransform3DMakeScale(0.75, 0.75, 1)
         self.layer.addSublayer(layer)
-        
-        
     }
     
 }

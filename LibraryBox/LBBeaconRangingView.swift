@@ -43,7 +43,7 @@ class LBBeaconRangingView: UIView
     @IBInspectable var farColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var defaultColor: UIColor = UIColor.clearColor()
     var yOffset: CGFloat = 80.0
-    var beacons:[CLBeacon] = []
+    var beaconSigmaDistances:[Double] = []
     
     
     override init(frame: CGRect) {
