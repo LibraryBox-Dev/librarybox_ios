@@ -88,6 +88,30 @@ class LBBeaconRangingView: UIView
                                     shadowBlurRadius,
                                     shadow.CGColor)
         CGContextBeginTransparencyLayer(context, nil)
+        let fiveMeterMark: UIBezierPath = UIBezierPath()
+        let fiveMeterMarkerY: CGFloat = self.convertToLogScale(5.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+        fiveMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, fiveMeterMarkerY))
+        fiveMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, fiveMeterMarkerY))
+        fiveMeterMark.lineWidth = 3.0
+        fiveMeterMark.lineCapStyle = CGLineCap.Round
+        UIColor.darkGrayColor().setStroke()
+        fiveMeterMark.stroke()
+        let twentyMeterMark: UIBezierPath = UIBezierPath()
+        let twentyMeterMarkerY: CGFloat = self.convertToLogScale(20.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+        twentyMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, twentyMeterMarkerY))
+        twentyMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, twentyMeterMarkerY))
+        twentyMeterMark.lineWidth = 2.4
+        twentyMeterMark.lineCapStyle = CGLineCap.Round
+        UIColor.darkGrayColor().setStroke()
+        twentyMeterMark.stroke()
+        let fiftyMeterMark: UIBezierPath = UIBezierPath()
+        let fiftyMeterMarkerY: CGFloat = self.convertToLogScale(50.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+        fiftyMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, fiftyMeterMarkerY))
+        fiftyMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, fiftyMeterMarkerY))
+        fiftyMeterMark.lineWidth = 1.5
+        fiftyMeterMark.lineCapStyle = CGLineCap.Round
+        UIColor.darkGrayColor().setStroke()
+        fiftyMeterMark.stroke()
         let linePath: UIBezierPath = UIBezierPath()
         linePath.moveToPoint(CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+75))
         linePath.addLineToPoint(endPoint)
@@ -95,11 +119,23 @@ class LBBeaconRangingView: UIView
         linePath.lineCapStyle = CGLineCap.Round
         UIColor.whiteColor().setStroke()
         linePath.stroke()
-        
+        let aCenterPoint = CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+50)
+        var aStartAngle: CGFloat = CGFloat(Float(2 * M_PI))
+        var anEndAngle: CGFloat = 0.0
+        let aStrokeWidth: CGFloat = 3.0
+        let aRadius = CGFloat((50.0 - CGFloat(aStrokeWidth)) / 2)
+        UIColor.whiteColor().setStroke()
+        UIColor.whiteColor().setFill()
+        aStartAngle = aStartAngle - CGFloat(Float(M_PI_2))
+        anEndAngle = anEndAngle - CGFloat(Float(M_PI_2))
+        let lowerCirclePath: UIBezierPath = UIBezierPath()
+        lowerCirclePath.addArcWithCenter(aCenterPoint, radius: aRadius, startAngle: aStartAngle, endAngle: anEndAngle, clockwise: true)
+        lowerCirclePath.lineWidth=aStrokeWidth
+        lowerCirclePath.fill()
+        lowerCirclePath.stroke()
+        //REDO FOR SIGMA DISTANCES!!
         for aBeacon in sortedBeacons
         {
-            
-            
             if(aBeacon.accuracy >= 0.0)
             {
                 print(aBeacon.accuracy)
