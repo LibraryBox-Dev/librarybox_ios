@@ -50,6 +50,12 @@ class LBMainViewController: UIViewController {
         //self.mapView.frame = self.view.bounds
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("MainViewControllerAppeared", object: nil)
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -31,6 +31,7 @@ class LBContainerViewController: UIViewController {
     var boxButton: LBBoxButton!
     var mapPinButton: LBPinningButton!
     let beaconKeyPath = "currentBeaconKeyPath"
+    var rangingViewExpandedStateStore: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +42,8 @@ class LBContainerViewController: UIViewController {
         view.addSubview(self.centerNavigationController.view)
         addChildViewController(self.centerNavigationController)
         self.centerNavigationController.didMoveToParentViewController(self)
-        
-//        TESTING BUTTON
-//        let button   = UIButton(type: UIButtonType.System) as UIButton
-//        button.frame = CGRectMake(100, 100, 100, 50)
-//        button.backgroundColor = UIColor.greenColor()
-//        button.setTitle("Test Button", forState: UIControlState.Normal)
-//        button.addTarget(self, action: #selector(testAction), forControlEvents: UIControlEvents.TouchUpInside)
-//        self.view.addSubview(button)
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: #selector(makeButtonsVisible), name: "MainViewControllerAppeared", object: nil)
         
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -156,12 +151,24 @@ class LBContainerViewController: UIViewController {
         self.wifiButton.hidden = true
         self.boxButton.hidden = true
         self.mapPinButton.hidden = true
+        if(currentState == .RightPanelExpanded)
+        {
+            rangingViewExpandedStateStore = true
+            self.toggleRightPanel()
+        }
     }
     
-//    @IBAction func testAction(sender: UIButton)
-//    {
-//        self.wifiButton.readyToConnect = false
-//    }
+    func makeButtonsVisible()
+    {
+        self.wifiButton.hidden = false
+        self.boxButton.hidden = false
+        self.mapPinButton.hidden = false
+        if(rangingViewExpandedStateStore == true)
+        {
+            self.toggleRightPanel()
+            rangingViewExpandedStateStore = false
+        }
+    }
     
     deinit {
         self.centerViewController.removeObserver(self, forKeyPath: beaconKeyPath)
@@ -174,7 +181,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     func toggleRightPanel() {
         let notExpanded = (currentState != .RightPanelExpanded)
         if notExpanded {
-            addRightPanelViewController()
+            self.addRightPanelViewController()
             self.wifiButton.turnOffBGOpacity()
         }
         else{

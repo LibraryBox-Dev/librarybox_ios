@@ -8,6 +8,6 @@ FIX: Expand rangingView with Circle under Button to provide shadow and white bac
 * Wifi Button Styling
 * Box Button Styling: BoxImage Layer
 * RoundedButton "Activate" animation
-* Overlays: Beacon distance, LibBox
+* Overlays: Closest Beacon proximity, LibBox
 * Map Pinning
 * WatchKit
