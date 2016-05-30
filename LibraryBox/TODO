@@ -1,5 +1,13 @@
 FIX: _BSMachError on device rotation => MKMapView
 FIX: Auto Layout for different devices
+FIX: UIWEbView Implementation
+FIX: RANGING API MAY NOT BE USED IN THE BACKGROUND => frontmost and the user is interacting with your app
+FIX: Expand rangingView with Circle under Button to provide shadow and white background (no need for BG-switch function)
 
-FIX: WifiButton: insert wifi sign on scan, text on connect
 
+* Wifi Button Styling
+* Box Button Styling: BoxImage Layer
+* RoundedButton "Activate" animation
+* Overlays: Closest Beacon proximity, LibBox
+* Map Pinning
+* WatchKit

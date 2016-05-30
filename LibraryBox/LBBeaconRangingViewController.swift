@@ -9,15 +9,45 @@
 import Foundation
 import UIKit
 
-protocol LBBeaconRangingViewControllerDelegate {
-    //func animalSelected(animal: Animal)
-}
+
 
 class LBBeaconRangingViewController: UIViewController
-{
-
-    var rangingView: UIView = LBBeaconRangingView()
-    var delegate: LBBeaconRangingViewControllerDelegate?
+{    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.checkOrientation()
+    }
     
+    override func viewWillTransitionToSize(size: CGSize,
+                                           withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        // Code here will execute before the rotation begins.
+        // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
+        coordinator.animateAlongsideTransition({ (context) -> Void in
+        },
+        completion: { (context) -> Void in
+            self.checkOrientation()
+            // Code here will execute after the rotation has finished.
+                                                // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
+        }) }
+
+        private func checkOrientation()
+        {
+            let orientation: UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
+            let aView = self.view as? LBBeaconRangingView
+            switch orientation
+            {
+            case UIInterfaceOrientation.Portrait:
+                aView!.yOffset = 80.0
+            case UIInterfaceOrientation.LandscapeLeft:
+                aView!.yOffset = 40.0
+            case UIInterfaceOrientation.LandscapeRight:
+                aView!.yOffset = 40.0
+            default:
+                aView!.yOffset = 80.0
+            }
+            self.view.setNeedsDisplay()
+
+        }
     
 }

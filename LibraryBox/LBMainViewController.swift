@@ -24,6 +24,7 @@ class LBMainViewController: UIViewController {
     var currentBeacons = [CLBeacon]()
     private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
+    let beaconKeyPath = "currentBeaconKeyPath"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,12 @@ class LBMainViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         //self.mapView.frame = self.view.bounds
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("MainViewControllerAppeared", object: nil)
     }
     
     
@@ -136,6 +143,8 @@ extension LBMainViewController: LBLocationServiceDelegate
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
 
+    // RANGING API MAY NOT BE USED IN THE BACKGROUND => frontmost and the user is interacting with your app
+    
     func rangingStartedSuccessfully() {
         currentBeacons = []
         
@@ -195,17 +204,18 @@ extension LBMainViewController: LBLocationServiceDelegate
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.currentBeacons = beacons
             
-            //Custom ranging view => update() -> show beacon distances
+            // instance variable _filteredAccuracy keeps the value from the last calculation.
+            // filterFactor is a constant between 0 and 1.
+            //float filterFactor = 0.2;
+            //_filteredAccuracy = (accuracy * filterFactor) + (_filteredAccuracy * (1.0 - filterFactor));
             
+            self.setValue(self.currentBeacons, forKeyPath: self.beaconKeyPath)
         }
     }
 
 }
 
-extension LBMainViewController: LBBeaconRangingViewControllerDelegate
-{
-    
-}
+
 
     
 
