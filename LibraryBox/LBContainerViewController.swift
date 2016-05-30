@@ -107,10 +107,21 @@ class LBContainerViewController: UIViewController {
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == beaconKeyPath {
             if (self.rightViewController != nil) {
-                if let beaconRangingView = self.rightViewController!.view as? LBBeaconRangingView
+                if(self.currentState == .RightPanelExpanded)
                 {
-                    beaconRangingView.beaconSigmaDistances = self.centerViewController.currentFilteredBeaconSigmaDistances
-                    beaconRangingView.setNeedsDisplay()
+                    if let beaconRangingView = self.rightViewController!.view as? LBBeaconRangingView
+                    {
+                        beaconRangingView.beaconSigmaDistances = self.centerViewController.currentFilteredBeaconSigmaDistances
+                        beaconRangingView.setNeedsDisplay()
+                    }
+                }
+                if let sigmaDistanceToNearestBeacon: Double = self.centerViewController.currentFilteredBeaconSigmaDistances[0]
+                {
+                    if(sigmaDistanceToNearestBeacon > 0.0 && sigmaDistanceToNearestBeacon < 15.0)
+                    {
+                        print("Distance to nearest beacon:", sigmaDistanceToNearestBeacon)
+                        //TODO: Animate map pinning button if no librarybox could be found in surroundings
+                    }
                 }
             }
         }
@@ -161,7 +172,17 @@ class LBContainerViewController: UIViewController {
     func makeButtonsVisible()
     {
         self.wifiButton.hidden = false
-        self.boxButton.hidden = false
+        if let currentSSIDString: String = LBSSIDCheckingService.fetchSSIDInfo()
+        {
+            print(currentSSIDString)
+            if (currentSSIDString == "LibraryBox")
+            {
+                self.boxButton.hidden = false
+            }
+            else{
+                self.boxButton.hidden = true
+            }
+        }
         self.mapPinButton.hidden = false
         if(rangingViewExpandedStateStore == true)
         {
