@@ -43,7 +43,7 @@ class LBContainerViewController: UIViewController {
         addChildViewController(self.centerNavigationController)
         self.centerNavigationController.didMoveToParentViewController(self)
         let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: #selector(makeButtonsVisible), name: "MainViewControllerAppeared", object: nil)
+        nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "MainViewControllerAppeared", object: nil)
         
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -168,18 +168,22 @@ class LBContainerViewController: UIViewController {
         }
     }
     
-    func makeButtonsVisible()
+    func handleMainViewAppearance()
     {
         self.wifiButton.hidden = false
         if let currentSSIDString: String = LBSSIDCheckingService.fetchSSIDInfo()
         {
             print(currentSSIDString)
-            if (currentSSIDString == "LibraryBox")
+            if (currentSSIDString == "PirateBox - Share Freely")
+            {
+                self.boxButton.hidden = false
+            }
+            else if(currentSSIDString == "Librarybox – Free Content!")
             {
                 self.boxButton.hidden = false
             }
             else{
-                self.boxButton.hidden = true
+                //self.boxButton.hidden = true
             }
         }
         self.mapPinButton.hidden = false
