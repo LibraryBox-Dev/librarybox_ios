@@ -151,8 +151,7 @@ class LBContainerViewController: UIViewController {
     
     @IBAction func wifiButtonClicked(sender: UIButton)
     {
-        //To be tested
-        //UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
+        UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
         self.wifiButton.readyToActivate = true
     }
     
