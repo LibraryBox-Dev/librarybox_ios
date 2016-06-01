@@ -35,9 +35,9 @@ class LBContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.centerViewController = UIStoryboard.centerViewController()
+        self.centerViewController = UIStoryboard.centerViewController() as LBMainViewController!
         self.centerViewController.delegate = self
-        self.centerViewController.addObserver(self, forKeyPath: beaconKeyPath, options: [NSKeyValueObservingOptions.Old, NSKeyValueObservingOptions.New], context: nil)
+        self.centerViewController.addObserver(self, forKeyPath:"currentFilteredBeaconSigmaDistances", options: [NSKeyValueObservingOptions.Old, NSKeyValueObservingOptions.New], context: nil)
         self.centerNavigationController = UINavigationController(rootViewController: centerViewController)
         view.addSubview(self.centerNavigationController.view)
         addChildViewController(self.centerNavigationController)
@@ -105,7 +105,7 @@ class LBContainerViewController: UIViewController {
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == beaconKeyPath {
+        if keyPath == "currentFilteredBeaconSigmaDistances" {
             if (self.rightViewController != nil) {
                 if(self.currentState == .RightPanelExpanded)
                 {

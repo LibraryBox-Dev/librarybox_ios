@@ -11,6 +11,7 @@ import CoreLocation
 
 protocol LBLocationServiceDelegate
 {
+    func userLocationServiceFailedToStartDueToAuthorization()
     func monitoringStartedSuccessfully()
     func monitoringStoppedSuccessfully()
     func monitoringFailedToStart()
@@ -30,11 +31,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     lazy var locationManager: CLLocationManager = CLLocationManager()
     var currentLoc: CLLocation!
     let beaconRegion: CLBeaconRegion = {
-        let uuidString = "01122334-4556-6778-899A-ABBCCDDEEFF0"
-        let beaconIdentifier = "Apple-iBeacon"
-        let beaconUUID:NSUUID = NSUUID(UUIDString: uuidString)!
-        let theRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,
-                                                         identifier: beaconIdentifier)
+        let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
         theRegion.notifyEntryStateOnDisplay = true
         return theRegion
     }()
@@ -45,9 +42,20 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     
     func startUpdatingUserLocation()
     {
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.pausesLocationUpdatesAutomatically = false
-        self.authorizeAndStartService()
+        useLocationManagerNotifications()
+        switch CLLocationManager.authorizationStatus() {
+        case .AuthorizedAlways:
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.pausesLocationUpdatesAutomatically = false
+            locationManager.startUpdatingLocation()
+        case .AuthorizedWhenInUse, .Denied, .Restricted:
+            print("Couldn't turn on user location: Required Location Access (Always) missing.")
+            delegate?.userLocationServiceFailedToStartDueToAuthorization()
+        case .NotDetermined:
+            locationManager.requestAlwaysAuthorization()
+        }
+        
+        
         
     }
     
@@ -66,7 +74,15 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             delegate?.monitoringFailedToStart()
             return
         }
-        self.authorizeAndStartService()
+        switch CLLocationManager.authorizationStatus() {
+        case .AuthorizedAlways:
+            startMonitoring()
+        case .AuthorizedWhenInUse, .Denied, .Restricted:
+            print("Couldn't turn on monitoring: Required Location Access (Always) missing.")
+            delegate?.monitoringFailedToStartDueToAuthorization()
+        case .NotDetermined:
+            locationManager.requestAlwaysAuthorization()
+        }
     }
 
     
@@ -99,7 +115,16 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             print("Didn't turn on ranging: Ranging already on.")
             return
         }
-        self.authorizeAndStartService()
+        switch CLLocationManager.authorizationStatus() {
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            startRanging()
+        case .Denied, .Restricted:
+            print("Couldn't turn on ranging: Required Location Access (When In Use) missing.")
+            delegate?.rangingFailedToStartDueToAuthorization()
+        case .NotDetermined:
+            locationManager.requestAlwaysAuthorization()
+        }
+        
     }
     
     func startRanging() {
@@ -118,13 +143,11 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
         print("Turned off ranging.")
     }
     
-    private func authorizeAndStartService()
+    func authorize()
     {
         switch CLLocationManager.authorizationStatus() {
         case .AuthorizedAlways:
-            locationManager.startUpdatingLocation()
-            startMonitoring()
-            startRanging()
+            break
         case .AuthorizedWhenInUse, .Denied, .Restricted:
             print("Couldn't turn on monitoring: Required Location Access (Always) missing.")
             delegate?.monitoringFailedToStartDueToAuthorization()
@@ -139,22 +162,22 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
 
 
 
-extension LBLocationService
-{
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedAlways {
-            print("Location Access (Always) granted!")
-            delegate?.monitoringStartedSuccessfully()
-            startMonitoring()
-            delegate?.rangingStartedSuccessfully()
-            startRanging()
-        } else if status == .AuthorizedWhenInUse || status == .Denied || status == .Restricted {
-            print("Location Access (Always) denied!")
-            delegate?.monitoringFailedToStart()
-            delegate?.rangingFailedToStart()
-        }
-    }
-}
+//extension LBLocationService
+//{
+//    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+//        if status == .AuthorizedAlways {
+//            print("Location Access (Always) granted!")
+//            delegate?.monitoringStartedSuccessfully()
+//            startMonitoring()
+//            delegate?.rangingStartedSuccessfully()
+//            startRanging()
+//        } else if status == .AuthorizedWhenInUse || status == .Denied || status == .Restricted {
+//            print("Location Access (Always) denied!")
+//            delegate?.monitoringFailedToStart()
+//            delegate?.rangingFailedToStart()
+//        }
+//    }
+//}
 
 extension LBLocationService
 {
