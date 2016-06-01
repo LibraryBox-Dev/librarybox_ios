@@ -30,7 +30,6 @@ class LBContainerViewController: UIViewController {
     var wifiButton: LBWIFIButton!
     var boxButton: LBBoxButton!
     var mapPinButton: LBPinningButton!
-    let beaconKeyPath = "currentBeaconDistanceSigmaKeyPath"
     var rangingViewExpandedStateStore: Bool = false
     
     override func viewDidLoad() {
@@ -43,7 +42,7 @@ class LBContainerViewController: UIViewController {
         addChildViewController(self.centerNavigationController)
         self.centerNavigationController.didMoveToParentViewController(self)
         let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "MainViewControllerAppeared", object: nil)
+        nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "LBMainViewControllerAppeared", object: nil)
         
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -195,7 +194,7 @@ class LBContainerViewController: UIViewController {
     }
     
     deinit {
-        self.centerViewController.removeObserver(self, forKeyPath: beaconKeyPath)
+        self.centerViewController.removeObserver(self, forKeyPath:"currentFilteredBeaconSigmaDistances")
     }
     
 }

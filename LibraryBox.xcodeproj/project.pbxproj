@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */; };
+		631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE731CFF8E6100B19B84 /* KMLParser.m */; };
 		636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */; };
 		637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
@@ -48,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		0A6DC3511CF737F700C69D42 /* LBBeaconRangingVisualization.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LBBeaconRangingVisualization.playground; sourceTree = "<group>"; };
+		631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBURLDownloadService.swift; sourceTree = "<group>"; };
+		631BDE721CFF8E6100B19B84 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
+		631BDE731CFF8E6100B19B84 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 		636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBContainerViewController.swift; sourceTree = "<group>"; };
 		637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBWIFIButton.swift; sourceTree = "<group>"; };
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
@@ -121,6 +126,7 @@
 			children = (
 				63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */,
 				63BA7E731CFCDF4200FE2F2C /* LBSSIDCheckingService.swift */,
+				631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -128,6 +134,8 @@
 		63BB3FAC1CF3B03800EF88E8 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				631BDE721CFF8E6100B19B84 /* KMLParser.h */,
+				631BDE731CFF8E6100B19B84 /* KMLParser.m */,
 			);
 			name = External;
 			sourceTree = "<group>";
@@ -359,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */,
 				63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */,
 				63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */,
 				63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */,
@@ -369,6 +378,7 @@
 				637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */,
 				63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */,
 				63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */,
+				631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */,
 				63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */,
 				63BA7E761CFCE36100FE2F2C /* LBBoxWebViewController.swift in Sources */,
 			);

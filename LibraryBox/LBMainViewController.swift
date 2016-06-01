@@ -24,9 +24,9 @@ class LBMainViewController: UIViewController {
     var currentBeacons = [CLBeacon]()
     dynamic var currentFilteredBeaconSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     var _beaconFilteredSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
+    var myKMLParser: KMLParser!
     private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
-    let beaconKeyPath = "currentBeaconDistanceSigmaKeyPath"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,9 @@ class LBMainViewController: UIViewController {
         locationService.authorize()
         locationService.startUpdatingUserLocation()
         locationService.startBeaconRanging()
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
+        self.updateMapUI()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -57,7 +60,7 @@ class LBMainViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         let nc = NSNotificationCenter.defaultCenter()
-        nc.postNotificationName("MainViewControllerAppeared", object: nil)
+        nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
     }
     
     
@@ -70,6 +73,56 @@ class LBMainViewController: UIViewController {
     {
         delegate?.toggleRightPanel()
     }
+    
+    func updateMapUI()
+    {
+        let kmlURL = self.libraryBoxKMLDataCheckAndPath()
+        myKMLParser = KMLParser.init(URL:NSURL(string: kmlURL))
+        myKMLParser.parseKML()
+        self.addOverlays()
+        self.addAnnotations()
+    }
+    
+    func libraryBoxKMLDataCheckAndPath() -> String
+    {
+        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        let filePath = url.URLByAppendingPathComponent("LibBox_Locations.kml")
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(filePath.path!) {
+            do {
+                let attributes = try fileManager.attributesOfItemAtPath(filePath.path!)
+                let creationDate = attributes["NSFileCreationDate"]
+                if let created = creationDate where fabs(created.timeIntervalSinceNow) > 300 {
+                    try fileManager.removeItemAtPath(filePath.path!)
+                    if let URL = NSURL(string: "http://www.google.com/maps/d/kml?forcekml=1&mid=11WhHwTW0VYR-ToW7XtwS0OGiu4o") {
+                        LBURLDownloadService.load(URL)
+                    }
+                }
+            }
+            catch let error as NSError {
+                print("Something went wrong: \(error)")
+            }
+        } else {
+            if let URL = NSURL(string: "http://www.google.com/maps/d/kml?forcekml=1&mid=11WhHwTW0VYR-ToW7XtwS0OGiu4o") {
+                LBURLDownloadService.load(URL)
+            }
+        }
+        return filePath.absoluteString
+    }
+    
+    func addOverlays()
+    {
+        //let myKMLOverlayArray = myKMLParser.overlays as! [MKOverlay]
+        //3self.mapView.addOverlays(myKMLOverlayArray)
+    }
+    
+    func addAnnotations()
+    {
+        let myKMLAnnotationArray = myKMLParser.points as! [MKAnnotation]
+        self.mapView.addAnnotations(myKMLAnnotationArray)
+    }
+    
 }
 
 extension LBMainViewController: MKMapViewDelegate {
