@@ -9,32 +9,31 @@
 import UIKit
 import CoreLocation
 
-class testBeacon
-{
-    var proximity: Int = 0
-    var accuracy: Double = 0.0
-    
-    init(newProximity:Int, newAccuracy:Double)
-    {
-        self.proximity = newProximity
-        self.accuracy = newAccuracy
-    }
-}
-
-let beacon1 = testBeacon(newProximity: 1,newAccuracy: 0.3)
-let beacon2 = testBeacon(newProximity: 2,newAccuracy: 1.5)
-let beacon3 = testBeacon(newProximity: 2,newAccuracy: 4.8)
-let beacon4 = testBeacon(newProximity: 3,newAccuracy: 30.456666)
-let beacon5 = testBeacon(newProximity: 3,newAccuracy: 55.246356723)
-let beacon6 = testBeacon(newProximity: 0,newAccuracy: -2)
-
-var beacons: [testBeacon] = [beacon1, beacon2, beacon3, beacon4, beacon5, beacon6]
-var sortedBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
+//class testBeacon
+//{
+//    var proximity: Int = 0
+//    var accuracy: Double = 0.0
+//    
+//    init(newProximity:Int, newAccuracy:Double)
+//    {
+//        self.proximity = newProximity
+//        self.accuracy = newAccuracy
+//    }
+//}
+//
+//let beacon1 = testBeacon(newProximity: 1,newAccuracy: 0.3)
+//let beacon2 = testBeacon(newProximity: 2,newAccuracy: 1.5)
+//let beacon3 = testBeacon(newProximity: 2,newAccuracy: 4.8)
+//let beacon4 = testBeacon(newProximity: 3,newAccuracy: 30.456666)
+//let beacon5 = testBeacon(newProximity: 3,newAccuracy: 55.246356723)
+//let beacon6 = testBeacon(newProximity: 0,newAccuracy: -2)
+//
+//var beacons: [testBeacon] = [beacon1, beacon2, beacon3, beacon4, beacon5, beacon6]
+//var sortedBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
 
 @IBDesignable
 class LBBeaconRangingView: UIView
 {
-    //labels
     @IBInspectable var endColor: UIColor = UIColor.darkGrayColor()
     @IBInspectable var startColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
@@ -43,7 +42,7 @@ class LBBeaconRangingView: UIView
     @IBInspectable var farColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var defaultColor: UIColor = UIColor.clearColor()
     var yOffset: CGFloat = 80.0
-    var beaconSigmaDistances:[Double] = []
+    var beaconSigmaDistances:[Double] = [Double](count: 20, repeatedValue: 0.0)
     
     
     override init(frame: CGRect) {
@@ -133,19 +132,18 @@ class LBBeaconRangingView: UIView
         lowerCirclePath.lineWidth=aStrokeWidth
         lowerCirclePath.fill()
         lowerCirclePath.stroke()
-        //REDO FOR SIGMA DISTANCES!!
-        for aBeacon in sortedBeacons
+        for aBeaconDistance in beaconSigmaDistances
         {
-            if(aBeacon.accuracy >= 0.0)
+            if(aBeaconDistance > 0.0)
             {
-                print(aBeacon.accuracy)
+                print(aBeaconDistance)
                 let beaconY: CGFloat
-                if(aBeacon.accuracy < 1.0)
+                if(aBeaconDistance < 1.0)
                     {
                     beaconY = self.convertToLogScale(1.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
                 }else
                     {
-                    beaconY = self.convertToLogScale(aBeacon.accuracy, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+                    beaconY = self.convertToLogScale(aBeaconDistance, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
                 }
                 print(beaconY)
                 let centerPoint = CGPointMake(rect.size.width - 50, beaconY)
@@ -154,15 +152,14 @@ class LBBeaconRangingView: UIView
                 let strokeWidth: CGFloat = 3.0
                 let radius = CGFloat((25.0 - CGFloat(strokeWidth)) / 2)
                 UIColor.whiteColor().setStroke()
-                print(aBeacon.proximity)
-                switch aBeacon.proximity {
-                case 0:
+                switch aBeaconDistance {
+                case 0.0:
                     defaultColor.setFill()
-                case 1:
+                case 0.1..<3.0:
                     immediateColor.setFill()
-                case 2:
+                case 3.1..<20.0:
                     nearColor.setFill()
-                case 3:
+                case 20.0..<80.0:
                     farColor.setFill()
                 default:
                     defaultColor.setFill()
