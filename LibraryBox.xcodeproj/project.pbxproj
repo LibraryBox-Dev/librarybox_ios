@@ -12,6 +12,8 @@
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
 		63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */; };
+		63BA7E741CFCDF4200FE2F2C /* LBSSIDCheckingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BA7E731CFCDF4200FE2F2C /* LBSSIDCheckingService.swift */; };
+		63BA7E761CFCE36100FE2F2C /* LBBoxWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */; };
 		63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */; };
 		63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */; };
 		63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 63BB3FB21CF3B38D00EF88E8 /* TODO */; };
@@ -51,6 +53,8 @@
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
 		63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRoundedButton.swift; sourceTree = "<group>"; };
 		63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningButton.swift; sourceTree = "<group>"; };
+		63BA7E731CFCDF4200FE2F2C /* LBSSIDCheckingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBSSIDCheckingService.swift; sourceTree = "<group>"; };
+		63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxWebViewController.swift; sourceTree = "<group>"; };
 		63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBeaconRangingView.swift; sourceTree = "<group>"; };
 		63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBeaconRangingViewController.swift; sourceTree = "<group>"; };
 		63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LibraryBox-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */,
+				63BA7E731CFCDF4200FE2F2C /* LBSSIDCheckingService.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 				63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */,
 				63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */,
 				636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */,
+				63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -359,10 +365,12 @@
 				63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */,
 				63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */,
 				636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */,
+				63BA7E741CFCDF4200FE2F2C /* LBSSIDCheckingService.swift in Sources */,
 				637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */,
 				63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */,
 				63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */,
 				63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */,
+				63BA7E761CFCE36100FE2F2C /* LBBoxWebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

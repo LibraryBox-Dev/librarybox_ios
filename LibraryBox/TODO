@@ -1,12 +1,10 @@
-FIX: _BSMachError on device rotation => MKMapView
-FIX: Auto Layout for different devices
-FIX: UIWEbView Implementation
 FIX: RANGING API MAY NOT BE USED IN THE BACKGROUND => frontmost and the user is interacting with your app
-FIX: Expand rangingView with Circle under Button to provide shadow and white background (no need for BG-switch function)
+FIX: Beacon Detection
+FIX: WiFi Check when back from WiFi-Settings, MapPinning or BoxView
+FIX: Authorize on first launch
+FIX: Downloads on first launch before setting KML views
 
-
-* Wifi Button Styling
-* Box Button Styling: BoxImage Layer
+* stopRanging() on App Suspense and App Close
 * RoundedButton "Activate" animation
 * Overlays: Closest Beacon proximity, LibBox
 * Map Pinning

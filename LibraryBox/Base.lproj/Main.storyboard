@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Beacon Ranging View Controller-->
@@ -67,26 +68,86 @@
                     <navigationItem key="navigationItem" id="nXq-Pe-T0t"/>
                     <connections>
                         <outlet property="mapView" destination="TbR-BC-Bt2" id="X2g-FR-XUc"/>
-                        <segue destination="ZZi-rL-LK7" kind="show" identifier="boxContent" id="S7M-tG-47I"/>
+                        <segue destination="h2k-nN-aMG" kind="show" identifier="boxContent" id="pVf-9b-uz6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="637" y="875"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="YnS-6E-rZK">
+        <!--Box Web View Controller-->
+        <scene sceneID="zui-xi-jyu">
             <objects>
-                <viewController id="ZZi-rL-LK7" sceneMemberID="viewController">
-                    <webView key="view" contentMode="scaleToFill" scalesPageToFit="YES" id="gwE-8J-rTV">
+                <viewController id="h2k-nN-aMG" customClass="LBBoxWebViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1fM-I8-jgL"/>
+                        <viewControllerLayoutGuide type="bottom" id="TAo-by-DiP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FDY-9E-hMS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                    </webView>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aj7-Ie-hLc">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="h2k-nN-aMG" id="WeR-u7-CZj"/>
+                                </connections>
+                            </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CHG-0K-DAO">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="stop" id="fmL-4W-4e7">
+                                        <connections>
+                                            <action selector="stop:" destination="h2k-nN-aMG" id="Ti4-95-7IW"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="29" systemItem="fixedSpace" id="NNs-Ve-Wp1"/>
+                                    <barButtonItem systemItem="refresh" id="DlK-EA-k0x">
+                                        <connections>
+                                            <action selector="doRefresh:" destination="h2k-nN-aMG" id="qxE-9j-0vb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="DFk-s3-ZmN"/>
+                                    <barButtonItem title="◄" id="AuM-QV-d5x">
+                                        <connections>
+                                            <action selector="goBack:" destination="h2k-nN-aMG" id="whY-HA-hJj"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="38" systemItem="fixedSpace" id="Llf-Hv-iWk"/>
+                                    <barButtonItem title="►" id="f8d-AU-6px">
+                                        <connections>
+                                            <action selector="goForward:" destination="h2k-nN-aMG" id="N3H-lh-dPC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="25" systemItem="fixedSpace" id="1eg-oK-0FE"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leadingMargin" constant="-20" id="6o8-5M-IJX"/>
+                            <constraint firstItem="CHG-0K-DAO" firstAttribute="centerY" secondItem="FDY-9E-hMS" secondAttribute="centerY" id="CkS-SU-Svr"/>
+                            <constraint firstItem="TAo-by-DiP" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="bottom" id="OYZ-xt-UNC"/>
+                            <constraint firstItem="tXh-kR-fap" firstAttribute="leading" secondItem="Aj7-Ie-hLc" secondAttribute="leading" id="OZx-GJ-Zsc"/>
+                            <constraint firstItem="CHG-0K-DAO" firstAttribute="centerX" secondItem="FDY-9E-hMS" secondAttribute="centerX" id="P0E-wy-FHJ"/>
+                            <constraint firstItem="tXh-kR-fap" firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="baB-fU-SM7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" constant="-20" id="kyd-p4-CS8"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="topMargin" id="pCV-Ls-6MB"/>
+                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="xxt-2f-cCD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="CHG-0K-DAO" id="wYB-gG-jP9"/>
+                        <outlet property="webView" destination="Aj7-Ie-hLc" id="HKx-gf-n0x"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SYc-PW-Mfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Uk-yk-xXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="637" y="1648"/>
+            <point key="canvasLocation" x="628" y="1621"/>
         </scene>
     </scenes>
 </document>

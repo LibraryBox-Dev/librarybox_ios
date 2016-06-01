@@ -22,9 +22,11 @@ class LBMainViewController: UIViewController {
     //@IBOutlet weak var mapContainerView: UIView!
     
     var currentBeacons = [CLBeacon]()
+    dynamic var currentFilteredBeaconSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
+    var _beaconFilteredSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
-    let beaconKeyPath = "currentBeaconKeyPath"
+    let beaconKeyPath = "currentBeaconDistanceSigmaKeyPath"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +43,9 @@ class LBMainViewController: UIViewController {
         rightBarButton.customView = radarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
         locationService.delegate = self
+        locationService.authorize()
         locationService.startUpdatingUserLocation()
+        locationService.startBeaconRanging()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -101,12 +105,14 @@ extension LBMainViewController: MKMapViewDelegate {
 
 extension LBMainViewController: LBLocationServiceDelegate
 {
+    func userLocationServiceFailedToStartDueToAuthorization()
+    {
+        self.reAuthorize()
+    }
+    
     func monitoringStartedSuccessfully() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            
-            //custom wifi-connection view monitoringAnimation
-            
-            //self.monitoringActivityIndicator.startAnimating()
+
         }
         delegate?.startScanningAnimation()
 
@@ -120,6 +126,13 @@ extension LBMainViewController: LBLocationServiceDelegate
     }
     
     func monitoringFailedToStart() {
+        let title = "No beacon monitoring possible"
+        let message = "No beacon monitoring is available on this device at the moment."
+        let okButtonTitle = "OK"
+        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction.init(title: okButtonTitle, style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
            
         }
@@ -135,11 +148,9 @@ extension LBMainViewController: LBLocationServiceDelegate
     
     func sendLocalNotificationForBeaconRegion(region: CLBeaconRegion) {
         let notification = UILocalNotification()
-        
         notification.alertBody = "Entered beacon region for UUID: " + region.proximityUUID.UUIDString
         notification.alertAction = "View Details"
         notification.soundName = UILocalNotificationDefaultSoundName
-        
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
 
@@ -147,6 +158,7 @@ extension LBMainViewController: LBLocationServiceDelegate
     
     func rangingStartedSuccessfully() {
         currentBeacons = []
+        print("Ranging started successfully.")
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
            // self.rangingSwitch.on = true
@@ -154,8 +166,15 @@ extension LBMainViewController: LBLocationServiceDelegate
     }
     
     func rangingFailedToStart() {
+        let title = "No beacon ranging possible"
+        let message = "No beacon ranging is available on this device at the moment."
+        let okButtonTitle = "OK"
+        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction.init(title: okButtonTitle, style: UIAlertActionStyle.Default, handler: nil)
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-          //  self.rangingSwitch.on = false
+            
         }
     }
     
@@ -187,29 +206,33 @@ extension LBMainViewController: LBLocationServiceDelegate
     }
     
     func rangingStoppedSuccessfully() {
-        currentBeacons = []
-        
+        self.currentBeacons = []
+        self.currentFilteredBeaconSigmaDistances  = [Double](count: 20, repeatedValue: 0.0)
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            //Custom ranging view => update -> stop showing beacons
             
-            //self.beaconTableView.beginUpdates()
-            //if let deletedSections = self.deletedSections() {
-            //    self.beaconTableView.deleteSections(deletedSections, withRowAnimation: UITableViewRowAnimation.Fade)
-            //}
-            //self.beaconTableView.endUpdates()
         }
     }
     
     func rangingBeaconsInRange(beacons: [CLBeacon]!, inRegion region: CLBeaconRegion!) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.currentBeacons = beacons
-            
-            // instance variable _filteredAccuracy keeps the value from the last calculation.
-            // filterFactor is a constant between 0 and 1.
-            //float filterFactor = 0.2;
-            //_filteredAccuracy = (accuracy * filterFactor) + (_filteredAccuracy * (1.0 - filterFactor));
-            
-            self.setValue(self.currentBeacons, forKeyPath: self.beaconKeyPath)
+            let sortedBeacons = self.currentBeacons.sort({ $0.accuracy < $1.accuracy})
+            let filterFactor: Double = 0.2
+            for (index, value) in sortedBeacons.enumerate()
+            {
+                if (index < 20)
+                {
+                    let beacon: CLBeacon = value
+                    var previousFilteredAccuracy = self._beaconFilteredSigmaDistances[index]
+                    if(previousFilteredAccuracy < 0.1)
+                    {
+                        previousFilteredAccuracy = beacon.accuracy
+                    }
+                    let _filteredAccuracy: Double = (beacon.accuracy * filterFactor) + (previousFilteredAccuracy * (1.0 - filterFactor))
+                    self.currentFilteredBeaconSigmaDistances[index] = _filteredAccuracy
+                }
+            }
+            //self.setValue(self.currentFilteredBeaconSigmaDistances, forKeyPath: self.beaconKeyPath)
         }
     }
 
