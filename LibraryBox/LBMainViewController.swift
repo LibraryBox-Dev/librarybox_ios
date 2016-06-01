@@ -144,6 +144,8 @@ extension LBMainViewController: MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView()
+        annotationView.annotation = annotation
+        //annotationView.image = UIImage(named:"LBAnnotationImage")
         annotationView.rightCalloutAccessoryView = UIButton.init(type:UIButtonType.DetailDisclosure)
         annotationView.canShowCallout = true
         return annotationView
