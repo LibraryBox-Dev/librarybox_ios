@@ -29,6 +29,7 @@
 		63E33EC91CF2E7DA005F6F5C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E33EC81CF2E7DA005F6F5C /* MapKit.framework */; };
 		63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */; };
 		63E33ED11CF2F93E005F6F5C /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 63E33ED01CF2F93E005F6F5C /* Licenses */; };
+		63F7CF401D00E9130002C026 /* LBGoogleAPIAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F7CF3F1D00E9130002C026 /* LBGoogleAPIAccessService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		63E33EC81CF2E7DA005F6F5C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBLocationService.swift; sourceTree = "<group>"; };
 		63E33ED01CF2F93E005F6F5C /* Licenses */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Licenses; sourceTree = "<group>"; };
+		63F7CF3F1D00E9130002C026 /* LBGoogleAPIAccessService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGoogleAPIAccessService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */,
 				63BA7E731CFCDF4200FE2F2C /* LBSSIDCheckingService.swift */,
 				631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */,
+				63F7CF3F1D00E9130002C026 /* LBGoogleAPIAccessService.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63F7CF401D00E9130002C026 /* LBGoogleAPIAccessService.swift in Sources */,
 				631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */,
 				63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */,
 				63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */,
