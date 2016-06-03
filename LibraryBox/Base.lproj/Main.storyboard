@@ -296,6 +296,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBN-0B-jrP">
                                                     <rect key="frame" x="274" y="7" width="53" height="30"/>
                                                     <state key="normal" title="Add Pin"/>
+                                                    <connections>
+                                                        <action selector="pinBox:" destination="feP-NS-Ry8" eventType="touchUpInside" id="dYv-Db-1PM"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -313,6 +316,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ejU-5P-UO7"/>
+                    <connections>
+                        <outlet property="boxAddress" destination="fYV-cG-UMn" id="otP-1Z-74k"/>
+                        <outlet property="boxTitle" destination="uS8-vL-9PY" id="n0r-1a-Lwd"/>
+                        <outlet property="boxTypeSelection" destination="LRg-1r-9ld" id="B8b-tk-J2e"/>
+                        <outlet property="latitudeField" destination="94D-wL-ZUD" id="7D6-q6-XRu"/>
+                        <outlet property="longitudeField" destination="hhf-eb-mN8" id="N8x-tB-Buw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGS-qc-b5O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

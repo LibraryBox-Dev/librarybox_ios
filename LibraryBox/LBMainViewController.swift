@@ -25,7 +25,7 @@ class LBMainViewController: UIViewController {
     dynamic var currentFilteredBeaconSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     var _beaconFilteredSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     var myKMLParser: KMLParser!
-    private var locationService = LBLocationService()
+    var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
     
     override func viewDidLoad() {

@@ -151,6 +151,15 @@ class LBContainerViewController: UIViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(segue.identifier == "showPinningInfo") {
+            
+            let yourNextViewController = (segue.destinationViewController as! LBMapPinningTableViewController)
+            yourNextViewController.currentLocationOfUser = self.centerViewController.locationService.currentLoc
+        }
+    }
+    
     @IBAction func wifiButtonClicked(sender: UIButton)
     {
         UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
@@ -173,14 +182,6 @@ class LBContainerViewController: UIViewController {
     @IBAction func pinningButtonClicked(sender: UIButton)
     {
         self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
-//        self.wifiButton.hidden = true
-//        self.boxButton.hidden = true
-//        self.mapPinButton.hidden = true
-//        if(currentState == .RightPanelExpanded)
-//        {
-//            rangingViewExpandedStateStore = true
-//            self.toggleRightPanel()
-//        }
     }
     
     func handleMainViewAppearance()
