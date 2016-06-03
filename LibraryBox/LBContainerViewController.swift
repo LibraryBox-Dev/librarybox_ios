@@ -151,14 +151,7 @@ class LBContainerViewController: UIViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if(segue.identifier == "showPinningInfo") {
-            
-            let yourNextViewController = (segue.destinationViewController as! LBMapPinningTableViewController)
-            yourNextViewController.currentLocationOfUser = self.centerViewController.locationService.currentLoc
-        }
-    }
+    
     
     @IBAction func wifiButtonClicked(sender: UIButton)
     {

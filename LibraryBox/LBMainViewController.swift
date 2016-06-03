@@ -25,7 +25,7 @@ class LBMainViewController: UIViewController {
     dynamic var currentFilteredBeaconSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     var _beaconFilteredSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     var myKMLParser: KMLParser!
-    var locationService = LBLocationService()
+    private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -63,6 +63,15 @@ class LBMainViewController: UIViewController {
         nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(segue.identifier == "showPinningInfo") {
+            
+            let yourNextNavigationController = (segue.destinationViewController as! UINavigationController)
+            let yourNextViewController = yourNextNavigationController.topViewController as! LBMapPinningTableViewController
+            yourNextViewController.currentLocationOfUser = self.locationService.currentLoc
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
