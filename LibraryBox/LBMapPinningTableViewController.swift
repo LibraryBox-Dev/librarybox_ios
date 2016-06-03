@@ -52,9 +52,7 @@ class LBMapPinningTableViewController: UITableViewController
     
     func getAddressFromPlaceMark(unsafePlaceMark: CLPlacemark? )->String?{
         if let placeMark = unsafePlaceMark{
-            if let thoroughfare = placeMark.thoroughfare{
-                return thoroughfare
-            } else if let address=placeMark.addressDictionary?["FormattedAddressLines"] as? [String]
+            if let address=placeMark.addressDictionary?["FormattedAddressLines"] as? [String]
             {
                 let addressString = address.joinWithSeparator(",")
                 return addressString
