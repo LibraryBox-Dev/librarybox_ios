@@ -9,12 +9,13 @@
 import Foundation
 import UIKit
 import CoreLocation
+import AddressBookUI
 
 class LBMapPinningTableViewController: UITableViewController
 {
     @IBOutlet weak var boxAddress: UITextView!
-    @IBOutlet weak var latitudeField: UITextField!
-    @IBOutlet weak var longitudeField: UITextField!
+    //@IBOutlet weak var latitudeField: UITextField!
+    //@IBOutlet weak var longitudeField: UITextField!
     @IBOutlet weak var boxTypeSelection: UISegmentedControl!
     var currentLocationOfUser: CLLocation!
     
@@ -22,18 +23,44 @@ class LBMapPinningTableViewController: UITableViewController
         super.viewDidLoad()
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(cancelPinning))
         self.navigationItem.rightBarButtonItem = cancelButton
-        self.navigationItem.title = "Add Box to Map"
+        self.navigationItem.title = "Add Box Location"
         
         if currentLocationOfUser != nil
         {
-            latitudeField.text = String(currentLocationOfUser.coordinate.latitude)
-            longitudeField.text = String(currentLocationOfUser.coordinate.longitude)
+            self.getPlacemarkFromLocation(currentLocationOfUser)
+            //latitudeField.text = String(currentLocationOfUser.coordinate.latitude)
+            //longitudeField.text = String(currentLocationOfUser.coordinate.longitude)
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getPlacemarkFromLocation(location: CLLocation){
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler:
+            {(placemarks, error) in
+                if (error != nil) {print("reverse geodcode fail: \(error!.localizedDescription)")}
+                let pm = placemarks! as [CLPlacemark]
+                if pm.count > 0 {
+                    let addressString = self.getAddressFromPlaceMark(pm[0])
+                    self.boxAddress.text = addressString
+                }
+        })
+    }
+    
+    func getAddressFromPlaceMark(unsafePlaceMark: CLPlacemark? )->String?{
+        if let placeMark = unsafePlaceMark{
+            if let thoroughfare = placeMark.thoroughfare{
+                return thoroughfare
+            } else if let address=placeMark.addressDictionary?["FormattedAddressLines"] as? [String]
+            {
+                let addressString = address.joinWithSeparator(",")
+                return addressString
+            }
+        }
+        return nil
     }
     
     @IBAction func pinBox(sender: UIButton) {
