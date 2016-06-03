@@ -19,6 +19,7 @@
 		63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */; };
 		63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */; };
 		63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 63BB3FB21CF3B38D00EF88E8 /* TODO */; };
+		63E014FE1D01D20E00269FD6 /* LBMapPinningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */; };
 		63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */; };
 		63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */; };
 		63E33EA01CF2E7A9005F6F5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E33E9E1CF2E7A9005F6F5C /* Main.storyboard */; };
@@ -65,6 +66,7 @@
 		63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBeaconRangingViewController.swift; sourceTree = "<group>"; };
 		63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LibraryBox-Bridging-Header.h"; sourceTree = "<group>"; };
 		63BB3FB21CF3B38D00EF88E8 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBMapPinningTableViewController.swift; sourceTree = "<group>"; };
 		63E33E971CF2E7A9005F6F5C /* LibraryBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LibraryBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBMainViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */,
 				636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */,
 				63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */,
+				63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */,
 				63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */,
 				63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */,
+				63E014FE1D01D20E00269FD6 /* LBMapPinningTableViewController.swift in Sources */,
 				63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */,
 				636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */,
 				63BA7E741CFCDF4200FE2F2C /* LBSSIDCheckingService.swift in Sources */,

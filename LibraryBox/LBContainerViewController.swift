@@ -43,6 +43,9 @@ class LBContainerViewController: UIViewController {
         self.centerNavigationController.didMoveToParentViewController(self)
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "LBMainViewControllerAppeared", object: nil)
+        //nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationDidBecomeActiveNotification, object: nil)
+        //nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationWillResignActiveNotification, object: nil)
+        //nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationWillTerminateNotification, object: nil)
         
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -88,7 +91,7 @@ class LBContainerViewController: UIViewController {
         self.mapPinButton.lineWidth = 3.0
         self.mapPinButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
         self.mapPinButton.inactiveColor = self.view.tintColor
-        //self.mapPinButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        self.mapPinButton.addTarget(self, action:#selector(pinningButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.mapPinButton)
         let thirdButtonDict = ["pinningButton":self.mapPinButton]
         let pinButtonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|-25-[pinningButton]", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: thirdButtonDict)
@@ -165,6 +168,19 @@ class LBContainerViewController: UIViewController {
             rangingViewExpandedStateStore = true
             self.toggleRightPanel()
         }
+    }
+    
+    @IBAction func pinningButtonClicked(sender: UIButton)
+    {
+        self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
+//        self.wifiButton.hidden = true
+//        self.boxButton.hidden = true
+//        self.mapPinButton.hidden = true
+//        if(currentState == .RightPanelExpanded)
+//        {
+//            rangingViewExpandedStateStore = true
+//            self.toggleRightPanel()
+//        }
     }
     
     func handleMainViewAppearance()

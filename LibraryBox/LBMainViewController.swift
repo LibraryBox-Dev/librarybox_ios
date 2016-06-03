@@ -48,9 +48,6 @@ class LBMainViewController: UIViewController {
         locationService.startBeaconRanging()
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
-        nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationDidBecomeActiveNotification, object: nil)
-        nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationWillResignActiveNotification, object: nil)
-        nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationWillTerminateNotification, object: nil)
         self.updateMapUI()
         // Do any additional setup after loading the view, typically from a nib.
     }
