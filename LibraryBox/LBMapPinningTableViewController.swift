@@ -11,7 +11,7 @@ import UIKit
 import CoreLocation
 import AddressBookUI
 
-class LBMapPinningTableViewController: UITableViewController
+class LBMapPinningTableViewController: UITableViewController, UITextViewDelegate
 {
     @IBOutlet weak var boxAddress: UITextView!
     @IBOutlet weak var boxTypeSelection: UISegmentedControl!
@@ -22,6 +22,7 @@ class LBMapPinningTableViewController: UITableViewController
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(cancelPinning))
         self.navigationItem.rightBarButtonItem = cancelButton
         self.navigationItem.title = "Add Box Location"
+        self.boxAddress.delegate = self
         
         if currentLocationOfUser != nil
         {
@@ -59,7 +60,24 @@ class LBMapPinningTableViewController: UITableViewController
         return nil
     }
     
+//    -(void)textViewDidBeginEditing:(UITextView *)textView
+//    {
+    //==> deactivate button
+//    [self.yourTextview setText:@""];
+//    [yourTextview setTextColor:[UIColor blackColor]];
+//    }
+    //    -(void)textViewDidEndEditing:(UITextView *)textView
+    //    {
+    //==> check address
+    //==> activate button if address is valid (data detector -> send to: clplacemark (forward, then reverse geocode) -> not empty); set UITableViewSectionDetails that address is valid or not
+    //==> "..address...." with CheckMark OR No valid address found X
+    //    [self.yourTextview setText:@""];
+    //    [yourTextview setTextColor:[UIColor blackColor]];
+    //    }
+    
     @IBAction func pinBox(sender: UIButton) {
+
+        
         self.dismissViewControllerAnimated(true, completion:{
             let request = NSMutableURLRequest(URL: NSURL(string: "https://www.googleapis.com/fusiontables/v1/query")!)
             request.HTTPMethod = "POST"
