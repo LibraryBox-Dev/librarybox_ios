@@ -177,6 +177,8 @@ class LBContainerViewController: UIViewController {
         self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
     }
     
+
+    
     func handleMainViewAppearance()
     {
         self.wifiButton.hidden = false
@@ -281,5 +283,6 @@ private extension UIStoryboard {
     class func centerViewController() -> LBMainViewController? {
         return mainStoryboard().instantiateViewControllerWithIdentifier("MainViewController") as? LBMainViewController
     }
+    
     
 }

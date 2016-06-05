@@ -14,8 +14,6 @@ import AddressBookUI
 class LBMapPinningTableViewController: UITableViewController
 {
     @IBOutlet weak var boxAddress: UITextView!
-    //@IBOutlet weak var latitudeField: UITextField!
-    //@IBOutlet weak var longitudeField: UITextField!
     @IBOutlet weak var boxTypeSelection: UISegmentedControl!
     var currentLocationOfUser: CLLocation!
     
