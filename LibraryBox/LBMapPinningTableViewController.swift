@@ -19,6 +19,7 @@ class LBMapPinningTableViewController: UITableViewController
     @IBOutlet weak var boxAddressFeedback: UILabel!
     var currentLocationOfUser: CLLocation!
     var currentBoxLocations: [MKAnnotation] = []
+    var placemarkForPinning: CLPlacemark!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,30 +77,32 @@ class LBMapPinningTableViewController: UITableViewController
     
     
     @IBAction func pinBox(sender: UIButton) {
-
-        
         self.dismissViewControllerAnimated(true, completion:{
-            let request = NSMutableURLRequest(URL: NSURL(string: "https://www.googleapis.com/fusiontables/v1/query")!)
-            request.HTTPMethod = "POST"
-            let accessKey:String = LBGoogleAPIAccessService.accessKey()
-            let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('Blue Shoes', 50);"
-            let postString = "sql=\(sqlQuery)&key=\(accessKey)"
-            request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-                guard error == nil && data != nil else {                                                          // check for fundamental networking error
-                    print("error=\(error)")
-                    return
+            if let locationForPinning = self.placemarkForPinning.location
+            {
+                let request = NSMutableURLRequest(URL: NSURL(string: "https://www.googleapis.com/fusiontables/v1/query")!)
+                request.HTTPMethod = "POST"
+                let accessKey:String = LBGoogleAPIAccessService.accessKey()
+                let addressTitle:String = self.getAddressFromPlaceMark(self.placemarkForPinning)!
+                let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)', \(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude), '\(self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex))');"
+                let postString = "sql=\(sqlQuery)&key=\(accessKey)"
+                request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+                let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+                    guard error == nil && data != nil else {                                                          // check for fundamental networking error
+                        print("error=\(error)")
+                        return
+                    }
+                    
+                    if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                        print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                        print("response = \(response)")
+                    }
+                    
+                    let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                    print("responseString = \(responseString)")
                 }
-                
-                if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
-                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                    print("response = \(response)")
-                }
-                
-                let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                print("responseString = \(responseString)")
+                task.resume()
             }
-            task.resume()
         })
     }
     
@@ -133,6 +136,7 @@ class LBMapPinningTableViewController: UITableViewController
                         if !self.checkForDublicatePinning(pm[0])
                         {
                             self.updateAddressFeedback("\u{2705} '\(currentAddress)' valid")
+                            self.placemarkForPinning = pm[0]
                             self.pinButton.enabled = true
                             
                         } else
