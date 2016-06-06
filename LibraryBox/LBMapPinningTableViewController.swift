@@ -16,7 +16,9 @@ class LBMapPinningTableViewController: UITableViewController
     @IBOutlet weak var boxAddress: UITextView!
     @IBOutlet weak var boxTypeSelection: UISegmentedControl!
     @IBOutlet weak var pinButton: UIButton!
+    @IBOutlet weak var boxAddressFeedback: UILabel!
     var currentLocationOfUser: CLLocation!
+    var currentBoxLocations: [MKAnnotation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,10 @@ class LBMapPinningTableViewController: UITableViewController
             self.getPlacemarkFromLocation(currentLocationOfUser)
         }
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -122,46 +128,56 @@ class LBMapPinningTableViewController: UITableViewController
                 if (error != nil) {print("forward geodcode fail: \(error!.localizedDescription)")}
                 let pm = placemarks! as [CLPlacemark]
                 if pm.count > 0 {
-                    if self.getAddressFromPlaceMark(pm[0]) != nil
+                    if let currentAddress = self.getAddressFromPlaceMark(pm[0])
                     {
                         if !self.checkForDublicatePinning(pm[0])
                         {
-                            self.updateAddressFooter("'Address' valid")
+                            self.updateAddressFeedback("\u{2705} '\(currentAddress)' valid")
                             self.pinButton.enabled = true
                             
                         } else
                         {
-                            self.updateAddressFooter("'Address' already on map")
+                            self.updateAddressFeedback("\u{274C} '\(currentAddress)' already on map")
                             self.pinButton.enabled = false
                         }
                     }else
                     {
-                        self.updateAddressFooter("No valid address found")
+                        self.updateAddressFeedback("\u{274C} No valid address found")
                         self.pinButton.enabled = false
                     }
                 }
             })
+        }else
+        {
+            self.updateAddressFeedback("\u{274C} No valid address found")
+            self.pinButton.enabled = false
         }
     }
     
     func checkForDublicatePinning(place: CLPlacemark) -> Bool
     {
-        //check lat and long values with kml (not translated into clplacemark due to performance
-        return true
+        var isDublicate: Bool = true
+        for boxLoc in currentBoxLocations
+        {
+            let locationOfPlace = place.location
+            let pinLoc = CLLocation(latitude: boxLoc.coordinate.latitude, longitude: boxLoc.coordinate.longitude)
+            let distance = locationOfPlace?.distanceFromLocation(pinLoc)
+            if (distance < 15)
+            {
+                isDublicate = true
+                break
+            }
+            else
+            {
+                isDublicate = false
+            }
+        }
+        return isDublicate
     }
     
-    func updateAddressFooter(text: String)
+    func updateAddressFeedback(text: String)
     {
-        //TODO Update line height and string font
-        let myTable = self.view as? UITableView
-        let footerView: UITableViewHeaderFooterView = myTable!.footerViewForSection(0)!
-        let animation: CATransition = CATransition()
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.type = kCATransitionFade
-        animation.duration = 0.35;
-        footerView.textLabel?.layer.addAnimation(animation, forKey: "kCATransitionFade")
-        footerView.textLabel?.text=text
-        footerView.textLabel?.sizeToFit()
+        boxAddressFeedback.text=text
     }
     
 }

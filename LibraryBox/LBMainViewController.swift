@@ -70,6 +70,10 @@ class LBMainViewController: UIViewController {
             let yourNextNavigationController = (segue.destinationViewController as! UINavigationController)
             let yourNextViewController = yourNextNavigationController.topViewController as! LBMapPinningTableViewController
             yourNextViewController.currentLocationOfUser = self.locationService.currentLoc
+            if let currentPoints = myKMLParser.points as? [MKAnnotation]
+            {
+                yourNextViewController.currentBoxLocations = currentPoints
+            }
         }
     }
     
