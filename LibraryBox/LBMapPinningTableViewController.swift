@@ -11,10 +11,11 @@ import UIKit
 import CoreLocation
 import AddressBookUI
 
-class LBMapPinningTableViewController: UITableViewController, UITextViewDelegate
+class LBMapPinningTableViewController: UITableViewController
 {
     @IBOutlet weak var boxAddress: UITextView!
     @IBOutlet weak var boxTypeSelection: UISegmentedControl!
+    @IBOutlet weak var pinButton: UIButton!
     var currentLocationOfUser: CLLocation!
     
     override func viewDidLoad() {
@@ -22,19 +23,25 @@ class LBMapPinningTableViewController: UITableViewController, UITextViewDelegate
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(cancelPinning))
         self.navigationItem.rightBarButtonItem = cancelButton
         self.navigationItem.title = "Add Box Location"
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.tableView.addGestureRecognizer(gestureRecognizer)
+        self.pinButton.enabled = false
         self.boxAddress.delegate = self
-        
         if currentLocationOfUser != nil
         {
             self.getPlacemarkFromLocation(currentLocationOfUser)
-            //latitudeField.text = String(currentLocationOfUser.coordinate.latitude)
-            //longitudeField.text = String(currentLocationOfUser.coordinate.longitude)
         }
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func hideKeyboard()
+    {
+        self.boxAddress.resignFirstResponder()
     }
     
     func getPlacemarkFromLocation(location: CLLocation){
@@ -45,6 +52,7 @@ class LBMapPinningTableViewController: UITableViewController, UITextViewDelegate
                 if pm.count > 0 {
                     let addressString = self.getAddressFromPlaceMark(pm[0])
                     self.boxAddress.text = addressString
+                    self.validateAddressText()
                 }
         })
     }
@@ -60,20 +68,6 @@ class LBMapPinningTableViewController: UITableViewController, UITextViewDelegate
         return nil
     }
     
-//    -(void)textViewDidBeginEditing:(UITextView *)textView
-//    {
-    //==> deactivate button
-//    [self.yourTextview setText:@""];
-//    [yourTextview setTextColor:[UIColor blackColor]];
-//    }
-    //    -(void)textViewDidEndEditing:(UITextView *)textView
-    //    {
-    //==> check address
-    //==> activate button if address is valid (data detector -> send to: clplacemark (forward, then reverse geocode) -> not empty); set UITableViewSectionDetails that address is valid or not
-    //==> "..address...." with CheckMark OR No valid address found X
-    //    [self.yourTextview setText:@""];
-    //    [yourTextview setTextColor:[UIColor blackColor]];
-    //    }
     
     @IBAction func pinBox(sender: UIButton) {
 
@@ -110,5 +104,80 @@ class LBMapPinningTableViewController: UITableViewController, UITextViewDelegate
             
         })
 
+    }
+    
+    func validateAddressText()
+    {
+        let addressText = self.boxAddress.text
+        let types: NSTextCheckingType = [.Address]
+        let detector = try? NSDataDetector(types: types.rawValue)
+        var addresses: [[String:String]] = []
+        detector?.enumerateMatchesInString(addressText, options: [], range: NSMakeRange(0, (addressText as NSString).length)) { (result, flags, _) in
+            addresses.append((result?.addressComponents)!)
+            print(result?.addressComponents)
+        }
+        if(addresses.count > 0)
+        {
+            CLGeocoder().geocodeAddressDictionary(addresses[0], completionHandler: {(placemarks, error) in
+                if (error != nil) {print("forward geodcode fail: \(error!.localizedDescription)")}
+                let pm = placemarks! as [CLPlacemark]
+                if pm.count > 0 {
+                    if self.getAddressFromPlaceMark(pm[0]) != nil
+                    {
+                        if !self.checkForDublicatePinning(pm[0])
+                        {
+                            self.updateAddressFooter("'Address' valid")
+                            self.pinButton.enabled = true
+                            
+                        } else
+                        {
+                            self.updateAddressFooter("'Address' already on map")
+                            self.pinButton.enabled = false
+                        }
+                    }else
+                    {
+                        self.updateAddressFooter("No valid address found")
+                        self.pinButton.enabled = false
+                    }
+                }
+            })
+        }
+    }
+    
+    func checkForDublicatePinning(place: CLPlacemark) -> Bool
+    {
+        //check lat and long values with kml (not translated into clplacemark due to performance
+        return true
+    }
+    
+    func updateAddressFooter(text: String)
+    {
+        //TODO Update line height and string font
+        let myTable = self.view as? UITableView
+        let footerView: UITableViewHeaderFooterView = myTable!.footerViewForSection(0)!
+        let animation: CATransition = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionFade
+        animation.duration = 0.35;
+        footerView.textLabel?.layer.addAnimation(animation, forKey: "kCATransitionFade")
+        footerView.textLabel?.text=text
+        footerView.textLabel?.sizeToFit()
+    }
+    
+}
+
+
+
+
+extension LBMapPinningTableViewController: UITextViewDelegate
+{
+
+    func textViewDidBeginEditing(textView: UITextView) {
+        self.pinButton.enabled = false
+    }
+    
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        self.validateAddressText()
     }
 }
