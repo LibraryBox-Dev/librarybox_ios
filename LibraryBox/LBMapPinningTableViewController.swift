@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import CoreLocation
 import AddressBookUI
+import AeroGearHttp
+import AeroGearOAuth2
 
 class LBMapPinningTableViewController: UITableViewController
 {
@@ -20,6 +22,7 @@ class LBMapPinningTableViewController: UITableViewController
     var currentLocationOfUser: CLLocation!
     var currentBoxLocations: [MKAnnotation] = []
     var placemarkForPinning: CLPlacemark!
+    var http: Http!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,7 @@ class LBMapPinningTableViewController: UITableViewController
         {
             self.getPlacemarkFromLocation(currentLocationOfUser)
         }
+        http = Http()
         
     }
     
@@ -80,28 +84,26 @@ class LBMapPinningTableViewController: UITableViewController
         self.dismissViewControllerAnimated(true, completion:{
             if let locationForPinning = self.placemarkForPinning.location
             {
-                let request = NSMutableURLRequest(URL: NSURL(string: "https://www.googleapis.com/fusiontables/v1/query")!)
-                request.HTTPMethod = "POST"
-                let accessKey:String = LBGoogleAPIAccessService.accessKey()
-                let addressTitle:String = self.getAddressFromPlaceMark(self.placemarkForPinning)!
-                let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)', \(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude), '\(self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex))');"
-                let postString = "sql=\(sqlQuery)&key=\(accessKey)"
-                request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-                let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-                    guard error == nil && data != nil else {                                                          // check for fundamental networking error
-                        print("error=\(error)")
-                        return
-                    }
-                    
-                    if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
-                        print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                        print("response = \(response)")
-                    }
-                    
-                    let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                    print("responseString = \(responseString)")
+                let googleConfig = GoogleConfig(
+                    clientId: LBGoogleAPIAccessService.clientId(),
+                    scopes:["https://www.googleapis.com/auth/fusiontables"])
+                let gdModule =  OAuth2Module(config: googleConfig)
+                self.http.authzModule = gdModule
+                gdModule.requestAccess { (response:AnyObject?, error:NSError?) -> Void in
+                    let accessKey:String = LBGoogleAPIAccessService.accessKey()
+                    let addressTitle:String = self.getAddressFromPlaceMark(self.placemarkForPinning)!
+                    let type:String = self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
+                    let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)', \(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude), '\(type))');"
+                    let queryURL: String = sqlQuery.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    //let pathString:String = "https://www.googleapis.com/fusiontables/v2/query&sql=INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)', \(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude), '\(type))');&key=\(accessKey)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+                    self.http.request(.POST, path: "https://www.googleapis.com/fusiontables/v2/query", parameters: ["sql":queryURL, "key":accessKey], credential: nil, responseSerializer: JsonResponseSerializer(), completionHandler: {(response, error) in
+                        if (error != nil) {
+                            print("Error uploading file: \(error)")
+                        } else {
+                            print("Successfully posted: " + response!.description)
+                        }
+                    })
                 }
-                task.resume()
             }
         })
     }

@@ -249,7 +249,7 @@
                                                     <rect key="frame" x="274" y="7" width="53" height="30"/>
                                                     <state key="normal" title="Add Pin"/>
                                                     <connections>
-                                                        <action selector="pinBox:" destination="feP-NS-Ry8" eventType="touchUpInside" id="dYv-Db-1PM"/>
+                                                        <action selector="pinBox:" destination="feP-NS-Ry8" eventType="touchUpInside" id="Eam-HB-kM7"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
