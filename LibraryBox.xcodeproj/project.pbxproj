@@ -60,7 +60,7 @@
 		17F935F43CC6AE85CA6BC1EC /* Pods-LibraryBoxUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests.release.xcconfig"; sourceTree = "<group>"; };
 		33D9481FB2FC56DAE4ECD871 /* Pods_LibraryBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LibraryBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		454E6A33E6F249371302716E /* Pods-LibraryBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBox/Pods-LibraryBox.debug.xcconfig"; sourceTree = "<group>"; };
-		6316D6951D082C9F00C68EBF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		6316D6951D082C9F00C68EBF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBURLDownloadService.swift; sourceTree = "<group>"; };
 		631BDE721CFF8E6100B19B84 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
 		631BDE731CFF8E6100B19B84 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
