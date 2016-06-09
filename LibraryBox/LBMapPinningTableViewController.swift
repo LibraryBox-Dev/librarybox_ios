@@ -93,10 +93,10 @@ class LBMapPinningTableViewController: UITableViewController
                     let accessKey:String = LBGoogleAPIAccessService.accessKey()
                     let addressTitle:String = self.getAddressFromPlaceMark(self.placemarkForPinning)!
                     let type:String = self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
-                    let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)', \(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude), '\(type))');"
+                    let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)',\(locationForPinning.coordinate.latitude),\(locationForPinning.coordinate.longitude),'\(type)');"
                     let queryURL: String = sqlQuery.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                    //let pathString:String = "https://www.googleapis.com/fusiontables/v2/query&sql=INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)', \(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude), '\(type))');&key=\(accessKey)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                    self.http.request(.POST, path: "https://www.googleapis.com/fusiontables/v2/query", parameters: ["sql":queryURL, "key":accessKey], credential: nil, responseSerializer: JsonResponseSerializer(), completionHandler: {(response, error) in
+                    let pathString:String = "https://www.googleapis.com/fusiontables/v2/query?sql=INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)', \(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude), '\(type)');".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())! //?key=\(accessKey)
+                    self.http.request(.POST, path: pathString, parameters: ["sql":queryURL, "key":accessKey], credential: nil, responseSerializer: StringResponseSerializer(), completionHandler: {(response, error) in
                         if (error != nil) {
                             print("Error uploading file: \(error)")
                         } else {
