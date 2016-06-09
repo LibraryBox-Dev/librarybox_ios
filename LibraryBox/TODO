@@ -2,11 +2,8 @@ FIX: RANGING API MAY NOT BE USED IN THE BACKGROUND => frontmost and the user is 
 FIX: WiFi Check when back from WiFi-Settings, MapPinning or BoxView
 FIX: Test monitoring and notifications
 
-* Adding pin button only active when valid address and not yet pinned
-* kml to clplacemark array (so every box has a title = address)
 * Custom Annotation Pin Image
 * stopRanging() on App Suspense and App Close
 * RoundedButton "Activate" animation
-* Overlays: Closest Beacon proximity
-* Map Pinning
+* Overlays: Closest Beacon proximity, LBs
 * WatchKit

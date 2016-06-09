@@ -39,6 +39,15 @@ class LBMapPinningTableViewController: UITableViewController
         }
         http = Http()
         
+//        self.terms.delegate = self
+//        let str = "By using this app you agree to our Terms and Conditions and Privacy Policy"
+//        let attributedString = NSMutableAttributedString(string: str)
+//        var foundRange = attributedString.mutableString.rangeOfString("Terms and Conditions")
+//        attributedString.addAttribute(NSLinkAttributeName, value: termsAndConditionsURL, range: foundRange)
+//        foundRange = attributedString.mutableString.rangeOfString("Privacy Policy")
+//        attributedString.addAttribute(NSLinkAttributeName, value: privacyURL, range: foundRange)
+//        terms.attributedText = attributedString
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -202,4 +211,17 @@ extension LBMapPinningTableViewController: UITextViewDelegate
     func textViewDidEndEditing(textView: UITextView) {
         self.validateAddressText()
     }
+    
+//    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+//        if (URL.absoluteString == termsAndConditionsURL) {
+//            let myAlert = UIAlertController(title: "Terms", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+//            myAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+//            self.presentViewController(myAlert, animated: true, completion: nil)
+//        } else if (URL.absoluteString == privacyURL) {
+//            let myAlert = UIAlertController(title: "Conditions", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+//            myAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+//            self.presentViewController(myAlert, animated: true, completion: nil)
+//        }
+//        return false
+//    }
 }
