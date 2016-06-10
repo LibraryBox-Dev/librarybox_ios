@@ -34,7 +34,7 @@ class LBMainViewController: UIViewController {
         let userLocationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
         self.navigationItem.leftBarButtonItem = userLocationButton
         self.navigationItem.title = "LibraryBox"
-        let radar = UIImage(named: "online")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let radar = UIImage(named: "bluetoothsearching")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         let radarButton = UIButton()
         radarButton.frame = CGRectMake(0, 0, 22, 22)
         radarButton.setImage(radar, forState: .Normal)
