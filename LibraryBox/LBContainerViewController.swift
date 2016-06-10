@@ -43,9 +43,6 @@ class LBContainerViewController: UIViewController {
         self.centerNavigationController.didMoveToParentViewController(self)
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "LBMainViewControllerAppeared", object: nil)
-        //nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationDidBecomeActiveNotification, object: nil)
-        //nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationWillResignActiveNotification, object: nil)
-        //nc.addObserver(self, selector: #selector(updateMapUI), name:UIApplicationWillTerminateNotification, object: nil)
         
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -104,6 +101,12 @@ class LBContainerViewController: UIViewController {
         self.view.addConstraints(pinButtonHeightConstraint)
         self.view.setNeedsUpdateConstraints()
         
+        self.handleMainViewAppearance()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -194,10 +197,11 @@ class LBContainerViewController: UIViewController {
                 self.boxButton.hidden = false
             }
             else{
-                //self.boxButton.hidden = true
+                //box button only on box network?
+                self.boxButton.hidden = false
             }
         }
-        self.mapPinButton.hidden = false
+        self.mapPinButton.hidden = false //?
         if(rangingViewExpandedStateStore == true)
         {
             self.toggleRightPanel()

@@ -45,10 +45,14 @@ class LBMainViewController: UIViewController {
         locationService.delegate = self
         locationService.authorize()
         locationService.startUpdatingUserLocation()
+        locationService.startMonitoringForBeacons()
         locationService.startBeaconRanging()
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
         self.updateMapUI()
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: #selector(activateMapRelatedServices), name:UIApplicationDidBecomeActiveNotification, object: nil)
+        nc.addObserver(self, selector: #selector(deactivateRangingService), name:UIApplicationWillResignActiveNotification, object: nil)
+        nc.addObserver(self, selector: #selector(deactivateMapRelatedServices), name:UIApplicationWillTerminateNotification, object: nil)
+        nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -85,6 +89,24 @@ class LBMainViewController: UIViewController {
     @IBAction func triggerBeaconRangingView(sender: UITabBarItem)
     {
         delegate?.toggleRightPanel()
+    }
+    
+    func activateMapRelatedServices()
+    {
+        locationService.startMonitoringForBeacons()
+        locationService.startBeaconRanging()
+        self.updateMapUI()
+    }
+    
+    func deactivateRangingService()
+    {
+        locationService.stopBeaconRanging()
+    }
+    
+    func deactivateMapRelatedServices()
+    {
+        locationService.stopBeaconRanging()
+        locationService.stopMonitoringForBeacons()
     }
     
     func updateMapUI()
@@ -223,8 +245,6 @@ extension LBMainViewController: LBLocationServiceDelegate
         notification.soundName = UILocalNotificationDefaultSoundName
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
-
-    // RANGING API MAY NOT BE USED IN THE BACKGROUND => frontmost and the user is interacting with your app
     
     func rangingStartedSuccessfully() {
         currentBeacons = []
