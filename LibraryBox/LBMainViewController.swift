@@ -31,6 +31,7 @@ class LBMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.showsUserLocation = true
+        self.mapView.delegate = self
         let userLocationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
         self.navigationItem.leftBarButtonItem = userLocationButton
         self.navigationItem.title = "LibraryBox"
@@ -180,12 +181,16 @@ extension LBMainViewController: MKMapViewDelegate {
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKAnnotationView()
-        annotationView.annotation = annotation
-        //annotationView.image = UIImage(named:"LBAnnotationImage")
-        annotationView.rightCalloutAccessoryView = UIButton.init(type:UIButtonType.DetailDisclosure)
-        annotationView.canShowCallout = true
-        return annotationView
+//        if annotation is KMLPlacemark
+//        {
+//            let annotationView = MKAnnotationView()
+//            annotationView.annotation = annotation
+//            annotationView.image = UIImage(named:"LibraryBox_box")
+//            annotationView.rightCalloutAccessoryView = UIButton.init(type:UIButtonType.DetailDisclosure)
+//            annotationView.canShowCallout = true
+//            return annotationView
+//        }
+        return nil
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -212,8 +217,7 @@ extension LBMainViewController: LBLocationServiceDelegate
     
     func monitoringStoppedSuccessfully() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            //custom wifi-connection view monitoringAnimation
-            //self.monitoringActivityIndicator.stopAnimating()
+            //UI updates
         }
     }
     
@@ -249,9 +253,9 @@ extension LBMainViewController: LBLocationServiceDelegate
     func rangingStartedSuccessfully() {
         currentBeacons = []
         print("Ranging started successfully.")
-        
+        delegate?.startScanningAnimation()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-           // self.rangingSwitch.on = true
+           // UI updates
         }
     }
     
@@ -290,7 +294,7 @@ extension LBMainViewController: LBLocationServiceDelegate
         self.presentViewController(alertController, animated: true, completion: nil)
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            // self.monitoringSwitch.on = false
+            //UI updates
         }
 
     }
