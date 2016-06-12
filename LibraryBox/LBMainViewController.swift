@@ -27,6 +27,8 @@ class LBMainViewController: UIViewController {
     var myKMLParser: KMLParser!
     private var locationService = LBLocationService()
     var delegate: LBMainViewControllerDelegate?
+    var monitoring: Bool = false
+    var ranging: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,7 +152,7 @@ class LBMainViewController: UIViewController {
     func addOverlays()
     {
         //let myKMLOverlayArray = myKMLParser.overlays as! [MKOverlay]
-        //3self.mapView.addOverlays(myKMLOverlayArray)
+        //self.mapView.addOverlays(myKMLOverlayArray)
     }
     
     func addAnnotations()
@@ -185,7 +187,7 @@ extension LBMainViewController: MKMapViewDelegate {
 //        {
 //            let annotationView = MKAnnotationView()
 //            annotationView.annotation = annotation
-//            annotationView.image = UIImage(named:"LibraryBox_box")
+//            annotationView.image = UIImage(named:"box")
 //            annotationView.rightCalloutAccessoryView = UIButton.init(type:UIButtonType.DetailDisclosure)
 //            annotationView.canShowCallout = true
 //            return annotationView
@@ -211,7 +213,9 @@ extension LBMainViewController: LBLocationServiceDelegate
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
 
         }
+        monitoring = true
         delegate?.startScanningAnimation()
+        
 
     }
     
@@ -219,6 +223,7 @@ extension LBMainViewController: LBLocationServiceDelegate
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             //UI updates
         }
+        monitoring = false
     }
     
     func monitoringFailedToStart() {
@@ -232,10 +237,12 @@ extension LBMainViewController: LBLocationServiceDelegate
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
            
         }
+        monitoring = false
     }
     
     func monitoringFailedToStartDueToAuthorization() {
-            self.reAuthorize()
+        monitoring = false
+        self.reAuthorize()
     }
     
     func monitoringDetectedEnteringRegion(region: CLBeaconRegion) {
@@ -253,6 +260,7 @@ extension LBMainViewController: LBLocationServiceDelegate
     func rangingStartedSuccessfully() {
         currentBeacons = []
         print("Ranging started successfully.")
+        ranging = true
         delegate?.startScanningAnimation()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
            // UI updates
@@ -270,9 +278,11 @@ extension LBMainViewController: LBLocationServiceDelegate
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             
         }
+        ranging = false
     }
     
     func rangingFailedToStartDueToAuthorization() {
+        ranging = false
         self.reAuthorize()
     }
     

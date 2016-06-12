@@ -207,6 +207,10 @@ class LBContainerViewController: UIViewController {
             self.toggleRightPanel()
             rangingViewExpandedStateStore = false
         }
+        if self.centerViewController.ranging
+        {
+            self.startScanningAnimation()
+        }
     }
     
     deinit {
