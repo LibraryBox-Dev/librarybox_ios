@@ -40,7 +40,7 @@ class LBBeaconRangingView: UIView
     @IBInspectable var immediateColor: UIColor = UIColor.redColor()
     @IBInspectable var nearColor: UIColor = UIColor.blueColor()
     @IBInspectable var farColor: UIColor = UIColor.lightGrayColor()
-    @IBInspectable var defaultColor: UIColor = UIColor.clearColor()
+    @IBInspectable var defaultColor: UIColor = UIColor.whiteColor()
     var yOffset: CGFloat = 80.0
     var beaconSigmaDistances:[Double] = [Double](count: 20, repeatedValue: 0.0)
     

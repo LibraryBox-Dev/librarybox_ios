@@ -48,8 +48,8 @@ class LBContainerViewController: UIViewController {
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
         self.wifiButton.lineWidth = 3.0
-        self.wifiButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
-        self.wifiButton.inactiveColor = self.view.tintColor
+        self.wifiButton.activeColor = self.view.tintColor
+        self.wifiButton.inactiveColor = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1)
         self.wifiButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.wifiButton)
         let buttonDict = ["button":self.wifiButton]
@@ -67,8 +67,8 @@ class LBContainerViewController: UIViewController {
         self.boxButton = LBBoxButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         self.boxButton.translatesAutoresizingMaskIntoConstraints = false
         self.boxButton.lineWidth = 3.0
-        self.boxButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
-        self.boxButton.inactiveColor = self.view.tintColor
+        self.boxButton.activeColor = self.view.tintColor
+        self.boxButton.inactiveColor = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1)
         self.boxButton.addTarget(self, action:#selector(boxButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.boxButton)
         let secondButtonDict = ["superview":self.view, "secondButton":self.boxButton]
@@ -86,8 +86,8 @@ class LBContainerViewController: UIViewController {
         self.mapPinButton = LBPinningButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.mapPinButton.translatesAutoresizingMaskIntoConstraints = false
         self.mapPinButton.lineWidth = 3.0
-        self.mapPinButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
-        self.mapPinButton.inactiveColor = self.view.tintColor
+        self.mapPinButton.activeColor = self.view.tintColor
+        self.mapPinButton.inactiveColor = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1)
         self.mapPinButton.addTarget(self, action:#selector(pinningButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.mapPinButton)
         let thirdButtonDict = ["pinningButton":self.mapPinButton]

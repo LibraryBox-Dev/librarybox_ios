@@ -2,6 +2,7 @@ FIX: WiFi Check when back from WiFi-Settings, MapPinning or BoxView
 FIX: Test monitoring and notifications
 
 * Custom Annotation Pin Image
+* Button Design
+* Overlays: Closest Beacon proximity
 * RoundedButton "Activate" animation
-* Overlays: Closest Beacon proximity, LBs
 * WatchKit
