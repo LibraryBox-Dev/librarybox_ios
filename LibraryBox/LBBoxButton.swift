@@ -17,7 +17,7 @@ class LBBoxButton: LBRoundedButton {
         super.layoutSubviews()
         let layer = CALayer()
         layer.frame = self.bounds
-        if let image = UIImage(named: "LibraryBox_box") {
+        if let image = UIImage(named: "box") {
             layer.contents = image.CGImage
         }
         layer.contentsGravity = kCAGravityResizeAspect
@@ -28,6 +28,7 @@ class LBBoxButton: LBRoundedButton {
         layer.opacity = 1.0
         layer.hidden = false
         layer.masksToBounds = false
+        layer.shouldRasterize = false
         layer.cornerRadius = 100.0
         layer.borderWidth = 12.0
         layer.borderColor = UIColor.clearColor().CGColor

@@ -28,6 +28,7 @@ class LBPinningButton: LBRoundedButton {
         layer.opacity = 1.0
         layer.hidden = false
         layer.masksToBounds = false
+        layer.shouldRasterize = false
         layer.cornerRadius = 100.0
         layer.borderWidth = 12.0
         layer.borderColor = UIColor.clearColor().CGColor

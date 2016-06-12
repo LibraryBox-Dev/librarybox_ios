@@ -1,8 +1,9 @@
-FIX: WiFi Check when back from WiFi-Settings, MapPinning or BoxView
+FIX: Animate Wifi if not in range or close to LB
+FIX: BoxButton Blur
 FIX: Test monitoring and notifications
+FIX: Possibility to connect to all libraryBoxes without SSID check
 
 * Custom Annotation Pin Image
-* Button Design
 * Overlays: Closest Beacon proximity
 * RoundedButton "Activate" animation
 * WatchKit

@@ -24,7 +24,7 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
             updateLayerProperties()
         }
     }
-    @IBInspectable var inactiveColor: UIColor = UIColor(red: 60/255, green: 60/255, blue: 60/255, alpha: 1) {
+    @IBInspectable var inactiveColor: UIColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1) {
         didSet {
             updateLayerProperties()
         }
@@ -43,7 +43,7 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
         if outerRingShape != nil
         {
             outerRingShape.lineWidth = lineWidth
-            outerRingShape.strokeColor = readyToActivate ? activeColor.CGColor : inactiveColor.CGColor
+            outerRingShape.strokeColor = inactiveColor.CGColor
         }
         if circleBGShape != nil
         {
