@@ -22,6 +22,7 @@ class LBMainViewController: UIViewController {
     //@IBOutlet weak var mapContainerView: UIView!
     
     var currentBeacons = [CLBeacon]()
+    var closestBeacon: CLBeacon?
     dynamic var currentFilteredBeaconSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     var _beaconFilteredSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
     var myKMLParser: KMLParser!
@@ -117,7 +118,7 @@ class LBMainViewController: UIViewController {
         let kmlURL = self.libraryBoxKMLDataCheckAndPath()
         myKMLParser = KMLParser.init(URL:NSURL(string: kmlURL))
         myKMLParser.parseKML()
-        self.addOverlays()
+        //self.addOverlays()
         self.addAnnotations()
     }
     
@@ -149,11 +150,11 @@ class LBMainViewController: UIViewController {
         return filePath.absoluteString
     }
     
-    func addOverlays()
-    {
-        //let myKMLOverlayArray = myKMLParser.overlays as! [MKOverlay]
-        //self.mapView.addOverlays(myKMLOverlayArray)
-    }
+//    func addOverlays()
+//    {
+//        //let myKMLOverlayArray = myKMLParser.overlays as! [MKOverlay]
+//        //self.mapView.addOverlays(myKMLOverlayArray)
+//    }
     
     func addAnnotations()
     {
@@ -177,21 +178,38 @@ extension LBMainViewController: MKMapViewDelegate {
             polygonView.lineWidth = 0.4
             polygonView.strokeColor = UIColor.blackColor()
             return polygonView
+        } else if overlay is LBBoxProximityCircleOverlay {
+            let circle = MKCircleRenderer(overlay: overlay)
+            var fillColoring: UIColor = UIColor.clearColor()
+            var strokeColoring:UIColor = UIColor.clearColor()
+            if let myBeacon:CLBeacon = closestBeacon
+            {
+                switch myBeacon.proximity {
+                case .Far:
+                    fillColoring = UIColor.cyanColor()
+                    strokeColoring = UIColor.darkGrayColor()
+                case .Near:
+                    fillColoring = UIColor.orangeColor()
+                    strokeColoring = UIColor.darkGrayColor()
+                case .Immediate:
+                    fillColoring = UIColor.redColor()
+                    strokeColoring = UIColor.darkGrayColor()
+                case .Unknown:
+                    fillColoring = UIColor.clearColor()
+                    strokeColoring = UIColor.clearColor()
+                }
+            }
+            circle.fillColor = fillColoring
+            circle.strokeColor = strokeColoring
+            circle.lineWidth = 1
+            return circle
         }
         let myOverlayRenderer: MKOverlayRenderer? = nil
         return myOverlayRenderer!
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-//        if annotation is KMLPlacemark
-//        {
-//            let annotationView = MKAnnotationView()
-//            annotationView.annotation = annotation
-//            annotationView.image = UIImage(named:"box")
-//            annotationView.rightCalloutAccessoryView = UIButton.init(type:UIButtonType.DetailDisclosure)
-//            annotationView.canShowCallout = true
-//            return annotationView
-//        }
+
         return nil
     }
     
@@ -319,8 +337,12 @@ extension LBMainViewController: LBLocationServiceDelegate
     
     func rangingBeaconsInRange(beacons: [CLBeacon]!, inRegion region: CLBeaconRegion!) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.currentBeacons = beacons
-            let sortedBeacons = self.currentBeacons.sort({ $0.accuracy < $1.accuracy})
+            self.currentBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
+            if(self.currentBeacons.count > 0)
+            {
+                self.closestBeacon = self.currentBeacons[0]
+            }
+            let sortedBeacons = self.currentBeacons
             let filterFactor: Double = 0.2
             for (index, value) in sortedBeacons.enumerate()
             {
@@ -337,6 +359,26 @@ extension LBMainViewController: LBLocationServiceDelegate
                 }
             }
             //self.setValue(self.currentFilteredBeaconSigmaDistances, forKeyPath: self.beaconKeyPath)
+        }
+    }
+    
+    func userLocationChangedTo(location:CLLocation)
+    {
+        var distanceRadius: Double = 0.0
+        if let myBeacon:CLBeacon = closestBeacon
+        {
+            switch myBeacon.proximity {
+            case .Far:
+                distanceRadius = 80.0
+            case .Near:
+                distanceRadius = 15.0
+            case .Immediate:
+                distanceRadius = 5.0
+            case .Unknown:
+                distanceRadius = 5.0
+            }
+            let circle = LBBoxProximityCircleOverlay(centerCoordinate: location.coordinate, radius: distanceRadius as CLLocationDistance)
+            self.mapView.addOverlay(circle)
         }
     }
 

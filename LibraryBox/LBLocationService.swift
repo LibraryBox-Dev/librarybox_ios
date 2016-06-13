@@ -12,6 +12,7 @@ import CoreLocation
 protocol LBLocationServiceDelegate
 {
     func userLocationServiceFailedToStartDueToAuthorization()
+    func userLocationChangedTo(location:CLLocation)
     func monitoringStartedSuccessfully()
     func monitoringStoppedSuccessfully()
     func monitoringFailedToStart()
@@ -220,5 +221,6 @@ extension LBLocationService
 {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLoc = locations.last
+        delegate?.userLocationChangedTo(currentLoc)
     }
 }

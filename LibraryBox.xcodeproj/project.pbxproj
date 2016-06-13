@@ -12,6 +12,7 @@
 		631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE731CFF8E6100B19B84 /* KMLParser.m */; };
 		636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */; };
 		637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */; };
+		63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
 		63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */; };
@@ -21,7 +22,6 @@
 		63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */; };
 		63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 63BB3FB21CF3B38D00EF88E8 /* TODO */; };
 		63E014FE1D01D20E00269FD6 /* LBMapPinningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */; };
-		63E331B11D0E0A7B006A6663 /* LBLibraryBoxAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E331B01D0E0A7B006A6663 /* LBLibraryBoxAnnotation.swift */; };
 		63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */; };
 		63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */; };
 		63E33EA01CF2E7A9005F6F5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E33E9E1CF2E7A9005F6F5C /* Main.storyboard */; };
@@ -67,6 +67,7 @@
 		631BDE731CFF8E6100B19B84 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 		636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBContainerViewController.swift; sourceTree = "<group>"; };
 		637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBWIFIButton.swift; sourceTree = "<group>"; };
+		63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxProximityCircleOverlay.swift; sourceTree = "<group>"; };
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
 		63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRoundedButton.swift; sourceTree = "<group>"; };
 		63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningButton.swift; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LibraryBox-Bridging-Header.h"; sourceTree = "<group>"; };
 		63BB3FB21CF3B38D00EF88E8 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBMapPinningTableViewController.swift; sourceTree = "<group>"; };
-		63E331B01D0E0A7B006A6663 /* LBLibraryBoxAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBLibraryBoxAnnotation.swift; sourceTree = "<group>"; };
 		63E33E971CF2E7A9005F6F5C /* LibraryBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LibraryBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBMainViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 		63E331AF1D0E0A64006A6663 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				63E331B01D0E0A7B006A6663 /* LBLibraryBoxAnnotation.swift */,
+				63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -561,6 +561,7 @@
 			files = (
 				63F7CF401D00E9130002C026 /* LBGoogleAPIAccessService.swift in Sources */,
 				631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */,
+				63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */,
 				63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */,
 				63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */,
 				63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */,
@@ -573,7 +574,6 @@
 				63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */,
 				63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */,
 				631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */,
-				63E331B11D0E0A7B006A6663 /* LBLibraryBoxAnnotation.swift in Sources */,
 				63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */,
 				63BA7E761CFCE36100FE2F2C /* LBBoxWebViewController.swift in Sources */,
 			);
