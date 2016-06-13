@@ -26,7 +26,7 @@ class LBContainerViewController: UIViewController {
         }
     }
     var rightViewController: LBBeaconRangingViewController?
-    var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 85
+    var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 100
     var wifiButton: LBWIFIButton!
     var boxButton: LBBoxButton!
     var mapPinButton: LBPinningButton!
@@ -141,7 +141,7 @@ class LBContainerViewController: UIViewController {
             
             },
             completion: { (context) -> Void in
-                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 85
+                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
                 // Code here will execute after the rotation has finished.
                 // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
