@@ -13,6 +13,14 @@
 		636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */; };
 		637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */; };
 		63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */; };
+		63754B851D0EFAC6002B2EFE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63754B831D0EFAC6002B2EFE /* Interface.storyboard */; };
+		63754B871D0EFAC6002B2EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63754B861D0EFAC6002B2EFE /* Assets.xcassets */; };
+		63754B8E1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 63754B8D1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		63754B951D0EFAC6002B2EFE /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B941D0EFAC6002B2EFE /* InterfaceController.swift */; };
+		63754B971D0EFAC6002B2EFE /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B961D0EFAC6002B2EFE /* ExtensionDelegate.swift */; };
+		63754B991D0EFAC6002B2EFE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B981D0EFAC6002B2EFE /* NotificationController.swift */; };
+		63754B9B1D0EFAC6002B2EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */; };
+		63754B9F1D0EFAC6002B2EFE /* LibraryBox Notifications.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
 		63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */; };
@@ -39,6 +47,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		63754B8F1D0EFAC6002B2EFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63E33E8F1CF2E7A9005F6F5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63754B8C1D0EFAC6002B2EFE;
+			remoteInfo = "LibraryBox Notifications Extension";
+		};
+		63754B9D1D0EFAC6002B2EFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63E33E8F1CF2E7A9005F6F5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63754B801D0EFAC6002B2EFE;
+			remoteInfo = "LibraryBox Notifications";
+		};
 		63E33EAC1CF2E7A9005F6F5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 63E33E8F1CF2E7A9005F6F5C /* Project object */;
@@ -55,6 +77,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		63754BA31D0EFAC7002B2EFE /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				63754B8E1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63754BA71D0EFAC7002B2EFE /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				63754B9F1D0EFAC6002B2EFE /* LibraryBox Notifications.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0A6DC3511CF737F700C69D42 /* LBBeaconRangingVisualization.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LBBeaconRangingVisualization.playground; sourceTree = "<group>"; };
 		15B15FD2D4D2E62002B2C2C7 /* Pods-LibraryBoxUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +115,17 @@
 		636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBContainerViewController.swift; sourceTree = "<group>"; };
 		637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBWIFIButton.swift; sourceTree = "<group>"; };
 		63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxProximityCircleOverlay.swift; sourceTree = "<group>"; };
+		63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LibraryBox Notifications.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63754B841D0EFAC6002B2EFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		63754B861D0EFAC6002B2EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		63754B881D0EFAC6002B2EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63754B8D1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LibraryBox Notifications Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63754B931D0EFAC6002B2EFE /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		63754B941D0EFAC6002B2EFE /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		63754B961D0EFAC6002B2EFE /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		63754B981D0EFAC6002B2EFE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		63754B9C1D0EFAC6002B2EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
 		63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRoundedButton.swift; sourceTree = "<group>"; };
 		63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningButton.swift; sourceTree = "<group>"; };
@@ -103,6 +161,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		63754B8A1D0EFAC6002B2EFE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63E33E941CF2E7A9005F6F5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +219,37 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		63754B821D0EFAC6002B2EFE /* LibraryBox Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				63754B831D0EFAC6002B2EFE /* Interface.storyboard */,
+				63754B861D0EFAC6002B2EFE /* Assets.xcassets */,
+				63754B881D0EFAC6002B2EFE /* Info.plist */,
+			);
+			path = "LibraryBox Notifications";
+			sourceTree = "<group>";
+		};
+		63754B911D0EFAC6002B2EFE /* LibraryBox Notifications Extension */ = {
+			isa = PBXGroup;
+			children = (
+				63754B941D0EFAC6002B2EFE /* InterfaceController.swift */,
+				63754B961D0EFAC6002B2EFE /* ExtensionDelegate.swift */,
+				63754B981D0EFAC6002B2EFE /* NotificationController.swift */,
+				63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */,
+				63754B9C1D0EFAC6002B2EFE /* Info.plist */,
+				63754B921D0EFAC6002B2EFE /* Supporting Files */,
+			);
+			path = "LibraryBox Notifications Extension";
+			sourceTree = "<group>";
+		};
+		63754B921D0EFAC6002B2EFE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				63754B931D0EFAC6002B2EFE /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		63BB3FA21CF3A12300EF88E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +298,8 @@
 				63E33E991CF2E7A9005F6F5C /* LibraryBox */,
 				63E33EAE1CF2E7A9005F6F5C /* LibraryBoxTests */,
 				63E33EB91CF2E7A9005F6F5C /* LibraryBoxUITests */,
+				63754B821D0EFAC6002B2EFE /* LibraryBox Notifications */,
+				63754B911D0EFAC6002B2EFE /* LibraryBox Notifications Extension */,
 				63E33E981CF2E7A9005F6F5C /* Products */,
 				041800A99B984BA586C9C5B5 /* Frameworks */,
 				5B03B3B5563614166C13713B /* Pods */,
@@ -214,6 +312,8 @@
 				63E33E971CF2E7A9005F6F5C /* LibraryBox.app */,
 				63E33EAB1CF2E7A9005F6F5C /* LibraryBoxTests.xctest */,
 				63E33EB61CF2E7A9005F6F5C /* LibraryBoxUITests.xctest */,
+				63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */,
+				63754B8D1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,6 +388,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		63754B801D0EFAC6002B2EFE /* LibraryBox Notifications */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63754BA41D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications" */;
+			buildPhases = (
+				63754B7F1D0EFAC6002B2EFE /* Resources */,
+				63754BA31D0EFAC7002B2EFE /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				63754B901D0EFAC6002B2EFE /* PBXTargetDependency */,
+			);
+			name = "LibraryBox Notifications";
+			productName = "LibraryBox Notifications";
+			productReference = 63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		63754B8C1D0EFAC6002B2EFE /* LibraryBox Notifications Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63754BA01D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications Extension" */;
+			buildPhases = (
+				63754B891D0EFAC6002B2EFE /* Sources */,
+				63754B8A1D0EFAC6002B2EFE /* Frameworks */,
+				63754B8B1D0EFAC6002B2EFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LibraryBox Notifications Extension";
+			productName = "LibraryBox Notifications Extension";
+			productReference = 63754B8D1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		63E33E961CF2E7A9005F6F5C /* LibraryBox */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63E33EBF1CF2E7A9005F6F5C /* Build configuration list for PBXNativeTarget "LibraryBox" */;
@@ -298,10 +432,12 @@
 				63E33E951CF2E7A9005F6F5C /* Resources */,
 				E22175D303ABCA8F7CD2E1FC /* [CP] Embed Pods Frameworks */,
 				981D85E82917DBBD17CE6FE0 /* [CP] Copy Pods Resources */,
+				63754BA71D0EFAC7002B2EFE /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				63754B9E1D0EFAC6002B2EFE /* PBXTargetDependency */,
 			);
 			name = LibraryBox;
 			productName = LibraryBox;
@@ -359,6 +495,13 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Berkman Center";
 				TargetAttributes = {
+					63754B801D0EFAC6002B2EFE = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = M9AG4A3F6L;
+					};
+					63754B8C1D0EFAC6002B2EFE = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					63E33E961CF2E7A9005F6F5C = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = M9AG4A3F6L;
@@ -397,11 +540,30 @@
 				63E33E961CF2E7A9005F6F5C /* LibraryBox */,
 				63E33EAA1CF2E7A9005F6F5C /* LibraryBoxTests */,
 				63E33EB51CF2E7A9005F6F5C /* LibraryBoxUITests */,
+				63754B801D0EFAC6002B2EFE /* LibraryBox Notifications */,
+				63754B8C1D0EFAC6002B2EFE /* LibraryBox Notifications Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		63754B7F1D0EFAC6002B2EFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63754B871D0EFAC6002B2EFE /* Assets.xcassets in Resources */,
+				63754B851D0EFAC6002B2EFE /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63754B8B1D0EFAC6002B2EFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63754B9B1D0EFAC6002B2EFE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63E33E951CF2E7A9005F6F5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -555,6 +717,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		63754B891D0EFAC6002B2EFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63754B991D0EFAC6002B2EFE /* NotificationController.swift in Sources */,
+				63754B971D0EFAC6002B2EFE /* ExtensionDelegate.swift in Sources */,
+				63754B951D0EFAC6002B2EFE /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63E33E931CF2E7A9005F6F5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -598,6 +770,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		63754B901D0EFAC6002B2EFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63754B8C1D0EFAC6002B2EFE /* LibraryBox Notifications Extension */;
+			targetProxy = 63754B8F1D0EFAC6002B2EFE /* PBXContainerItemProxy */;
+		};
+		63754B9E1D0EFAC6002B2EFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63754B801D0EFAC6002B2EFE /* LibraryBox Notifications */;
+			targetProxy = 63754B9D1D0EFAC6002B2EFE /* PBXContainerItemProxy */;
+		};
 		63E33EAD1CF2E7A9005F6F5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 63E33E961CF2E7A9005F6F5C /* LibraryBox */;
@@ -611,6 +793,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		63754B831D0EFAC6002B2EFE /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				63754B841D0EFAC6002B2EFE /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		63E33E9E1CF2E7A9005F6F5C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -630,6 +820,70 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		63754BA11D0EFAC7002B2EFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "LibraryBox Notifications Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		63754BA21D0EFAC7002B2EFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "LibraryBox Notifications Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		63754BA51D0EFAC7002B2EFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = LibraryBox_Notifications_Extension;
+				INFOPLIST_FILE = "LibraryBox Notifications/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		63754BA61D0EFAC7002B2EFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = LibraryBox_Notifications_Extension;
+				INFOPLIST_FILE = "LibraryBox Notifications/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
 		63E33EBD1CF2E7A9005F6F5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -803,6 +1057,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		63754BA01D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63754BA11D0EFAC7002B2EFE /* Debug */,
+				63754BA21D0EFAC7002B2EFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		63754BA41D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63754BA51D0EFAC7002B2EFE /* Debug */,
+				63754BA61D0EFAC7002B2EFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		63E33E921CF2E7A9005F6F5C /* Build configuration list for PBXProject "LibraryBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
