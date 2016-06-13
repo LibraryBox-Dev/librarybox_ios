@@ -142,8 +142,8 @@ class LBContainerViewController: UIViewController {
             },
             completion: { (context) -> Void in
                 self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
-                                                // Code here will execute after the rotation has finished.
-                                                // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
+                // Code here will execute after the rotation has finished.
+                // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
     
     func showShadowForCenterViewController(needsToShowShadow: Bool) {
