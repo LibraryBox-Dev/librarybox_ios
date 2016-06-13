@@ -221,8 +221,8 @@
 		63E33E991CF2E7A9005F6F5C /* LibraryBox */ = {
 			isa = PBXGroup;
 			children = (
-				63E331AF1D0E0A64006A6663 /* Models */,
 				63BB3FAC1CF3B03800EF88E8 /* External */,
+				63E331AF1D0E0A64006A6663 /* Models */,
 				63BB3FA21CF3A12300EF88E8 /* Views */,
 				63E33ECA1CF2E870005F6F5C /* Controllers */,
 				63BB3FA51CF3A41900EF88E8 /* Helpers */,
