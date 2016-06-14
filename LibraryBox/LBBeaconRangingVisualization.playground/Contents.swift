@@ -25,7 +25,7 @@ let beacon5 = testBeacon(newProximity: 2,newAccuracy: 55)
 let beacon6 = testBeacon(newProximity: 0,newAccuracy: -2)
 
 var beacons: [testBeacon] = [beacon1, beacon2, beacon3, beacon4, beacon5, beacon6]
-var sortedBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
+var sortedBeacons = beacons.sortInPlace({ $0.accuracy < $1.accuracy})
 
 class RangingView: UIView
 {
@@ -41,7 +41,11 @@ class RangingView: UIView
         
     }
     
-    required init!(coder aDecoder: NSCoder) {
+    required init?;!(coder aDecoder: NSCoder) {
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
         super.init(coder: aDecoder)!
     }
     

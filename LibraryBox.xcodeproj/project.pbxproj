@@ -491,6 +491,7 @@
 		63E33E8F1CF2E7A9005F6F5C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0730;
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Berkman Center";
@@ -1064,6 +1065,7 @@
 				63754BA21D0EFAC7002B2EFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63754BA41D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications" */ = {
 			isa = XCConfigurationList;
@@ -1072,6 +1074,7 @@
 				63754BA61D0EFAC7002B2EFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63E33E921CF2E7A9005F6F5C /* Build configuration list for PBXProject "LibraryBox" */ = {
 			isa = XCConfigurationList;
