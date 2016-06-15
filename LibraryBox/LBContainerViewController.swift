@@ -185,6 +185,8 @@ class LBContainerViewController: UIViewController {
     func handleMainViewAppearance()
     {
         self.wifiButton.hidden = false
+        let networkConnection:Bool = LBReachabilityService.isConnectedToNetwork()
+        let internetConnection: Bool = LBReachabilityService.isConnectedToInternet()
         if let currentSSIDString: String = LBSSIDCheckingService.fetchSSIDInfo()
         {
             print(currentSSIDString)
@@ -197,11 +199,25 @@ class LBContainerViewController: UIViewController {
                 self.boxButton.hidden = false
             }
             else{
-                //box button only on box network?
-                self.boxButton.hidden = false
+                if(!internetConnection)
+                {
+                    if(networkConnection)
+                    {
+                       self.boxButton.hidden = false
+                    }
+                    else
+                    {
+                       self.boxButton.hidden = true
+                    }
+                }
+                else
+                {
+                    self.boxButton.hidden = true
+                }
             }
         }
-        if(LBReachabilityService.isConnectedToInternet())
+    
+        if(internetConnection)
         {
             self.mapPinButton.hidden = false
         }else
