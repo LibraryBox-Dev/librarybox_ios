@@ -190,35 +190,35 @@ class LBContainerViewController: UIViewController {
         let networkConnection:Bool = LBReachabilityService.isConnectedToNetwork()
         let internetConnection: Bool = LBReachabilityService.isConnectedToInternet()
         /////////////////
-        if let currentSSIDString: String = LBSSIDCheckingService.fetchSSIDInfo()
-        {
-            print(currentSSIDString)
-            if (currentSSIDString == "PirateBox - Share Freely")
-            {
+        //if let currentSSIDString: String = LBSSIDCheckingService.fetchSSIDInfo()
+        //{
+        //    print(currentSSIDString)
+        //    if (currentSSIDString == "PirateBox - Share Freely")
+        //    {
                 self.boxButton.hidden = false
-            }
-            else if(currentSSIDString == "Librarybox – Free Content!")
-            {
-                self.boxButton.hidden = false
-            }
-            else{
-                if(!internetConnection)
-                {
-                    if(networkConnection)
-                    {
-                       self.boxButton.hidden = false
-                    }
-                    else
-                    {
-                       self.boxButton.hidden = true
-                    }
-                }
-                else
-                {
-                    self.boxButton.hidden = true
-                }
-            }
-        }
+        //    }
+        //    else if(currentSSIDString == "Librarybox – Free Content!")
+        //    {
+        //        self.boxButton.hidden = false
+        //    }
+        //    else{
+        //        if(!internetConnection)
+        //        {
+        //            if(networkConnection)
+        //            {
+        //               self.boxButton.hidden = false
+        //            }
+        //            else
+        //            {
+        //               self.boxButton.hidden = true
+        //            }
+        //        }
+        //        else
+        //        {
+        //            self.boxButton.hidden = true
+        //        }
+        //    }
+        //}
     
         if(internetConnection)
         {
