@@ -227,6 +227,8 @@ class LBContainerViewController: UIViewController {
         {
             self.mapPinButton.hidden = true
         }
+        
+        
         if(rangingViewExpandedStateStore == true)
         {
             self.toggleRightPanel()
