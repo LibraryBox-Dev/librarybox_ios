@@ -21,6 +21,7 @@
 		63754B991D0EFAC6002B2EFE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B981D0EFAC6002B2EFE /* NotificationController.swift */; };
 		63754B9B1D0EFAC6002B2EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */; };
 		63754B9F1D0EFAC6002B2EFE /* LibraryBox Notifications.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */; };
+		639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
 		63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */; };
@@ -126,6 +127,7 @@
 		63754B981D0EFAC6002B2EFE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63754B9C1D0EFAC6002B2EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LBReachabilityService.swift; path = ../LBReachabilityService.swift; sourceTree = "<group>"; };
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
 		63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRoundedButton.swift; sourceTree = "<group>"; };
 		63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningButton.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		63BB3FA51CF3A41900EF88E8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */,
 				63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */,
 				63BA7E731CFCDF4200FE2F2C /* LBSSIDCheckingService.swift */,
 				631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */,
@@ -732,6 +735,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */,
 				63F7CF401D00E9130002C026 /* LBGoogleAPIAccessService.swift in Sources */,
 				631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */,
 				63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */,

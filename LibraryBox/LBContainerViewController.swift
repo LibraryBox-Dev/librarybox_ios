@@ -201,7 +201,13 @@ class LBContainerViewController: UIViewController {
                 self.boxButton.hidden = false
             }
         }
-        self.mapPinButton.hidden = false //?
+        if(LBReachabilityService.isConnectedToInternet())
+        {
+            self.mapPinButton.hidden = false
+        }else
+        {
+            self.mapPinButton.hidden = true
+        }
         if(rangingViewExpandedStateStore == true)
         {
             self.toggleRightPanel()

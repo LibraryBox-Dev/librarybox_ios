@@ -99,6 +99,8 @@ class LBMainViewController: UIViewController {
         locationService.startMonitoringForBeacons()
         locationService.startBeaconRanging()
         self.updateMapUI()
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
     }
     
     func deactivateRangingService()
