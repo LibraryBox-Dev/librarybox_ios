@@ -185,8 +185,11 @@ class LBContainerViewController: UIViewController {
     func handleMainViewAppearance()
     {
         self.wifiButton.hidden = false
+        
+        //THIS IS A HACK
         let networkConnection:Bool = LBReachabilityService.isConnectedToNetwork()
         let internetConnection: Bool = LBReachabilityService.isConnectedToInternet()
+        /////////////////
         if let currentSSIDString: String = LBSSIDCheckingService.fetchSSIDInfo()
         {
             print(currentSSIDString)
