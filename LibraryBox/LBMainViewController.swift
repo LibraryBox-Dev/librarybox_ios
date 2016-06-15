@@ -195,14 +195,14 @@ extension LBMainViewController: MKMapViewDelegate {
             {
                 switch myBeacon.proximity {
                 case .Far:
-                    fillColoring = UIColor.cyanColor()
-                    strokeColoring = UIColor.darkGrayColor()
+                    fillColoring = UIColor.cyanColor().colorWithAlphaComponent(0.2)
+                    strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
                 case .Near:
-                    fillColoring = UIColor.orangeColor()
-                    strokeColoring = UIColor.darkGrayColor()
+                    fillColoring = UIColor.orangeColor().colorWithAlphaComponent(0.2)
+                    strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
                 case .Immediate:
-                    fillColoring = UIColor.redColor()
-                    strokeColoring = UIColor.darkGrayColor()
+                    fillColoring = UIColor.redColor().colorWithAlphaComponent(0.2)
+                    strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
                 case .Unknown:
                     fillColoring = UIColor.clearColor()
                     strokeColoring = UIColor.clearColor()
