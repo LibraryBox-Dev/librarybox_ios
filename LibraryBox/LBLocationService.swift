@@ -184,6 +184,7 @@ extension LBLocationService
 {
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered region: \(region)")
+        //check region identifier if it is a librarybox before sending the delegate message
         delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
     }
     
@@ -197,6 +198,7 @@ extension LBLocationService
         switch state {
         case .Inside:
             stateString = "inside"
+            //check region identifier if it is a librarybox before sending the delegate message
             delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
         case .Outside:
             stateString = "outside"
