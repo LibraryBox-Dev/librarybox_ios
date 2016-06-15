@@ -177,7 +177,6 @@ class LBMainViewController: UIViewController {
 //mapView delegate
 extension LBMainViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        self.removeOverlays()
         if overlay is MKPolyline {
             let lineView = MKPolylineRenderer(overlay: overlay)
             lineView.strokeColor = UIColor.greenColor()
@@ -387,7 +386,7 @@ extension LBMainViewController: LBLocationServiceDelegate
             case .Unknown:
                 distanceRadius = 5.0
             }
-            self.mapView.removeOverlays(self.mapView.overlays)
+            self.removeOverlays()
             let circle = LBBoxProximityCircleOverlay(centerCoordinate: location.coordinate, radius: distanceRadius as CLLocationDistance)
             self.mapView.addOverlay(circle)
         }
