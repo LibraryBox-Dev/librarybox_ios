@@ -155,6 +155,16 @@ class LBMainViewController: UIViewController {
 //        //self.mapView.addOverlays(myKMLOverlayArray)
 //    }
     
+    func removeOverlays()
+    {
+        let overlays = self.mapView.overlays
+        overlays.forEach {
+            if ($0 is LBBoxProximityCircleOverlay) {
+                self.mapView.removeOverlay($0)
+            }
+        }
+    }
+    
     func addAnnotations()
     {
         let myKMLAnnotationArray = myKMLParser.points as! [MKAnnotation]
@@ -167,6 +177,7 @@ class LBMainViewController: UIViewController {
 //mapView delegate
 extension LBMainViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        self.removeOverlays()
         if overlay is MKPolyline {
             let lineView = MKPolylineRenderer(overlay: overlay)
             lineView.strokeColor = UIColor.greenColor()
@@ -376,6 +387,7 @@ extension LBMainViewController: LBLocationServiceDelegate
             case .Unknown:
                 distanceRadius = 5.0
             }
+            self.mapView.removeOverlays(self.mapView.overlays)
             let circle = LBBoxProximityCircleOverlay(centerCoordinate: location.coordinate, radius: distanceRadius as CLLocationDistance)
             self.mapView.addOverlay(circle)
         }
