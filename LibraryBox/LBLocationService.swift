@@ -197,6 +197,7 @@ extension LBLocationService
         switch state {
         case .Inside:
             stateString = "inside"
+            delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
         case .Outside:
             stateString = "outside"
         case .Unknown:

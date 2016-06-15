@@ -19,7 +19,6 @@ protocol LBMainViewControllerDelegate {
 class LBMainViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-    //@IBOutlet weak var mapContainerView: UIView!
     
     var currentBeacons = [CLBeacon]()
     var closestBeacon: CLBeacon?
@@ -269,7 +268,7 @@ extension LBMainViewController: LBLocationServiceDelegate
     
     func sendLocalNotificationForBeaconRegion(region: CLBeaconRegion) {
         let notification = UILocalNotification()
-        notification.alertBody = "Entered beacon region for UUID: " + region.proximityUUID.UUIDString
+        notification.alertBody = "Close to librarybox with UUID: " + region.proximityUUID.UUIDString
         notification.alertAction = "View Details"
         notification.soundName = UILocalNotificationDefaultSoundName
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)

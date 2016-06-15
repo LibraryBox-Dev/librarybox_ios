@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     var watchSession: WCSession?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         if WCSession.isSupported() {
             watchSession = WCSession.defaultSession()
             watchSession!.delegate = self
