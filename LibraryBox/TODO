@@ -1,5 +1,3 @@
-FIX: check region identifier if it is a librarybox before sending the delegate message
-
 
 * WatchKit
 * Accessibility
