@@ -18,6 +18,11 @@ class LBBeaconRangingViewController: UIViewController
         self.checkOrientation()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.view.setNeedsDisplay()
+    }
+    
     override func viewWillTransitionToSize(size: CGSize,
                                            withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
     
     var outerRingShape: CAShapeLayer!
@@ -23,7 +24,7 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
             updateLayerProperties()
         }
     }
-    @IBInspectable var inactiveColor: UIColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1) {
+    @IBInspectable var inactiveColor: UIColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1) {
         didSet {
             updateLayerProperties()
         }
@@ -42,7 +43,7 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
         if outerRingShape != nil
         {
             outerRingShape.lineWidth = lineWidth
-            outerRingShape.strokeColor = readyToActivate ? activeColor.CGColor : inactiveColor.CGColor
+            outerRingShape.strokeColor = inactiveColor.CGColor
         }
         if circleBGShape != nil
         {

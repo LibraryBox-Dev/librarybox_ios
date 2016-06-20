@@ -7,8 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AD96B691D180DF900F8A838 /* LBUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD96B681D180DF900F8A838 /* LBUtilities.swift */; };
+		6316D6961D082C9F00C68EBF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6316D6951D082C9F00C68EBF /* Podfile */; };
+		631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */; };
+		631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE731CFF8E6100B19B84 /* KMLParser.m */; };
 		636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */; };
 		637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */; };
+		63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */; };
+		63754B851D0EFAC6002B2EFE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63754B831D0EFAC6002B2EFE /* Interface.storyboard */; };
+		63754B871D0EFAC6002B2EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63754B861D0EFAC6002B2EFE /* Assets.xcassets */; };
+		63754B8E1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 63754B8D1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		63754B951D0EFAC6002B2EFE /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B941D0EFAC6002B2EFE /* InterfaceController.swift */; };
+		63754B971D0EFAC6002B2EFE /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B961D0EFAC6002B2EFE /* ExtensionDelegate.swift */; };
+		63754B991D0EFAC6002B2EFE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B981D0EFAC6002B2EFE /* NotificationController.swift */; };
+		63754B9B1D0EFAC6002B2EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */; };
+		63754B9F1D0EFAC6002B2EFE /* LibraryBox Notifications.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */; };
+		639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
 		63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */; };
@@ -17,6 +31,7 @@
 		63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */; };
 		63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */; };
 		63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 63BB3FB21CF3B38D00EF88E8 /* TODO */; };
+		63E014FE1D01D20E00269FD6 /* LBMapPinningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */; };
 		63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */; };
 		63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */; };
 		63E33EA01CF2E7A9005F6F5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E33E9E1CF2E7A9005F6F5C /* Main.storyboard */; };
@@ -27,9 +42,27 @@
 		63E33EC91CF2E7DA005F6F5C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E33EC81CF2E7DA005F6F5C /* MapKit.framework */; };
 		63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */; };
 		63E33ED11CF2F93E005F6F5C /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 63E33ED01CF2F93E005F6F5C /* Licenses */; };
+		63F7CF401D00E9130002C026 /* LBGoogleAPIAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F7CF3F1D00E9130002C026 /* LBGoogleAPIAccessService.swift */; };
+		A53E2B2CE12506276073C068 /* Pods_LibraryBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6585F3FF2BE7F342208304 /* Pods_LibraryBox.framework */; };
+		C60F8DA0521C66434B962AC8 /* Pods_LibraryBoxUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7A896C55513BE54862B959 /* Pods_LibraryBoxUITests.framework */; };
+		E3BDA017149B1FA4980F443F /* Pods_LibraryBoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D9481FB2FC56DAE4ECD871 /* Pods_LibraryBoxTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		63754B8F1D0EFAC6002B2EFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63E33E8F1CF2E7A9005F6F5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63754B8C1D0EFAC6002B2EFE;
+			remoteInfo = "LibraryBox Notifications Extension";
+		};
+		63754B9D1D0EFAC6002B2EFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63E33E8F1CF2E7A9005F6F5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63754B801D0EFAC6002B2EFE;
+			remoteInfo = "LibraryBox Notifications";
+		};
 		63E33EAC1CF2E7A9005F6F5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 63E33E8F1CF2E7A9005F6F5C /* Project object */;
@@ -46,10 +79,57 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		63754BA31D0EFAC7002B2EFE /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				63754B8E1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63754BA71D0EFAC7002B2EFE /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				63754B9F1D0EFAC6002B2EFE /* LibraryBox Notifications.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0A6DC3511CF737F700C69D42 /* LBBeaconRangingVisualization.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LBBeaconRangingVisualization.playground; sourceTree = "<group>"; };
+		0AD96B681D180DF900F8A838 /* LBUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBUtilities.swift; sourceTree = "<group>"; };
+		15B15FD2D4D2E62002B2C2C7 /* Pods-LibraryBoxUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		17F935F43CC6AE85CA6BC1EC /* Pods-LibraryBoxUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests.release.xcconfig"; sourceTree = "<group>"; };
+		33D9481FB2FC56DAE4ECD871 /* Pods_LibraryBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LibraryBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		454E6A33E6F249371302716E /* Pods-LibraryBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBox/Pods-LibraryBox.debug.xcconfig"; sourceTree = "<group>"; };
+		6316D6951D082C9F00C68EBF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBURLDownloadService.swift; sourceTree = "<group>"; };
+		631BDE721CFF8E6100B19B84 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
+		631BDE731CFF8E6100B19B84 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 		636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBContainerViewController.swift; sourceTree = "<group>"; };
 		637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBWIFIButton.swift; sourceTree = "<group>"; };
+		63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxProximityCircleOverlay.swift; sourceTree = "<group>"; };
+		63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LibraryBox Notifications.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63754B841D0EFAC6002B2EFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		63754B861D0EFAC6002B2EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		63754B881D0EFAC6002B2EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63754B8D1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LibraryBox Notifications Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63754B931D0EFAC6002B2EFE /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		63754B941D0EFAC6002B2EFE /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		63754B961D0EFAC6002B2EFE /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		63754B981D0EFAC6002B2EFE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		63754B9C1D0EFAC6002B2EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LBReachabilityService.swift; path = ../LBReachabilityService.swift; sourceTree = "<group>"; };
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
 		63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRoundedButton.swift; sourceTree = "<group>"; };
 		63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningButton.swift; sourceTree = "<group>"; };
@@ -59,6 +139,7 @@
 		63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBeaconRangingViewController.swift; sourceTree = "<group>"; };
 		63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LibraryBox-Bridging-Header.h"; sourceTree = "<group>"; };
 		63BB3FB21CF3B38D00EF88E8 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
+		63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBMapPinningTableViewController.swift; sourceTree = "<group>"; };
 		63E33E971CF2E7A9005F6F5C /* LibraryBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LibraryBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBMainViewController.swift; sourceTree = "<group>"; };
@@ -75,14 +156,28 @@
 		63E33EC81CF2E7DA005F6F5C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBLocationService.swift; sourceTree = "<group>"; };
 		63E33ED01CF2F93E005F6F5C /* Licenses */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Licenses; sourceTree = "<group>"; };
+		63F7CF3F1D00E9130002C026 /* LBGoogleAPIAccessService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGoogleAPIAccessService.swift; sourceTree = "<group>"; };
+		7E6585F3FF2BE7F342208304 /* Pods_LibraryBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LibraryBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88831756F9E963A568446BA2 /* Pods-LibraryBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxTests/Pods-LibraryBoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		8D7A896C55513BE54862B959 /* Pods_LibraryBoxUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LibraryBoxUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3E523DB0C7F02C9C827D51B /* Pods-LibraryBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBox/Pods-LibraryBox.release.xcconfig"; sourceTree = "<group>"; };
+		F4B24F94FD7ADFFBD655767B /* Pods-LibraryBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxTests/Pods-LibraryBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		63754B8A1D0EFAC6002B2EFE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63E33E941CF2E7A9005F6F5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				63E33EC91CF2E7DA005F6F5C /* MapKit.framework in Frameworks */,
+				A53E2B2CE12506276073C068 /* Pods_LibraryBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3BDA017149B1FA4980F443F /* Pods_LibraryBoxTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,12 +193,67 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C60F8DA0521C66434B962AC8 /* Pods_LibraryBoxUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		041800A99B984BA586C9C5B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E6585F3FF2BE7F342208304 /* Pods_LibraryBox.framework */,
+				33D9481FB2FC56DAE4ECD871 /* Pods_LibraryBoxTests.framework */,
+				8D7A896C55513BE54862B959 /* Pods_LibraryBoxUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B03B3B5563614166C13713B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				454E6A33E6F249371302716E /* Pods-LibraryBox.debug.xcconfig */,
+				C3E523DB0C7F02C9C827D51B /* Pods-LibraryBox.release.xcconfig */,
+				F4B24F94FD7ADFFBD655767B /* Pods-LibraryBoxTests.debug.xcconfig */,
+				88831756F9E963A568446BA2 /* Pods-LibraryBoxTests.release.xcconfig */,
+				15B15FD2D4D2E62002B2C2C7 /* Pods-LibraryBoxUITests.debug.xcconfig */,
+				17F935F43CC6AE85CA6BC1EC /* Pods-LibraryBoxUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		63754B821D0EFAC6002B2EFE /* LibraryBox Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				63754B831D0EFAC6002B2EFE /* Interface.storyboard */,
+				63754B861D0EFAC6002B2EFE /* Assets.xcassets */,
+				63754B881D0EFAC6002B2EFE /* Info.plist */,
+			);
+			path = "LibraryBox Notifications";
+			sourceTree = "<group>";
+		};
+		63754B911D0EFAC6002B2EFE /* LibraryBox Notifications Extension */ = {
+			isa = PBXGroup;
+			children = (
+				63754B941D0EFAC6002B2EFE /* InterfaceController.swift */,
+				63754B961D0EFAC6002B2EFE /* ExtensionDelegate.swift */,
+				63754B981D0EFAC6002B2EFE /* NotificationController.swift */,
+				63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */,
+				63754B9C1D0EFAC6002B2EFE /* Info.plist */,
+				63754B921D0EFAC6002B2EFE /* Supporting Files */,
+			);
+			path = "LibraryBox Notifications Extension";
+			sourceTree = "<group>";
+		};
+		63754B921D0EFAC6002B2EFE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				63754B931D0EFAC6002B2EFE /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		63BB3FA21CF3A12300EF88E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,8 +270,12 @@
 		63BB3FA51CF3A41900EF88E8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */,
 				63E33ECE1CF2EB84005F6F5C /* LBLocationService.swift */,
 				63BA7E731CFCDF4200FE2F2C /* LBSSIDCheckingService.swift */,
+				631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */,
+				63F7CF3F1D00E9130002C026 /* LBGoogleAPIAccessService.swift */,
+				0AD96B681D180DF900F8A838 /* LBUtilities.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -128,8 +283,18 @@
 		63BB3FAC1CF3B03800EF88E8 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				631BDE721CFF8E6100B19B84 /* KMLParser.h */,
+				631BDE731CFF8E6100B19B84 /* KMLParser.m */,
 			);
 			name = External;
+			sourceTree = "<group>";
+		};
+		63E331AF1D0E0A64006A6663 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		63E33E8E1CF2E7A9005F6F5C = {
@@ -139,7 +304,11 @@
 				63E33E991CF2E7A9005F6F5C /* LibraryBox */,
 				63E33EAE1CF2E7A9005F6F5C /* LibraryBoxTests */,
 				63E33EB91CF2E7A9005F6F5C /* LibraryBoxUITests */,
+				63754B821D0EFAC6002B2EFE /* LibraryBox Notifications */,
+				63754B911D0EFAC6002B2EFE /* LibraryBox Notifications Extension */,
 				63E33E981CF2E7A9005F6F5C /* Products */,
+				041800A99B984BA586C9C5B5 /* Frameworks */,
+				5B03B3B5563614166C13713B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +318,8 @@
 				63E33E971CF2E7A9005F6F5C /* LibraryBox.app */,
 				63E33EAB1CF2E7A9005F6F5C /* LibraryBoxTests.xctest */,
 				63E33EB61CF2E7A9005F6F5C /* LibraryBoxUITests.xctest */,
+				63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */,
+				63754B8D1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				63BB3FAC1CF3B03800EF88E8 /* External */,
+				63E331AF1D0E0A64006A6663 /* Models */,
 				63BB3FA21CF3A12300EF88E8 /* Views */,
 				63E33ECA1CF2E870005F6F5C /* Controllers */,
 				63BB3FA51CF3A41900EF88E8 /* Helpers */,
@@ -192,6 +364,7 @@
 				63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */,
 				636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */,
 				63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */,
+				63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -212,6 +385,7 @@
 				63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */,
 				63E33EA61CF2E7A9005F6F5C /* Info.plist */,
 				63E33ED01CF2F93E005F6F5C /* Licenses */,
+				6316D6951D082C9F00C68EBF /* Podfile */,
 				63BB3FB21CF3B38D00EF88E8 /* TODO */,
 			);
 			name = "Supporting FIles";
@@ -220,17 +394,56 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		63E33E961CF2E7A9005F6F5C /* LibraryBox */ = {
+		63754B801D0EFAC6002B2EFE /* LibraryBox Notifications */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 63E33EBF1CF2E7A9005F6F5C /* Build configuration list for PBXNativeTarget "LibraryBox" */;
+			buildConfigurationList = 63754BA41D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications" */;
 			buildPhases = (
-				63E33E931CF2E7A9005F6F5C /* Sources */,
-				63E33E941CF2E7A9005F6F5C /* Frameworks */,
-				63E33E951CF2E7A9005F6F5C /* Resources */,
+				63754B7F1D0EFAC6002B2EFE /* Resources */,
+				63754BA31D0EFAC7002B2EFE /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				63754B901D0EFAC6002B2EFE /* PBXTargetDependency */,
+			);
+			name = "LibraryBox Notifications";
+			productName = "LibraryBox Notifications";
+			productReference = 63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		63754B8C1D0EFAC6002B2EFE /* LibraryBox Notifications Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63754BA01D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications Extension" */;
+			buildPhases = (
+				63754B891D0EFAC6002B2EFE /* Sources */,
+				63754B8A1D0EFAC6002B2EFE /* Frameworks */,
+				63754B8B1D0EFAC6002B2EFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LibraryBox Notifications Extension";
+			productName = "LibraryBox Notifications Extension";
+			productReference = 63754B8D1D0EFAC6002B2EFE /* LibraryBox Notifications Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		63E33E961CF2E7A9005F6F5C /* LibraryBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63E33EBF1CF2E7A9005F6F5C /* Build configuration list for PBXNativeTarget "LibraryBox" */;
+			buildPhases = (
+				8E2F3A5AD06C5D214CDF128F /* [CP] Check Pods Manifest.lock */,
+				63E33E931CF2E7A9005F6F5C /* Sources */,
+				63E33E941CF2E7A9005F6F5C /* Frameworks */,
+				63E33E951CF2E7A9005F6F5C /* Resources */,
+				E22175D303ABCA8F7CD2E1FC /* [CP] Embed Pods Frameworks */,
+				981D85E82917DBBD17CE6FE0 /* [CP] Copy Pods Resources */,
+				63754BA71D0EFAC7002B2EFE /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				63754B9E1D0EFAC6002B2EFE /* PBXTargetDependency */,
 			);
 			name = LibraryBox;
 			productName = LibraryBox;
@@ -241,9 +454,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63E33EC21CF2E7A9005F6F5C /* Build configuration list for PBXNativeTarget "LibraryBoxTests" */;
 			buildPhases = (
+				75D46500841D2939460FFF80 /* [CP] Check Pods Manifest.lock */,
 				63E33EA71CF2E7A9005F6F5C /* Sources */,
 				63E33EA81CF2E7A9005F6F5C /* Frameworks */,
 				63E33EA91CF2E7A9005F6F5C /* Resources */,
+				CB70257742E195FC45D55CAA /* [CP] Embed Pods Frameworks */,
+				37F36DD093FA93A50F03BD2B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -259,9 +475,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63E33EC51CF2E7A9005F6F5C /* Build configuration list for PBXNativeTarget "LibraryBoxUITests" */;
 			buildPhases = (
+				6C4674D48941D0CA6EF64E6A /* [CP] Check Pods Manifest.lock */,
 				63E33EB21CF2E7A9005F6F5C /* Sources */,
 				63E33EB31CF2E7A9005F6F5C /* Frameworks */,
 				63E33EB41CF2E7A9005F6F5C /* Resources */,
+				CD7105CEF5B47E97AE7CAEC1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -279,14 +497,25 @@
 		63E33E8F1CF2E7A9005F6F5C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0730;
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Berkman Center";
 				TargetAttributes = {
+					63754B801D0EFAC6002B2EFE = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = M9AG4A3F6L;
+					};
+					63754B8C1D0EFAC6002B2EFE = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					63E33E961CF2E7A9005F6F5C = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = M9AG4A3F6L;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -321,15 +550,35 @@
 				63E33E961CF2E7A9005F6F5C /* LibraryBox */,
 				63E33EAA1CF2E7A9005F6F5C /* LibraryBoxTests */,
 				63E33EB51CF2E7A9005F6F5C /* LibraryBoxUITests */,
+				63754B801D0EFAC6002B2EFE /* LibraryBox Notifications */,
+				63754B8C1D0EFAC6002B2EFE /* LibraryBox Notifications Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		63754B7F1D0EFAC6002B2EFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63754B871D0EFAC6002B2EFE /* Assets.xcassets in Resources */,
+				63754B851D0EFAC6002B2EFE /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63754B8B1D0EFAC6002B2EFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63754B9B1D0EFAC6002B2EFE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63E33E951CF2E7A9005F6F5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6316D6961D082C9F00C68EBF /* Podfile in Resources */,
 				63E33EA51CF2E7A9005F6F5C /* LaunchScreen.storyboard in Resources */,
 				63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */,
 				63E33EA21CF2E7A9005F6F5C /* Assets.xcassets in Resources */,
@@ -354,21 +603,161 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		37F36DD093FA93A50F03BD2B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LibraryBoxTests/Pods-LibraryBoxTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C4674D48941D0CA6EF64E6A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		75D46500841D2939460FFF80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E2F3A5AD06C5D214CDF128F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		981D85E82917DBBD17CE6FE0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LibraryBox/Pods-LibraryBox-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB70257742E195FC45D55CAA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LibraryBoxTests/Pods-LibraryBoxTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD7105CEF5B47E97AE7CAEC1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E22175D303ABCA8F7CD2E1FC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LibraryBox/Pods-LibraryBox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		63754B891D0EFAC6002B2EFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63754B991D0EFAC6002B2EFE /* NotificationController.swift in Sources */,
+				63754B971D0EFAC6002B2EFE /* ExtensionDelegate.swift in Sources */,
+				63754B951D0EFAC6002B2EFE /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63E33E931CF2E7A9005F6F5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */,
+				63F7CF401D00E9130002C026 /* LBGoogleAPIAccessService.swift in Sources */,
+				631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */,
+				63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */,
 				63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */,
 				63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */,
 				63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */,
 				63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */,
+				63E014FE1D01D20E00269FD6 /* LBMapPinningTableViewController.swift in Sources */,
 				63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */,
 				636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */,
 				63BA7E741CFCDF4200FE2F2C /* LBSSIDCheckingService.swift in Sources */,
+				0AD96B691D180DF900F8A838 /* LBUtilities.swift in Sources */,
 				637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */,
 				63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */,
 				63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */,
+				631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */,
 				63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */,
 				63BA7E761CFCE36100FE2F2C /* LBBoxWebViewController.swift in Sources */,
 			);
@@ -393,6 +782,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		63754B901D0EFAC6002B2EFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63754B8C1D0EFAC6002B2EFE /* LibraryBox Notifications Extension */;
+			targetProxy = 63754B8F1D0EFAC6002B2EFE /* PBXContainerItemProxy */;
+		};
+		63754B9E1D0EFAC6002B2EFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63754B801D0EFAC6002B2EFE /* LibraryBox Notifications */;
+			targetProxy = 63754B9D1D0EFAC6002B2EFE /* PBXContainerItemProxy */;
+		};
 		63E33EAD1CF2E7A9005F6F5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 63E33E961CF2E7A9005F6F5C /* LibraryBox */;
@@ -406,6 +805,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		63754B831D0EFAC6002B2EFE /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				63754B841D0EFAC6002B2EFE /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		63E33E9E1CF2E7A9005F6F5C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -425,6 +832,70 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		63754BA11D0EFAC7002B2EFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "LibraryBox Notifications Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		63754BA21D0EFAC7002B2EFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "LibraryBox Notifications Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		63754BA51D0EFAC7002B2EFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = LibraryBox_Notifications_Extension;
+				INFOPLIST_FILE = "LibraryBox Notifications/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		63754BA61D0EFAC7002B2EFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = LibraryBox_Notifications_Extension;
+				INFOPLIST_FILE = "LibraryBox Notifications/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
 		63E33EBD1CF2E7A9005F6F5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -512,6 +983,7 @@
 		};
 		63E33EC01CF2E7A9005F6F5C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 454E6A33E6F249371302716E /* Pods-LibraryBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -529,6 +1001,7 @@
 		};
 		63E33EC11CF2E7A9005F6F5C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3E523DB0C7F02C9C827D51B /* Pods-LibraryBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -545,6 +1018,7 @@
 		};
 		63E33EC31CF2E7A9005F6F5C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4B24F94FD7ADFFBD655767B /* Pods-LibraryBoxTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = LibraryBoxTests/Info.plist;
@@ -557,6 +1031,7 @@
 		};
 		63E33EC41CF2E7A9005F6F5C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88831756F9E963A568446BA2 /* Pods-LibraryBoxTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = LibraryBoxTests/Info.plist;
@@ -569,6 +1044,7 @@
 		};
 		63E33EC61CF2E7A9005F6F5C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15B15FD2D4D2E62002B2C2C7 /* Pods-LibraryBoxUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = LibraryBoxUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -580,6 +1056,7 @@
 		};
 		63E33EC71CF2E7A9005F6F5C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17F935F43CC6AE85CA6BC1EC /* Pods-LibraryBoxUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = LibraryBoxUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -592,6 +1069,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		63754BA01D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63754BA11D0EFAC7002B2EFE /* Debug */,
+				63754BA21D0EFAC7002B2EFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63754BA41D0EFAC7002B2EFE /* Build configuration list for PBXNativeTarget "LibraryBox Notifications" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63754BA51D0EFAC7002B2EFE /* Debug */,
+				63754BA61D0EFAC7002B2EFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		63E33E921CF2E7A9005F6F5C /* Build configuration list for PBXProject "LibraryBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -30,8 +30,8 @@ class LBContainerViewController: UIViewController {
     var wifiButton: LBWIFIButton!
     var boxButton: LBBoxButton!
     var mapPinButton: LBPinningButton!
-    let beaconKeyPath = "currentBeaconDistanceSigmaKeyPath"
     var rangingViewExpandedStateStore: Bool = false
+    var connectedToBox: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +43,15 @@ class LBContainerViewController: UIViewController {
         addChildViewController(self.centerNavigationController)
         self.centerNavigationController.didMoveToParentViewController(self)
         let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "MainViewControllerAppeared", object: nil)
-        
+        nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "LBMainViewControllerAppeared", object: nil)
+        nc.addObserver(self, selector: #selector(setConnectedToBoxBool), name: "LBConnectedToBox", object: nil)
+        nc.addObserver(self, selector: #selector(setNotConnectedToBoxBool), name: "LBNotConnectedToBox", object: nil)
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
-        self.wifiButton.lineWidth = 3.0
-        self.wifiButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
-        self.wifiButton.inactiveColor = self.view.tintColor
+        self.wifiButton.lineWidth = 1.5
+        self.wifiButton.activeColor = self.view.tintColor
+        self.wifiButton.inactiveColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
         self.wifiButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.wifiButton)
         let buttonDict = ["button":self.wifiButton]
@@ -67,9 +68,9 @@ class LBContainerViewController: UIViewController {
         //Box-Button Implementation
         self.boxButton = LBBoxButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         self.boxButton.translatesAutoresizingMaskIntoConstraints = false
-        self.boxButton.lineWidth = 3.0
-        self.boxButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
-        self.boxButton.inactiveColor = self.view.tintColor
+        self.boxButton.lineWidth = 1.5
+        self.boxButton.activeColor = self.view.tintColor
+        self.boxButton.inactiveColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
         self.boxButton.addTarget(self, action:#selector(boxButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.boxButton)
         let secondButtonDict = ["superview":self.view, "secondButton":self.boxButton]
@@ -86,10 +87,10 @@ class LBContainerViewController: UIViewController {
         //Pinning-Button Implementation
         self.mapPinButton = LBPinningButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.mapPinButton.translatesAutoresizingMaskIntoConstraints = false
-        self.mapPinButton.lineWidth = 3.0
-        self.mapPinButton.activeColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1)
-        self.mapPinButton.inactiveColor = self.view.tintColor
-        //self.mapPinButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        self.mapPinButton.lineWidth = 1.5
+        self.mapPinButton.activeColor = self.view.tintColor
+        self.mapPinButton.inactiveColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
+        self.mapPinButton.addTarget(self, action:#selector(pinningButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.mapPinButton)
         let thirdButtonDict = ["pinningButton":self.mapPinButton]
         let pinButtonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|-25-[pinningButton]", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: thirdButtonDict)
@@ -101,7 +102,12 @@ class LBContainerViewController: UIViewController {
         self.view.addConstraints(pinButtonWidthConstraint)
         self.view.addConstraints(pinButtonHeightConstraint)
         self.view.setNeedsUpdateConstraints()
-        
+        self.handleMainViewAppearance()
+        LBReachabilityService.isConnectedToBox()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -137,8 +143,8 @@ class LBContainerViewController: UIViewController {
             },
             completion: { (context) -> Void in
                 self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
-                                                // Code here will execute after the rotation has finished.
-                                                // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
+                // Code here will execute after the rotation has finished.
+                // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
     
     func showShadowForCenterViewController(needsToShowShadow: Bool) {
@@ -149,6 +155,8 @@ class LBContainerViewController: UIViewController {
         }
     }
     
+    
+    
     @IBAction func wifiButtonClicked(sender: UIButton)
     {
         UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
@@ -157,45 +165,71 @@ class LBContainerViewController: UIViewController {
     
     @IBAction func boxButtonClicked(sender: UIButton)
     {
-        self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
-        self.wifiButton.hidden = true
-        self.boxButton.hidden = true
-        self.mapPinButton.hidden = true
-        if(currentState == .RightPanelExpanded)
+        if(self.connectedToBox)
         {
-            rangingViewExpandedStateStore = true
-            self.toggleRightPanel()
+            self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
+            self.wifiButton.hidden = true
+            self.boxButton.hidden = true
+            self.mapPinButton.hidden = true
+            if(currentState == .RightPanelExpanded)
+            {
+                rangingViewExpandedStateStore = true
+                self.toggleRightPanel()
+            }
         }
+        else{
+            self.centerViewController.performSegueWithIdentifier("showBoxNotConnected", sender: self)
+            self.wifiButton.hidden = true
+            self.boxButton.hidden = true
+            self.mapPinButton.hidden = true
+            if(currentState == .RightPanelExpanded)
+            {
+                rangingViewExpandedStateStore = true
+                self.toggleRightPanel()
+            }
+        }
+    }
+    
+    @IBAction func pinningButtonClicked(sender: UIButton)
+    {
+        if(!self.connectedToBox)
+        {
+            self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
+        }
+        else{
+            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
+        }
+    }
+    
+
+    func setConnectedToBoxBool()
+    {
+        self.connectedToBox = true
+    }
+
+    func setNotConnectedToBoxBool()
+    {
+        self.connectedToBox = false
     }
     
     func handleMainViewAppearance()
     {
         self.wifiButton.hidden = false
-        if let currentSSIDString: String = LBSSIDCheckingService.fetchSSIDInfo()
-        {
-            print(currentSSIDString)
-            if (currentSSIDString == "PirateBox - Share Freely")
-            {
-                self.boxButton.hidden = false
-            }
-            else if(currentSSIDString == "Librarybox – Free Content!")
-            {
-                self.boxButton.hidden = false
-            }
-            else{
-                //self.boxButton.hidden = true
-            }
-        }
+        self.boxButton.hidden = false
         self.mapPinButton.hidden = false
         if(rangingViewExpandedStateStore == true)
         {
             self.toggleRightPanel()
             rangingViewExpandedStateStore = false
         }
+        if self.centerViewController.ranging
+        {
+            self.startScanningAnimation()
+        }
     }
     
     deinit {
-        self.centerViewController.removeObserver(self, forKeyPath: beaconKeyPath)
+        self.centerViewController.removeObserver(self, forKeyPath:"currentFilteredBeaconSigmaDistances")
     }
     
 }
@@ -272,5 +306,6 @@ private extension UIStoryboard {
     class func centerViewController() -> LBMainViewController? {
         return mainStoryboard().instantiateViewControllerWithIdentifier("MainViewController") as? LBMainViewController
     }
+    
     
 }

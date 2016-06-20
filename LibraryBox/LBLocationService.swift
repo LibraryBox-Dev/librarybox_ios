@@ -12,6 +12,7 @@ import CoreLocation
 protocol LBLocationServiceDelegate
 {
     func userLocationServiceFailedToStartDueToAuthorization()
+    func userLocationChangedTo(location:CLLocation)
     func monitoringStartedSuccessfully()
     func monitoringStoppedSuccessfully()
     func monitoringFailedToStart()
@@ -33,6 +34,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     let beaconRegion: CLBeaconRegion = {
         let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
         theRegion.notifyEntryStateOnDisplay = true
+        //UNLocationNotificationTrigger(region: region, repeats: false);
         return theRegion
     }()
     
@@ -54,9 +56,12 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
         case .NotDetermined:
             locationManager.requestAlwaysAuthorization()
         }
-        
-        
-        
+    }
+    
+    func stopUpdatingUserLocation()
+    {
+        useLocationManagerNotifications()
+        locationManager.stopUpdatingLocation()
     }
     
     func startMonitoringForBeacons() {
@@ -161,28 +166,11 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
 }
 
 
-
-//extension LBLocationService
-//{
-//    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-//        if status == .AuthorizedAlways {
-//            print("Location Access (Always) granted!")
-//            delegate?.monitoringStartedSuccessfully()
-//            startMonitoring()
-//            delegate?.rangingStartedSuccessfully()
-//            startRanging()
-//        } else if status == .AuthorizedWhenInUse || status == .Denied || status == .Restricted {
-//            print("Location Access (Always) denied!")
-//            delegate?.monitoringFailedToStart()
-//            delegate?.rangingFailedToStart()
-//        }
-//    }
-//}
-
 extension LBLocationService
 {
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered region: \(region)")
+        //check region identifier if it is a librarybox before sending the delegate message
         delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
     }
     
@@ -196,6 +184,8 @@ extension LBLocationService
         switch state {
         case .Inside:
             stateString = "inside"
+            //check region identifier if it is a librarybox before sending the delegate message
+            //delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
         case .Outside:
             stateString = "outside"
         case .Unknown:
@@ -220,5 +210,6 @@ extension LBLocationService
 {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLoc = locations.last
+        delegate?.userLocationChangedTo(currentLoc)
     }
 }
