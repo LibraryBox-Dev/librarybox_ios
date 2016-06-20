@@ -34,6 +34,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     let beaconRegion: CLBeaconRegion = {
         let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
         theRegion.notifyEntryStateOnDisplay = true
+        //UNLocationNotificationTrigger(region: region, repeats: false);
         return theRegion
     }()
     
