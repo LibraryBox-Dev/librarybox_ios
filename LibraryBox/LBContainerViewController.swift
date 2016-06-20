@@ -31,6 +31,7 @@ class LBContainerViewController: UIViewController {
     var boxButton: LBBoxButton!
     var mapPinButton: LBPinningButton!
     var rangingViewExpandedStateStore: Bool = false
+    var connectedToBox: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,8 @@ class LBContainerViewController: UIViewController {
         self.centerNavigationController.didMoveToParentViewController(self)
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "LBMainViewControllerAppeared", object: nil)
-        
+        nc.addObserver(self, selector: #selector(setConnectedToBoxBool), name: "LBConnectedToBox", object: nil)
+        nc.addObserver(self, selector: #selector(setNotConnectedToBoxBool), name: "LBNotConnectedToBox", object: nil)
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
@@ -100,9 +102,8 @@ class LBContainerViewController: UIViewController {
         self.view.addConstraints(pinButtonWidthConstraint)
         self.view.addConstraints(pinButtonHeightConstraint)
         self.view.setNeedsUpdateConstraints()
-        
         self.handleMainViewAppearance()
-        
+        LBReachabilityService.isConnectedToBox()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -164,71 +165,50 @@ class LBContainerViewController: UIViewController {
     
     @IBAction func boxButtonClicked(sender: UIButton)
     {
-        self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
-        self.wifiButton.hidden = true
-        self.boxButton.hidden = true
-        self.mapPinButton.hidden = true
-        if(currentState == .RightPanelExpanded)
+        if(self.connectedToBox)
         {
-            rangingViewExpandedStateStore = true
-            self.toggleRightPanel()
+            self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
+            self.wifiButton.hidden = true
+            self.boxButton.hidden = true
+            self.mapPinButton.hidden = true
+            if(currentState == .RightPanelExpanded)
+            {
+                rangingViewExpandedStateStore = true
+                self.toggleRightPanel()
+            }
+        }
+        else{
+            
         }
     }
     
     @IBAction func pinningButtonClicked(sender: UIButton)
     {
-        self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
+        if(!self.connectedToBox)
+        {
+            self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
+        }
+        else{
+            
+        }
     }
     
 
+    func setConnectedToBoxBool()
+    {
+        self.connectedToBox = true
+    }
+
+    func setNotConnectedToBoxBool()
+    {
+        self.connectedToBox = false
+    }
     
     func handleMainViewAppearance()
     {
         self.wifiButton.hidden = false
-        
-        //THIS IS A HACK
-        let networkConnection:Bool = LBReachabilityService.isConnectedToNetwork()
-        let internetConnection: Bool = LBReachabilityService.isConnectedToInternet()
-        /////////////////
-        //if let currentSSIDString: String = LBSSIDCheckingService.fetchSSIDInfo()
-        //{
-        //    print(currentSSIDString)
-        //    if (currentSSIDString == "PirateBox - Share Freely")
-        //    {
-                self.boxButton.hidden = false
-        //    }
-        //    else if(currentSSIDString == "Librarybox – Free Content!")
-        //    {
-        //        self.boxButton.hidden = false
-        //    }
-        //    else{
-        //        if(!internetConnection)
-        //        {
-        //            if(networkConnection)
-        //            {
-        //               self.boxButton.hidden = false
-        //            }
-        //            else
-        //            {
-        //               self.boxButton.hidden = true
-        //            }
-        //        }
-        //        else
-        //        {
-        //            self.boxButton.hidden = true
-        //        }
-        //    }
-        //}
-    
-        if(internetConnection)
-        {
-            self.mapPinButton.hidden = false
-        }else
-        {
-            self.mapPinButton.hidden = true
-        }
-        
-        
+        self.boxButton.hidden = false
+        self.mapPinButton.hidden = false
         if(rangingViewExpandedStateStore == true)
         {
             self.toggleRightPanel()

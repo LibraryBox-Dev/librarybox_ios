@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AD96B691D180DF900F8A838 /* LBUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD96B681D180DF900F8A838 /* LBUtilities.swift */; };
 		6316D6961D082C9F00C68EBF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6316D6951D082C9F00C68EBF /* Podfile */; };
 		631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */; };
 		631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE731CFF8E6100B19B84 /* KMLParser.m */; };
@@ -105,6 +106,7 @@
 
 /* Begin PBXFileReference section */
 		0A6DC3511CF737F700C69D42 /* LBBeaconRangingVisualization.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LBBeaconRangingVisualization.playground; sourceTree = "<group>"; };
+		0AD96B681D180DF900F8A838 /* LBUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBUtilities.swift; sourceTree = "<group>"; };
 		15B15FD2D4D2E62002B2C2C7 /* Pods-LibraryBoxUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		17F935F43CC6AE85CA6BC1EC /* Pods-LibraryBoxUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests.release.xcconfig"; sourceTree = "<group>"; };
 		33D9481FB2FC56DAE4ECD871 /* Pods_LibraryBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LibraryBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,6 +275,7 @@
 				63BA7E731CFCDF4200FE2F2C /* LBSSIDCheckingService.swift */,
 				631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */,
 				63F7CF3F1D00E9130002C026 /* LBGoogleAPIAccessService.swift */,
+				0AD96B681D180DF900F8A838 /* LBUtilities.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 				63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */,
 				636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */,
 				63BA7E741CFCDF4200FE2F2C /* LBSSIDCheckingService.swift in Sources */,
+				0AD96B691D180DF900F8A838 /* LBUtilities.swift in Sources */,
 				637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */,
 				63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */,
 				63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */,

@@ -60,4 +60,29 @@ public class LBReachabilityService {
         }
         return status
     }
+    
+    class func isConnectedToBox() {
+        if let url = NSURL(string: "https://192.168.77.1/config.json") {
+            let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 300)
+            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let session = NSURLSession(configuration: config)
+            
+            let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+                if let httpResponse = response as? NSHTTPURLResponse {
+                    print("Status code: (\(httpResponse.statusCode))")
+                    let nc = NSNotificationCenter.defaultCenter()
+                    if (httpResponse.statusCode == 200)
+                    {
+                        nc.postNotificationName("LBConnectedToBox", object: nil)
+                    }
+                    else
+                    {
+                        nc.postNotificationName("LBNotConnectedToBox", object: nil)
+                    }
+                }
+            })
+            task.resume()
+        }
+    }
+    
 }

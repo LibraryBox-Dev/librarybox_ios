@@ -29,6 +29,7 @@ class LBMainViewController: UIViewController {
     var delegate: LBMainViewControllerDelegate?
     var monitoring: Bool = false
     var ranging: Bool = false
+    var reauthorizationNecessary:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,7 @@ class LBMainViewController: UIViewController {
         super.viewDidAppear(animated)
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
+        self.presentErrors()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -87,6 +89,34 @@ class LBMainViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func presentErrors()
+    {
+        if(reauthorizationNecessary)
+        {
+            let title = "Missing Location Access"
+            let message = "Location Access (Always) is required. Click Settings to update the location access settings."
+            let cancelButtonTitle = "Cancel"
+            let settingsButtonTitle = "Settings"
+            let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertActionStyle.Cancel, handler: nil)
+            let settingsAction = UIAlertAction.init(title: settingsButtonTitle, style: UIAlertActionStyle.Default) {
+                (action: UIAlertAction) -> Void in
+                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+            }
+            alertController.addAction(cancelAction);
+            alertController.addAction(settingsAction);
+            delay(0.4){
+                    UIApplication.sharedApplication().delegate?.window!?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
+        else if(!ranging || !monitoring)
+        {
+            delay(0.4){
+                showAlert("No beacon sensing is available on this device at the moment.", title: "iBeacon sensing currently not possible.", fn: {})
+            }
+        }
     }
 
     @IBAction func triggerBeaconRangingView(sender: UITabBarItem)
@@ -235,7 +265,8 @@ extension LBMainViewController: LBLocationServiceDelegate
 {
     func userLocationServiceFailedToStartDueToAuthorization()
     {
-        self.reAuthorize()
+        self.reauthorizationNecessary = true
+        self.presentErrors()
     }
     
     func monitoringStartedSuccessfully() {
@@ -255,23 +286,19 @@ extension LBMainViewController: LBLocationServiceDelegate
         monitoring = false
     }
     
+    func openAppSettings()
+    {
+        UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+    }
+    
     func monitoringFailedToStart() {
-        let title = "No beacon monitoring possible"
-        let message = "No beacon monitoring is available on this device at the moment."
-        let okButtonTitle = "OK"
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction.init(title: okButtonTitle, style: UIAlertActionStyle.Default, handler: nil)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-           
-        }
         monitoring = false
     }
     
     func monitoringFailedToStartDueToAuthorization() {
         monitoring = false
-        self.reAuthorize()
+        self.reauthorizationNecessary = true
+        self.presentErrors()
     }
     
     func monitoringDetectedEnteringRegion(region: CLBeaconRegion) {
@@ -297,45 +324,13 @@ extension LBMainViewController: LBLocationServiceDelegate
     }
     
     func rangingFailedToStart() {
-        let title = "No beacon ranging possible"
-        let message = "No beacon ranging is available on this device at the moment."
-        let okButtonTitle = "OK"
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction.init(title: okButtonTitle, style: UIAlertActionStyle.Default, handler: nil)
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            
-        }
         ranging = false
     }
     
     func rangingFailedToStartDueToAuthorization() {
         ranging = false
-        self.reAuthorize()
-    }
-    
-    func reAuthorize()
-    {
-        let title = "Missing Location Access"
-        let message = "Location Access (Always) is required. Click Settings to update the location access settings."
-        let cancelButtonTitle = "Cancel"
-        let settingsButtonTitle = "Settings"
-        
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertActionStyle.Cancel, handler: nil)
-        let settingsAction = UIAlertAction.init(title: settingsButtonTitle, style: UIAlertActionStyle.Default) {
-            (action: UIAlertAction) -> Void in
-            UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
-        }
-        alertController.addAction(cancelAction);
-        alertController.addAction(settingsAction);
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            //UI updates
-        }
-
+        self.reauthorizationNecessary = true
+        self.presentErrors()
     }
     
     func rangingStoppedSuccessfully() {
