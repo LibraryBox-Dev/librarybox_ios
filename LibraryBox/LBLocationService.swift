@@ -203,7 +203,7 @@ extension LBLocationService
         case .Inside:
             stateString = "inside"
             //check region identifier if it is a librarybox before sending the delegate message
-            delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
+            //delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
         case .Outside:
             stateString = "outside"
         case .Unknown:

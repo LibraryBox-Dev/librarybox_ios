@@ -302,6 +302,7 @@ extension LBMainViewController: LBLocationServiceDelegate
     }
     
     func monitoringDetectedEnteringRegion(region: CLBeaconRegion) {
+        
         sendLocalNotificationForBeaconRegion(region)
     }
     
