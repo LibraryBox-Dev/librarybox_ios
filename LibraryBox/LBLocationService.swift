@@ -166,24 +166,6 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
 }
 
 
-
-//extension LBLocationService
-//{
-//    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-//        if status == .AuthorizedAlways {
-//            print("Location Access (Always) granted!")
-//            delegate?.monitoringStartedSuccessfully()
-//            startMonitoring()
-//            delegate?.rangingStartedSuccessfully()
-//            startRanging()
-//        } else if status == .AuthorizedWhenInUse || status == .Denied || status == .Restricted {
-//            print("Location Access (Always) denied!")
-//            delegate?.monitoringFailedToStart()
-//            delegate?.rangingFailedToStart()
-//        }
-//    }
-//}
-
 extension LBLocationService
 {
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
