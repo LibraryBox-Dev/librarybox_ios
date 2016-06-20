@@ -178,7 +178,7 @@ class LBContainerViewController: UIViewController {
             }
         }
         else{
-            
+            self.centerViewController.performSegueWithIdentifier("showBoxNotConnected", sender: self)
         }
     }
     
@@ -189,7 +189,7 @@ class LBContainerViewController: UIViewController {
             self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
         }
         else{
-            
+            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
         }
     }
     
