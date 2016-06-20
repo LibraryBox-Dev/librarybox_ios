@@ -56,9 +56,12 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
         case .NotDetermined:
             locationManager.requestAlwaysAuthorization()
         }
-        
-        
-        
+    }
+    
+    func stopUpdatingUserLocation()
+    {
+        useLocationManagerNotifications()
+        locationManager.stopUpdatingLocation()
     }
     
     func startMonitoringForBeacons() {

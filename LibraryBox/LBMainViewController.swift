@@ -75,7 +75,6 @@ class LBMainViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if(segue.identifier == "showPinningInfo") {
-            
             let yourNextNavigationController = (segue.destinationViewController as! UINavigationController)
             let yourNextViewController = yourNextNavigationController.topViewController as! LBMapPinningTableViewController
             yourNextViewController.currentLocationOfUser = self.locationService.currentLoc
@@ -96,7 +95,7 @@ class LBMainViewController: UIViewController {
         if(reauthorizationNecessary)
         {
             let title = "Missing Location Access"
-            let message = "Location Access (Always) is required. Click Settings to update the location access settings."
+            let message = "Location Access (Always) is required. User location is updated when the app is active. Beacon ranging is activated when the app is active. Beacon monitoring is running when the app is active, inactive or in the background. Click Settings to update the location access settings."
             let cancelButtonTitle = "Cancel"
             let settingsButtonTitle = "Settings"
             let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -126,6 +125,7 @@ class LBMainViewController: UIViewController {
     
     func activateMapRelatedServices()
     {
+        locationService.startUpdatingUserLocation()
         locationService.startMonitoringForBeacons()
         locationService.startBeaconRanging()
         self.updateMapUI()
@@ -136,12 +136,14 @@ class LBMainViewController: UIViewController {
     func deactivateRangingService()
     {
         locationService.stopBeaconRanging()
+        locationService.stopUpdatingUserLocation()
     }
     
     func deactivateMapRelatedServices()
     {
         locationService.stopBeaconRanging()
         locationService.stopMonitoringForBeacons()
+        locationService.stopUpdatingUserLocation()
     }
     
     func updateMapUI()
@@ -275,8 +277,6 @@ extension LBMainViewController: LBLocationServiceDelegate
         }
         monitoring = true
         delegate?.startScanningAnimation()
-        
-
     }
     
     func monitoringStoppedSuccessfully() {
@@ -388,7 +388,6 @@ extension LBMainViewController: LBLocationServiceDelegate
             self.mapView.addOverlay(circle)
         }
     }
-
 }
 
 
