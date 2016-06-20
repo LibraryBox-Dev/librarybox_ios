@@ -166,13 +166,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please choose a LibraryBox connection in your WiFi settings." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UfE-cc-lKh">
-                                <rect key="frame" x="68" y="297" width="464" height="39"/>
+                                <rect key="frame" x="68" y="252" width="464" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="wifinotification" translatesAutoresizingMaskIntoConstraints="NO" id="HxH-4F-9gm">
-                                <rect key="frame" x="277" y="344" width="46" height="46"/>
+                                <rect key="frame" x="277" y="299" width="46" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="Gmc-X3-Wls"/>
                                     <constraint firstAttribute="width" constant="46" id="fpv-VO-SjN"/>
@@ -185,6 +185,9 @@
                                     <constraint firstAttribute="width" constant="119" id="pRV-Ht-Xue"/>
                                 </constraints>
                                 <state key="normal" title="About LibraryBox"/>
+                                <connections>
+                                    <segue destination="ict-Ik-HAx" kind="show" identifier="showAboutLibraryBox" id="uAg-oE-MFf"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Find LibraryBox in the area by locating annotations on the map or by ranging for box iBeacons." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T3O-ei-ery">
                                 <rect key="frame" x="68" y="398" width="464" height="61"/>
@@ -199,9 +202,9 @@
                                     <constraint firstAttribute="height" constant="30" id="zKL-Bt-V7S"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Not connected to a LibraryBox." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pM1-at-4ti">
-                                <rect key="frame" x="59" y="196" width="464" height="48"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Not connected to Box." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pM1-at-4ti">
+                                <rect key="frame" x="68" y="212" width="464" height="26"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -209,26 +212,56 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="UfE-cc-lKh" firstAttribute="leading" secondItem="tdK-pf-6ZJ" secondAttribute="leadingMargin" constant="48" id="1TP-i4-ddK"/>
-                            <constraint firstItem="pM1-at-4ti" firstAttribute="leading" secondItem="tdK-pf-6ZJ" secondAttribute="leadingMargin" constant="39" id="AF0-Uv-4YH"/>
+                            <constraint firstItem="pM1-at-4ti" firstAttribute="leading" secondItem="tdK-pf-6ZJ" secondAttribute="leadingMargin" constant="48" id="AF0-Uv-4YH"/>
                             <constraint firstItem="HxH-4F-9gm" firstAttribute="top" secondItem="UfE-cc-lKh" secondAttribute="bottom" constant="8" id="Ank-RV-3ao"/>
                             <constraint firstAttribute="trailingMargin" secondItem="T3O-ei-ery" secondAttribute="trailing" constant="48" id="EMH-cf-mFE"/>
                             <constraint firstItem="RAr-T2-68k" firstAttribute="top" secondItem="vUN-Mb-PA8" secondAttribute="bottom" constant="20" id="KGg-5B-JTi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UfE-cc-lKh" secondAttribute="trailing" constant="48" id="KvN-wz-KhZ"/>
                             <constraint firstItem="HxH-4F-9gm" firstAttribute="centerX" secondItem="tdK-pf-6ZJ" secondAttribute="centerX" id="MfV-Mt-jyY"/>
-                            <constraint firstItem="T3O-ei-ery" firstAttribute="top" secondItem="HxH-4F-9gm" secondAttribute="bottom" constant="8" id="OKa-g8-NeK"/>
+                            <constraint firstItem="T3O-ei-ery" firstAttribute="top" secondItem="HxH-4F-9gm" secondAttribute="bottom" constant="53" id="OKa-g8-NeK"/>
                             <constraint firstItem="hAk-Db-atR" firstAttribute="top" secondItem="T3O-ei-ery" secondAttribute="bottom" constant="8" id="Poc-Zy-gJv"/>
-                            <constraint firstItem="UfE-cc-lKh" firstAttribute="top" secondItem="pM1-at-4ti" secondAttribute="bottom" constant="53" id="VCu-3p-pm8"/>
+                            <constraint firstItem="UfE-cc-lKh" firstAttribute="top" secondItem="pM1-at-4ti" secondAttribute="bottom" constant="14" id="VCu-3p-pm8"/>
                             <constraint firstItem="vUN-Mb-PA8" firstAttribute="top" secondItem="hAk-Db-atR" secondAttribute="bottom" constant="53" id="aOw-hz-XHr"/>
                             <constraint firstItem="hAk-Db-atR" firstAttribute="centerX" secondItem="tdK-pf-6ZJ" secondAttribute="centerX" id="azF-Vs-GlQ"/>
                             <constraint firstItem="T3O-ei-ery" firstAttribute="leading" secondItem="tdK-pf-6ZJ" secondAttribute="leadingMargin" constant="48" id="lwa-et-L32"/>
                             <constraint firstItem="vUN-Mb-PA8" firstAttribute="centerX" secondItem="tdK-pf-6ZJ" secondAttribute="centerX" id="oBD-Qy-iWs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="pM1-at-4ti" secondAttribute="trailing" constant="57" id="qby-mc-MLx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pM1-at-4ti" secondAttribute="trailing" constant="48" id="qby-mc-MLx"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HZ-4E-40o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="660" y="2297"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Uid-oI-ZaZ">
+            <objects>
+                <viewController id="ict-Ik-HAx" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wox-id-yyQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="oJ4-k4-iwc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C35-lh-Vot">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About LibraryBox" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUQ-Sv-eHO">
+                                <rect key="frame" x="234" y="75" width="133" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RUQ-Sv-eHO" firstAttribute="centerX" secondItem="C35-lh-Vot" secondAttribute="centerX" id="Z2X-xd-jPz"/>
+                            <constraint firstItem="RUQ-Sv-eHO" firstAttribute="top" secondItem="Wox-id-yyQ" secondAttribute="bottom" constant="55" id="fM1-Tf-jM7"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="He6-T5-Hw9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="660" y="3079"/>
         </scene>
         <!--Map Pinning Table View Controller-->
         <scene sceneID="eoz-Co-L8p">
