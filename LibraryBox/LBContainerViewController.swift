@@ -179,6 +179,14 @@ class LBContainerViewController: UIViewController {
         }
         else{
             self.centerViewController.performSegueWithIdentifier("showBoxNotConnected", sender: self)
+            self.wifiButton.hidden = true
+            self.boxButton.hidden = true
+            self.mapPinButton.hidden = true
+            if(currentState == .RightPanelExpanded)
+            {
+                rangingViewExpandedStateStore = true
+                self.toggleRightPanel()
+            }
         }
     }
     
