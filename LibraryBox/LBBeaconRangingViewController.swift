@@ -36,6 +36,10 @@ class LBBeaconRangingViewController: UIViewController
                                                 // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
 
+    
+        /**
+        Checks device orientation to calculate y-axis offset.
+        */
         private func checkOrientation()
         {
             let orientation: UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
