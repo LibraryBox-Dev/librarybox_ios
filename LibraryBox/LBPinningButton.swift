@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-//Botton class for the Box-button in the map interface.
+///Botton class for the Box-button in the map interface.
 @IBDesignable
 class LBPinningButton: LBRoundedButton {
     

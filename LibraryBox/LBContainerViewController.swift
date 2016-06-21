@@ -10,13 +10,14 @@ import Foundation
 import UIKit
 import QuartzCore
 
-//Enum for the state of the  background panel on the right side.
+//Enumerations
+///Enum for the state of the  background panel on the right side.
 enum SlideOutState {
     case Collapsed
     case RightPanelExpanded
 }
 
-//View controller class containing the main view controller holding the map view as well as the beacon ranging view controller that presents a right side panel showing a custom scale for beacon ranging. Manages panel presentation, user interaction by pressing map buttons and KVO for beacon sigma proximity changes.
+///View controller class containing the main view controller holding the map view as well as the beacon ranging view controller that presents a right side panel showing a custom scale for beacon ranging. Manages panel presentation, user interaction by pressing map buttons and KVO for beacon sigma proximity changes.
 class LBContainerViewController: UIViewController {
     
     //The map view controller is embedded in a navigation controller showing a navigation bar
@@ -286,7 +287,7 @@ class LBContainerViewController: UIViewController {
     
 }
 
-//Extension dealing with showing and collapsing the right panel in the main interface.
+//MARK: Extension dealing with showing and hiding the right panel in the main interface.
 extension LBContainerViewController: LBMainViewControllerDelegate {
     
     func toggleRightPanel() {
@@ -361,7 +362,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     
 }
 
-//UIStoryboard extension to retrieve view controllers
+//MARK: UIStoryboard extension to retrieve view controllers
 private extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
     

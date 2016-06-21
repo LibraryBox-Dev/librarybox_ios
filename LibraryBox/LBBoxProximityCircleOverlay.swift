@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 
 
-//A model class to identify the circular beacon ranging map overlay at the users' location
+///A model class to identify the circular beacon ranging map overlay at the users' location
 class LBBoxProximityCircleOverlay: MKCircle
 {
     

@@ -18,7 +18,7 @@ protocol LBMainViewControllerDelegate {
     func startScanningAnimation()
 }
 
-//Main view controller class holding the map view.
+///Main view controller class holding the map view.
 class LBMainViewController: UIViewController {
 
     //Outlet to the map view
@@ -104,7 +104,7 @@ class LBMainViewController: UIViewController {
     }
     
     /**
-     Transmits current user location to LBMapPinningTableViewController associated with the storyboard segue "showPinningInfo".
+     Transmits current user location and current box locations to LBMapPinningTableViewController associated with the storyboard segue "showPinningInfo".
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "showPinningInfo") {
@@ -272,7 +272,7 @@ class LBMainViewController: UIViewController {
 }
 
 
-//mapView delegate
+//MARK: mapView delegate
 extension LBMainViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
@@ -336,7 +336,7 @@ extension LBMainViewController: MKMapViewDelegate {
 }
 
 
-//location service delegate functions
+//MARK: location service delegate functions
 extension LBMainViewController: LBLocationServiceDelegate
 {
     /**

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-//View controller class for the box content web view
+///View controller class for the box content web view
 //modified from http://rshankar.com/swift-webview-demo/
 class LBBoxWebViewController: UIViewController
 {
@@ -29,7 +29,6 @@ class LBBoxWebViewController: UIViewController
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func doRefresh(sender: UIBarButtonItem) {
@@ -49,6 +48,7 @@ class LBBoxWebViewController: UIViewController
     }
 }
 
+//MARK: Delegate methods
 extension LBBoxWebViewController: UIWebViewDelegate
 {
     func webViewDidStartLoad(webView: UIWebView){

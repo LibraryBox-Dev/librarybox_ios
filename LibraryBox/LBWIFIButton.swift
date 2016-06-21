@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-//Botton class for the Wifi-button in the map interface.
+///Botton class for the Wifi-button in the map interface.
 @IBDesignable
 class LBWIFIButton: LBRoundedButton {
     

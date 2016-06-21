@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-//The beacon ranging view class, designable from the interface builder
+///The beacon ranging view class, designable from the interface builder
 @IBDesignable
 class LBBeaconRangingView: UIView
 {

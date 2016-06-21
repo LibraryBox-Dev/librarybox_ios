@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-//The parent class to the buttons used in the map interface. The button is layer-based to allow for CAAnimations.
+///The parent class to the buttons used in the map interface. The button is layer-based to allow for CAAnimations.
 @IBDesignable
 class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
     
