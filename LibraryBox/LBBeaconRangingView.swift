@@ -9,31 +9,12 @@
 import UIKit
 import CoreLocation
 
-//class testBeacon
-//{
-//    var proximity: Int = 0
-//    var accuracy: Double = 0.0
-//    
-//    init(newProximity:Int, newAccuracy:Double)
-//    {
-//        self.proximity = newProximity
-//        self.accuracy = newAccuracy
-//    }
-//}
-//
-//let beacon1 = testBeacon(newProximity: 1,newAccuracy: 0.3)
-//let beacon2 = testBeacon(newProximity: 2,newAccuracy: 1.5)
-//let beacon3 = testBeacon(newProximity: 2,newAccuracy: 4.8)
-//let beacon4 = testBeacon(newProximity: 3,newAccuracy: 30.456666)
-//let beacon5 = testBeacon(newProximity: 3,newAccuracy: 55.246356723)
-//let beacon6 = testBeacon(newProximity: 0,newAccuracy: -2)
-//
-//var beacons: [testBeacon] = [beacon1, beacon2, beacon3, beacon4, beacon5, beacon6]
-//var sortedBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
-
+//The beacon ranging view class, designable from the interface builder
 @IBDesignable
 class LBBeaconRangingView: UIView
 {
+    
+    //Variables that can be changed in the interface builder
     @IBInspectable var endColor: UIColor = UIColor.darkGrayColor()
     @IBInspectable var startColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
@@ -41,7 +22,11 @@ class LBBeaconRangingView: UIView
     @IBInspectable var nearColor: UIColor = UIColor.blueColor()
     @IBInspectable var farColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var defaultColor: UIColor = UIColor.whiteColor()
+    
+    //To set the horizontal center of the beacon ranging scale
     var yOffset: CGFloat = 80.0
+    
+    //Array of approximate distances of close ibeacons
     var beaconSigmaDistances:[Double] = [Double](count: 20, repeatedValue: 0.0)
     
     
@@ -54,21 +39,39 @@ class LBBeaconRangingView: UIView
         super.init(coder: aDecoder)!
     }
     
+    /**
+     
+     Returns a float value from a double value converted from a linear scale to a logarithmic scale.
+     
+     :returns: A float value converted from a a linear to a logarithmic scale
+     */
     func convertToLogScale(data: Double, screenY0:CGFloat, screenY1:CGFloat, dataY0:Double, dataY1:CGFloat) ->CGFloat{
         
         return screenY0 + (log(CGFloat(data)) - log(CGFloat(dataY0))) / (log(CGFloat(dataY1)) - log(CGFloat(dataY0))) * (screenY1 - screenY0)
     }
     
+    /**
+     Draws the logarithmic beacon ranging scale. Close beacons appear as colored circles on the scale.
+     */
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
+        
+        //Setup constants for color gradient
         let startPGradient = CGPoint.zero
         let endPGradient = CGPoint(x:0, y:self.bounds.height)
+        
+        //Setup constants for scale length
         let startPoint: CGPoint = CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+95)
         let endPoint: CGPoint = CGPointMake(rect.size.width - 50, CGRectGetMaxY(rect)-yOffset)
+        
         let context = UIGraphicsGetCurrentContext()
+        
+        //Color gradient colors
         let colors = [startColor.CGColor, endColor.CGColor]
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let colorLocations:[CGFloat] = [0.0, 1.0]
+        
+        //The color gradient in the background of the view
         let gradient = CGGradientCreateWithColors(colorSpace,
                                                   colors,
                                                   colorLocations)
@@ -77,9 +80,14 @@ class LBBeaconRangingView: UIView
                                     startPGradient,
                                     endPGradient,
                                     CGGradientDrawingOptions.DrawsAfterEndLocation)
+        
         CGContextSaveGState(context)
+        
+        //Context is flipped to match the coordinate system
         let flipVertical:CGAffineTransform = CGAffineTransformMake(1,0,0,-1,0,rect.size.height)
         CGContextConcatCTM(context, flipVertical)
+        
+        //Shadow drawing
         let shadowOffset = CGSizeMake(2.0, 2.0)
         let shadowBlurRadius: CGFloat = 5
         CGContextSetShadowWithColor(context,
@@ -87,6 +95,8 @@ class LBBeaconRangingView: UIView
                                     shadowBlurRadius,
                                     shadow.CGColor)
         CGContextBeginTransparencyLayer(context, nil)
+        
+        //Scale mark drawing
         let fiveMeterMark: UIBezierPath = UIBezierPath()
         let fiveMeterMarkerY: CGFloat = self.convertToLogScale(5.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
         fiveMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, fiveMeterMarkerY))
@@ -111,6 +121,9 @@ class LBBeaconRangingView: UIView
         fiftyMeterMark.lineCapStyle = CGLineCap.Round
         UIColor.darkGrayColor().setStroke()
         fiftyMeterMark.stroke()
+        
+        
+        //Line drawing
         let linePath: UIBezierPath = UIBezierPath()
         linePath.moveToPoint(CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+75))
         linePath.addLineToPoint(endPoint)
@@ -118,6 +131,8 @@ class LBBeaconRangingView: UIView
         linePath.lineCapStyle = CGLineCap.Round
         UIColor.whiteColor().setStroke()
         linePath.stroke()
+        
+        //Button background drawing
         let aCenterPoint = CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+50)
         var aStartAngle: CGFloat = CGFloat(Float(2 * M_PI))
         var anEndAngle: CGFloat = 0.0
@@ -132,6 +147,8 @@ class LBBeaconRangingView: UIView
         lowerCirclePath.lineWidth=aStrokeWidth
         lowerCirclePath.fill()
         lowerCirclePath.stroke()
+        
+        //iBeacon drawing
         for aBeaconDistance in beaconSigmaDistances
         {
             if(aBeaconDistance > 0.0)
@@ -152,6 +169,8 @@ class LBBeaconRangingView: UIView
                 let strokeWidth: CGFloat = 3.0
                 let radius = CGFloat((25.0 - CGFloat(strokeWidth)) / 2)
                 UIColor.whiteColor().setStroke()
+                
+                //iBeacon coloring based on distance
                 switch aBeaconDistance {
                 case 0.0:
                     defaultColor.setFill()
