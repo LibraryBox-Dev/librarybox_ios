@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-
+//View controller class for the custom beacon ranging view
 class LBBeaconRangingViewController: UIViewController
 {    
     override func viewDidLoad() {
