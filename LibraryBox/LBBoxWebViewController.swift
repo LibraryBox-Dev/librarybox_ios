@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+
+//View controller class for the box content web view
+//modified from http://rshankar.com/swift-webview-demo/
 class LBBoxWebViewController: UIViewController
 {
     @IBOutlet weak var webView: UIWebView! = UIWebView()
@@ -17,6 +20,8 @@ class LBBoxWebViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.hidden = true
+        
+        //the librarybox URL that is opened (can be any address as LibraryBox redirects)
         let url = NSURL(string: "http://www.librarybox.us")
         let request = NSURLRequest(URL: url!)
         webView.loadRequest(request)
