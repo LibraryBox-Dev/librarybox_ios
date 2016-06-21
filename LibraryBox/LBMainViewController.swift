@@ -14,7 +14,14 @@ import CoreLocation
 Delegate protocol for the main view controller. "toggleRightPanel()" is called from the delegate, when the NavigationItem for bluetooth ranging is pressed. "startScanningAnimation()" is called from the delegate, when monitoring or ranging for beacons started successfully.
  */
 protocol LBMainViewControllerDelegate {
+    /**
+     Triggered when button is pressed to show the iBeacon ranging view.
+     */
     func toggleRightPanel()
+    
+    /**
+    Triggered when iBeacon monitoring or ranging started successfully.
+     */
     func startScanningAnimation()
 }
 

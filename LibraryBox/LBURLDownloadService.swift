@@ -8,7 +8,13 @@
 
 import Foundation
 
+
+///Class holding a class function for downloading the KML file from the LibraryBox MyMaps environment.
 class LBURLDownloadService {
+    
+    /**
+     Downloads the KML file from the LibraryBox MyMaps environment and stores it on the device. On successful completion, a notification is sent via NSNotificationCenter.
+     */
     class func load(URL: NSURL) {
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)

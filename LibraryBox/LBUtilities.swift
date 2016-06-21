@@ -8,6 +8,12 @@
 
 import Foundation
 
+
+///Utility functions (used e. g. in LBMainViewController)
+
+/**
+ GCD Delay function
+ */
 func delay(delay:Double, closure:()->()) {
     dispatch_after(
         dispatch_time(
@@ -17,6 +23,10 @@ func delay(delay:Double, closure:()->()) {
         dispatch_get_main_queue(), closure)
 }
 
+
+/**
+ Presents an alert via UIAlertController
+ */
 func showAlert(text : NSString, title : NSString, fn:()->Void){
     let alert = UIAlertController(title: title as String, message: text as String, preferredStyle: UIAlertControllerStyle.Alert)
     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in fn()}))
