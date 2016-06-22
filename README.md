@@ -16,7 +16,7 @@ If you wish to build LibraryBox iOS yourself, you will need the following compon
 After cloning the repository, run the following commands inside the repository root:
 ```bash
 pod install
-``
+```
 to install your dependencies
 
 ##Google Summer of Code 2016 Development 
