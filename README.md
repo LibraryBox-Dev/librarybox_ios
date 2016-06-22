@@ -7,7 +7,7 @@ Github Repository for the open source LIbraryBox iOS app
 
 If you wish to build LibraryBox iOS yourself, you will need the following components:
 
-* a recent Xcode (version > 7.3)
+* Xcode (version > 7.3)
 * OS X SDK (10.11 or later)
 * Git
 * [Cocoapods](https://cocoapods.org)
