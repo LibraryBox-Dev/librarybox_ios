@@ -17,7 +17,7 @@ After cloning the repository, run the following commands inside the repository r
 ```bash
 pod install
 ```
-to install your dependencies
+to install dependencies (AeroGearHttp, AeroGearOAuth2)
 
 ##Google Summer of Code 2016 Development 
 [LibraryBox iOS Project Proposal](https://summerofcode.withgoogle.com/projects/#6529072016392192)
