@@ -20,5 +20,5 @@ pod install
 to install dependencies (AeroGearHttp, AeroGearOAuth2)
 
 ##Google Summer of Code 2016 Development 
-[LibraryBox iOS Project Proposal](https://summerofcode.withgoogle.com/projects/#6529072016392192)
-[LibraryBox iOS Development Blog](https://soleil-alpin.com/gsoc2016/)
+* [LibraryBox iOS Project Proposal](https://summerofcode.withgoogle.com/projects/#6529072016392192)
+* [LibraryBox iOS Development Blog](https://soleil-alpin.com/gsoc2016/)
