@@ -9,9 +9,12 @@
 import Foundation
 import UIKit
 
+
+///The parent class to the buttons used in the map interface. The button is layer-based to allow for CAAnimations.
 @IBDesignable
 class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
     
+    //Layer variables
     var outerRingShape: CAShapeLayer!
     var circleBGShape: CAShapeLayer!
     var lineWidth: CGFloat = 3.0{
@@ -19,6 +22,8 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
             updateLayerProperties()
         }
     }
+    
+    //Colors for states of button can be set in interface builder
     @IBInspectable var activeColor: UIColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1) {
         didSet {
             updateLayerProperties()
@@ -29,7 +34,10 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
             updateLayerProperties()
         }
     }
+    
+    //Bool can be used to check for starting or stopping animation
     var readyToActivate: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -38,6 +46,9 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
         super.init(coder: aDecoder)!
     }
     
+    /**
+     Setup of layer properties.
+    */
     private func updateLayerProperties()
     {
         if outerRingShape != nil
@@ -53,6 +64,9 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
         
     }
     
+    /**
+     Setup of button appearance.
+     */
     override func layoutSubviews()
     {
         super.layoutSubviews()
@@ -60,6 +74,9 @@ class LBRoundedButton: UIButton, UIViewControllerTransitioningDelegate {
         updateLayerProperties()
     }
     
+    /**
+     Layer creation.
+     */
     private func createLayersIfNeeded() {
         if circleBGShape == nil {
             circleBGShape = CAShapeLayer()

@@ -10,42 +10,69 @@ import Foundation
 import UIKit
 import QuartzCore
 
+//Enumerations
+///Enum for the state of the  background panel on the right side.
 enum SlideOutState {
     case Collapsed
     case RightPanelExpanded
 }
 
+///View controller class containing the main view controller holding the map view as well as the beacon ranging view controller that presents a right side panel showing a custom scale for beacon ranging. Manages panel presentation, user interaction by pressing map buttons and KVO for beacon sigma proximity changes.
 class LBContainerViewController: UIViewController {
     
+    //The map view controller is embedded in a navigation controller showing a navigation bar
     var centerNavigationController: UINavigationController!
     var centerViewController: LBMainViewController!
+    
+    //State of the right panel
     var currentState: SlideOutState = .Collapsed {
         didSet {
+            //Sets a shadow from the center view controller on the background right panel
             let needsShowShadow = currentState != .Collapsed
             showShadowForCenterViewController(needsShowShadow)
         }
     }
+    
     var rightViewController: LBBeaconRangingViewController?
+    
+    //The y-axis offset of the center view controller when the right panel is expanded
     var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 100
+    
+    //Buttons on the main interface
     var wifiButton: LBWIFIButton!
     var boxButton: LBBoxButton!
     var mapPinButton: LBPinningButton!
+    
+    //State store of panel
     var rangingViewExpandedStateStore: Bool = false
+    
+    //Bool check if connected to a LibraryBox
     var connectedToBox: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Center view controller from the main storyboard -> private UIStoryboard extension
         self.centerViewController = UIStoryboard.centerViewController() as LBMainViewController!
+        
+        //Sets the delegate of the LBMainViewController instance
         self.centerViewController.delegate = self
+        
+        //Setup KVO for "currentFilteredBeaconSigmaDistances"
         self.centerViewController.addObserver(self, forKeyPath:"currentFilteredBeaconSigmaDistances", options: [NSKeyValueObservingOptions.Old, NSKeyValueObservingOptions.New], context: nil)
+        
+        //Embedding center view controller in navigation controller
         self.centerNavigationController = UINavigationController(rootViewController: centerViewController)
         view.addSubview(self.centerNavigationController.view)
         addChildViewController(self.centerNavigationController)
         self.centerNavigationController.didMoveToParentViewController(self)
+        
+        //Listening to notifications on map view appearance as well as box connection and disconnection
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "LBMainViewControllerAppeared", object: nil)
         nc.addObserver(self, selector: #selector(setConnectedToBoxBool), name: "LBConnectedToBox", object: nil)
         nc.addObserver(self, selector: #selector(setNotConnectedToBoxBool), name: "LBNotConnectedToBox", object: nil)
+        
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         self.wifiButton.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +81,8 @@ class LBContainerViewController: UIViewController {
         self.wifiButton.inactiveColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1)
         self.wifiButton.addTarget(self, action:#selector(wifiButtonClicked), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(self.wifiButton)
+        
+        //Autolayout
         let buttonDict = ["button":self.wifiButton]
         let buttonHorizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:[button]-25-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
         let buttonVerticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-25-|", options:NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: buttonDict)
@@ -102,7 +131,11 @@ class LBContainerViewController: UIViewController {
         self.view.addConstraints(pinButtonWidthConstraint)
         self.view.addConstraints(pinButtonHeightConstraint)
         self.view.setNeedsUpdateConstraints()
+        
+        //Main interface setup
         self.handleMainViewAppearance()
+        
+        //Check for connection to a LibraryBox
         LBReachabilityService.isConnectedToBox()
     }
     
@@ -110,6 +143,9 @@ class LBContainerViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    /**
+     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay()
+    */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "currentFilteredBeaconSigmaDistances" {
             if (self.rightViewController != nil) {
@@ -121,18 +157,13 @@ class LBContainerViewController: UIViewController {
                         beaconRangingView.setNeedsDisplay()
                     }
                 }
-                if let sigmaDistanceToNearestBeacon: Double = self.centerViewController.currentFilteredBeaconSigmaDistances[0]
-                {
-                    if(sigmaDistanceToNearestBeacon > 0.0 && sigmaDistanceToNearestBeacon < 15.0)
-                    {
-                        print("Distance to nearest beacon:", sigmaDistanceToNearestBeacon)
-                        //TODO: Animate map pinning button if no librarybox could be found in surroundings
-                    }
-                }
             }
         }
     }
     
+    /**
+     Set y-axis offset on device rotation.
+    */
     override func viewWillTransitionToSize(size: CGSize,
                                            withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
@@ -147,6 +178,9 @@ class LBContainerViewController: UIViewController {
                 // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
     
+    /**
+     Show shadow when panel is expanded.
+    */
     func showShadowForCenterViewController(needsToShowShadow: Bool) {
         if (needsToShowShadow) {
             centerNavigationController.view.layer.shadowOpacity = 0.8
@@ -156,13 +190,18 @@ class LBContainerViewController: UIViewController {
     }
     
     
-    
+    /**
+    Open the Wifi Settings URL when Wifi-Button is clicked.
+    */
     @IBAction func wifiButtonClicked(sender: UIButton)
     {
         UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
         self.wifiButton.readyToActivate = true
     }
     
+    /**
+     On button click, check connection to box. If connected, present Web View Controller associated with the storyboard segue "boxContent", otherwise present a sheet informing the user that they are not connected to a LibraryBox and how they can connect to one.
+    */
     @IBAction func boxButtonClicked(sender: UIButton)
     {
         if(self.connectedToBox)
@@ -190,6 +229,9 @@ class LBContainerViewController: UIViewController {
         }
     }
     
+    /**
+    On button click, check connection to a box. If connected, present a sheet informing the user that they need to be connected to the internet if they want to annotate a map location, otherwise present the map pinning view associated with the storyboard segue "showPinningInfo".
+    */
     @IBAction func pinningButtonClicked(sender: UIButton)
     {
         if(!self.connectedToBox)
@@ -201,17 +243,25 @@ class LBContainerViewController: UIViewController {
         }
     }
     
-
+    /**
+     Sets boolean connectedToBox to true.
+    */
     func setConnectedToBoxBool()
     {
         self.connectedToBox = true
     }
 
+    /**
+     Sets boolean connectedToBox to false.
+     */
     func setNotConnectedToBoxBool()
     {
         self.connectedToBox = false
     }
     
+    /**
+     Sets button appearance and panel appearance. Starts Wifi-button animation.
+     */
     func handleMainViewAppearance()
     {
         self.wifiButton.hidden = false
@@ -228,18 +278,24 @@ class LBContainerViewController: UIViewController {
         }
     }
     
+    /**
+     Removes KVO on deinit.
+    */
     deinit {
         self.centerViewController.removeObserver(self, forKeyPath:"currentFilteredBeaconSigmaDistances")
     }
     
 }
 
+//MARK: Extension dealing with showing and hiding the right panel in the main interface.
 extension LBContainerViewController: LBMainViewControllerDelegate {
     
     func toggleRightPanel() {
         let notExpanded = (currentState != .RightPanelExpanded)
         if notExpanded {
             self.addRightPanelViewController()
+            
+            //turn off opacity of wifibutton, if panel is expanded
             self.wifiButton.turnOffBGOpacity()
         }
         else{
@@ -257,11 +313,15 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         }
     }
     
+    /**
+     Add view and view controller of panel to container view.
+    */
     func addChildSidePanelController(sidePanelController: LBBeaconRangingViewController) {
         view.insertSubview(sidePanelController.view, atIndex: 0)
         self.addChildViewController(sidePanelController)
         sidePanelController.didMoveToParentViewController(self)
     }
+    
     
     func addRightPanelViewController() {
         if (self.rightViewController == nil) {
@@ -270,6 +330,9 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         }
     }
     
+    /**
+     Animates panel presentation.
+    */
     func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
             self.centerNavigationController.view.frame.origin.x = targetPosition
@@ -289,6 +352,9 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         }
     }
     
+    /**
+     Starts Wifi-Button color-fade animation.
+     */
     func startScanningAnimation()
     {
         self.wifiButton.readyToActivate = false
@@ -296,6 +362,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     
 }
 
+//MARK: UIStoryboard extension to retrieve view controllers
 private extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
     

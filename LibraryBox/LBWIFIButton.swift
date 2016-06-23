@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-
+///Botton class for the Wifi-button in the map interface.
 @IBDesignable
 class LBWIFIButton: LBRoundedButton {
     
@@ -27,6 +27,9 @@ class LBWIFIButton: LBRoundedButton {
         super.init(coder: aDecoder)!
     }
     
+    /**
+     Overridden function adding the button image in a layer.
+     */
     override func layoutSubviews()
     {
         super.layoutSubviews()
@@ -75,6 +78,9 @@ class LBWIFIButton: LBRoundedButton {
             super.drawRect(rect)
     }
     
+    /**
+     Scanning for beacons - Color-Fade Animation. This function starts the animation.
+     */
     private func scanning(){
         let wifiFillColorAnimation = CABasicAnimation(keyPath: "fillColor")
         wifiFillColorAnimation.toValue = activeColor.CGColor
@@ -87,9 +93,13 @@ class LBWIFIButton: LBRoundedButton {
         }
     }
     
+    /**
+      If this method is called, animations are stopped.
+     */
     private func connectionReady(){
         outerRingShape.removeAllAnimations()
     }
+    
     
     override func animationDidStart(anim: CAAnimation) {
         disableTouch()

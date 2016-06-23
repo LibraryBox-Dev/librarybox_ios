@@ -18,10 +18,19 @@
 //    double signalStrength = hotspotNetwork.signalStrength;
 //}
 
+
 import Foundation
 import SystemConfiguration.CaptiveNetwork
 
+
+///Class holding class function to check for SSID of the network currently connected to
 class LBSSIDCheckingService {
+    
+    /**
+     Returns the title of the network currently connected to.
+     
+     :returns: The SSID string.
+     */
     class func fetchSSIDInfo() ->  String {
         var currentSSID = ""
         let interfaces:CFArray! = CNCopySupportedInterfaces()

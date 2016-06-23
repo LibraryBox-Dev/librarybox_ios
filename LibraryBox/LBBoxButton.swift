@@ -9,9 +9,14 @@
 import Foundation
 import UIKit
 
+///Botton class for the Box-button in the map interface.
 @IBDesignable
 class LBBoxButton: LBRoundedButton {
 
+    
+    /**
+     Overridden function adding the button image in a layer.
+     */
     override func layoutSubviews()
     {
         super.layoutSubviews()

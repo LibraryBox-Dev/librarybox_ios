@@ -10,31 +10,61 @@ import UIKit
 import MapKit
 import CoreLocation
 
+/**
+Delegate protocol for the main view controller. "toggleRightPanel()" is called from the delegate, when the NavigationItem for bluetooth ranging is pressed. "startScanningAnimation()" is called from the delegate, when monitoring or ranging for beacons started successfully.
+ */
 protocol LBMainViewControllerDelegate {
+    /**
+     Triggered when button is pressed to show the iBeacon ranging view.
+     */
     func toggleRightPanel()
-    func collapseSidePanel()
+    
+    /**
+    Triggered when iBeacon monitoring or ranging started successfully.
+     */
     func startScanningAnimation()
 }
 
+///Main view controller class holding the map view.
 class LBMainViewController: UIViewController {
 
+    //Outlet to the map view
     @IBOutlet weak var mapView: MKMapView!
     
+    //Array holding current iBeacons, sorted by accuracy
     var currentBeacons = [CLBeacon]()
+    
+    //The currently closest iBeacon based on accuracy
     var closestBeacon: CLBeacon?
+    
+    //Sigma distances of up to 20 close iBeacons based on accuracy
     dynamic var currentFilteredBeaconSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
+    
+    //Cached sigma distances for low pass filtering of iBeacon proximity based on accuracy
     var _beaconFilteredSigmaDistances = [Double](count: 20, repeatedValue: 0.0)
+    
+    //The KML parser (an external objective-c class from an Apple sample project)
     var myKMLParser: KMLParser!
+    
+    //The location service instance - including the location manager
     private var locationService = LBLocationService()
+    
+    //The delegate
     var delegate: LBMainViewControllerDelegate?
+    
+    //Boolean variables that signify if monitoring, ranging is active or if reauthorization is necessary
     var monitoring: Bool = false
     var ranging: Bool = false
     var reauthorizationNecessary:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Map setup
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
+        
+        //Navigation bar items: Title and left bar button item
         let userLocationButton = MKUserTrackingBarButtonItem(mapView:self.mapView)
         self.navigationItem.leftBarButtonItem = userLocationButton
         self.navigationItem.title = "LibraryBox"
@@ -46,34 +76,44 @@ class LBMainViewController: UIViewController {
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = radarButton
         self.navigationItem.rightBarButtonItem = rightBarButton
+        
+        //Location service setup
         locationService.delegate = self
         locationService.authorize()
         locationService.startUpdatingUserLocation()
         locationService.startMonitoringForBeacons()
         locationService.startBeaconRanging()
+        
+        //Map user interface updating - sets KML annotation pins
         self.updateMapUI()
+        
+        //Notifications for app status: active, background, terminating - to turn location services on or off
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(activateMapRelatedServices), name:UIApplicationDidBecomeActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(deactivateRangingService), name:UIApplicationWillResignActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(deactivateMapRelatedServices), name:UIApplicationWillTerminateNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        //self.mapView.frame = self.view.bounds
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        //send notification when view is loaded
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
+        
+        //check for authorization, iBeacon ranging and monitoring and present a sheet from a UIAlertController, if something is not working.
         self.presentErrors()
     }
     
+    /**
+     Transmits current user location and current box locations to LBMapPinningTableViewController associated with the storyboard segue "showPinningInfo".
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if(segue.identifier == "showPinningInfo") {
             let yourNextNavigationController = (segue.destinationViewController as! UINavigationController)
             let yourNextViewController = yourNextNavigationController.topViewController as! LBMapPinningTableViewController
@@ -87,9 +127,11 @@ class LBMainViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    /**
+     Presents error messages using UIAlertController, first checks if authorization is necessary, then if ranging or monitoring is not active.
+    */
     func presentErrors()
     {
         if(reauthorizationNecessary)
@@ -106,6 +148,7 @@ class LBMainViewController: UIViewController {
             }
             alertController.addAction(cancelAction);
             alertController.addAction(settingsAction);
+            //"delay" function that enables a delay on Grand Central Dispatch - from LBUtilities
             delay(0.4){
                     UIApplication.sharedApplication().delegate?.window!?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
             }
@@ -113,16 +156,23 @@ class LBMainViewController: UIViewController {
         else if(!ranging || !monitoring)
         {
             delay(0.4){
+                //"showAlert" function that creates an alert message with an "OK" button - from LBUtilities
                 showAlert("No beacon sensing is available on this device at the moment.", title: "iBeacon sensing currently not possible.", fn: {})
             }
         }
     }
-
+    
+    /**
+     Called from the left navigation item - to toggle the right panel showing or hiding the iBeacon ranging view
+    */
     @IBAction func triggerBeaconRangingView(sender: UITabBarItem)
     {
         delegate?.toggleRightPanel()
     }
     
+    /**
+     Called when app is activated.
+    */
     func activateMapRelatedServices()
     {
         locationService.startUpdatingUserLocation()
@@ -131,14 +181,21 @@ class LBMainViewController: UIViewController {
         self.updateMapUI()
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
+        self.presentErrors()
     }
     
+    /**
+     Called when app goes to background.
+     */
     func deactivateRangingService()
     {
         locationService.stopBeaconRanging()
         locationService.stopUpdatingUserLocation()
     }
     
+    /**
+     Called when app is terminating.
+     */
     func deactivateMapRelatedServices()
     {
         locationService.stopBeaconRanging()
@@ -146,6 +203,9 @@ class LBMainViewController: UIViewController {
         locationService.stopUpdatingUserLocation()
     }
     
+    /**
+     Retrieves KML from LibraryBox Google MyMaps environment, parses the KML and calls a function to add annotations to the map view.
+    */
     func updateMapUI()
     {
         let kmlURL = self.libraryBoxKMLDataCheckAndPath()
@@ -155,6 +215,13 @@ class LBMainViewController: UIViewController {
         self.addAnnotations()
     }
     
+    
+    /**
+     Retrieves KML from LibraryBox Google MyMaps environment by checking if a KML file exists, if it needs to be updated and if so, downloading a new KML file using the LBURLDownloadService.
+     Returns the path to the KML file.
+     
+     :returns: file path to KML file as string.
+     */
     func libraryBoxKMLDataCheckAndPath() -> String
     {
         let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
@@ -185,10 +252,11 @@ class LBMainViewController: UIViewController {
     
 //    func addOverlays()
 //    {
-//        //let myKMLOverlayArray = myKMLParser.overlays as! [MKOverlay]
-//        //self.mapView.addOverlays(myKMLOverlayArray)
 //    }
     
+    /**
+     Removes all overlays from the map that are of the class "LBBoxProximityCircleOverlay"
+    */
     func removeOverlays()
     {
         let overlays = self.mapView.overlays
@@ -199,6 +267,9 @@ class LBMainViewController: UIViewController {
         }
     }
     
+    /**
+     Adds annotations from the parsed KML file to the map view.
+    */
     func addAnnotations()
     {
         let myKMLAnnotationArray = myKMLParser.points as! [MKAnnotation]
@@ -208,7 +279,7 @@ class LBMainViewController: UIViewController {
 }
 
 
-//mapView delegate
+//MARK: mapView delegate
 extension LBMainViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
@@ -221,12 +292,15 @@ extension LBMainViewController: MKMapViewDelegate {
             polygonView.lineWidth = 0.4
             polygonView.strokeColor = UIColor.blackColor()
             return polygonView
+        
+        //creates the circular map overlay renderer at the users' location based on proximity of the closest iBeacon
         } else if overlay is LBBoxProximityCircleOverlay {
             let circle = MKCircleRenderer(overlay: overlay)
             var fillColoring: UIColor = UIColor.clearColor()
             var strokeColoring:UIColor = UIColor.clearColor()
             if let myBeacon:CLBeacon = closestBeacon
             {
+                //coloring the circle based on iBeacon proximity attribute
                 switch myBeacon.proximity {
                 case .Far:
                     fillColoring = UIColor.cyanColor().colorWithAlphaComponent(0.2)
@@ -251,11 +325,17 @@ extension LBMainViewController: MKMapViewDelegate {
         return myOverlayRenderer!
     }
     
+    /**
+     For custom annotations
+    */
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
 
         return nil
     }
     
+    /**
+     For accessory views to annotations
+     */
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         
@@ -263,14 +343,20 @@ extension LBMainViewController: MKMapViewDelegate {
 }
 
 
+//MARK: location service delegate functions
 extension LBMainViewController: LBLocationServiceDelegate
 {
+    /**
+     Sets the boolean reauthorizationNecessary to true.
+     */
     func userLocationServiceFailedToStartDueToAuthorization()
     {
         self.reauthorizationNecessary = true
-        self.presentErrors()
     }
     
+    /**
+     Sets the bool monitoring to true. Starts the color-fade scanning animation on the Wifi-Button.
+    */
     func monitoringStartedSuccessfully() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
 
@@ -279,6 +365,9 @@ extension LBMainViewController: LBLocationServiceDelegate
         delegate?.startScanningAnimation()
     }
     
+    /**
+     Sets the bool monitoring to false.
+     */
     func monitoringStoppedSuccessfully() {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             //UI updates
@@ -286,26 +375,40 @@ extension LBMainViewController: LBLocationServiceDelegate
         monitoring = false
     }
     
+    /**
+     Opens the app settings URL.
+     */
     func openAppSettings()
     {
         UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
     }
     
+    /**
+     Sets the boolean monitoring to false.
+     */
     func monitoringFailedToStart() {
         monitoring = false
     }
     
+    /**
+     Sets the booleans monitoring to false and reauthorizationNecessary to true.
+     */
     func monitoringFailedToStartDueToAuthorization() {
         monitoring = false
         self.reauthorizationNecessary = true
-        self.presentErrors()
     }
     
+    /**
+     Called on entering an iBeacon region.
+     */
     func monitoringDetectedEnteringRegion(region: CLBeaconRegion) {
         
         sendLocalNotificationForBeaconRegion(region)
     }
     
+    /**
+     Sends a local notification that the iOS device is close to a LibraryBox iBeacon.
+     */
     func sendLocalNotificationForBeaconRegion(region: CLBeaconRegion) {
         let notification = UILocalNotification()
         notification.alertBody = "Close to librarybox with UUID: " + region.proximityUUID.UUIDString
@@ -314,26 +417,37 @@ extension LBMainViewController: LBLocationServiceDelegate
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
     
+    /**
+     Called if ranging started successfully. Sets the array of current beacons to an empty array, sets the boolean ranging to true, calls the delegate method to start the scanning animation on the Wifi button.
+    */
     func rangingStartedSuccessfully() {
         currentBeacons = []
         print("Ranging started successfully.")
         ranging = true
         delegate?.startScanningAnimation()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-           // UI updates
+           // UI updates can be implemented here
         }
     }
     
+    /**
+     Sets the boolean ranging to false.
+    */
     func rangingFailedToStart() {
         ranging = false
     }
     
+    /**
+     Sets the booleans ranging to false and reauthorizationNecessary to true.
+     */
     func rangingFailedToStartDueToAuthorization() {
         ranging = false
         self.reauthorizationNecessary = true
-        self.presentErrors()
     }
     
+    /**
+     Called when iBeacon ranging is stopped. Resets the currentBeacons array to an empty beacon and the currentFilteredBeaconSigmaDistances array holding 20 double values representing the accuracy attribute of CLBeacons in the area to 0.0 for each array element.
+    */
     func rangingStoppedSuccessfully() {
         self.currentBeacons = []
         self.currentFilteredBeaconSigmaDistances  = [Double](count: 20, repeatedValue: 0.0)
@@ -342,6 +456,9 @@ extension LBMainViewController: LBLocationServiceDelegate
         }
     }
     
+    /**
+     Called when ranging beacons. Sets the currentFilteredBeaconSigmaDistances array based on a low-pass filter algorithm applied on CLBeacon accuracies. The currentFilteredBeaconSigmaDistances array is KVO compliant and observed in LBContainerViewController.
+    */
     func rangingBeaconsInRange(beacons: [CLBeacon]!, inRegion region: CLBeaconRegion!) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.currentBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
@@ -356,24 +473,27 @@ extension LBMainViewController: LBLocationServiceDelegate
                 if (index < 20)
                 {
                     let beacon: CLBeacon = value
-                    var previousFilteredAccuracy = self._beaconFilteredSigmaDistances[index]
-                    if(previousFilteredAccuracy < 0.1)
+                    if(self._beaconFilteredSigmaDistances[index] < 0.1)
                     {
-                        previousFilteredAccuracy = beacon.accuracy
+                        self._beaconFilteredSigmaDistances[index] = beacon.accuracy
                     }
+                    let previousFilteredAccuracy = self._beaconFilteredSigmaDistances[index]
                     let _filteredAccuracy: Double = (beacon.accuracy * filterFactor) + (previousFilteredAccuracy * (1.0 - filterFactor))
                     self.currentFilteredBeaconSigmaDistances[index] = _filteredAccuracy
                 }
             }
-            //self.setValue(self.currentFilteredBeaconSigmaDistances, forKeyPath: self.beaconKeyPath)
         }
     }
     
+    /**
+     Called when the user location changes. Updates the circular iBeacon proximity map overlay.
+     */
     func userLocationChangedTo(location:CLLocation)
     {
         var distanceRadius: Double = 0.0
         if let myBeacon:CLBeacon = closestBeacon
         {
+            //Set distance radius of circular user location overlay in meters
             switch myBeacon.proximity {
             case .Far:
                 distanceRadius = 80.0
@@ -384,6 +504,8 @@ extension LBMainViewController: LBLocationServiceDelegate
             case .Unknown:
                 distanceRadius = 5.0
             }
+            
+            //Update overlay
             self.removeOverlays()
             let circle = LBBoxProximityCircleOverlay(centerCoordinate: location.coordinate, radius: distanceRadius as CLLocationDistance)
             self.mapView.addOverlay(circle)

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-
+///View controller class for the custom beacon ranging view
 class LBBeaconRangingViewController: UIViewController
 {    
     override func viewDidLoad() {
@@ -36,6 +36,10 @@ class LBBeaconRangingViewController: UIViewController
                                                 // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
 
+    
+        /**
+        Checks device orientation to calculate y-axis offset.
+        */
         private func checkOrientation()
         {
             let orientation: UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation
