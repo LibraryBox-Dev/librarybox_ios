@@ -290,15 +290,18 @@ extension LBLocationService
         switch state {
         case .Inside:
             stateString = "inside"
+            self.startUpdatingUserLocation()
             self.startBeaconRanging()
             //TODO: check region identifier if it is a librarybox before sending the delegate message
             //delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
         case .Outside:
             stateString = "outside"
             self.stopBeaconRanging()
+            self.stopUpdatingUserLocation()
         case .Unknown:
             stateString = "unknown"
             self.stopBeaconRanging()
+            self.stopUpdatingUserLocation()
         }
         
         print("State changed to " + stateString + " for region \(region).")
