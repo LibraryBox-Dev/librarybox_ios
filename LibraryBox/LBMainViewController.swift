@@ -87,12 +87,14 @@ class LBMainViewController: UIViewController {
         //Map user interface updating - sets KML annotation pins
         self.updateMapUI()
         
-        //Notifications for app status: active, background, terminating - to turn location services on or off
+        //Notifications for app status: active, background, terminating - to turn location services on or off, updating UI based on KML file, start ranging services based on notification from watchkit
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: #selector(activateMapRelatedServices), name:UIApplicationDidBecomeActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(deactivateRangingService), name:UIApplicationWillResignActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(deactivateMapRelatedServices), name:UIApplicationWillTerminateNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
+        nc.addObserver(self, selector: #selector(operateOnWatchNotification), name: "LBWatchNotificationName", object: nil)
+
     }
     
     override func viewWillLayoutSubviews() {
@@ -183,6 +185,16 @@ class LBMainViewController: UIViewController {
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
         self.presentErrors()
+    }
+    
+    /**
+     Called when notified by a connected watch.
+     */
+    func operateOnWatchNotification()
+    {
+        //TODO: if notification object message is to start ranging:
+        locationService.startUpdatingUserLocation()
+        locationService.startBeaconRanging()
     }
     
     /**

@@ -78,8 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     
     // WCSessionDelegate methods
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(AppDelegate.LBWatchNotificationName, object: self, userInfo: message)
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName(AppDelegate.LBWatchNotificationName, object: self, userInfo: message)
     }
 
 }

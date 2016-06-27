@@ -284,6 +284,9 @@ extension LBLocationService
         print("Exited region: \(region)")
     }
     
+    /**
+     Start updating user location and beacon ranging when inside region otherwise turn off beacon ranging and updating user location
+     */
     func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
         var stateString: String
         
@@ -292,8 +295,6 @@ extension LBLocationService
             stateString = "inside"
             self.startUpdatingUserLocation()
             self.startBeaconRanging()
-            //TODO: check region identifier if it is a librarybox before sending the delegate message
-            //delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
         case .Outside:
             stateString = "outside"
             self.stopBeaconRanging()

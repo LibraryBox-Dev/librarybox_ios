@@ -161,13 +161,17 @@ class LBContainerViewController: UIViewController {
             }
             //send beacon array to watchkit with watchkit connectivity through the watch session in the app delegate
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            if (self.centerViewController.currentFilteredBeaconSigmaDistances.count > 0)
+            if(appDelegate.watchSession!.activationState == .Activated && appDelegate.watchSession!.reachable == true)
             {
-                let payload = ["beaconProximities": self.centerViewController.currentFilteredBeaconSigmaDistances]
-                if(appDelegate.watchSession!.activationState == .Activated && appDelegate.watchSession!.reachable == true)
+                if (self.centerViewController.currentFilteredBeaconSigmaDistances.count > 0)
                 {
+                    let payload = ["beaconProximities": self.centerViewController.currentBeacons]
                     appDelegate.watchSession!.sendMessage(payload, replyHandler: nil, errorHandler: nil)
                 }
+            }
+            if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
+            {
+                self.centerViewController.deactivateRangingService()
             }
         }
     }
