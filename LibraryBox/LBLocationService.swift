@@ -262,10 +262,19 @@ extension LBLocationService
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered region: \(region)")
         //TODO: check region identifier if it is a librarybox before sending the delegate message
+        
+        /**
+         Start ranging on entering beacon range
+         */
+        locationManager.startRangingBeaconsInRegion(beaconRegion)
         delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
     }
     
     func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        /**
+         Stop ranging on exiting beacon range
+         */
+        locationManager.stopRangingBeaconsInRegion(beaconRegion)
         print("Exited region: \(region)")
     }
     

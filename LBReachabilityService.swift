@@ -68,23 +68,28 @@ public class LBReachabilityService {
      Checks, if connected to a box by requesting the config.json file that is present at the box. If the URL can be found, a notification is posted via NSNotificationCenter that the device is connected to a box. Otherwise, a notification is sent via NSNotificationCenter that it is not connected.
      */
     class func isConnectedToBox() {
-        if let url = NSURL(string: "https://192.168.77.1/config.json") {
+        if let url = NSURL(string: "http://192.168.77.1/config.json") {
             let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 300)
             let config = NSURLSessionConfiguration.defaultSessionConfiguration()
             let session = NSURLSession(configuration: config)
             
             let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-                if let httpResponse = response as? NSHTTPURLResponse {
-                    print("Status code: (\(httpResponse.statusCode))")
-                    let nc = NSNotificationCenter.defaultCenter()
-                    if (httpResponse.statusCode == 200)
-                    {
-                        nc.postNotificationName("LBConnectedToBox", object: nil)
+                if (error == nil) {
+                    if let httpResponse = response as? NSHTTPURLResponse {
+                        print("Status code: (\(httpResponse.statusCode))")
+                        let nc = NSNotificationCenter.defaultCenter()
+                        if (httpResponse.statusCode == 200)
+                        {
+                            nc.postNotificationName("LBConnectedToBox", object: nil)
+                        }
+                        else
+                        {
+                            nc.postNotificationName("LBNotConnectedToBox", object: nil)
+                        }
                     }
-                    else
-                    {
-                        nc.postNotificationName("LBNotConnectedToBox", object: nil)
-                    }
+                }else
+                {
+                    print("Failure: %@", error!.localizedDescription);
                 }
             })
             task.resume()

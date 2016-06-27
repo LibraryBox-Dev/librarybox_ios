@@ -1,6 +1,7 @@
-
+FIX: map when connected to box
+FIX: config.json finding on app activation
+FIX: Textview with scrolling as box info
 
 * WatchKit
-* GeoFencing (with background wakeup)
 * Map Pinning
 * Accessibility
