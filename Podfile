@@ -8,7 +8,6 @@ target 'LibraryBox' do
   # Pods for LibraryBox
     pod 'AeroGearHttp'
     pod 'AeroGearOAuth2'
-    pod 'MMWormhole'
 
   target 'LibraryBoxTests' do
     inherit! :search_paths
