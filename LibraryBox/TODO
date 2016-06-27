@@ -1,4 +1,5 @@
 FIX: Textview with scrolling as box info
+FIX: beacon colors, overlay ui
 
 * WatchKit @prio: high
 * Interface => no map on box connection, signaling when connected to box, user feedback on app use
