@@ -121,6 +121,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
         case .AuthorizedAlways:
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.pausesLocationUpdatesAutomatically = false
+            locationManager.allowsBackgroundLocationUpdates = true
             locationManager.startUpdatingLocation()
             delegate?.userLocationServiceStartedSuccessfully()
         case .AuthorizedWhenInUse, .Denied, .Restricted:
@@ -289,12 +290,15 @@ extension LBLocationService
         switch state {
         case .Inside:
             stateString = "inside"
+            self.startBeaconRanging()
             //TODO: check region identifier if it is a librarybox before sending the delegate message
             //delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
         case .Outside:
             stateString = "outside"
+            self.stopBeaconRanging()
         case .Unknown:
             stateString = "unknown"
+            self.stopBeaconRanging()
         }
         
         print("State changed to " + stateString + " for region \(region).")

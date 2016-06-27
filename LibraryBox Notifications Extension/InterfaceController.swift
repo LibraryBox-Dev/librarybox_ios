@@ -37,5 +37,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
+    
+    
+    
+    // MARK: WCSessionDelegate methods
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+        //let notificationCenter = NSNotificationCenter.defaultCenter()
+        //notificationCenter.postNotificationName(NATHiBeaconsDelegate.NATHiBeaconsWatchNotificationName, object: self, userInfo: message)
+    }
 
 }

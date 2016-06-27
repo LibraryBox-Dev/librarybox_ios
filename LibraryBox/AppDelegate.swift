@@ -20,13 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     /// The main window
     var window: UIWindow?
     var watchSession: WCSession?
+    var containerViewController: LBContainerViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //set and register local notification settings
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
-        //setup watch kit session, if supported
+        //setup watchkit connectivity session, if supported
         if WCSession.isSupported() {
             watchSession = WCSession.defaultSession()
             watchSession!.delegate = self
@@ -35,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
         //set root view controller of app window to LBContainerViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let containerViewController = LBContainerViewController()
+        containerViewController = LBContainerViewController()
         window!.rootViewController = containerViewController
         window!.makeKeyAndVisible()
 
@@ -75,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    // MARK: WCSessionDelegate methods
+    // WCSessionDelegate methods
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.postNotificationName(AppDelegate.LBWatchNotificationName, object: self, userInfo: message)

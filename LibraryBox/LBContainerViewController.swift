@@ -144,10 +144,11 @@ class LBContainerViewController: UIViewController {
     }
     
     /**
-     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay()
+     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay(), send distances to watchkit, if session is active
     */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "currentFilteredBeaconSigmaDistances" {
+            //set beacon distances in beaconRangingView
             if (self.rightViewController != nil) {
                 if(self.currentState == .RightPanelExpanded)
                 {
@@ -156,6 +157,16 @@ class LBContainerViewController: UIViewController {
                         beaconRangingView.beaconSigmaDistances = self.centerViewController.currentFilteredBeaconSigmaDistances
                         beaconRangingView.setNeedsDisplay()
                     }
+                }
+            }
+            //send beacon array to watchkit with watchkit connectivity through the watch session in the app delegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if (self.centerViewController.currentFilteredBeaconSigmaDistances.count > 0)
+            {
+                let payload = ["beaconProximities": self.centerViewController.currentFilteredBeaconSigmaDistances]
+                if(appDelegate.watchSession!.activationState == .Activated && appDelegate.watchSession!.reachable == true)
+                {
+                    appDelegate.watchSession!.sendMessage(payload, replyHandler: nil, errorHandler: nil)
                 }
             }
         }
