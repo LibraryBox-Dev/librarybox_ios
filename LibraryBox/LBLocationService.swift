@@ -18,6 +18,10 @@ protocol LBLocationServiceDelegate
     func userLocationServiceFailedToStartDueToAuthorization()
     
     /**
+     Triggered when the user location update operation has started successfully.
+     */
+    func userLocationServiceStartedSuccessfully()
+    /**
      Triggered when the users' location changed.
      
      :param: location The CLLocation of the users' current location.
@@ -118,6 +122,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.pausesLocationUpdatesAutomatically = false
             locationManager.startUpdatingLocation()
+            delegate?.userLocationServiceStartedSuccessfully()
         case .AuthorizedWhenInUse, .Denied, .Restricted:
             print("Couldn't turn on user location: Required Location Access (Always) missing.")
             delegate?.userLocationServiceFailedToStartDueToAuthorization()

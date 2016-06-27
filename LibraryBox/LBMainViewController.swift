@@ -178,6 +178,7 @@ class LBMainViewController: UIViewController {
         locationService.startUpdatingUserLocation()
         locationService.startMonitoringForBeacons()
         locationService.startBeaconRanging()
+        LBReachabilityService.isConnectedToBox()
         self.updateMapUI()
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
@@ -354,6 +355,11 @@ extension LBMainViewController: LBLocationServiceDelegate
         self.reauthorizationNecessary = true
     }
     
+    func userLocationServiceStartedSuccessfully()
+    {
+        self.reauthorizationNecessary = false
+    }
+    
     /**
      Sets the bool monitoring to true. Starts the color-fade scanning animation on the Wifi-Button.
     */
@@ -362,6 +368,7 @@ extension LBMainViewController: LBLocationServiceDelegate
 
         }
         monitoring = true
+        self.reauthorizationNecessary = false
         delegate?.startScanningAnimation()
     }
     
@@ -424,6 +431,7 @@ extension LBMainViewController: LBLocationServiceDelegate
         currentBeacons = []
         print("Ranging started successfully.")
         ranging = true
+        self.reauthorizationNecessary = false
         delegate?.startScanningAnimation()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
            // UI updates can be implemented here

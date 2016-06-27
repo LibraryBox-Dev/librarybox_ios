@@ -1,5 +1,5 @@
+FIX: check for reachablity -> signaling when connected to box: animation, don´t allow interaction until feedback
 FIX: map when connected to box
-FIX: config.json finding on app activation
 FIX: Textview with scrolling as box info
 
 * WatchKit
