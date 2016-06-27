@@ -6,15 +6,25 @@
 //  Copyright © 2016 Berkman Center. All rights reserved.
 //
 
+
 import WatchKit
+import WatchConnectivity
 import Foundation
 
 
-class InterfaceController: WKInterfaceController {
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
+
+    private var defaultSession: WCSession?
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
+        
+        if WCSession.isSupported() {
+            defaultSession = WCSession.defaultSession()
+            defaultSession!.delegate = self
+            defaultSession!.activateSession()
+        }
         // Configure interface objects here.
     }
 
