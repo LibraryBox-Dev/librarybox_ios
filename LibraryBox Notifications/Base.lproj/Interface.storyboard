@@ -8,7 +8,15 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="LibraryBox_Notifications" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="LibraryBox_Notifications" customModuleProvider="target">
+                    <items>
+                        <imageView height="82" alignment="left" image="LibraryBox_v2_white" contentMode="scaleAspectFit" id="rDU-0Y-Z4q"/>
+                        <label width="136" height="44.5" alignment="left" text="Label" textAlignment="center" numberOfLines="0" id="w6E-rF-gtH"/>
+                    </items>
+                    <connections>
+                        <outlet property="proximityLabel" destination="w6E-rF-gtH" id="UJR-76-I7T"/>
+                    </connections>
+                </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
         </scene>

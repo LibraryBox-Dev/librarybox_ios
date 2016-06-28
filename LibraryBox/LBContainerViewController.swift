@@ -144,7 +144,7 @@ class LBContainerViewController: UIViewController {
     }
     
     /**
-     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay(), send distances to watchkit, if session is active
+     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay(), send closest beacon proximity to watchkit, if session is active and closest beacon is available
     */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "currentFilteredBeaconSigmaDistances" {
@@ -165,12 +165,24 @@ class LBContainerViewController: UIViewController {
             {
                 if let currentBeacon = self.centerViewController.closestBeacon
                 {
-                    let payload = ["closestBeaconProximity": currentBeacon.proximity as! AnyObject]
+                    var proximityString: String = "No box in range"
+                    switch currentBeacon.proximity {
+                    case .Far:
+                        proximityString = "Box is far."
+                    case .Near:
+                        proximityString = "Box is near."
+                    case .Immediate:
+                        proximityString = "Box is very close."
+                    case .Unknown:
+                        proximityString = "No box in range."
+                    }
+                    let payload = ["ClosestBeaconProximity": proximityString]
                     appDelegate.watchSession!.sendMessage(payload, replyHandler: nil, errorHandler: nil)
-//                    if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
-//                    {
-//                        self.centerViewController.deactivateRangingService()
-//                    }
+                    //deactivate ranging after sending state of closest beacon when in background
+                    if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
+                    {
+                        self.centerViewController.deactivateRangingService()
+                    }
                 }
             }
         }

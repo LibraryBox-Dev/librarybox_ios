@@ -93,7 +93,7 @@ class LBMainViewController: UIViewController {
         nc.addObserver(self, selector: #selector(deactivateRangingService), name:UIApplicationWillResignActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(deactivateMapRelatedServices), name:UIApplicationWillTerminateNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
-        nc.addObserver(self, selector: #selector(operateOnWatchNotification), name: "LBWatchNotificationName", object: nil)
+        nc.addObserver(self, selector: #selector(performWatchAction(_:)), name: "LBWatchNotificationName", object: nil)
 
     }
     
@@ -190,11 +190,17 @@ class LBMainViewController: UIViewController {
     /**
      Called when notified by a connected watch.
      */
-    func operateOnWatchNotification()
+    func performWatchAction(notification: NSNotification)
     {
-        //TODO: if notification object message is to start ranging:
-        locationService.startUpdatingUserLocation()
-        locationService.startBeaconRanging()
+        var payload = notification.userInfo as! [String : NSNumber]
+        if let rangingState = payload["BeaconRanging"]
+        {
+            if rangingState == true
+            {
+                locationService.startUpdatingUserLocation()
+                locationService.startBeaconRanging()
+            }
+        }
     }
     
     /**
