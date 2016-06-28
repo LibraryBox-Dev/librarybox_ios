@@ -1,5 +1,4 @@
 FIX: Textview with scrolling as box info
-FIX: Allow ranging when inside of region
 FIX: beacon colors, overlay ui, ranging view: meter distance
 
 * WatchKit @prio: high

@@ -163,15 +163,15 @@ class LBContainerViewController: UIViewController {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             if(appDelegate.watchSession!.activationState == .Activated && appDelegate.watchSession!.reachable == true)
             {
-                if (self.centerViewController.currentFilteredBeaconSigmaDistances.count > 0)
+                if let currentBeacon = self.centerViewController.closestBeacon
                 {
-                    let payload = ["beaconProximities": self.centerViewController.currentBeacons]
+                    let payload = ["closestBeaconProximity": currentBeacon.proximity as! AnyObject]
                     appDelegate.watchSession!.sendMessage(payload, replyHandler: nil, errorHandler: nil)
+//                    if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
+//                    {
+//                        self.centerViewController.deactivateRangingService()
+//                    }
                 }
-            }
-            if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
-            {
-                self.centerViewController.deactivateRangingService()
             }
         }
     }
