@@ -1,8 +1,7 @@
 FIX: Textview with scrolling as box info
 FIX: beacon colors, overlay ui, ranging view: meter distance
 
-* WatchKit @prio: high
-    * if inside region => start ranging, send to watch, turn off ranging
+
 * Interface => no map on box connection, signaling when connected to box, user feedback on app use
 * Map Pinning
 * Accessibility

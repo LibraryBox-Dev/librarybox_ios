@@ -23,6 +23,7 @@ class LBContainerViewController: UIViewController {
     //The map view controller is embedded in a navigation controller showing a navigation bar
     var centerNavigationController: UINavigationController!
     var centerViewController: LBMainViewController!
+    var beaconUpdateCounter: Int = 0
     
     //State of the right panel
     var currentState: SlideOutState = .Collapsed {
@@ -179,10 +180,15 @@ class LBContainerViewController: UIViewController {
                     let payload = ["ClosestBeaconProximity": proximityString]
                     appDelegate.watchSession!.sendMessage(payload, replyHandler: nil, errorHandler: nil)
                     //deactivate ranging after sending state of closest beacon when in background
-                    if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
-                    {
-                        self.centerViewController.deactivateRangingService()
-                    }
+                }
+            }
+            if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
+            {
+                beaconUpdateCounter = beaconUpdateCounter + 1
+                if(beaconUpdateCounter > 5)
+                {
+                    self.centerViewController.deactivateRangingService()
+                    beaconUpdateCounter = 0
                 }
             }
         }
