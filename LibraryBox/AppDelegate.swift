@@ -8,27 +8,48 @@
 
 import UIKit
 import WatchConnectivity
+import AeroGearOAuth2
 
+///The application delegate
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
+    /// The notification name for watch-related operations
     static let LBWatchNotificationName = "LBWatchNotificationName"
+    
+    /// The main window
     var window: UIWindow?
     var watchSession: WCSession?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        //set and register local notification settings
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        //setup watch kit session, if supported
         if WCSession.isSupported() {
             watchSession = WCSession.defaultSession()
             watchSession!.delegate = self
             watchSession!.activateSession()
         }
         
+        //set root view controller of app window to LBContainerViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let containerViewController = LBContainerViewController()
         window!.rootViewController = containerViewController
         window!.makeKeyAndVisible()
 
-        // Override point for customization after application launch.
+        return true
+    }
+    
+    func application(application: UIApplication,
+                     openURL url: NSURL,
+                             sourceApplication: String?,
+                             annotation: AnyObject) -> Bool {
+        let notification = NSNotification(name: AGAppLaunchedWithURLNotification,
+                                          object:nil,
+                                          userInfo:[UIApplicationLaunchOptionsURLKey:url])
+        NSNotificationCenter.defaultCenter().postNotification(notification)
         return true
     }
 
@@ -54,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    // MARK: WCSessionDelegate methods
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.postNotificationName(AppDelegate.LBWatchNotificationName, object: self, userInfo: message)

@@ -9,130 +9,81 @@
 import Foundation
 import UIKit
 
-
-
-
+///Botton class for the Wifi-button in the map interface.
 @IBDesignable
-class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
+class LBWIFIButton: LBRoundedButton {
     
-    private var outerRingShape: CAShapeLayer!
-    private var circleBGShape: CAShapeLayer!
-    
-    var lineWidth: CGFloat = 2.0{
+    override var readyToActivate: Bool {
         didSet {
-            updateLayerProperties()
-        }
-    }
-    
-    var connectionColor: UIColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1) {
-        didSet {
-            updateLayerProperties()
-        }
-    }
-    
-    var scanningColor: UIColor = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1) {
-        didSet {
-            updateLayerProperties()
-        }
-    }
-    
-    var readyToConnect: Bool = false {
-        didSet {
-            return self.readyToConnect ? connectionReady() : scanning()
+            return self.readyToActivate ? connectionReady() : scanning()
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setup()
     }
     
     required init!(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        self.setup()
     }
     
-    func setup() {
-        self.clipsToBounds = true
-        let image = createImage(self.bounds)
-        self.setBackgroundImage(image, forState: UIControlState.Normal)
-        let wifiImage = UIImage(named: "wifi")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        self.setImage(wifiImage, forState: UIControlState.Normal)
-
-    }
-    
-    private func updateLayerProperties()
-    {
-        if outerRingShape != nil
-        {
-            outerRingShape.lineWidth = lineWidth
-            outerRingShape.strokeColor = readyToConnect ? connectionColor.CGColor : scanningColor.CGColor
-        }
-        if circleBGShape != nil
-        {
-                circleBGShape.lineWidth = lineWidth
-                circleBGShape.strokeColor = readyToConnect ? connectionColor.CGColor : scanningColor.CGColor
-        }
-        
-    }
-    
-    
+    /**
+     Overridden function adding the button image in a layer.
+     */
     override func layoutSubviews()
     {
         super.layoutSubviews()
-        createLayersIfNeeded()
-        updateLayerProperties()
+        let layer = CALayer()
+        layer.frame = self.bounds
+        if let image = UIImage(named: "wifinotification") {
+            layer.contents = image.CGImage
+        }
+        layer.contentsGravity = kCAGravityResizeAspect
+        layer.contentsScale = UIScreen.mainScreen().scale
+        layer.magnificationFilter = kCAFilterLinear
+        layer.geometryFlipped = false
+        layer.backgroundColor = UIColor.clearColor().CGColor
+        layer.opacity = 1.0
+        layer.hidden = false
+        layer.masksToBounds = false
+        layer.shouldRasterize = false
+        layer.cornerRadius = 100.0
+        layer.borderWidth = 12.0
+        layer.borderColor = UIColor.clearColor().CGColor
+        layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
+        self.layer.addSublayer(layer)
+        
     }
     
-    private func createLayersIfNeeded() {
-        if circleBGShape == nil {
-            circleBGShape = CAShapeLayer()
-            circleBGShape.path = UIBezierPath(ovalInRect:frameWithInset()).CGPath
-            circleBGShape.bounds = frameWithInset()
-            circleBGShape.lineWidth = lineWidth
-            circleBGShape.strokeColor = scanningColor.CGColor
-            circleBGShape.fillColor = UIColor.whiteColor().CGColor
-            circleBGShape.position = CGPoint(x: CGRectGetWidth(self.bounds)/2, y: CGRectGetHeight(self.bounds)/2)
-            circleBGShape.transform = CATransform3DIdentity
+    
+    func turnOffBGOpacity()
+    {
+        if circleBGShape != nil {
+            circleBGShape.opacity = 1.0
+        }
+    }
+    
+    func turnOnBGOpacity()
+    {
+        if circleBGShape != nil {
             circleBGShape.opacity = 0.4
-            self.layer.addSublayer(circleBGShape)
         }
-        
-        if outerRingShape == nil {
-            outerRingShape = CAShapeLayer()
-            outerRingShape.path = UIBezierPath(ovalInRect:frameWithInset()).CGPath
-            outerRingShape.bounds = frameWithInset()
-            outerRingShape.lineWidth = lineWidth
-            outerRingShape.strokeColor = scanningColor.CGColor
-            outerRingShape.fillColor = UIColor.clearColor().CGColor
-            outerRingShape.position = CGPoint(x: CGRectGetWidth(self.bounds)/2, y: CGRectGetHeight(self.bounds)/2)
-            outerRingShape.transform = CATransform3DIdentity
-            outerRingShape.opacity = 0.8
-            self.layer.addSublayer(outerRingShape)
-        }
-        
-        
     }
     
     private func frameWithInset() -> CGRect {
         return CGRectInset(self.bounds, lineWidth/2, lineWidth/2)
     }
     
-    private func createImage(rect: CGRect) -> UIImage{
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext();
-        CGContextSetFillColorWithColor(context,  UIColor.clearColor().CGColor);
-        CGContextFillEllipseInRect(context, CGRectInset(rect, 4, 4));
-        CGContextStrokePath(context);
-        let image =  UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext()
-        return image
+    override func drawRect(rect: CGRect) {
+            super.drawRect(rect)
     }
     
+    /**
+     Scanning for beacons - Color-Fade Animation. This function starts the animation.
+     */
     private func scanning(){
-        self.titleLabel?.removeFromSuperview()
         let wifiFillColorAnimation = CABasicAnimation(keyPath: "fillColor")
-        wifiFillColorAnimation.toValue = connectionColor.CGColor
+        wifiFillColorAnimation.toValue = activeColor.CGColor
         wifiFillColorAnimation.duration = 1.5
         wifiFillColorAnimation.autoreverses = true
         wifiFillColorAnimation.repeatCount = .infinity
@@ -142,11 +93,11 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
         }
     }
     
+    /**
+      If this method is called, animations are stopped.
+     */
     private func connectionReady(){
         outerRingShape.removeAllAnimations()
-        self.addSubview(self.titleLabel!)
-        //CAAnimation
-        
     }
     
     
@@ -161,8 +112,4 @@ class LBWIFIButton: UIButton, UIViewControllerTransitioningDelegate {
     private func enableTouch() {
         self.userInteractionEnabled = true
     }
-
-    
-    
-    
 }

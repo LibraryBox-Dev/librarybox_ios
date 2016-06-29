@@ -9,48 +9,135 @@
 import Foundation
 import CoreLocation
 
+//The delegate protocol of the location service. Lists the methods that a delegate should implement to be notified for all location service related operation events.
 protocol LBLocationServiceDelegate
 {
+    /**
+     Triggered when the user location update operation has failed to start due to the last authorization denial.
+     */
+    func userLocationServiceFailedToStartDueToAuthorization()
+    
+    /**
+     Triggered when the users' location changed.
+     
+     :param: location The CLLocation of the users' current location.
+     */
+    func userLocationChangedTo(location:CLLocation)
+    
+    /**
+     Triggered when the monitoring operation has started successfully.
+     */
     func monitoringStartedSuccessfully()
+    
+    /**
+     Triggered by the monitoring operation when it has stopped successfully.
+     */
     func monitoringStoppedSuccessfully()
+    
+    /**
+     Triggered when the monitoring operation has failed to start.
+     */
     func monitoringFailedToStart()
+    
+    /**
+     Triggered when the monitoring operation has failed to start due to the last authorization denial.
+     */
     func monitoringFailedToStartDueToAuthorization()
+    
+    /**
+     Triggered when the monitoring operation has detected entering the given region.
+     
+     :param: region The region that the monitoring operation detected.
+     */
     func monitoringDetectedEnteringRegion(region: CLBeaconRegion)
+    
+    /**
+     Triggered when the ranging operation has started successfully.
+     */
     func rangingStartedSuccessfully()
+    
+    /**
+     Triggered when the ranging operation has failed to start.
+     */
     func rangingFailedToStart()
+    
+    /**
+     Triggered when the ranging operation has failed to start due to the last authorization denial.
+     */
     func rangingFailedToStartDueToAuthorization()
+    
+    /**
+     Triggered when the ranging operation has stopped successfully.
+     */
     func rangingStoppedSuccessfully()
+    
+    /**
+     Triggered when the ranging operation has detected beacons belonging to a specific given beacon region.
+     
+     :param: beacons An array of provided beacons that the ranging operation detected.
+     :param: region A provided region whose beacons the operation is trying to range.
+     */
     func rangingBeaconsInRange(beacons: [CLBeacon]!, inRegion region: CLBeaconRegion!)
 }
 
-
+///The core class for operations related to core location
 class LBLocationService: NSObject, CLLocationManagerDelegate
 {
     var delegate: LBLocationServiceDelegate?
+    
+    //The CLLocationManager object
     lazy var locationManager: CLLocationManager = CLLocationManager()
+    
+    //A variable holding the users' current location
     var currentLoc: CLLocation!
+    
+    //SETUP OF BEACON REGION FOR MONITORING AND RANGING
     let beaconRegion: CLBeaconRegion = {
-        let uuidString = "01122334-4556-6778-899A-ABBCCDDEEFF0"
-        let beaconIdentifier = "Apple-iBeacon"
-        let beaconUUID:NSUUID = NSUUID(UUIDString: uuidString)!
-        let theRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,
-                                                         identifier: beaconIdentifier)
+        let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
         theRegion.notifyEntryStateOnDisplay = true
+        //UNLocationNotificationTrigger(region: region, repeats: false);
         return theRegion
     }()
     
+    /**
+     Sets the location manager delegate to self.  It gets called when an instance is ready to process location
+     manager delegate calls.
+    */
     func useLocationManagerNotifications() {
         locationManager.delegate = self
     }
     
+    /**
+     Checks, if user wants to use location services. If location services are enabled, user location is being updated.
+     */
     func startUpdatingUserLocation()
     {
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.pausesLocationUpdatesAutomatically = false
-        self.authorizeAndStartService()
-        
+        useLocationManagerNotifications()
+        switch CLLocationManager.authorizationStatus() {
+        case .AuthorizedAlways:
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.pausesLocationUpdatesAutomatically = false
+            locationManager.startUpdatingLocation()
+        case .AuthorizedWhenInUse, .Denied, .Restricted:
+            print("Couldn't turn on user location: Required Location Access (Always) missing.")
+            delegate?.userLocationServiceFailedToStartDueToAuthorization()
+        case .NotDetermined:
+            locationManager.requestAlwaysAuthorization()
+        }
     }
     
+    /**
+     Stops updating users' location.
+     */
+    func stopUpdatingUserLocation()
+    {
+        useLocationManagerNotifications()
+        locationManager.stopUpdatingLocation()
+    }
+    
+    /**
+     Starts the beacon region monitoring process.
+     */
     func startMonitoringForBeacons() {
         useLocationManagerNotifications()
         
@@ -66,22 +153,38 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             delegate?.monitoringFailedToStart()
             return
         }
-        self.authorizeAndStartService()
+        switch CLLocationManager.authorizationStatus() {
+        case .AuthorizedAlways:
+            startMonitoring()
+        case .AuthorizedWhenInUse, .Denied, .Restricted:
+            print("Couldn't turn on monitoring: Required Location Access (Always) missing.")
+            delegate?.monitoringFailedToStartDueToAuthorization()
+        case .NotDetermined:
+            locationManager.requestAlwaysAuthorization()
+        }
     }
 
-    
+    /**
+     Turns on monitoring (after all the checks have been passed).
+     */
     func startMonitoring() {
         locationManager.startMonitoringForRegion(beaconRegion)
         print("Monitoring turned on for region: \(beaconRegion)")
         delegate?.monitoringStartedSuccessfully()
     }
     
+    /**
+     Stops the monitoring process.
+     */
     func stopMonitoringForBeacons() {
         locationManager.stopMonitoringForRegion(beaconRegion)
         print("Turned off monitoring")
         delegate?.monitoringStoppedSuccessfully()
     }
     
+    /**
+     Starts the beacon ranging process.
+     */
     func startBeaconRanging() {
         useLocationManagerNotifications()
         print("Turning on ranging...")
@@ -99,15 +202,30 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             print("Didn't turn on ranging: Ranging already on.")
             return
         }
-        self.authorizeAndStartService()
+        switch CLLocationManager.authorizationStatus() {
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            startRanging()
+        case .Denied, .Restricted:
+            print("Couldn't turn on ranging: Required Location Access (When In Use) missing.")
+            delegate?.rangingFailedToStartDueToAuthorization()
+        case .NotDetermined:
+            locationManager.requestAlwaysAuthorization()
+        }
+        
     }
     
+    /**
+     Turns on ranging (after all the checks have been passed).
+     */
     func startRanging() {
         locationManager.startRangingBeaconsInRegion(beaconRegion)
         print("Ranging turned on for beacons in region: \(beaconRegion)")
         delegate?.rangingStartedSuccessfully()
     }
     
+    /**
+     Stops the ranging process.
+     */
     func stopBeaconRanging() {
         if locationManager.rangedRegions.isEmpty {
             print("Didn't turn off ranging: Ranging already off.")
@@ -118,13 +236,14 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
         print("Turned off ranging.")
     }
     
-    private func authorizeAndStartService()
+    /**
+     Checks the location services authorization status.
+     */
+    func authorize()
     {
         switch CLLocationManager.authorizationStatus() {
         case .AuthorizedAlways:
-            locationManager.startUpdatingLocation()
-            startMonitoring()
-            startRanging()
+            break
         case .AuthorizedWhenInUse, .Denied, .Restricted:
             print("Couldn't turn on monitoring: Required Location Access (Always) missing.")
             delegate?.monitoringFailedToStartDueToAuthorization()
@@ -137,29 +256,12 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     }
 }
 
-
-
-extension LBLocationService
-{
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedAlways {
-            print("Location Access (Always) granted!")
-            delegate?.monitoringStartedSuccessfully()
-            startMonitoring()
-            delegate?.rangingStartedSuccessfully()
-            startRanging()
-        } else if status == .AuthorizedWhenInUse || status == .Denied || status == .Restricted {
-            print("Location Access (Always) denied!")
-            delegate?.monitoringFailedToStart()
-            delegate?.rangingFailedToStart()
-        }
-    }
-}
-
+// MARK: Location manager delegate methods
 extension LBLocationService
 {
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered region: \(region)")
+        //TODO: check region identifier if it is a librarybox before sending the delegate message
         delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
     }
     
@@ -173,6 +275,8 @@ extension LBLocationService
         switch state {
         case .Inside:
             stateString = "inside"
+            //TODO: check region identifier if it is a librarybox before sending the delegate message
+            //delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
         case .Outside:
             stateString = "outside"
         case .Unknown:
@@ -197,5 +301,6 @@ extension LBLocationService
 {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLoc = locations.last
+        delegate?.userLocationChangedTo(currentLoc)
     }
 }
