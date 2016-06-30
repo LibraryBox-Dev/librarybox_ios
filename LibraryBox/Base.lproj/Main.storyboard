@@ -152,10 +152,10 @@
             </objects>
             <point key="canvasLocation" x="628" y="1621"/>
         </scene>
-        <!--View Controller-->
+        <!--Box Not Connected Web View Controller-->
         <scene sceneID="MZ8-4q-bHH">
             <objects>
-                <viewController id="5v3-7h-2AR" sceneMemberID="viewController">
+                <viewController id="5v3-7h-2AR" customClass="LBBoxNotConnectedWebViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7hc-uT-smL"/>
                         <viewControllerLayoutGuide type="bottom" id="RAr-T2-68k"/>
@@ -177,6 +177,9 @@
                             <constraint firstItem="TVm-f8-oRb" firstAttribute="leading" secondItem="tdK-pf-6ZJ" secondAttribute="leading" id="eUR-G4-yhy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="TVm-f8-oRb" id="iW9-og-Wbb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HZ-4E-40o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
