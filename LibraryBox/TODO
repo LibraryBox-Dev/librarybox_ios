@@ -3,5 +3,7 @@ FIX: beacon colors, overlay ui, ranging view: meter distance
 
 
 * Interface => no map on box connection, signaling when connected to box, user feedback on app use
+    * check on activate -> hud progress indicator -> if connected => box interface, if not => map interface
+    * remove box connection button
 * Map Pinning
 * Accessibility
