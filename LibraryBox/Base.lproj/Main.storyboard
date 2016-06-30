@@ -164,28 +164,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjL-9v-S9N">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVm-f8-oRb">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">
-
-Not connected to a box.    Please choose a box WIFI connection.   Check out box annotations on the map or use ranging for beacons to find boxes in your areas.</string>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wr9-2o-yOI">
-                                <rect key="frame" x="227" y="550" width="147" height="30"/>
-                                <state key="normal" title="About LibraryBox iOS"/>
-                            </button>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="pjL-9v-S9N" secondAttribute="trailing" constant="-20" id="0aY-4T-0Hh"/>
-                            <constraint firstItem="pjL-9v-S9N" firstAttribute="top" secondItem="tdK-pf-6ZJ" secondAttribute="topMargin" id="3mL-1v-WII"/>
-                            <constraint firstItem="RAr-T2-68k" firstAttribute="top" secondItem="pjL-9v-S9N" secondAttribute="bottom" id="5xj-Zd-8T7"/>
-                            <constraint firstItem="Wr9-2o-yOI" firstAttribute="centerX" secondItem="tdK-pf-6ZJ" secondAttribute="centerX" id="AlE-Bd-Kcg"/>
-                            <constraint firstItem="pjL-9v-S9N" firstAttribute="leading" secondItem="tdK-pf-6ZJ" secondAttribute="leadingMargin" constant="-20" id="Pzx-sz-TKX"/>
-                            <constraint firstItem="RAr-T2-68k" firstAttribute="top" secondItem="Wr9-2o-yOI" secondAttribute="bottom" constant="20" id="e8g-hA-wjK"/>
+                            <constraint firstAttribute="trailing" secondItem="TVm-f8-oRb" secondAttribute="trailing" id="76J-Gn-uiJ"/>
+                            <constraint firstItem="TVm-f8-oRb" firstAttribute="top" secondItem="tdK-pf-6ZJ" secondAttribute="top" id="96L-gN-lUh"/>
+                            <constraint firstItem="TVm-f8-oRb" firstAttribute="bottom" secondItem="RAr-T2-68k" secondAttribute="top" id="cpD-vw-PFF"/>
+                            <constraint firstItem="TVm-f8-oRb" firstAttribute="leading" secondItem="tdK-pf-6ZJ" secondAttribute="leading" id="eUR-G4-yhy"/>
                         </constraints>
                     </view>
                 </viewController>
