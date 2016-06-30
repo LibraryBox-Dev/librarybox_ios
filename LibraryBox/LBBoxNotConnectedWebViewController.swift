@@ -16,10 +16,6 @@ class LBBoxNotConnectedWebViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        //NSURL *url = [[NSBundle mainBundle] URLForResource:@"my" withExtension:@"html"];
-        //[webView loadRequest:[NSURLRequest requestWithURL:url]];
-        
         let url = NSBundle.mainBundle().URLForResource("notConnected", withExtension: "html")
         let request = NSURLRequest(URL: url!)
         webView.loadRequest(request)

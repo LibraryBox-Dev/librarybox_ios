@@ -1,4 +1,4 @@
-FIX: Textview with scrolling as box info
+FIX: webview for map pinning if no internet available
 FIX: beacon colors, overlay ui, ranging view: meter distance
 
 
