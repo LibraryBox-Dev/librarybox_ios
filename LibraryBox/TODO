@@ -1,9 +1,11 @@
-FIX: webview for map pinning if no internet available
-FIX: beacon colors, overlay ui, ranging view: meter distance
 
 
 * Interface => no map on box connection, signaling when connected to box, user feedback on app use
     * check on activate -> hud progress indicator -> if connected => box interface, if not => map interface
     * remove box connection button
-* Map Pinning
+* Webview for box when not connected to it
+* beacon ranging view update (circles; beacon colors, overlay ui, ranging view: meter distance)
+* Map Pinning => from Ranging View (buttons stay active)
+* WatchKit Testing
+* App Testing
 * Accessibility
