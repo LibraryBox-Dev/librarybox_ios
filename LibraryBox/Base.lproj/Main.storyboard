@@ -17,7 +17,56 @@
                     <view key="view" contentMode="scaleToFill" id="sxY-65-kub" customClass="LBBeaconRangingView" customModule="LibraryBox" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please hold your device close to the box for  map pinning on proximity" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybZ-Sa-09O">
+                                <rect key="frame" x="137" y="80" width="357" height="71"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaY-bk-rma">
+                                <rect key="frame" x="219" y="174" width="193" height="48"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <state key="normal" title="Add Location" image="addlocation">
+                                    <color key="titleColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Otherwise share the address of the box" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWl-lk-mRX">
+                                <rect key="frame" x="137" y="264" width="357" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOL-AS-jL0">
+                                <rect key="frame" x="219" y="344" width="193" height="48"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <state key="normal" title="Set Address" image="addlocation">
+                                    <color key="titleColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                </state>
+                                <connections>
+                                    <segue destination="uvq-xq-aD2" kind="presentation" identifier="showPinningInfo" modalPresentationStyle="formSheet" id="Mfr-N1-fs9"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IOL-AS-jL0" firstAttribute="centerX" secondItem="sxY-65-kub" secondAttribute="centerX" id="4DG-ih-GO4"/>
+                            <constraint firstItem="gWl-lk-mRX" firstAttribute="top" secondItem="HaY-bk-rma" secondAttribute="bottom" constant="42" id="74F-4K-zlX"/>
+                            <constraint firstItem="ybZ-Sa-09O" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="130" id="BKJ-id-Lzg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HaY-bk-rma" secondAttribute="trailing" constant="180" id="Gi7-XX-hsn"/>
+                            <constraint firstItem="gWl-lk-mRX" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="129" id="ITT-bl-RFU"/>
+                            <constraint firstItem="HaY-bk-rma" firstAttribute="top" secondItem="ybZ-Sa-09O" secondAttribute="bottom" constant="23" id="KeW-k7-Qgu"/>
+                            <constraint firstItem="IOL-AS-jL0" firstAttribute="top" secondItem="gWl-lk-mRX" secondAttribute="bottom" constant="8" id="Sra-Bo-5Np"/>
+                            <constraint firstItem="IOL-AS-jL0" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="211" id="WhL-cn-eLg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gWl-lk-mRX" secondAttribute="trailing" constant="98" id="X3v-9r-aub"/>
+                            <constraint firstItem="HaY-bk-rma" firstAttribute="centerX" secondItem="sxY-65-kub" secondAttribute="centerX" id="Y83-cR-oU9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IOL-AS-jL0" secondAttribute="trailing" constant="180" id="Z36-V8-PXj"/>
+                            <constraint firstItem="ybZ-Sa-09O" firstAttribute="centerX" secondItem="sxY-65-kub" secondAttribute="centerX" id="jRE-17-5sn"/>
+                            <constraint firstItem="HaY-bk-rma" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="211" id="jgZ-Qn-bke"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ybZ-Sa-09O" secondAttribute="trailing" constant="98" id="pDO-du-SEx"/>
+                            <constraint firstItem="gWl-lk-mRX" firstAttribute="centerX" secondItem="sxY-65-kub" secondAttribute="centerX" id="wqJ-qU-p6e"/>
+                            <constraint firstItem="ybZ-Sa-09O" firstAttribute="top" secondItem="eGV-SG-eMH" secondAttribute="bottom" constant="60" id="xYG-7R-A71"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="endColor">
                                 <color key="value" red="0.79626145289633499" green="0.79626145289633499" blue="0.79626145289633499" alpha="1" colorSpace="calibratedRGB"/>
@@ -69,7 +118,6 @@
                     <connections>
                         <outlet property="mapView" destination="TbR-BC-Bt2" id="X2g-FR-XUc"/>
                         <segue destination="h2k-nN-aMG" kind="show" identifier="boxContent" id="pVf-9b-uz6"/>
-                        <segue destination="uvq-xq-aD2" kind="presentation" identifier="showPinningInfo" modalPresentationStyle="formSheet" id="GnX-BV-A8U"/>
                         <segue destination="Tzp-MT-9pC" kind="show" identifier="showPinningInfoNotConnected" id="NcY-I9-PRN"/>
                         <segue destination="5v3-7h-2AR" kind="show" identifier="showBoxNotConnected" id="yu0-Sa-NwD"/>
                     </connections>
@@ -150,7 +198,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Uk-yk-xXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="1621"/>
+            <point key="canvasLocation" x="-124" y="1645"/>
         </scene>
         <!--Box Not Connected Web View Controller-->
         <scene sceneID="MZ8-4q-bHH">
@@ -183,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HZ-4E-40o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="660" y="2297"/>
+            <point key="canvasLocation" x="-132" y="2331"/>
         </scene>
         <!--Map Pinning Table View Controller-->
         <scene sceneID="eoz-Co-L8p">
@@ -331,7 +379,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPj-lu-K0j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="1621"/>
+            <point key="canvasLocation" x="1348" y="1637"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="WiA-Iq-FTt">
@@ -372,7 +420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwb-7J-QiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2112" y="2331"/>
+            <point key="canvasLocation" x="2200" y="2387"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AXA-vS-9yU">
@@ -390,7 +438,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J2E-q4-LfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="2331"/>
+            <point key="canvasLocation" x="1220" y="2347"/>
         </scene>
     </scenes>
     <resources>
