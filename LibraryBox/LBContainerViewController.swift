@@ -49,6 +49,7 @@ class LBContainerViewController: UIViewController {
     
     //Bool check if connected to a LibraryBox
     var connectedToBox: Bool = false
+    var mapPinning:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -206,7 +207,14 @@ class LBContainerViewController: UIViewController {
             
             },
             completion: { (context) -> Void in
-                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                if(self.mapPinning)
+                {
+                    self.centerPanelExpandedOffset = 85
+                }
+                else
+                {
+                    self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                }
                 // Code here will execute after the rotation has finished.
                 // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
@@ -276,7 +284,7 @@ class LBContainerViewController: UIViewController {
 //        }
         self.centerPanelExpandedOffset = 85
         self.toggleRightPanel()
-        self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+        //self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
     }
     
     /**
@@ -305,8 +313,15 @@ class LBContainerViewController: UIViewController {
         self.mapPinButton.hidden = false
         if(rangingViewExpandedStateStore == true)
         {
+            if(mapPinning)
+            {
+                centerPanelExpandedOffset = 85
+
+            }
             self.toggleRightPanel()
             rangingViewExpandedStateStore = false
+            centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+
         }
         if self.centerViewController.ranging
         {
@@ -336,6 +351,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         }
         else{
             self.wifiButton.turnOnBGOpacity()
+            mapPinning = false
         }
         self.animateRightPanel(notExpanded)
     }
@@ -384,6 +400,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
                 self.currentState = .Collapsed
                 self.rightViewController!.view.removeFromSuperview()
                 self.rightViewController = nil;
+                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
             }
         }
     }
