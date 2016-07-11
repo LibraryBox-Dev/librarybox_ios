@@ -18,54 +18,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Please hold your device close to the box for  map pinning on proximity" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybZ-Sa-09O">
-                                <rect key="frame" x="137" y="80" width="357" height="71"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pin on proximity" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybZ-Sa-09O">
+                                <rect key="frame" x="99" y="58" width="402" height="71"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaY-bk-rma">
-                                <rect key="frame" x="219" y="174" width="193" height="48"/>
+                                <rect key="frame" x="211" y="137" width="193" height="48"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal" title="Add Location" image="addlocation">
+                                <state key="normal" title="Pin" image="addlocation">
                                     <color key="titleColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Otherwise share the address of the box" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWl-lk-mRX">
-                                <rect key="frame" x="137" y="264" width="357" height="72"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOL-AS-jL0">
-                                <rect key="frame" x="219" y="344" width="193" height="48"/>
+                                <rect key="frame" x="211" y="273" width="193" height="48"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal" title="Set Address" image="addlocation">
+                                <state key="normal" title="Set" image="addlocation">
                                     <color key="titleColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 </state>
                                 <connections>
                                     <segue destination="uvq-xq-aD2" kind="presentation" identifier="showPinningInfo" modalPresentationStyle="formSheet" id="Mfr-N1-fs9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Or share box address" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWl-lk-mRX">
+                                <rect key="frame" x="122" y="193" width="357" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IOL-AS-jL0" firstAttribute="centerX" secondItem="sxY-65-kub" secondAttribute="centerX" id="4DG-ih-GO4"/>
-                            <constraint firstItem="gWl-lk-mRX" firstAttribute="top" secondItem="HaY-bk-rma" secondAttribute="bottom" constant="42" id="74F-4K-zlX"/>
-                            <constraint firstItem="ybZ-Sa-09O" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="130" id="BKJ-id-Lzg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="HaY-bk-rma" secondAttribute="trailing" constant="180" id="Gi7-XX-hsn"/>
-                            <constraint firstItem="gWl-lk-mRX" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="129" id="ITT-bl-RFU"/>
-                            <constraint firstItem="HaY-bk-rma" firstAttribute="top" secondItem="ybZ-Sa-09O" secondAttribute="bottom" constant="23" id="KeW-k7-Qgu"/>
-                            <constraint firstItem="IOL-AS-jL0" firstAttribute="top" secondItem="gWl-lk-mRX" secondAttribute="bottom" constant="8" id="Sra-Bo-5Np"/>
-                            <constraint firstItem="IOL-AS-jL0" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="211" id="WhL-cn-eLg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gWl-lk-mRX" secondAttribute="trailing" constant="98" id="X3v-9r-aub"/>
-                            <constraint firstItem="HaY-bk-rma" firstAttribute="centerX" secondItem="sxY-65-kub" secondAttribute="centerX" id="Y83-cR-oU9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IOL-AS-jL0" secondAttribute="trailing" constant="180" id="Z36-V8-PXj"/>
-                            <constraint firstItem="ybZ-Sa-09O" firstAttribute="centerX" secondItem="sxY-65-kub" secondAttribute="centerX" id="jRE-17-5sn"/>
-                            <constraint firstItem="HaY-bk-rma" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="211" id="jgZ-Qn-bke"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ybZ-Sa-09O" secondAttribute="trailing" constant="98" id="pDO-du-SEx"/>
-                            <constraint firstItem="gWl-lk-mRX" firstAttribute="centerX" secondItem="sxY-65-kub" secondAttribute="centerX" id="wqJ-qU-p6e"/>
-                            <constraint firstItem="ybZ-Sa-09O" firstAttribute="top" secondItem="eGV-SG-eMH" secondAttribute="bottom" constant="60" id="xYG-7R-A71"/>
+                            <constraint firstItem="HaY-bk-rma" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="85" id="2Fs-SC-bEN"/>
+                            <constraint firstItem="gWl-lk-mRX" firstAttribute="top" secondItem="HaY-bk-rma" secondAttribute="bottom" constant="8" id="7LJ-wb-yxR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gWl-lk-mRX" secondAttribute="trailing" constant="85" id="BhS-cG-sSX"/>
+                            <constraint firstItem="ybZ-Sa-09O" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="85" id="F0O-qP-yAo"/>
+                            <constraint firstItem="HaY-bk-rma" firstAttribute="top" secondItem="ybZ-Sa-09O" secondAttribute="bottom" constant="8" id="H07-mL-JnH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HaY-bk-rma" secondAttribute="trailing" constant="85" id="L4N-uZ-1cF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IOL-AS-jL0" secondAttribute="trailing" constant="85" id="Mu2-gY-pIp"/>
+                            <constraint firstItem="IOL-AS-jL0" firstAttribute="top" secondItem="gWl-lk-mRX" secondAttribute="bottom" constant="8" id="NVh-cS-LWc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ybZ-Sa-09O" secondAttribute="trailing" constant="85" id="cV8-mo-VJJ"/>
+                            <constraint firstItem="gWl-lk-mRX" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="85" id="dkA-C9-DDE"/>
+                            <constraint firstItem="ybZ-Sa-09O" firstAttribute="top" secondItem="eGV-SG-eMH" secondAttribute="bottom" constant="38" id="pNB-x8-EuF"/>
+                            <constraint firstItem="IOL-AS-jL0" firstAttribute="leading" secondItem="sxY-65-kub" secondAttribute="leadingMargin" constant="85" id="qtl-rd-tpl"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="endColor">

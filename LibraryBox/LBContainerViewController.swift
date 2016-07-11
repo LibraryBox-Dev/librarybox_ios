@@ -267,13 +267,16 @@ class LBContainerViewController: UIViewController {
     */
     @IBAction func pinningButtonClicked(sender: UIButton)
     {
-        if(!self.connectedToBox)
-        {
-            self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
-        }
-        else{
-            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
-        }
+//        if(!self.connectedToBox)
+//        {
+//            self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
+//        }
+//        else{
+//            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
+//        }
+        self.centerPanelExpandedOffset = 85
+        self.toggleRightPanel()
+        self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
     }
     
     /**
