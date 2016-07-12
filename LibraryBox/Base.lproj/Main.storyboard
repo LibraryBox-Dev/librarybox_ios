@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pin on proximity" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybZ-Sa-09O">
-                                <rect key="frame" x="99" y="58" width="402" height="71"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaY-bk-rma">
                                 <rect key="frame" x="211" y="137" width="193" height="48"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
@@ -43,6 +37,12 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Or share box address" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWl-lk-mRX">
                                 <rect key="frame" x="122" y="193" width="357" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pin on proximity" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybZ-Sa-09O">
+                                <rect key="frame" x="99" y="58" width="402" height="71"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -68,16 +68,19 @@
                                 <color key="value" red="0.79626145289633499" green="0.79626145289633499" blue="0.79626145289633499" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="nearColor">
-                                <color key="value" red="0.0" green="0.6537957553" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="value" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="farColor">
-                                <color key="value" red="0.63663793099999999" green="0.79876077590000005" blue="0.53914331900000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="startColor">
                                 <color key="value" red="0.97733274201026865" green="0.97595625830645383" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="shadow">
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="immediateColor">
+                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -193,18 +196,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="3mT-br-4Lo"/>
-                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="5qa-Iy-kuE"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="top" id="5qt-DZ-6MD"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="top" id="8yv-yN-sDU"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" id="9Nw-L1-tbb"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="QvJ-ad-SiK"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="centerX" secondItem="CHG-0K-DAO" secondAttribute="centerX" id="V9x-Lf-RcU"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="Xl2-Yf-vfE"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="mtn-Uj-StR"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="oEe-Wu-A5s"/>
-                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="tjU-qL-2fJ"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="ya7-F8-j5K"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="8ps-kJ-f2I"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="9d1-4b-dcM"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="FL5-ih-o9r"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="top" id="Mz2-4k-ULV"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" id="S53-0T-x6t"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="Aj7-Ie-hLc" secondAttribute="leading" id="ULc-eW-RPA"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="yfb-Oz-mE5" secondAttribute="trailing" id="VMW-Lw-Jul"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="YNb-gn-ekl"/>
+                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="omk-Oj-kf3"/>
+                            <constraint firstAttribute="trailing" secondItem="yfb-Oz-mE5" secondAttribute="trailing" id="rgd-UH-HZm"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="centerX" secondItem="CHG-0K-DAO" secondAttribute="centerX" id="s2O-rs-cQH"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="top" id="u8y-z9-7Vy"/>
                         </constraints>
                     </view>
                     <connections>

@@ -8,7 +8,6 @@
 
 import Foundation
 import SystemConfiguration
-import PKHUD
 
 
 ///Public class holding class functions to check for network reachability
@@ -70,7 +69,7 @@ public class LBReachabilityService {
      */
     class func isConnectedToBox() {
         if let url = NSURL(string: "http://192.168.77.1/config.json") {
-            let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10)
+            let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
             let config = NSURLSessionConfiguration.defaultSessionConfiguration()
             let session = NSURLSession(configuration: config)
             
@@ -92,7 +91,6 @@ public class LBReachabilityService {
                     }
                 }else
                 {
-                    HUD.hide()
                     NSNotificationCenter.defaultCenter().postNotificationName("LBNotConnectedToBox", object: nil)
                     print("Failure: %@", error!.localizedDescription);
                 }
