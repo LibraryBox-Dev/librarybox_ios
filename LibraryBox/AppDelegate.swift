@@ -34,6 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             watchSession!.activateSession()
         }
         
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: #selector(checkBoxConnectionStatus), name:UIApplicationDidBecomeActiveNotification, object: nil)
+        self.checkBoxConnectionStatus()
+        
         //set root view controller of app window to LBContainerViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         containerViewController = LBContainerViewController()
@@ -41,6 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         window!.makeKeyAndVisible()
 
         return true
+    }
+    
+    func checkBoxConnectionStatus()
+    {
+        LBReachabilityService.isConnectedToBox()
     }
     
     func application(application: UIApplication,

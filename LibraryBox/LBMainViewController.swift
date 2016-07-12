@@ -89,7 +89,8 @@ class LBMainViewController: UIViewController {
         
         //Notifications for app status: active, background, terminating - to turn location services on or off, updating UI based on KML file, start ranging services based on notification from watchkit
         let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: #selector(activateMapRelatedServices), name:UIApplicationDidBecomeActiveNotification, object: nil)
+        nc.addObserver(self, selector: #selector(handleViewAppearance), name: "LBConnectedToBox", object: nil)
+        nc.addObserver(self, selector: #selector(activateMapRelatedServices), name: "LBNotConnectedToBox", object: nil)
         nc.addObserver(self, selector: #selector(deactivateRangingService), name:UIApplicationWillResignActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(deactivateMapRelatedServices), name:UIApplicationWillTerminateNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
@@ -173,18 +174,24 @@ class LBMainViewController: UIViewController {
     }
     
     /**
-     Called when app is activated.
+     Called when not connected to box.
     */
     func activateMapRelatedServices()
     {
         locationService.startUpdatingUserLocation()
         locationService.startMonitoringForBeacons()
         locationService.startBeaconRanging()
-        LBReachabilityService.isConnectedToBox()
+        //LBReachabilityService.isConnectedToBox()
         self.updateMapUI()
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
         self.presentErrors()
+    }
+    
+    func handleViewAppearance()
+    {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
     }
     
     /**
@@ -316,20 +323,21 @@ extension LBMainViewController: MKMapViewDelegate {
         } else if overlay is LBBoxProximityCircleOverlay {
             let circle = MKCircleRenderer(overlay: overlay)
             var fillColoring: UIColor = UIColor.clearColor()
+            let strokeWidth:CGFloat = 0.8
             var strokeColoring:UIColor = UIColor.clearColor()
             if let myBeacon:CLBeacon = closestBeacon
             {
                 //coloring the circle based on iBeacon proximity attribute
                 switch myBeacon.proximity {
                 case .Far:
-                    fillColoring = UIColor.cyanColor().colorWithAlphaComponent(0.2)
+                    fillColoring = UIColor.orangeColor().colorWithAlphaComponent(0.15)
                     strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
                 case .Near:
-                    fillColoring = UIColor.orangeColor().colorWithAlphaComponent(0.2)
+                    fillColoring = UIColor.redColor().colorWithAlphaComponent(0.15)
                     strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
                 case .Immediate:
                     fillColoring = UIColor.redColor().colorWithAlphaComponent(0.2)
-                    strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
+                    strokeColoring = UIColor.blackColor().colorWithAlphaComponent(0.2)
                 case .Unknown:
                     fillColoring = UIColor.clearColor()
                     strokeColoring = UIColor.clearColor()
@@ -337,7 +345,7 @@ extension LBMainViewController: MKMapViewDelegate {
             }
             circle.fillColor = fillColoring
             circle.strokeColor = strokeColoring
-            circle.lineWidth = 1
+            circle.lineWidth = strokeWidth
             return circle
         }
         let myOverlayRenderer: MKOverlayRenderer? = nil

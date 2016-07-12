@@ -203,20 +203,20 @@ class LBContainerViewController: UIViewController {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         // Code here will execute before the rotation begins.
         // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
-        coordinator.animateAlongsideTransition({ (context) -> Void in
+      
+        
+                coordinator.animateAlongsideTransition({ (context) -> Void in
             
             },
             completion: { (context) -> Void in
                 if(self.mapPinning)
                 {
-                    self.centerPanelExpandedOffset = 85
+                    self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - UIScreen.mainScreen().bounds.width + 85
                 }
                 else
                 {
                     self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
                 }
-                // Code here will execute after the rotation has finished.
-                // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
         }) }
     
     /**
@@ -282,9 +282,9 @@ class LBContainerViewController: UIViewController {
 //        else{
 //            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
 //        }
-        self.centerPanelExpandedOffset = 85
+        self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - UIScreen.mainScreen().bounds.width + 85
         self.toggleRightPanel()
-        //self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+        self.mapPinning = true
     }
     
     /**
@@ -308,24 +308,41 @@ class LBContainerViewController: UIViewController {
      */
     func handleMainViewAppearance()
     {
-        self.wifiButton.hidden = false
-        self.boxButton.hidden = false
-        self.mapPinButton.hidden = false
-        if(rangingViewExpandedStateStore == true)
+        if(self.connectedToBox)
         {
-            if(mapPinning)
+            self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
+            self.wifiButton.hidden = true
+            self.boxButton.hidden = true
+            self.mapPinButton.hidden = true
+            if(currentState == .RightPanelExpanded)
             {
-                centerPanelExpandedOffset = 85
-
+                rangingViewExpandedStateStore = true
+                self.toggleRightPanel()
             }
-            self.toggleRightPanel()
-            rangingViewExpandedStateStore = false
-            centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
-
         }
-        if self.centerViewController.ranging
+        else
         {
-            self.startScanningAnimation()
+            self.wifiButton.hidden = false
+            self.boxButton.hidden = false
+            self.mapPinButton.hidden = false
+            if(rangingViewExpandedStateStore == true)
+            {
+                if(mapPinning)
+                {
+                    centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - UIScreen.mainScreen().bounds.width + 85
+
+                }
+                else
+                {
+                    centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                }
+                self.toggleRightPanel()
+                rangingViewExpandedStateStore = false
+            }
+            if self.centerViewController.ranging
+            {
+                self.startScanningAnimation()
+            }
         }
     }
     
@@ -352,6 +369,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         else{
             self.wifiButton.turnOnBGOpacity()
             mapPinning = false
+            centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
         }
         self.animateRightPanel(notExpanded)
     }

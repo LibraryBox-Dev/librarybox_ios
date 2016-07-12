@@ -20,7 +20,6 @@ class LBBoxWebViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.hidden = true
-        
         //the librarybox URL that is opened (can be any address as LibraryBox redirects)
         let url = NSURL(string: "http://www.librarybox.us")
         let request = NSURLRequest(URL: url!)
@@ -29,6 +28,10 @@ class LBBoxWebViewController: UIViewController
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @IBAction func gotoWifiSettings(sender: UIBarButtonItem) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
     }
     
     @IBAction func doRefresh(sender: UIBarButtonItem) {

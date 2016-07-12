@@ -1,10 +1,13 @@
 
 
+*on activation: check for reachability (in app delegate; add to nc)-> of connected => send notification to containerview, if not, start map activities (activateMapRelatedServices) in mainViewController
+* add wifi-settings bar to box content view (push instead of detail)
+
 * Interface => no map on box connection, signaling when connected to box, user feedback on app use
     * check on activate -> hud progress indicator -> if connected => box interface, if not => map interface
     * remove box connection button
 * Webview for box when not connected to it
-* beacon ranging view update (circles; beacon colors, overlay ui, ranging view: meter distance)
+* beacon ranging view update (ranging view: meter distance)
 * Map Pinning => from Ranging View (buttons stay active)
 * WatchKit Testing
 * App Testing

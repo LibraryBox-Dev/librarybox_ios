@@ -21,7 +21,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pin on proximity" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybZ-Sa-09O">
                                 <rect key="frame" x="99" y="58" width="402" height="71"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaY-bk-rma">
@@ -44,7 +44,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Or share box address" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWl-lk-mRX">
                                 <rect key="frame" x="122" y="193" width="357" height="72"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -113,7 +113,7 @@
                     <navigationItem key="navigationItem" id="nXq-Pe-T0t"/>
                     <connections>
                         <outlet property="mapView" destination="TbR-BC-Bt2" id="X2g-FR-XUc"/>
-                        <segue destination="h2k-nN-aMG" kind="show" identifier="boxContent" id="pVf-9b-uz6"/>
+                        <segue destination="h2k-nN-aMG" kind="presentation" identifier="boxContent" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="pVf-9b-uz6"/>
                         <segue destination="Tzp-MT-9pC" kind="show" identifier="showPinningInfoNotConnected" id="NcY-I9-PRN"/>
                         <segue destination="5v3-7h-2AR" kind="show" identifier="showBoxNotConnected" id="yu0-Sa-NwD"/>
                     </connections>
@@ -144,28 +144,32 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CHG-0K-DAO">
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="stop" id="fmL-4W-4e7">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="stop:" destination="h2k-nN-aMG" id="Ti4-95-7IW"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="29" systemItem="fixedSpace" id="NNs-Ve-Wp1"/>
                                     <barButtonItem systemItem="refresh" id="DlK-EA-k0x">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="doRefresh:" destination="h2k-nN-aMG" id="qxE-9j-0vb"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="DFk-s3-ZmN"/>
                                     <barButtonItem title="◄" id="AuM-QV-d5x">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="goBack:" destination="h2k-nN-aMG" id="whY-HA-hJj"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="38" systemItem="fixedSpace" id="Llf-Hv-iWk"/>
                                     <barButtonItem title="►" id="f8d-AU-6px">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="goForward:" destination="h2k-nN-aMG" id="N3H-lh-dPC"/>
                                         </connections>
@@ -173,18 +177,34 @@
                                     <barButtonItem width="25" systemItem="fixedSpace" id="1eg-oK-0FE"/>
                                 </items>
                             </toolbar>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" backIndicatorImage="wifitethering" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-Oz-mE5">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Box" id="gk2-YV-cNq">
+                                        <barButtonItem key="leftBarButtonItem" title="Wifi Settings" id="Wtj-n8-l2V">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="gotoWifiSettings:" destination="h2k-nN-aMG" id="L0a-mA-v9u"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leadingMargin" constant="-20" id="6o8-5M-IJX"/>
-                            <constraint firstItem="CHG-0K-DAO" firstAttribute="centerY" secondItem="FDY-9E-hMS" secondAttribute="centerY" id="CkS-SU-Svr"/>
-                            <constraint firstItem="TAo-by-DiP" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="bottom" id="OYZ-xt-UNC"/>
-                            <constraint firstItem="tXh-kR-fap" firstAttribute="leading" secondItem="Aj7-Ie-hLc" secondAttribute="leading" id="OZx-GJ-Zsc"/>
-                            <constraint firstItem="CHG-0K-DAO" firstAttribute="centerX" secondItem="FDY-9E-hMS" secondAttribute="centerX" id="P0E-wy-FHJ"/>
-                            <constraint firstItem="tXh-kR-fap" firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="baB-fU-SM7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" constant="-20" id="kyd-p4-CS8"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="topMargin" id="pCV-Ls-6MB"/>
-                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="xxt-2f-cCD"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="3mT-br-4Lo"/>
+                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="5qa-Iy-kuE"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="top" id="5qt-DZ-6MD"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="top" id="8yv-yN-sDU"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" id="9Nw-L1-tbb"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="QvJ-ad-SiK"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="centerX" secondItem="CHG-0K-DAO" secondAttribute="centerX" id="V9x-Lf-RcU"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="Xl2-Yf-vfE"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="mtn-Uj-StR"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="oEe-Wu-A5s"/>
+                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="tjU-qL-2fJ"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="ya7-F8-j5K"/>
                         </constraints>
                     </view>
                     <connections>
@@ -194,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Uk-yk-xXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-124" y="1645"/>
+            <point key="canvasLocation" x="-173" y="1621"/>
         </scene>
         <!--Box Not Connected Web View Controller-->
         <scene sceneID="MZ8-4q-bHH">
@@ -399,7 +419,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="To add a LibraryBox annotation to the map, please connect to the Internet and get close to the box." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k56-rs-LTE">
                                 <rect key="frame" x="105" y="157" width="390" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -439,5 +459,6 @@
     </scenes>
     <resources>
         <image name="addlocation" width="48" height="48"/>
+        <image name="wifitethering" width="48" height="48"/>
     </resources>
 </document>

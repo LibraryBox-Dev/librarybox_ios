@@ -19,8 +19,8 @@ class LBBeaconRangingView: UIView
     @IBInspectable var startColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
     @IBInspectable var immediateColor: UIColor = UIColor.redColor()
-    @IBInspectable var nearColor: UIColor = UIColor.blueColor()
-    @IBInspectable var farColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var nearColor: UIColor = UIColor.redColor()
+    @IBInspectable var farColor: UIColor = UIColor.orangeColor()
     @IBInspectable var defaultColor: UIColor = UIColor.whiteColor()
     
     //To set the horizontal center of the beacon ranging scale
