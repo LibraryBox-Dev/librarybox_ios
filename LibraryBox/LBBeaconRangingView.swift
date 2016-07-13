@@ -15,8 +15,8 @@ class LBBeaconRangingView: UIView
 {
     
     //Variables that can be changed in the interface builder
-    @IBInspectable var endColor: UIColor = UIColor.darkGrayColor()
-    @IBInspectable var startColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var endColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var startColor: UIColor = UIColor(red: 255.0/255.0, green: 165.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     @IBInspectable var shadow:UIColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
     @IBInspectable var immediateColor: UIColor = UIColor.redColor()
     @IBInspectable var nearColor: UIColor = UIColor.redColor()

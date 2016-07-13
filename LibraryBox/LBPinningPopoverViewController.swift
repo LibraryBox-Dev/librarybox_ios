@@ -25,6 +25,7 @@ class LBPinningPopoverViewController: UIViewController {
     @IBOutlet weak var proximityLabel: UILabel!
     @IBOutlet weak var pinCloseBoxButton: UIButton!
     @IBOutlet weak var addAddressButton: UIButton!
+    @IBOutlet weak var boxTypeSelection: UISegmentedControl!
     
     var delegate: LBPinningPopoverDelegate?
     var http: Http!
@@ -97,8 +98,7 @@ class LBPinningPopoverViewController: UIViewController {
                 let addressTitle:String = ""
                 
                 //The content of the type column in the Fusion Table row
-                let type:String = "LibraryBox"
-                    //self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
+                let type:String = self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
                 
                 //The SQL query to add the new row in Fusion Table (INSERT INTO table-id (Column, *) VALUES (Value for column, *)
                 let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)',\(locationForPinning.coordinate.latitude),\(locationForPinning.coordinate.longitude),'\(type)');"
