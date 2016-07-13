@@ -8,6 +8,7 @@ target 'LibraryBox' do
   # Pods for LibraryBox
     pod 'AeroGearHttp'
     pod 'AeroGearOAuth2'
+    pod 'PKHUD'
 
   target 'LibraryBoxTests' do
     inherit! :search_paths

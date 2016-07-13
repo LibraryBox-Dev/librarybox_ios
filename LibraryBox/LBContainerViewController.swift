@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import QuartzCore
+import PKHUD
 
 //Enumerations
 ///Enum for the state of the  background panel on the right side.
@@ -49,7 +50,6 @@ class LBContainerViewController: UIViewController {
     
     //Bool check if connected to a LibraryBox
     var connectedToBox: Bool = false
-    var mapPinning:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +74,9 @@ class LBContainerViewController: UIViewController {
         nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "LBMainViewControllerAppeared", object: nil)
         nc.addObserver(self, selector: #selector(setConnectedToBoxBool), name: "LBConnectedToBox", object: nil)
         nc.addObserver(self, selector: #selector(setNotConnectedToBoxBool), name: "LBNotConnectedToBox", object: nil)
+        nc.addObserver(self, selector: #selector(checkBoxConnectionStatus), name:UIApplicationDidBecomeActiveNotification, object: nil)
+        self.checkBoxConnectionStatus()
+
         
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -209,14 +212,8 @@ class LBContainerViewController: UIViewController {
             
             },
             completion: { (context) -> Void in
-                if(self.mapPinning)
-                {
-                    self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - UIScreen.mainScreen().bounds.width + 85
-                }
-                else
-                {
                     self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
-                }
+                
         }) }
     
     /**
@@ -230,6 +227,11 @@ class LBContainerViewController: UIViewController {
         }
     }
     
+    func checkBoxConnectionStatus()
+    {
+        HUD.show(.Progress)
+        LBReachabilityService.isConnectedToBox()
+    }
     
     /**
     Open the Wifi Settings URL when Wifi-Button is clicked.
@@ -282,9 +284,7 @@ class LBContainerViewController: UIViewController {
 //        else{
 //            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
 //        }
-        self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - UIScreen.mainScreen().bounds.width + 85
-        self.toggleRightPanel()
-        self.mapPinning = true
+        self.centerViewController.performSegueWithIdentifier("pinningPopover", sender: self)
     }
     
     /**
@@ -292,6 +292,7 @@ class LBContainerViewController: UIViewController {
     */
     func setConnectedToBoxBool()
     {
+        HUD.hide()
         self.connectedToBox = true
     }
 
@@ -300,6 +301,7 @@ class LBContainerViewController: UIViewController {
      */
     func setNotConnectedToBoxBool()
     {
+        HUD.hide()
         self.connectedToBox = false
     }
     
@@ -327,15 +329,7 @@ class LBContainerViewController: UIViewController {
             self.mapPinButton.hidden = false
             if(rangingViewExpandedStateStore == true)
             {
-                if(mapPinning)
-                {
-                    centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - UIScreen.mainScreen().bounds.width + 85
-
-                }
-                else
-                {
-                    centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
-                }
+                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
                 self.toggleRightPanel()
                 rangingViewExpandedStateStore = false
             }
@@ -368,7 +362,6 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         }
         else{
             self.wifiButton.turnOnBGOpacity()
-            mapPinning = false
             centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
         }
         self.animateRightPanel(notExpanded)

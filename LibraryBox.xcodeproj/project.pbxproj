@@ -25,6 +25,7 @@
 		63754B991D0EFAC6002B2EFE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B981D0EFAC6002B2EFE /* NotificationController.swift */; };
 		63754B9B1D0EFAC6002B2EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */; };
 		63754B9F1D0EFAC6002B2EFE /* LibraryBox Notifications.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */; };
+		63781EFB1D365807005B711D /* LBPinningPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */; };
 		639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
@@ -135,6 +136,7 @@
 		63754B981D0EFAC6002B2EFE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63754B9C1D0EFAC6002B2EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningPopoverViewController.swift; sourceTree = "<group>"; };
 		639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LBReachabilityService.swift; path = ../LBReachabilityService.swift; sourceTree = "<group>"; };
 		63A275061D2175BA00EE2CF5 /* LibraryBox Notifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "LibraryBox Notifications.entitlements"; sourceTree = "<group>"; };
 		63A275071D2175E600EE2CF5 /* LibraryBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LibraryBox.entitlements; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */,
 				63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */,
 				0AD96B7A1D25026A00F8A838 /* LBBoxNotConnectedWebViewController.swift */,
+				63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63781EFB1D365807005B711D /* LBPinningPopoverViewController.swift in Sources */,
 				639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */,
 				63F7CF401D00E9130002C026 /* LBGoogleAPIAccessService.swift in Sources */,
 				0AD96B701D1AF2DE00F8A838 /* README.md in Sources */,

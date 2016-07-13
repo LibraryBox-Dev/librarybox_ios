@@ -116,7 +116,14 @@ class LBMainViewController: UIViewController {
     /**
      Transmits current user location and current box locations to LBMapPinningTableViewController associated with the storyboard segue "showPinningInfo".
     */
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {        
+        if segue.identifier == "pinningPopover" {
+            let popoverViewController = segue.destinationViewController 
+            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            popoverViewController.popoverPresentationController!.delegate = self
+        }
+
+        
         if(segue.identifier == "showPinningInfo") {
             let yourNextNavigationController = (segue.destinationViewController as! UINavigationController)
             let yourNextViewController = yourNextNavigationController.topViewController as! LBMapPinningTableViewController
@@ -547,7 +554,12 @@ extension LBMainViewController: LBLocationServiceDelegate
     }
 }
 
-
+extension LBMainViewController: UIPopoverPresentationControllerDelegate
+{
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+}
 
     
 
