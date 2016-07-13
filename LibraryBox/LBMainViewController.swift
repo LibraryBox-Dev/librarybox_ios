@@ -120,6 +120,10 @@ class LBMainViewController: UIViewController {
         if segue.identifier == "pinningPopover" {
             let popoverViewController = segue.destinationViewController as! LBPinningPopoverViewController
             popoverViewController.delegate = self
+            if let currentPoints = myKMLParser.points as? [MKAnnotation]
+            {
+                popoverViewController.currentBoxLocations = currentPoints
+            }
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
             popoverViewController.popoverPresentationController!.delegate = self
         }
@@ -128,6 +132,7 @@ class LBMainViewController: UIViewController {
         if(segue.identifier == "showPinningInfo") {
             let yourNextNavigationController = (segue.destinationViewController as! UINavigationController)
             let yourNextViewController = yourNextNavigationController.topViewController as! LBMapPinningTableViewController
+            yourNextViewController.delegate = self
             yourNextViewController.currentLocationOfUser = self.locationService.currentLoc
             if let currentPoints = myKMLParser.points as? [MKAnnotation]
             {
@@ -306,8 +311,10 @@ class LBMainViewController: UIViewController {
     */
     func addAnnotations()
     {
-        let myKMLAnnotationArray = myKMLParser.points as! [MKAnnotation]
-        self.mapView.addAnnotations(myKMLAnnotationArray)
+        if let myKMLAnnotationArray = myKMLParser.points as? [MKAnnotation]
+        {
+            self.mapView.addAnnotations(myKMLAnnotationArray)
+        }
     }
     
 }
@@ -567,7 +574,22 @@ extension LBMainViewController:LBPinningPopoverDelegate
     func pinAddress() {
         self.performSegueWithIdentifier("showPinningInfo", sender: self)
     }
+    
+    func currentLocation() -> CLLocation
+    {
+        return self.locationService.currentLoc
+    }
+    
+    func locationPinningSuccessful() {
+        self.updateMapUI()
+    }
+
 }
 
-    
+extension LBMainViewController:LBAddressPinningDelegate
+{
+    func pinningSuccessful() {
+        self.updateMapUI()
+    }
+}
 
