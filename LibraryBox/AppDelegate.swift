@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
+        UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 140.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
         //setup watchkit connectivity session, if supported
         if WCSession.isSupported() {
             watchSession = WCSession.defaultSession()
