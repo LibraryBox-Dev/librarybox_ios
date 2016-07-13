@@ -118,7 +118,8 @@ class LBMainViewController: UIViewController {
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {        
         if segue.identifier == "pinningPopover" {
-            let popoverViewController = segue.destinationViewController 
+            let popoverViewController = segue.destinationViewController as! LBPinningPopoverViewController
+            popoverViewController.delegate = self
             popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
             popoverViewController.popoverPresentationController!.delegate = self
         }
@@ -558,6 +559,13 @@ extension LBMainViewController: UIPopoverPresentationControllerDelegate
 {
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
+    }
+}
+
+extension LBMainViewController:LBPinningPopoverDelegate
+{
+    func pinAddress() {
+        self.performSegueWithIdentifier("showPinningInfo", sender: self)
     }
 }
 

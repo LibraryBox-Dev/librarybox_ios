@@ -15,18 +15,69 @@
                         <viewControllerLayoutGuide type="bottom" id="2cv-Qu-D4z"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZSO-V5-CtR">
-                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proximity to closest box:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsf-7Y-98p">
+                                <rect key="frame" x="20" y="8" width="160" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Y6o-IX-UHB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOT IN RANGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxF-bk-4vZ">
+                                <rect key="frame" x="20" y="31" width="160" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="awA-c7-dgD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lK-vP-lc8">
+                                <rect key="frame" x="47" y="53" width="107" height="30"/>
+                                <state key="normal" title="Mark Close Box"/>
+                                <connections>
+                                    <action selector="pinCloseBox:" destination="kgE-Fn-Cg1" eventType="touchUpInside" id="rdy-8W-IQ8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-E3-ch3">
+                                <rect key="frame" x="42" y="112" width="117" height="30"/>
+                                <state key="normal" title="Add Box Address"/>
+                                <connections>
+                                    <action selector="addAddress:" destination="kgE-Fn-Cg1" eventType="touchUpInside" id="tib-4c-4bv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="trailing" secondItem="LxF-bk-4vZ" secondAttribute="trailing" id="6NC-GJ-Ets"/>
+                            <constraint firstItem="2cv-Qu-D4z" firstAttribute="top" secondItem="Y15-E3-ch3" secondAttribute="bottom" constant="8" symbolic="YES" id="6kj-Na-iug"/>
+                            <constraint firstItem="4lK-vP-lc8" firstAttribute="top" secondItem="LxF-bk-4vZ" secondAttribute="bottom" constant="1" id="By6-KL-Co4"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="top" secondItem="joh-YC-5ai" secondAttribute="bottom" constant="8" symbolic="YES" id="Jbo-SI-DKm"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="centerX" secondItem="ZSO-V5-CtR" secondAttribute="centerX" id="Nn7-dP-Xja"/>
+                            <constraint firstItem="4lK-vP-lc8" firstAttribute="centerX" secondItem="Y15-E3-ch3" secondAttribute="centerX" id="Tun-sF-opf"/>
+                            <constraint firstItem="LxF-bk-4vZ" firstAttribute="centerX" secondItem="4lK-vP-lc8" secondAttribute="centerX" id="XKo-qB-tOu"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="leading" secondItem="ZSO-V5-CtR" secondAttribute="leadingMargin" constant="4" id="a5W-re-a9b"/>
+                            <constraint firstItem="LxF-bk-4vZ" firstAttribute="top" secondItem="tsf-7Y-98p" secondAttribute="bottom" constant="2" id="cUe-P5-Pv4"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="leading" secondItem="LxF-bk-4vZ" secondAttribute="leading" id="yU5-4J-K4a"/>
+                        </constraints>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="100" height="100"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="150"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="100" height="100"/>
+                    <size key="freeformSize" width="200" height="150"/>
+                    <connections>
+                        <outlet property="addAddressButton" destination="Y15-E3-ch3" id="r2k-T8-hQS"/>
+                        <outlet property="pinCloseBoxButton" destination="4lK-vP-lc8" id="ZiO-HF-V18"/>
+                        <outlet property="proximityLabel" destination="LxF-bk-4vZ" id="pIz-VS-Q30"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9yn-lX-4gc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1196" y="228"/>
+            <point key="canvasLocation" x="1205" y="229"/>
         </scene>
         <!--Beacon Ranging View Controller-->
         <scene sceneID="3WB-Mp-cZw">
@@ -106,8 +157,9 @@
                         <segue destination="Tzp-MT-9pC" kind="show" identifier="showPinningInfoNotConnected" id="NcY-I9-PRN"/>
                         <segue destination="5v3-7h-2AR" kind="show" identifier="showBoxNotConnected" id="yu0-Sa-NwD"/>
                         <segue destination="kgE-Fn-Cg1" kind="popoverPresentation" identifier="pinningPopover" popoverAnchorView="iJq-bT-GlN" id="rBS-m9-caR">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                            <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
                         </segue>
+                        <segue destination="uvq-xq-aD2" kind="show" identifier="showPinningInfo" id="8zl-Nt-zf9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

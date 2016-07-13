@@ -164,27 +164,32 @@ class LBContainerViewController: UIViewController {
                     }
                 }
             }
+            
+            var proximityString: String = "No box in range."
+            if let currentBeacon = self.centerViewController.closestBeacon
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName("LBCurrentClosestBeacon", object: currentBeacon)
+                switch currentBeacon.proximity {
+                case .Far:
+                    proximityString = "Box is far."
+                case .Near:
+                    proximityString = "Box is near."
+                case .Immediate:
+                    proximityString = "Box is very close."
+                case .Unknown:
+                    proximityString = "No box in range."
+                }
+            }
+            
+            
             //send beacon array to watchkit with watchkit connectivity through the watch session in the app delegate
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             if(appDelegate.watchSession!.activationState == .Activated && appDelegate.watchSession!.reachable == true)
             {
-                if let currentBeacon = self.centerViewController.closestBeacon
-                {
-                    var proximityString: String = "No box in range"
-                    switch currentBeacon.proximity {
-                    case .Far:
-                        proximityString = "Box is far."
-                    case .Near:
-                        proximityString = "Box is near."
-                    case .Immediate:
-                        proximityString = "Box is very close."
-                    case .Unknown:
-                        proximityString = "No box in range."
-                    }
                     let payload = ["ClosestBeaconProximity": proximityString]
                     appDelegate.watchSession!.sendMessage(payload, replyHandler: nil, errorHandler: nil)
                     //deactivate ranging after sending state of closest beacon when in background
-                }
+                
             }
             if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
             {
