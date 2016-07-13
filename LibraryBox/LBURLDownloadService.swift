@@ -38,7 +38,7 @@ class LBURLDownloadService {
                 nc.postNotificationName("LBDownloadSuccess", object: nil)
             }
             else {
-                print("Faulure: %@", error!.localizedDescription);
+                print("Failure: %@", error!.localizedDescription);
             }
         })
         task.resume()

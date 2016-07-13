@@ -1,4 +1,8 @@
+FIX: Ranging View: Box Circle updating
+FIX: check if alert can be shown from pinning popover
 
-
-* WatchKit
+* Labels in ranging view
+* Webview for box when not connected to it => popover?
+* WatchKit Testing
+* App Testing
 * Accessibility

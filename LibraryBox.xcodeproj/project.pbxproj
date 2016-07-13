@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0AD96B691D180DF900F8A838 /* LBUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD96B681D180DF900F8A838 /* LBUtilities.swift */; };
 		0AD96B701D1AF2DE00F8A838 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0AD96B6F1D1AF2DE00F8A838 /* README.md */; };
+		0AD96B7B1D25026A00F8A838 /* LBBoxNotConnectedWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD96B7A1D25026A00F8A838 /* LBBoxNotConnectedWebViewController.swift */; };
+		0AD96B7D1D25035100F8A838 /* notConnected.html in Resources */ = {isa = PBXBuildFile; fileRef = 0AD96B7C1D25035100F8A838 /* notConnected.html */; };
 		6316D6961D082C9F00C68EBF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6316D6951D082C9F00C68EBF /* Podfile */; };
 		631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */; };
 		631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE731CFF8E6100B19B84 /* KMLParser.m */; };
@@ -23,6 +25,7 @@
 		63754B991D0EFAC6002B2EFE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B981D0EFAC6002B2EFE /* NotificationController.swift */; };
 		63754B9B1D0EFAC6002B2EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */; };
 		63754B9F1D0EFAC6002B2EFE /* LibraryBox Notifications.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */; };
+		63781EFB1D365807005B711D /* LBPinningPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */; };
 		639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
@@ -109,6 +112,8 @@
 		0A6DC3511CF737F700C69D42 /* LBBeaconRangingVisualization.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LBBeaconRangingVisualization.playground; sourceTree = "<group>"; };
 		0AD96B681D180DF900F8A838 /* LBUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBUtilities.swift; sourceTree = "<group>"; };
 		0AD96B6F1D1AF2DE00F8A838 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		0AD96B7A1D25026A00F8A838 /* LBBoxNotConnectedWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxNotConnectedWebViewController.swift; sourceTree = "<group>"; };
+		0AD96B7C1D25035100F8A838 /* notConnected.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = notConnected.html; sourceTree = "<group>"; };
 		15B15FD2D4D2E62002B2C2C7 /* Pods-LibraryBoxUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		17F935F43CC6AE85CA6BC1EC /* Pods-LibraryBoxUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibraryBoxUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LibraryBoxUITests/Pods-LibraryBoxUITests.release.xcconfig"; sourceTree = "<group>"; };
 		33D9481FB2FC56DAE4ECD871 /* Pods_LibraryBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LibraryBoxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +136,11 @@
 		63754B981D0EFAC6002B2EFE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		63754B9A1D0EFAC6002B2EFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63754B9C1D0EFAC6002B2EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningPopoverViewController.swift; sourceTree = "<group>"; };
 		639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LBReachabilityService.swift; path = ../LBReachabilityService.swift; sourceTree = "<group>"; };
+		63A275061D2175BA00EE2CF5 /* LibraryBox Notifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "LibraryBox Notifications.entitlements"; sourceTree = "<group>"; };
+		63A275071D2175E600EE2CF5 /* LibraryBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LibraryBox.entitlements; sourceTree = "<group>"; };
+		63A275081D21765500EE2CF5 /* LibraryBox Notifications Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "LibraryBox Notifications Extension.entitlements"; sourceTree = "<group>"; };
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
 		63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRoundedButton.swift; sourceTree = "<group>"; };
 		63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningButton.swift; sourceTree = "<group>"; };
@@ -199,6 +208,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CF8BAAB693A557D538C38016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -228,6 +244,7 @@
 		63754B821D0EFAC6002B2EFE /* LibraryBox Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				63A275061D2175BA00EE2CF5 /* LibraryBox Notifications.entitlements */,
 				63754B831D0EFAC6002B2EFE /* Interface.storyboard */,
 				63754B861D0EFAC6002B2EFE /* Assets.xcassets */,
 				63754B881D0EFAC6002B2EFE /* Info.plist */,
@@ -238,6 +255,7 @@
 		63754B911D0EFAC6002B2EFE /* LibraryBox Notifications Extension */ = {
 			isa = PBXGroup;
 			children = (
+				63A275081D21765500EE2CF5 /* LibraryBox Notifications Extension.entitlements */,
 				63754B941D0EFAC6002B2EFE /* InterfaceController.swift */,
 				63754B961D0EFAC6002B2EFE /* ExtensionDelegate.swift */,
 				63754B981D0EFAC6002B2EFE /* NotificationController.swift */,
@@ -246,7 +264,7 @@
 				63754B921D0EFAC6002B2EFE /* Supporting Files */,
 			);
 			path = "LibraryBox Notifications Extension";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		63754B921D0EFAC6002B2EFE /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -304,10 +322,10 @@
 			children = (
 				63E33EC81CF2E7DA005F6F5C /* MapKit.framework */,
 				63E33E991CF2E7A9005F6F5C /* LibraryBox */,
+				63754B911D0EFAC6002B2EFE /* LibraryBox Notifications Extension */,
+				63754B821D0EFAC6002B2EFE /* LibraryBox Notifications */,
 				63E33EAE1CF2E7A9005F6F5C /* LibraryBoxTests */,
 				63E33EB91CF2E7A9005F6F5C /* LibraryBoxUITests */,
-				63754B821D0EFAC6002B2EFE /* LibraryBox Notifications */,
-				63754B911D0EFAC6002B2EFE /* LibraryBox Notifications Extension */,
 				63E33E981CF2E7A9005F6F5C /* Products */,
 				041800A99B984BA586C9C5B5 /* Frameworks */,
 				5B03B3B5563614166C13713B /* Pods */,
@@ -329,6 +347,7 @@
 		63E33E991CF2E7A9005F6F5C /* LibraryBox */ = {
 			isa = PBXGroup;
 			children = (
+				63A275071D2175E600EE2CF5 /* LibraryBox.entitlements */,
 				63BB3FAC1CF3B03800EF88E8 /* External */,
 				63E331AF1D0E0A64006A6663 /* Models */,
 				63BB3FA21CF3A12300EF88E8 /* Views */,
@@ -365,8 +384,10 @@
 				63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */,
 				63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */,
 				636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */,
-				63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */,
 				63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */,
+				63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */,
+				0AD96B7A1D25026A00F8A838 /* LBBoxNotConnectedWebViewController.swift */,
+				63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -377,6 +398,7 @@
 				63E33EA11CF2E7A9005F6F5C /* Assets.xcassets */,
 				63E33E9E1CF2E7A9005F6F5C /* Main.storyboard */,
 				63E33EA31CF2E7A9005F6F5C /* LaunchScreen.storyboard */,
+				0AD96B7C1D25035100F8A838 /* notConnected.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -403,6 +425,7 @@
 			buildPhases = (
 				63754B7F1D0EFAC6002B2EFE /* Resources */,
 				63754BA31D0EFAC7002B2EFE /* Embed App Extensions */,
+				CF8BAAB693A557D538C38016 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -508,14 +531,28 @@
 					63754B801D0EFAC6002B2EFE = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = M9AG4A3F6L;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					63754B8C1D0EFAC6002B2EFE = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = M9AG4A3F6L;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					63E33E961CF2E7A9005F6F5C = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = M9AG4A3F6L;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -583,6 +620,7 @@
 			files = (
 				6316D6961D082C9F00C68EBF /* Podfile in Resources */,
 				63E33EA51CF2E7A9005F6F5C /* LaunchScreen.storyboard in Resources */,
+				0AD96B7D1D25035100F8A838 /* notConnected.html in Resources */,
 				63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */,
 				63E33EA21CF2E7A9005F6F5C /* Assets.xcassets in Resources */,
 				63E33ED11CF2F93E005F6F5C /* Licenses in Resources */,
@@ -744,6 +782,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63781EFB1D365807005B711D /* LBPinningPopoverViewController.swift in Sources */,
 				639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */,
 				63F7CF401D00E9130002C026 /* LBGoogleAPIAccessService.swift in Sources */,
 				0AD96B701D1AF2DE00F8A838 /* README.md in Sources */,
@@ -762,6 +801,7 @@
 				63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */,
 				63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */,
 				631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */,
+				0AD96B7B1D25026A00F8A838 /* LBBoxNotConnectedWebViewController.swift in Sources */,
 				63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */,
 				63BA7E761CFCE36100FE2F2C /* LBBoxWebViewController.swift in Sources */,
 			);
@@ -839,6 +879,8 @@
 		63754BA11D0EFAC7002B2EFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "LibraryBox Notifications Extension/LibraryBox Notifications Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
 				INFOPLIST_FILE = "LibraryBox Notifications Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp.watchkitextension;
@@ -853,6 +895,8 @@
 		63754BA21D0EFAC7002B2EFE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "LibraryBox Notifications Extension/LibraryBox Notifications Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
 				INFOPLIST_FILE = "LibraryBox Notifications Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp.watchkitextension;
@@ -868,8 +912,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "LibraryBox Notifications/LibraryBox Notifications.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = LibraryBox_Notifications_Extension;
 				INFOPLIST_FILE = "LibraryBox Notifications/Info.plist";
@@ -886,8 +931,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "LibraryBox Notifications/LibraryBox Notifications.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = LibraryBox_Notifications_Extension;
 				INFOPLIST_FILE = "LibraryBox Notifications/Info.plist";
@@ -918,6 +964,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -964,6 +1011,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -991,8 +1039,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = LibraryBox/LibraryBox.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
 				INFOPLIST_FILE = LibraryBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox;
@@ -1009,8 +1058,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = LibraryBox/LibraryBox.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
 				INFOPLIST_FILE = LibraryBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox;

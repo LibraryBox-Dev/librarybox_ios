@@ -51,6 +51,8 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>http://192.168.77.1/config.json</key>
+			<string></string>
 			<key>http://www.librarybox.us</key>
 			<string></string>
 		</dict>

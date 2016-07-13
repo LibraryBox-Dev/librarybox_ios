@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import QuartzCore
+import PKHUD
 
 //Enumerations
 ///Enum for the state of the  background panel on the right side.
@@ -23,6 +24,7 @@ class LBContainerViewController: UIViewController {
     //The map view controller is embedded in a navigation controller showing a navigation bar
     var centerNavigationController: UINavigationController!
     var centerViewController: LBMainViewController!
+    var beaconUpdateCounter: Int = 0
     
     //State of the right panel
     var currentState: SlideOutState = .Collapsed {
@@ -72,6 +74,9 @@ class LBContainerViewController: UIViewController {
         nc.addObserver(self, selector: #selector(handleMainViewAppearance), name: "LBMainViewControllerAppeared", object: nil)
         nc.addObserver(self, selector: #selector(setConnectedToBoxBool), name: "LBConnectedToBox", object: nil)
         nc.addObserver(self, selector: #selector(setNotConnectedToBoxBool), name: "LBNotConnectedToBox", object: nil)
+        nc.addObserver(self, selector: #selector(checkBoxConnectionStatus), name:UIApplicationDidBecomeActiveNotification, object: nil)
+        self.checkBoxConnectionStatus()
+
         
         //WiFi-Button Implementation
         self.wifiButton = LBWIFIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -144,10 +149,11 @@ class LBContainerViewController: UIViewController {
     }
     
     /**
-     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay()
+     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay(), send closest beacon proximity to watchkit, if session is active and closest beacon is available
     */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "currentFilteredBeaconSigmaDistances" {
+            //set beacon distances in beaconRangingView
             if (self.rightViewController != nil) {
                 if(self.currentState == .RightPanelExpanded)
                 {
@@ -156,6 +162,42 @@ class LBContainerViewController: UIViewController {
                         beaconRangingView.beaconSigmaDistances = self.centerViewController.currentFilteredBeaconSigmaDistances
                         beaconRangingView.setNeedsDisplay()
                     }
+                }
+            }
+            
+            var proximityString: String = "No box in range."
+            if let currentBeacon = self.centerViewController.closestBeacon
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName("LBCurrentClosestBeacon", object: currentBeacon)
+                switch currentBeacon.proximity {
+                case .Far:
+                    proximityString = "Box is far."
+                case .Near:
+                    proximityString = "Box is near."
+                case .Immediate:
+                    proximityString = "Box is very close."
+                case .Unknown:
+                    proximityString = "No box in range."
+                }
+            }
+            
+            
+            //send beacon array to watchkit with watchkit connectivity through the watch session in the app delegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if(appDelegate.watchSession!.activationState == .Activated && appDelegate.watchSession!.reachable == true)
+            {
+                    let payload = ["ClosestBeaconProximity": proximityString]
+                    appDelegate.watchSession!.sendMessage(payload, replyHandler: nil, errorHandler: nil)
+                    //deactivate ranging after sending state of closest beacon when in background
+                
+            }
+            if(UIApplication.sharedApplication().applicationState == UIApplicationState.Background)
+            {
+                beaconUpdateCounter = beaconUpdateCounter + 1
+                if(beaconUpdateCounter > 5)
+                {
+                    self.centerViewController.deactivateRangingService()
+                    beaconUpdateCounter = 0
                 }
             }
         }
@@ -169,13 +211,14 @@ class LBContainerViewController: UIViewController {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         // Code here will execute before the rotation begins.
         // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
-        coordinator.animateAlongsideTransition({ (context) -> Void in
+      
+        
+                coordinator.animateAlongsideTransition({ (context) -> Void in
             
             },
             completion: { (context) -> Void in
-                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
-                // Code here will execute after the rotation has finished.
-                // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
+                    self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                
         }) }
     
     /**
@@ -189,6 +232,11 @@ class LBContainerViewController: UIViewController {
         }
     }
     
+    func checkBoxConnectionStatus()
+    {
+        HUD.show(.Progress)
+        LBReachabilityService.isConnectedToBox()
+    }
     
     /**
     Open the Wifi Settings URL when Wifi-Button is clicked.
@@ -234,13 +282,14 @@ class LBContainerViewController: UIViewController {
     */
     @IBAction func pinningButtonClicked(sender: UIButton)
     {
-        if(!self.connectedToBox)
-        {
-            self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
-        }
-        else{
-            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
-        }
+//        if(!self.connectedToBox)
+//        {
+//            self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
+//        }
+//        else{
+//            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
+//        }
+        self.centerViewController.performSegueWithIdentifier("pinningPopover", sender: self)
     }
     
     /**
@@ -248,6 +297,7 @@ class LBContainerViewController: UIViewController {
     */
     func setConnectedToBoxBool()
     {
+        HUD.hide()
         self.connectedToBox = true
     }
 
@@ -256,6 +306,7 @@ class LBContainerViewController: UIViewController {
      */
     func setNotConnectedToBoxBool()
     {
+        HUD.hide()
         self.connectedToBox = false
     }
     
@@ -264,17 +315,33 @@ class LBContainerViewController: UIViewController {
      */
     func handleMainViewAppearance()
     {
-        self.wifiButton.hidden = false
-        self.boxButton.hidden = false
-        self.mapPinButton.hidden = false
-        if(rangingViewExpandedStateStore == true)
+        if(self.connectedToBox)
         {
-            self.toggleRightPanel()
-            rangingViewExpandedStateStore = false
+            self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
+            self.wifiButton.hidden = true
+            self.boxButton.hidden = true
+            self.mapPinButton.hidden = true
+            if(currentState == .RightPanelExpanded)
+            {
+                rangingViewExpandedStateStore = true
+                self.toggleRightPanel()
+            }
         }
-        if self.centerViewController.ranging
+        else
         {
-            self.startScanningAnimation()
+            self.wifiButton.hidden = false
+            self.boxButton.hidden = false
+            self.mapPinButton.hidden = false
+            if(rangingViewExpandedStateStore == true)
+            {
+                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                self.toggleRightPanel()
+                rangingViewExpandedStateStore = false
+            }
+            if self.centerViewController.ranging
+            {
+                self.startScanningAnimation()
+            }
         }
     }
     
@@ -300,6 +367,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         }
         else{
             self.wifiButton.turnOnBGOpacity()
+            centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
         }
         self.animateRightPanel(notExpanded)
     }
@@ -348,6 +416,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
                 self.currentState = .Collapsed
                 self.rightViewController!.view.removeFromSuperview()
                 self.rightViewController = nil;
+                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
             }
         }
     }

@@ -18,6 +18,10 @@ protocol LBLocationServiceDelegate
     func userLocationServiceFailedToStartDueToAuthorization()
     
     /**
+     Triggered when the user location update operation has started successfully.
+     */
+    func userLocationServiceStartedSuccessfully()
+    /**
      Triggered when the users' location changed.
      
      :param: location The CLLocation of the users' current location.
@@ -117,7 +121,9 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
         case .AuthorizedAlways:
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.pausesLocationUpdatesAutomatically = false
+            locationManager.allowsBackgroundLocationUpdates = true
             locationManager.startUpdatingLocation()
+            delegate?.userLocationServiceStartedSuccessfully()
         case .AuthorizedWhenInUse, .Denied, .Restricted:
             print("Couldn't turn on user location: Required Location Access (Always) missing.")
             delegate?.userLocationServiceFailedToStartDueToAuthorization()
@@ -262,25 +268,41 @@ extension LBLocationService
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered region: \(region)")
         //TODO: check region identifier if it is a librarybox before sending the delegate message
+        
+        /**
+         Start ranging on entering beacon range
+         */
+        locationManager.startRangingBeaconsInRegion(beaconRegion)
         delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
     }
     
     func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        /**
+         Stop ranging on exiting beacon range
+         */
+        locationManager.stopRangingBeaconsInRegion(beaconRegion)
         print("Exited region: \(region)")
     }
     
+    /**
+     Start updating user location and beacon ranging when inside region otherwise turn off beacon ranging and updating user location
+     */
     func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
         var stateString: String
         
         switch state {
         case .Inside:
             stateString = "inside"
-            //TODO: check region identifier if it is a librarybox before sending the delegate message
-            //delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
+            self.startUpdatingUserLocation()
+            self.startBeaconRanging()
         case .Outside:
             stateString = "outside"
+            self.stopBeaconRanging()
+            self.stopUpdatingUserLocation()
         case .Unknown:
             stateString = "unknown"
+            self.stopBeaconRanging()
+            self.stopUpdatingUserLocation()
         }
         
         print("State changed to " + stateString + " for region \(region).")

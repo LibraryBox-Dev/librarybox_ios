@@ -87,12 +87,15 @@ class LBMainViewController: UIViewController {
         //Map user interface updating - sets KML annotation pins
         self.updateMapUI()
         
-        //Notifications for app status: active, background, terminating - to turn location services on or off
+        //Notifications for app status: active, background, terminating - to turn location services on or off, updating UI based on KML file, start ranging services based on notification from watchkit
         let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: #selector(activateMapRelatedServices), name:UIApplicationDidBecomeActiveNotification, object: nil)
+        nc.addObserver(self, selector: #selector(handleViewAppearance), name: "LBConnectedToBox", object: nil)
+        nc.addObserver(self, selector: #selector(activateMapRelatedServices), name: "LBNotConnectedToBox", object: nil)
         nc.addObserver(self, selector: #selector(deactivateRangingService), name:UIApplicationWillResignActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(deactivateMapRelatedServices), name:UIApplicationWillTerminateNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
+        nc.addObserver(self, selector: #selector(performWatchAction(_:)), name: "LBWatchNotificationName", object: nil)
+
     }
     
     override func viewWillLayoutSubviews() {
@@ -113,10 +116,23 @@ class LBMainViewController: UIViewController {
     /**
      Transmits current user location and current box locations to LBMapPinningTableViewController associated with the storyboard segue "showPinningInfo".
     */
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {        
+        if segue.identifier == "pinningPopover" {
+            let popoverViewController = segue.destinationViewController as! LBPinningPopoverViewController
+            popoverViewController.delegate = self
+            if let currentPoints = myKMLParser.points as? [MKAnnotation]
+            {
+                popoverViewController.currentBoxLocations = currentPoints
+            }
+            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            popoverViewController.popoverPresentationController!.delegate = self
+        }
+
+        
         if(segue.identifier == "showPinningInfo") {
             let yourNextNavigationController = (segue.destinationViewController as! UINavigationController)
             let yourNextViewController = yourNextNavigationController.topViewController as! LBMapPinningTableViewController
+            yourNextViewController.delegate = self
             yourNextViewController.currentLocationOfUser = self.locationService.currentLoc
             if let currentPoints = myKMLParser.points as? [MKAnnotation]
             {
@@ -171,17 +187,40 @@ class LBMainViewController: UIViewController {
     }
     
     /**
-     Called when app is activated.
+     Called when not connected to box.
     */
     func activateMapRelatedServices()
     {
         locationService.startUpdatingUserLocation()
         locationService.startMonitoringForBeacons()
         locationService.startBeaconRanging()
+        //LBReachabilityService.isConnectedToBox()
         self.updateMapUI()
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
         self.presentErrors()
+    }
+    
+    func handleViewAppearance()
+    {
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName("LBMainViewControllerAppeared", object: nil)
+    }
+    
+    /**
+     Called when notified by a connected watch.
+     */
+    func performWatchAction(notification: NSNotification)
+    {
+        var payload = notification.userInfo as! [String : NSNumber]
+        if let rangingState = payload["BeaconRanging"]
+        {
+            if rangingState == true
+            {
+                locationService.startUpdatingUserLocation()
+                locationService.startBeaconRanging()
+            }
+        }
     }
     
     /**
@@ -272,8 +311,10 @@ class LBMainViewController: UIViewController {
     */
     func addAnnotations()
     {
-        let myKMLAnnotationArray = myKMLParser.points as! [MKAnnotation]
-        self.mapView.addAnnotations(myKMLAnnotationArray)
+        if let myKMLAnnotationArray = myKMLParser.points as? [MKAnnotation]
+        {
+            self.mapView.addAnnotations(myKMLAnnotationArray)
+        }
     }
     
 }
@@ -297,20 +338,21 @@ extension LBMainViewController: MKMapViewDelegate {
         } else if overlay is LBBoxProximityCircleOverlay {
             let circle = MKCircleRenderer(overlay: overlay)
             var fillColoring: UIColor = UIColor.clearColor()
+            let strokeWidth:CGFloat = 0.8
             var strokeColoring:UIColor = UIColor.clearColor()
             if let myBeacon:CLBeacon = closestBeacon
             {
                 //coloring the circle based on iBeacon proximity attribute
                 switch myBeacon.proximity {
                 case .Far:
-                    fillColoring = UIColor.cyanColor().colorWithAlphaComponent(0.2)
+                    fillColoring = UIColor.orangeColor().colorWithAlphaComponent(0.15)
                     strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
                 case .Near:
-                    fillColoring = UIColor.orangeColor().colorWithAlphaComponent(0.2)
+                    fillColoring = UIColor.redColor().colorWithAlphaComponent(0.15)
                     strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
                 case .Immediate:
                     fillColoring = UIColor.redColor().colorWithAlphaComponent(0.2)
-                    strokeColoring = UIColor.darkGrayColor().colorWithAlphaComponent(0.2)
+                    strokeColoring = UIColor.blackColor().colorWithAlphaComponent(0.2)
                 case .Unknown:
                     fillColoring = UIColor.clearColor()
                     strokeColoring = UIColor.clearColor()
@@ -318,7 +360,7 @@ extension LBMainViewController: MKMapViewDelegate {
             }
             circle.fillColor = fillColoring
             circle.strokeColor = strokeColoring
-            circle.lineWidth = 1
+            circle.lineWidth = strokeWidth
             return circle
         }
         let myOverlayRenderer: MKOverlayRenderer? = nil
@@ -354,6 +396,11 @@ extension LBMainViewController: LBLocationServiceDelegate
         self.reauthorizationNecessary = true
     }
     
+    func userLocationServiceStartedSuccessfully()
+    {
+        self.reauthorizationNecessary = false
+    }
+    
     /**
      Sets the bool monitoring to true. Starts the color-fade scanning animation on the Wifi-Button.
     */
@@ -362,6 +409,7 @@ extension LBMainViewController: LBLocationServiceDelegate
 
         }
         monitoring = true
+        self.reauthorizationNecessary = false
         delegate?.startScanningAnimation()
     }
     
@@ -424,6 +472,7 @@ extension LBMainViewController: LBLocationServiceDelegate
         currentBeacons = []
         print("Ranging started successfully.")
         ranging = true
+        self.reauthorizationNecessary = false
         delegate?.startScanningAnimation()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
            // UI updates can be implemented here
@@ -513,7 +562,34 @@ extension LBMainViewController: LBLocationServiceDelegate
     }
 }
 
+extension LBMainViewController: UIPopoverPresentationControllerDelegate
+{
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+}
 
-
+extension LBMainViewController:LBPinningPopoverDelegate
+{
+    func pinAddress() {
+        self.performSegueWithIdentifier("showPinningInfo", sender: self)
+    }
     
+    func currentLocation() -> CLLocation
+    {
+        return self.locationService.currentLoc
+    }
+    
+    func locationPinningSuccessful() {
+        self.updateMapUI()
+    }
+
+}
+
+extension LBMainViewController:LBAddressPinningDelegate
+{
+    func pinningSuccessful() {
+        self.updateMapUI()
+    }
+}
 

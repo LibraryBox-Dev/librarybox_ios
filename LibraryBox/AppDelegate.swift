@@ -20,27 +20,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     /// The main window
     var window: UIWindow?
     var watchSession: WCSession?
+    var containerViewController: LBContainerViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //set and register local notification settings
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
-        //setup watch kit session, if supported
+        UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 140.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        //setup watchkit connectivity session, if supported
         if WCSession.isSupported() {
             watchSession = WCSession.defaultSession()
             watchSession!.delegate = self
             watchSession!.activateSession()
         }
         
+                
         //set root view controller of app window to LBContainerViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let containerViewController = LBContainerViewController()
+        containerViewController = LBContainerViewController()
         window!.rootViewController = containerViewController
         window!.makeKeyAndVisible()
 
         return true
     }
+    
+    
     
     func application(application: UIApplication,
                      openURL url: NSURL,
@@ -75,10 +83,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    // MARK: WCSessionDelegate methods
+    // WCSessionDelegate methods
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.postNotificationName(AppDelegate.LBWatchNotificationName, object: self, userInfo: message)
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.postNotificationName(AppDelegate.LBWatchNotificationName, object: self, userInfo: message)
     }
 
 }
