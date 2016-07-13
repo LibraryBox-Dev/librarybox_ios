@@ -1,5 +1,5 @@
 FIX: Ranging View
-
+FIX: check if alert can be shown from popover
 
 * Webview for box when not connected to it
 * beacon ranging view update (ranging view: meter distance)
