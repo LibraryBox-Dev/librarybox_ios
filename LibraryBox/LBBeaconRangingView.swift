@@ -97,40 +97,60 @@ class LBBeaconRangingView: UIView
         CGContextBeginTransparencyLayer(context, nil)
         
         //Scale mark drawing
-        let fiveMeterMark: UIBezierPath = UIBezierPath()
-        let fiveMeterMarkerY: CGFloat = self.convertToLogScale(5.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
-        fiveMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, fiveMeterMarkerY))
-        fiveMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, fiveMeterMarkerY))
-        fiveMeterMark.lineWidth = 3.0
-        fiveMeterMark.lineCapStyle = CGLineCap.Round
-        UIColor.darkGrayColor().setStroke()
-        fiveMeterMark.stroke()
-        let twentyMeterMark: UIBezierPath = UIBezierPath()
-        let twentyMeterMarkerY: CGFloat = self.convertToLogScale(20.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
-        twentyMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, twentyMeterMarkerY))
-        twentyMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, twentyMeterMarkerY))
-        twentyMeterMark.lineWidth = 2.4
-        twentyMeterMark.lineCapStyle = CGLineCap.Round
-        UIColor.darkGrayColor().setStroke()
-        twentyMeterMark.stroke()
-        let fiftyMeterMark: UIBezierPath = UIBezierPath()
-        let fiftyMeterMarkerY: CGFloat = self.convertToLogScale(50.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
-        fiftyMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, fiftyMeterMarkerY))
-        fiftyMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, fiftyMeterMarkerY))
-        fiftyMeterMark.lineWidth = 1.5
-        fiftyMeterMark.lineCapStyle = CGLineCap.Round
-        UIColor.darkGrayColor().setStroke()
-        fiftyMeterMark.stroke()
+//        let fiveMeterMark: UIBezierPath = UIBezierPath()
+//        let fiveMeterMarkerY: CGFloat = self.convertToLogScale(5.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+//        fiveMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, fiveMeterMarkerY))
+//        fiveMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, fiveMeterMarkerY))
+//        fiveMeterMark.lineWidth = 3.0
+//        fiveMeterMark.lineCapStyle = CGLineCap.Round
+//        UIColor.darkGrayColor().setStroke()
+//        fiveMeterMark.stroke()
+//        let twentyMeterMark: UIBezierPath = UIBezierPath()
+//        let twentyMeterMarkerY: CGFloat = self.convertToLogScale(20.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+//        twentyMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, twentyMeterMarkerY))
+//        twentyMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, twentyMeterMarkerY))
+//        twentyMeterMark.lineWidth = 2.4
+//        twentyMeterMark.lineCapStyle = CGLineCap.Round
+//        UIColor.darkGrayColor().setStroke()
+//        twentyMeterMark.stroke()
+//        let fiftyMeterMark: UIBezierPath = UIBezierPath()
+//        let fiftyMeterMarkerY: CGFloat = self.convertToLogScale(50.0, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)
+//        fiftyMeterMark.moveToPoint(CGPointMake(rect.size.width - 50, fiftyMeterMarkerY))
+//        fiftyMeterMark.addLineToPoint(CGPointMake(rect.size.width - 40, fiftyMeterMarkerY))
+//        fiftyMeterMark.lineWidth = 1.5
+//        fiftyMeterMark.lineCapStyle = CGLineCap.Round
+//        UIColor.darkGrayColor().setStroke()
+//        fiftyMeterMark.stroke()
         
+        
+        let circleDistances: [Double] = [1.0, 1.5, 2.0, 3.0, 4.0, 5.0, 10.0, 15.0, 25.0, 35.0, 70.0]
+        
+        for distance in circleDistances
+        {
+            let radius: CGFloat = 50.0 - CGFloat(self.convertToLogScale(distance, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0))
+            let aCenterPoint = CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+50)
+            var aStartAngle: CGFloat = CGFloat(Float(2 * M_PI))
+            var anEndAngle: CGFloat = 0.0
+            let aStrokeWidth: CGFloat = 0.5
+            //let aRadius = CGFloat((50.0 - CGFloat(aStrokeWidth)) / 2)
+            UIColor.darkGrayColor().setStroke()
+            aStartAngle = aStartAngle - CGFloat(Float(M_PI_2))
+            anEndAngle = anEndAngle - CGFloat(Float(M_PI_2))
+            let lowerCirclePath: UIBezierPath = UIBezierPath()
+            lowerCirclePath.addArcWithCenter(aCenterPoint, radius: radius, startAngle: aStartAngle, endAngle: anEndAngle, clockwise: true)
+            lowerCirclePath.lineWidth=aStrokeWidth
+            lowerCirclePath.stroke()
+            
+        }
         
         //Line drawing
-        let linePath: UIBezierPath = UIBezierPath()
-        linePath.moveToPoint(CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+75))
-        linePath.addLineToPoint(endPoint)
-        linePath.lineWidth = 6.0
-        linePath.lineCapStyle = CGLineCap.Round
-        UIColor.whiteColor().setStroke()
-        linePath.stroke()
+//        let linePath: UIBezierPath = UIBezierPath()
+//        linePath.moveToPoint(CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+75))
+//        linePath.addLineToPoint(endPoint)
+//        linePath.lineWidth = 6.0
+//        linePath.lineCapStyle = CGLineCap.Round
+//        UIColor.whiteColor().setStroke()
+//        linePath.stroke()
         
         //Button background drawing
         let aCenterPoint = CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+50)
