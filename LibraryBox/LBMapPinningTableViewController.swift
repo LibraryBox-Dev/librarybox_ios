@@ -53,7 +53,7 @@ class LBMapPinningTableViewController: UITableViewController
         //Navigation bar setup
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(cancelPinning))
         self.navigationItem.rightBarButtonItem = cancelButton
-        self.navigationItem.title = "Add Box Location"
+        self.navigationItem.title = "Box Address"
         
         //Tap gesture recognizer to hide keyboard when tapping outside of textview
         let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
