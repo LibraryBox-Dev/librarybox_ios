@@ -527,8 +527,8 @@ extension LBMainViewController: LBLocationServiceDelegate
                         self._beaconFilteredSigmaDistances[index] = beacon.accuracy
                     }
                     let previousFilteredAccuracy = self._beaconFilteredSigmaDistances[index]
-                    let _filteredAccuracy: Double = (beacon.accuracy * filterFactor) + (previousFilteredAccuracy * (1.0 - filterFactor))
-                    self.currentFilteredBeaconSigmaDistances[index] = _filteredAccuracy
+                    self._beaconFilteredSigmaDistances[index] = (beacon.accuracy * filterFactor) + (previousFilteredAccuracy * (1.0 - filterFactor))
+                    self.currentFilteredBeaconSigmaDistances[index] = self._beaconFilteredSigmaDistances[index]
                 }
             }
         }
