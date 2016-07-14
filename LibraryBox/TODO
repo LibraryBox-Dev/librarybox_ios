@@ -1,6 +1,7 @@
-FIX: check if alert can be shown from pinning popover
 
-* Labels in ranging view
+
+
 * WatchKit Testing
 * App Testing
+    * check if alert can be shown from pinning popover
 * Accessibility
