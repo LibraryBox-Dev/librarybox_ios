@@ -265,15 +265,9 @@ class LBContainerViewController: UIViewController {
             }
         }
         else{
-            self.centerViewController.performSegueWithIdentifier("showBoxNotConnected", sender: self)
-            self.wifiButton.hidden = true
-            self.boxButton.hidden = true
-            self.mapPinButton.hidden = true
-            if(currentState == .RightPanelExpanded)
-            {
-                rangingViewExpandedStateStore = true
-                self.toggleRightPanel()
-            }
+            let alert:UIAlertController = UIAlertController(title: "Not connected to box.", message: "Please use the map and beacon ranging to find boxes in your area.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     

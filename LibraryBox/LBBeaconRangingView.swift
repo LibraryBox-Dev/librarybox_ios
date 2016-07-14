@@ -127,7 +127,7 @@ class LBBeaconRangingView: UIView
         
         for distance in circleDistances
         {
-            let radius: CGFloat = 50.0 - CGFloat(self.convertToLogScale(distance, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0))
+            let radius: CGFloat = CGFloat(self.convertToLogScale(distance, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0)) - 50.0
             let aCenterPoint = CGPointMake(rect.size.width - 50, CGRectGetMinY(rect)+50)
             var aStartAngle: CGFloat = CGFloat(Float(2 * M_PI))
             var anEndAngle: CGFloat = 0.0
@@ -142,6 +142,26 @@ class LBBeaconRangingView: UIView
             lowerCirclePath.stroke()
             
         }
+        
+        let labelDistances: [Double] = [1.0, 2.0, 5.0, 15.0, 35.0, 70.0]
+        
+        for distance in labelDistances
+        {
+            let distanceInM: CGFloat = CGFloat(self.convertToLogScale(distance, screenY0:startPoint.y, screenY1:endPoint.y, dataY0:1.0, dataY1:80.0))
+            let attrs: Dictionary = [NSFontAttributeName: UIFont.systemFontOfSize(10),
+                                     NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+            let theString: String = String(Int(distance)) //+ " m"
+            let appendedString:String = "\(theString) m"
+            let attributedString: NSAttributedString = NSAttributedString(string:appendedString,attributes:attrs)
+            let attributedStringRef: CFAttributedStringRef  = attributedString as CFAttributedStringRef;
+            let myLine: CTLine = CTLineCreateWithAttributedString(attributedStringRef)
+            CGContextSetTextPosition(context, rect.size.width - 80, distanceInM + 2.0)
+            CTLineDraw(myLine, context!)
+        }
+        
+        
+        
+        
         
         //Line drawing
 //        let linePath: UIBezierPath = UIBezierPath()

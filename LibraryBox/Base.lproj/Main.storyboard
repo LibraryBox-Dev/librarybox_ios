@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9yn-lX-4gc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1205" y="229"/>
+            <point key="canvasLocation" x="1109" y="1473"/>
         </scene>
         <!--Beacon Ranging View Controller-->
         <scene sceneID="3WB-Mp-cZw">
@@ -166,7 +166,6 @@
                         <outlet property="mapView" destination="TbR-BC-Bt2" id="X2g-FR-XUc"/>
                         <segue destination="h2k-nN-aMG" kind="presentation" identifier="boxContent" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="pVf-9b-uz6"/>
                         <segue destination="Tzp-MT-9pC" kind="show" identifier="showPinningInfoNotConnected" id="NcY-I9-PRN"/>
-                        <segue destination="5v3-7h-2AR" kind="show" identifier="showBoxNotConnected" id="yu0-Sa-NwD"/>
                         <segue destination="kgE-Fn-Cg1" kind="popoverPresentation" identifier="pinningPopover" popoverAnchorView="iJq-bT-GlN" id="rBS-m9-caR">
                             <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
                         </segue>
@@ -270,39 +269,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Uk-yk-xXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-173" y="1621"/>
-        </scene>
-        <!--Box Not Connected Web View Controller-->
-        <scene sceneID="MZ8-4q-bHH">
-            <objects>
-                <viewController id="5v3-7h-2AR" customClass="LBBoxNotConnectedWebViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7hc-uT-smL"/>
-                        <viewControllerLayoutGuide type="bottom" id="RAr-T2-68k"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tdK-pf-6ZJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVm-f8-oRb">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="TVm-f8-oRb" secondAttribute="trailing" id="76J-Gn-uiJ"/>
-                            <constraint firstItem="TVm-f8-oRb" firstAttribute="top" secondItem="tdK-pf-6ZJ" secondAttribute="top" id="96L-gN-lUh"/>
-                            <constraint firstItem="TVm-f8-oRb" firstAttribute="bottom" secondItem="RAr-T2-68k" secondAttribute="top" id="cpD-vw-PFF"/>
-                            <constraint firstItem="TVm-f8-oRb" firstAttribute="leading" secondItem="tdK-pf-6ZJ" secondAttribute="leading" id="eUR-G4-yhy"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="webView" destination="TVm-f8-oRb" id="iW9-og-Wbb"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9HZ-4E-40o" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-132" y="2331"/>
         </scene>
         <!--Map Pinning Table View Controller-->
         <scene sceneID="eoz-Co-L8p">
