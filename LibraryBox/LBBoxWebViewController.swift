@@ -19,7 +19,9 @@ class LBBoxWebViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.title = "Box"
+        let wifiNavBarButton = UIBarButtonItem(title: "< Wi-Fi Settings", style: .Plain, target: self, action:#selector(gotoWifiSettings(_:)))
+        self.navigationItem.leftBarButtonItem = wifiNavBarButton
         webView.delegate = self
         activityIndicator.hidden = true
         //the librarybox URL that is opened (can be any address as LibraryBox redirects)
