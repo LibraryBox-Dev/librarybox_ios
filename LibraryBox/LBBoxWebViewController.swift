@@ -38,6 +38,8 @@ class LBBoxWebViewController: UIViewController
         super.didReceiveMemoryWarning()
     }
     
+    
+    
     @IBAction func gotoWifiSettings(sender: UIBarButtonItem) {
         UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
     }

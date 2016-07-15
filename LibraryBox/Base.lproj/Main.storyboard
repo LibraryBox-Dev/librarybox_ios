@@ -403,10 +403,10 @@
             </objects>
             <point key="canvasLocation" x="1581" y="1593"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Box Content Navigation Controller-->
         <scene sceneID="UX8-k7-cyo">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ftf-sJ-fYB" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ftf-sJ-fYB" customClass="LBBoxContentNavigationController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HPY-Zf-1Hw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
