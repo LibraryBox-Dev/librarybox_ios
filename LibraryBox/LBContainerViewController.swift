@@ -36,6 +36,7 @@ class LBContainerViewController: UIViewController {
     }
     
     var rightViewController: LBBeaconRangingViewController?
+    //var currentBoxViewController: LBBoxWebViewController?
     
     //The y-axis offset of the center view controller when the right panel is expanded
     var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 100
@@ -50,6 +51,7 @@ class LBContainerViewController: UIViewController {
     
     //Bool check if connected to a LibraryBox
     var connectedToBox: Bool = false
+    var presentingBoxViewController: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -252,9 +254,8 @@ class LBContainerViewController: UIViewController {
     */
     @IBAction func boxButtonClicked(sender: UIButton)
     {
-        if(self.connectedToBox)
+        if(self.connectedToBox && !self.presentingBoxViewController)
         {
-            self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
             self.wifiButton.hidden = true
             self.boxButton.hidden = true
             self.mapPinButton.hidden = true
@@ -263,11 +264,50 @@ class LBContainerViewController: UIViewController {
                 rangingViewExpandedStateStore = true
                 self.toggleRightPanel()
             }
+            self.presentingBoxViewController = true
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("going once")
+                self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
+                
+            })
         }
-        else{
-            let alert:UIAlertController = UIAlertController(title: "Not connected to box.", message: "Please use the map and beacon ranging to find boxes in your area.", preferredStyle: UIAlertControllerStyle.ActionSheet)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+        else if (!self.connectedToBox && self.presentingBoxViewController)
+        {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("to map")
+                self.centerViewController.presentedViewController!.performSegueWithIdentifier("returnToMap", sender: self)
+            })
+            self.wifiButton.hidden = false
+            self.boxButton.hidden = false
+            self.mapPinButton.hidden = false
+            if(rangingViewExpandedStateStore == true)
+            {
+                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                self.toggleRightPanel()
+                rangingViewExpandedStateStore = false
+            }
+            if self.centerViewController.ranging
+            {
+                self.startScanningAnimation()
+            }
+            self.presentingBoxViewController = false
+        }
+        else if(!self.connectedToBox && !self.presentingBoxViewController)
+        {
+            self.wifiButton.hidden = false
+            self.boxButton.hidden = false
+            self.mapPinButton.hidden = false
+            if(rangingViewExpandedStateStore == true)
+            {
+                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                self.toggleRightPanel()
+                rangingViewExpandedStateStore = false
+            }
+            if self.centerViewController.ranging
+            {
+                self.startScanningAnimation()
+            }
+            self.presentingBoxViewController = false
         }
     }
     
@@ -309,9 +349,8 @@ class LBContainerViewController: UIViewController {
      */
     func handleMainViewAppearance()
     {
-        if(self.connectedToBox)
+        if(self.connectedToBox && !self.presentingBoxViewController)
         {
-            self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
             self.wifiButton.hidden = true
             self.boxButton.hidden = true
             self.mapPinButton.hidden = true
@@ -320,8 +359,35 @@ class LBContainerViewController: UIViewController {
                 rangingViewExpandedStateStore = true
                 self.toggleRightPanel()
             }
+            self.presentingBoxViewController = true
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("going once")
+                self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
+
+            })
+            }
+        else if (!self.connectedToBox && self.presentingBoxViewController)
+        {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("to map")
+                self.centerViewController.presentedViewController!.performSegueWithIdentifier("returnToMap", sender: self)
+            })
+            self.wifiButton.hidden = false
+            self.boxButton.hidden = false
+            self.mapPinButton.hidden = false
+            if(rangingViewExpandedStateStore == true)
+            {
+                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                self.toggleRightPanel()
+                rangingViewExpandedStateStore = false
+            }
+            if self.centerViewController.ranging
+            {
+                self.startScanningAnimation()
+            }
+            self.presentingBoxViewController = false
         }
-        else
+        else if(!self.connectedToBox && !self.presentingBoxViewController)
         {
             self.wifiButton.hidden = false
             self.boxButton.hidden = false
@@ -336,6 +402,7 @@ class LBContainerViewController: UIViewController {
             {
                 self.startScanningAnimation()
             }
+            self.presentingBoxViewController = false
         }
     }
     
@@ -437,5 +504,8 @@ private extension UIStoryboard {
         return mainStoryboard().instantiateViewControllerWithIdentifier("MainViewController") as? LBMainViewController
     }
     
+//    class func boxViewController() -> LBBoxWebViewController? {
+//        return mainStoryboard().instantiateViewControllerWithIdentifier("BoxViewController") as? LBBoxWebViewController
+//    }
     
 }

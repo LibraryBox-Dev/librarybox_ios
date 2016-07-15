@@ -141,6 +141,11 @@ class LBMainViewController: UIViewController {
         }
     }
     
+    @IBAction func returnToMap(segue: UIStoryboardSegue)
+    {
+        print("Back on map")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

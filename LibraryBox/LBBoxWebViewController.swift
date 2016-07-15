@@ -19,6 +19,8 @@ class LBBoxWebViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        webView.delegate = self
         activityIndicator.hidden = true
         //the librarybox URL that is opened (can be any address as LibraryBox redirects)
         let url = NSURL(string: "http://www.librarybox.us")
@@ -49,6 +51,13 @@ class LBBoxWebViewController: UIViewController
     @IBAction func stop(sender: UIBarButtonItem) {
         webView.stopLoading()
     }
+    
+    deinit
+    {
+        webView.stopLoading()
+        webView.delegate = nil
+    }
+
 }
 
 //MARK: Delegate methods

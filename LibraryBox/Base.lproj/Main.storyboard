@@ -165,7 +165,6 @@
                     <connections>
                         <outlet property="mapView" destination="TbR-BC-Bt2" id="X2g-FR-XUc"/>
                         <segue destination="h2k-nN-aMG" kind="presentation" identifier="boxContent" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="pVf-9b-uz6"/>
-                        <segue destination="Tzp-MT-9pC" kind="show" identifier="showPinningInfoNotConnected" id="NcY-I9-PRN"/>
                         <segue destination="kgE-Fn-Cg1" kind="popoverPresentation" identifier="pinningPopover" popoverAnchorView="iJq-bT-GlN" id="rBS-m9-caR">
                             <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
                         </segue>
@@ -174,12 +173,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688" y="843"/>
+            <point key="canvasLocation" x="728" y="796"/>
         </scene>
         <!--Box Web View Controller-->
         <scene sceneID="zui-xi-jyu">
             <objects>
-                <viewController id="h2k-nN-aMG" customClass="LBBoxWebViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BoxViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="h2k-nN-aMG" customClass="LBBoxWebViewController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1fM-I8-jgL"/>
                         <viewControllerLayoutGuide type="bottom" id="TAo-by-DiP"/>
@@ -189,7 +188,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aj7-Ie-hLc">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="h2k-nN-aMG" id="WeR-u7-CZj"/>
@@ -250,25 +249,28 @@
                             <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="8ps-kJ-f2I"/>
                             <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="9d1-4b-dcM"/>
                             <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="FL5-ih-o9r"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="top" id="Mz2-4k-ULV"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" id="S53-0T-x6t"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="top" constant="44" id="Mz2-4k-ULV"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" constant="22" id="S53-0T-x6t"/>
                             <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="Aj7-Ie-hLc" secondAttribute="leading" id="ULc-eW-RPA"/>
                             <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="yfb-Oz-mE5" secondAttribute="trailing" id="VMW-Lw-Jul"/>
                             <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="YNb-gn-ekl"/>
                             <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="omk-Oj-kf3"/>
                             <constraint firstAttribute="trailing" secondItem="yfb-Oz-mE5" secondAttribute="trailing" id="rgd-UH-HZm"/>
                             <constraint firstItem="yfb-Oz-mE5" firstAttribute="centerX" secondItem="CHG-0K-DAO" secondAttribute="centerX" id="s2O-rs-cQH"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="top" id="u8y-z9-7Vy"/>
+                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="top" constant="-44" id="u8y-z9-7Vy"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="activityIndicator" destination="CHG-0K-DAO" id="wYB-gG-jP9"/>
                         <outlet property="webView" destination="Aj7-Ie-hLc" id="HKx-gf-n0x"/>
+                        <segue destination="wID-lw-dFt" kind="unwind" identifier="returnToMap" unwindAction="returnToMap:" id="HwR-CF-ccR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Uk-yk-xXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="wID-lw-dFt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-173" y="1621"/>
+            <point key="canvasLocation" x="-53" y="830"/>
         </scene>
         <!--Map Pinning Table View Controller-->
         <scene sceneID="eoz-Co-L8p">
@@ -418,68 +420,8 @@
             </objects>
             <point key="canvasLocation" x="1581" y="1593"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="WiA-Iq-FTt">
-            <objects>
-                <viewController id="5AR-be-l9Q" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Tll-bu-qOy"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pt8-0R-M6i"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="f4n-CU-JmS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addlocation" translatesAutoresizingMaskIntoConstraints="NO" id="txF-LF-Mev">
-                                <rect key="frame" x="275" y="99" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="EvV-IQ-5l4"/>
-                                    <constraint firstAttribute="width" constant="50" id="JW0-eV-4K0"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="To add a LibraryBox annotation to the map, please connect to the Internet and get close to the box." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k56-rs-LTE">
-                                <rect key="frame" x="105" y="157" width="390" height="26"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="k56-rs-LTE" secondAttribute="trailing" constant="85" id="TKc-bM-ofo"/>
-                            <constraint firstItem="k56-rs-LTE" firstAttribute="top" secondItem="txF-LF-Mev" secondAttribute="bottom" constant="8" id="Uee-Hg-t7V"/>
-                            <constraint firstItem="k56-rs-LTE" firstAttribute="leading" secondItem="f4n-CU-JmS" secondAttribute="leadingMargin" constant="85" id="hOZ-av-g91"/>
-                            <constraint firstItem="txF-LF-Mev" firstAttribute="centerX" secondItem="f4n-CU-JmS" secondAttribute="centerX" id="qEd-CD-qpv"/>
-                            <constraint firstItem="txF-LF-Mev" firstAttribute="top" secondItem="Tll-bu-qOy" secondAttribute="bottom" constant="35" id="rcK-Ne-gzi"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="TYo-ro-apo"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bwb-7J-QiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1876" y="2339"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="AXA-vS-9yU">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tzp-MT-9pC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sDH-OA-1vR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="5AR-be-l9Q" kind="relationship" relationship="rootViewController" id="hhd-vB-3Ix"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J2E-q4-LfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1160" y="2339"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="addlocation" width="48" height="48"/>
         <image name="wifitethering" width="48" height="48"/>
     </resources>
 </document>
