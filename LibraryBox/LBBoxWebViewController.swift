@@ -28,6 +28,10 @@ class LBBoxWebViewController: UIViewController
         webView.loadRequest(request)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

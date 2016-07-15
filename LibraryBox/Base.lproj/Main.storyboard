@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-TR-8cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1581" y="830"/>
+            <point key="canvasLocation" x="2393" y="830"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -164,7 +164,7 @@
                     <navigationItem key="navigationItem" id="nXq-Pe-T0t"/>
                     <connections>
                         <outlet property="mapView" destination="TbR-BC-Bt2" id="X2g-FR-XUc"/>
-                        <segue destination="h2k-nN-aMG" kind="presentation" identifier="boxContent" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="pVf-9b-uz6"/>
+                        <segue destination="Ftf-sJ-fYB" kind="presentation" identifier="boxContent" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="pVf-9b-uz6"/>
                         <segue destination="kgE-Fn-Cg1" kind="popoverPresentation" identifier="pinningPopover" popoverAnchorView="iJq-bT-GlN" id="rBS-m9-caR">
                             <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
                         </segue>
@@ -173,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="796"/>
+            <point key="canvasLocation" x="1540" y="796"/>
         </scene>
         <!--Box Web View Controller-->
         <scene sceneID="zui-xi-jyu">
@@ -184,45 +184,45 @@
                         <viewControllerLayoutGuide type="bottom" id="TAo-by-DiP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FDY-9E-hMS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aj7-Ie-hLc">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="h2k-nN-aMG" id="WeR-u7-CZj"/>
                                 </connections>
                             </webView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CHG-0K-DAO">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                                <rect key="frame" x="290" y="258" width="20" height="20"/>
                             </activityIndicatorView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
+                                <rect key="frame" x="0.0" y="492" width="600" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="stop" id="fmL-4W-4e7">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                         <connections>
                                             <action selector="stop:" destination="h2k-nN-aMG" id="Ti4-95-7IW"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="29" systemItem="fixedSpace" id="NNs-Ve-Wp1"/>
                                     <barButtonItem systemItem="refresh" id="DlK-EA-k0x">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                         <connections>
                                             <action selector="doRefresh:" destination="h2k-nN-aMG" id="qxE-9j-0vb"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="DFk-s3-ZmN"/>
                                     <barButtonItem title="◄" id="AuM-QV-d5x">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                         <connections>
                                             <action selector="goBack:" destination="h2k-nN-aMG" id="whY-HA-hJj"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="38" systemItem="fixedSpace" id="Llf-Hv-iWk"/>
                                     <barButtonItem title="►" id="f8d-AU-6px">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
                                         <connections>
                                             <action selector="goForward:" destination="h2k-nN-aMG" id="N3H-lh-dPC"/>
                                         </connections>
@@ -230,47 +230,30 @@
                                     <barButtonItem width="25" systemItem="fixedSpace" id="1eg-oK-0FE"/>
                                 </items>
                             </toolbar>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" backIndicatorImage="wifitethering" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-Oz-mE5">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <items>
-                                    <navigationItem title="Box" id="gk2-YV-cNq">
-                                        <barButtonItem key="leftBarButtonItem" title="Wifi Settings" id="Wtj-n8-l2V">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="gotoWifiSettings:" destination="h2k-nN-aMG" id="L0a-mA-v9u"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="8ps-kJ-f2I"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="9d1-4b-dcM"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="FL5-ih-o9r"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="FDY-9E-hMS" secondAttribute="top" constant="44" id="Mz2-4k-ULV"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" constant="22" id="S53-0T-x6t"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="Aj7-Ie-hLc" secondAttribute="leading" id="ULc-eW-RPA"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="yfb-Oz-mE5" secondAttribute="trailing" id="VMW-Lw-Jul"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="YNb-gn-ekl"/>
-                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="omk-Oj-kf3"/>
-                            <constraint firstAttribute="trailing" secondItem="yfb-Oz-mE5" secondAttribute="trailing" id="rgd-UH-HZm"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="centerX" secondItem="CHG-0K-DAO" secondAttribute="centerX" id="s2O-rs-cQH"/>
-                            <constraint firstItem="yfb-Oz-mE5" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="top" constant="-44" id="u8y-z9-7Vy"/>
+                            <constraint firstItem="CHG-0K-DAO" firstAttribute="centerX" secondItem="tXh-kR-fap" secondAttribute="centerX" id="0Px-gJ-4hT"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="O3O-WC-kJK"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" id="PTL-cq-oUn"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="Y8P-mY-VwC"/>
+                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="ZoS-hB-Wug"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="gij-oI-fxP"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="hhS-qU-6Kg"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="1fM-I8-jgL" secondAttribute="bottom" id="xjl-eT-Vzq"/>
+                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="yhj-lS-rJg"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="rFb-aE-Gi5"/>
                     <connections>
                         <outlet property="activityIndicator" destination="CHG-0K-DAO" id="wYB-gG-jP9"/>
                         <outlet property="webView" destination="Aj7-Ie-hLc" id="HKx-gf-n0x"/>
-                        <segue destination="wID-lw-dFt" kind="unwind" identifier="returnToMap" unwindAction="returnToMap:" id="HwR-CF-ccR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Uk-yk-xXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="wID-lw-dFt" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-53" y="830"/>
+            <point key="canvasLocation" x="759" y="830"/>
         </scene>
         <!--Map Pinning Table View Controller-->
         <scene sceneID="eoz-Co-L8p">
@@ -420,8 +403,25 @@
             </objects>
             <point key="canvasLocation" x="1581" y="1593"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UX8-k7-cyo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ftf-sJ-fYB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HPY-Zf-1Hw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="h2k-nN-aMG" kind="relationship" relationship="rootViewController" id="b6v-tf-7Xa"/>
+                        <segue destination="U4o-pm-e3V" kind="unwind" identifier="returnToMap" unwindAction="returnToMap:" id="Lxo-Mv-MCA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T3g-tl-n88" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="U4o-pm-e3V" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-53" y="830"/>
+        </scene>
     </scenes>
-    <resources>
-        <image name="wifitethering" width="48" height="48"/>
-    </resources>
 </document>

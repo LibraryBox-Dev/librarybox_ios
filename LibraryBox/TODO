@@ -1,7 +1,7 @@
+FIX: whose view is not in the window hierarchy - bug
 FIX: iBeacon sensing not possible at app start
 
-
-* WatchKit Testing
 * App Testing
     * check if alert can be shown from pinning popover
+* WatchKit Testing
 * Accessibility
