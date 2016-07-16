@@ -72,7 +72,7 @@ public class LBReachabilityService {
             let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 3)
             let config = NSURLSessionConfiguration.defaultSessionConfiguration()
             let session = NSURLSession(configuration: config)
-            
+            print("CHECKING BOX CONNECTION")
             let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
                 if (error == nil) {
                     if let httpResponse = response as? NSHTTPURLResponse {

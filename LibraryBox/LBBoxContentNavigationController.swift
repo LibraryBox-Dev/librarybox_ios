@@ -12,9 +12,10 @@ import UIKit
 class LBBoxContentNavigationController: UINavigationController
 {
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
+        print("dismissing")
         if((self.presentedViewController) != nil)
         {
             super.dismissViewControllerAnimated(flag, completion: completion)
         }
-    }
+    } 
 }

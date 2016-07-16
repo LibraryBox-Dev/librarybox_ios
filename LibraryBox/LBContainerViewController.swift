@@ -268,46 +268,15 @@ class LBContainerViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 print("going once")
                 self.centerViewController.performSegueWithIdentifier("boxContent", sender: self)
-                
             })
         }
-        else if (!self.connectedToBox && self.presentingBoxViewController)
+        else
         {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                print("to map")
-                self.centerViewController.presentedViewController!.performSegueWithIdentifier("returnToMap", sender: self)
-            })
-            self.wifiButton.hidden = false
-            self.boxButton.hidden = false
-            self.mapPinButton.hidden = false
-            if(rangingViewExpandedStateStore == true)
-            {
-                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
-                self.toggleRightPanel()
-                rangingViewExpandedStateStore = false
-            }
-            if self.centerViewController.ranging
-            {
-                self.startScanningAnimation()
-            }
             self.presentingBoxViewController = false
-        }
-        else if(!self.connectedToBox && !self.presentingBoxViewController)
-        {
-            self.wifiButton.hidden = false
-            self.boxButton.hidden = false
-            self.mapPinButton.hidden = false
-            if(rangingViewExpandedStateStore == true)
-            {
-                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
-                self.toggleRightPanel()
-                rangingViewExpandedStateStore = false
-            }
-            if self.centerViewController.ranging
-            {
-                self.startScanningAnimation()
-            }
-            self.presentingBoxViewController = false
+            let alert:UIAlertController = UIAlertController(title: "Not connected to box", message: "You are currently not connected to a box. Please use the map and beacon ranging to find boxes in your area.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
         }
     }
     
