@@ -1,8 +1,6 @@
 FIX: iBeacon sensing not possible at app start
 FIX: NSArray was mutated while enumerated on app start (e.g. KML parser when not connected to the internet)
-FIX: show alert when not connected to box
 
-* Box Navbar => title "Box", leftNavBarItem => "< Wi-Fi Settings"
 * App Testing
     * check if alert can be shown from pinning popover
 * WatchKit Testing
