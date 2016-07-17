@@ -19,6 +19,11 @@ class LBBoxWebViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Box"
+        let wifiNavBarButton = UIBarButtonItem(title: "< Wi-Fi Settings", style: .Plain, target: self, action:#selector(gotoWifiSettings(_:)))
+        self.navigationItem.leftBarButtonItem = wifiNavBarButton
+        webView.delegate = self
+        webView.userInteractionEnabled = true
         activityIndicator.hidden = true
         //the librarybox URL that is opened (can be any address as LibraryBox redirects)
         let url = NSURL(string: "http://www.librarybox.us")
@@ -26,9 +31,15 @@ class LBBoxWebViewController: UIViewController
         webView.loadRequest(request)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    
     
     @IBAction func gotoWifiSettings(sender: UIBarButtonItem) {
         UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
@@ -49,6 +60,20 @@ class LBBoxWebViewController: UIViewController
     @IBAction func stop(sender: UIBarButtonItem) {
         webView.stopLoading()
     }
+    
+    deinit
+    {
+        webView.stopLoading()
+        webView.delegate = nil
+    }
+    
+    func checkBoxConnection()
+    {
+        activityIndicator.hidden = false
+        activityIndicator.startAnimating()
+        LBReachabilityService.isConnectedToBox()
+    }
+
 }
 
 //MARK: Delegate methods
@@ -67,7 +92,7 @@ extension LBBoxWebViewController: UIWebViewDelegate
     func webView(webView: UIWebView,
                  didFailLoadWithError error: NSError?){
         let alert:UIAlertController = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in self.checkBoxConnection()}))
         self.presentViewController(alert, animated: true, completion: nil)
         activityIndicator.hidden = true
     }

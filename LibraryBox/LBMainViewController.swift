@@ -56,6 +56,7 @@ class LBMainViewController: UIViewController {
     var monitoring: Bool = false
     var ranging: Bool = false
     var reauthorizationNecessary:Bool = false
+    var updatingBeacons: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +140,11 @@ class LBMainViewController: UIViewController {
                 yourNextViewController.currentBoxLocations = currentPoints
             }
         }
+    }
+    
+    @IBAction func returnToMap(segue: UIStoryboardSegue)
+    {
+        print("Back on map")
     }
     
     override func didReceiveMemoryWarning() {
@@ -313,7 +319,12 @@ class LBMainViewController: UIViewController {
     {
         if let myKMLAnnotationArray = myKMLParser.points as? [MKAnnotation]
         {
-            self.mapView.addAnnotations(myKMLAnnotationArray)
+            if(myKMLAnnotationArray.count > 0)
+            {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.mapView.addAnnotations(myKMLAnnotationArray)
+                }
+            }
         }
     }
     
@@ -510,26 +521,31 @@ extension LBMainViewController: LBLocationServiceDelegate
     */
     func rangingBeaconsInRange(beacons: [CLBeacon]!, inRegion region: CLBeaconRegion!) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.currentBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
-            if(self.currentBeacons.count > 0)
+            if(!self.updatingBeacons)
             {
-                self.closestBeacon = self.currentBeacons[0]
-            }
-            let sortedBeacons = self.currentBeacons
-            let filterFactor: Double = 0.2
-            for (index, value) in sortedBeacons.enumerate()
-            {
-                if (index < 20)
+                self.updatingBeacons = true
+                self.currentBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
+                if(self.currentBeacons.count > 0)
                 {
-                    let beacon: CLBeacon = value
-                    if(self._beaconFilteredSigmaDistances[index] < 0.1)
-                    {
-                        self._beaconFilteredSigmaDistances[index] = beacon.accuracy
-                    }
-                    let previousFilteredAccuracy = self._beaconFilteredSigmaDistances[index]
-                    self._beaconFilteredSigmaDistances[index] = (beacon.accuracy * filterFactor) + (previousFilteredAccuracy * (1.0 - filterFactor))
-                    self.currentFilteredBeaconSigmaDistances[index] = self._beaconFilteredSigmaDistances[index]
+                    self.closestBeacon = self.currentBeacons[0]
                 }
+                let sortedBeacons = self.currentBeacons
+                let filterFactor: Double = 0.2
+                for (index, value) in sortedBeacons.enumerate()
+                {
+                    if (index < 20)
+                    {
+                        let beacon: CLBeacon = value
+                        if(self._beaconFilteredSigmaDistances[index] < 0.1)
+                        {
+                            self._beaconFilteredSigmaDistances[index] = beacon.accuracy
+                        }
+                        let previousFilteredAccuracy = self._beaconFilteredSigmaDistances[index]
+                        self._beaconFilteredSigmaDistances[index] = (beacon.accuracy * filterFactor) + (previousFilteredAccuracy * (1.0 - filterFactor))
+                        self.currentFilteredBeaconSigmaDistances[index] = self._beaconFilteredSigmaDistances[index]
+                    }
+                }
+                self.updatingBeacons = false
             }
         }
     }
