@@ -1,12 +1,16 @@
 FIX: iBeacon sensing not possible at app start
-FIX: User Agent in UIWebView => ErrorDomain 204
+FIX: User Agent in UIWebView => ErrorDomain 204 => ignore error
 FIX: Warning: Attempt to present <UIWebRotatingAlertController: 0x1263db400> on <LibraryBox.LBContainerViewController: 0x125e5f500> whose view is not in the window hierarchy!
+FIX: HUD view on device rotation => crash
 FIX: NSArray was mutated while enumerated on app start (e.g. KML parser when not connected to the internet)
 
+
+* UIWebView Share button
+* Box User Interface
+* Handle .zip and .epub files
 * App Testing
     * map pinning script (FusionTable to MyMaps layer)
 * WatchKit Testing
-* Box Interface => Wifi right, Back left
 * Accessibility
 	> http://bjmiller.me/post/62991772034/accessibility-in-ios-easier-than-you-think
 	> http://ronnqvi.st/making-drawrect-accessible/
