@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         catch let error as NSError {
             print(error)  
         }
+        //self.setUserAgent()
 
         
         //setup watchkit connectivity session, if supported
@@ -78,6 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         return true
     }
 
+//    func setUserAgent(){
+//        let userAgent = NSDictionary(object:  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A",forKey: "UserAgent")
+//        NSUserDefaults.standardUserDefaults().registerDefaults(userAgent as! [String : AnyObject])
+//    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

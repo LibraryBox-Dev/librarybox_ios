@@ -52,6 +52,7 @@ class LBContainerViewController: UIViewController {
     //Bool check if connected to a LibraryBox
     var connectedToBox: Bool = false
     var presentingBoxViewController: Bool = false
+    var boxButtonPressed: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -273,9 +274,9 @@ class LBContainerViewController: UIViewController {
         else
         {
             self.presentingBoxViewController = false
-            let alert:UIAlertController = UIAlertController(title: "Not connected to box", message: "You are currently not connected to a box. Please use the map and beacon ranging to find boxes in your area.", preferredStyle: UIAlertControllerStyle.ActionSheet)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.boxButtonPressed = true
+            LBReachabilityService.isConnectedToBox()
+            HUD.show(.Progress)
             
         }
     }
@@ -301,6 +302,7 @@ class LBContainerViewController: UIViewController {
     func setConnectedToBoxBool()
     {
         HUD.hide()
+        self.boxButtonPressed = false
         self.connectedToBox = true
     }
 
@@ -311,6 +313,13 @@ class LBContainerViewController: UIViewController {
     {
         HUD.hide()
         self.connectedToBox = false
+        if(self.boxButtonPressed)
+        {
+            let alert:UIAlertController = UIAlertController(title: "Not connected to box", message: "You are currently not connected to a box. Please use the map and beacon ranging to find boxes in your area.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            self.boxButtonPressed = false
+        }
     }
     
     /**

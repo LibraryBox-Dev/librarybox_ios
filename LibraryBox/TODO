@@ -1,5 +1,5 @@
 FIX: iBeacon sensing not possible at app start
-FIX: User Agent in UIWebView
+FIX: User Agent in UIWebView => ErrorDomain 204
 FIX: Warning: Attempt to present <UIWebRotatingAlertController: 0x1263db400> on <LibraryBox.LBContainerViewController: 0x125e5f500> whose view is not in the window hierarchy!
 FIX: NSArray was mutated while enumerated on app start (e.g. KML parser when not connected to the internet)
 
