@@ -37,6 +37,7 @@ class LBPinningPopoverViewController: UIViewController {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updatePopoverUI(_:)), name: "LBCurrentClosestBeacon", object: nil)
         pinCloseBoxButton.userInteractionEnabled = false
+        pinCloseBoxButton.selected = false
         addAddressButton.selected = true
         http = Http()
     }

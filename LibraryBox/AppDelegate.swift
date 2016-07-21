@@ -9,6 +9,7 @@
 import UIKit
 import WatchConnectivity
 import AeroGearOAuth2
+import AVFoundation
 
 ///The application delegate
 @UIApplicationMain
@@ -30,6 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 140.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch let error as NSError {
+            print(error)
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        }
+        catch let error as NSError {
+            print(error)  
+        }
+
         
         //setup watchkit connectivity session, if supported
         if WCSession.isSupported() {

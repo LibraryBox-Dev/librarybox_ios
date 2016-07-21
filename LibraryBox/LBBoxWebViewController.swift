@@ -24,6 +24,8 @@ class LBBoxWebViewController: UIViewController
         self.navigationItem.leftBarButtonItem = wifiNavBarButton
         webView.delegate = self
         webView.userInteractionEnabled = true
+        webView.allowsInlineMediaPlayback = true
+        webView.mediaPlaybackAllowsAirPlay = true
         activityIndicator.hidden = true
         //the librarybox URL that is opened (can be any address as LibraryBox redirects)
         let url = NSURL(string: "http://www.librarybox.us")

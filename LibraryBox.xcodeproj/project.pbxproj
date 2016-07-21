@@ -382,10 +382,10 @@
 				63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */,
 				63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */,
 				636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */,
+				63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */,
 				63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */,
 				63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */,
 				63781EFE1D393487005B711D /* LBBoxContentNavigationController.swift */,
-				63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
