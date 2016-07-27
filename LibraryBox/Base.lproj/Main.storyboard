@@ -194,57 +194,18 @@
                                     <outlet property="delegate" destination="h2k-nN-aMG" id="WeR-u7-CZj"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CHG-0K-DAO">
-                                <rect key="frame" x="290" y="258" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
-                                <rect key="frame" x="0.0" y="492" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="stop" id="fmL-4W-4e7">
-                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <action selector="stop:" destination="h2k-nN-aMG" id="Ti4-95-7IW"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="29" systemItem="fixedSpace" id="NNs-Ve-Wp1"/>
-                                    <barButtonItem systemItem="refresh" id="DlK-EA-k0x">
-                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <action selector="doRefresh:" destination="h2k-nN-aMG" id="qxE-9j-0vb"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="flexibleSpace" id="DFk-s3-ZmN"/>
-                                    <barButtonItem title="◄" id="AuM-QV-d5x">
-                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <action selector="goBack:" destination="h2k-nN-aMG" id="whY-HA-hJj"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="38" systemItem="fixedSpace" id="Llf-Hv-iWk"/>
-                                    <barButtonItem title="►" id="f8d-AU-6px">
-                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <action selector="goForward:" destination="h2k-nN-aMG" id="N3H-lh-dPC"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="25" systemItem="fixedSpace" id="1eg-oK-0FE"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CHG-0K-DAO" firstAttribute="centerX" secondItem="tXh-kR-fap" secondAttribute="centerX" id="0Px-gJ-4hT"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="1fM-I8-jgL" secondAttribute="bottom" id="4QR-Or-Yae"/>
-                            <constraint firstItem="TAo-by-DiP" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="bottom" id="7LJ-Zh-gxo"/>
-                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="cyf-5h-kiW"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="uri-9U-FEt"/>
-                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="yhj-lS-rJg"/>
+                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="1md-ep-xre"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="1fM-I8-jgL" secondAttribute="bottom" id="FH4-Ji-9TE"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="Vex-GE-8Nm"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="YXw-ut-bfF"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="rFb-aE-Gi5"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="CHG-0K-DAO" id="wYB-gG-jP9"/>
                         <outlet property="webView" destination="Aj7-Ie-hLc" id="HKx-gf-n0x"/>
                     </connections>
                 </viewController>
