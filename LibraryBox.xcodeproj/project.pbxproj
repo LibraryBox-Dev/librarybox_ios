@@ -14,6 +14,7 @@
 		631BDE741CFF8E6100B19B84 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 631BDE731CFF8E6100B19B84 /* KMLParser.m */; };
 		636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */; };
 		637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */; };
+		6373D1F31D4950AD0086DD81 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373D1F21D4950AD0086DD81 /* MimeType.swift */; };
 		63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */; };
 		63754B851D0EFAC6002B2EFE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63754B831D0EFAC6002B2EFE /* Interface.storyboard */; };
 		63754B871D0EFAC6002B2EFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63754B861D0EFAC6002B2EFE /* Assets.xcassets */; };
@@ -121,6 +122,7 @@
 		631BDE731CFF8E6100B19B84 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 		636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBContainerViewController.swift; sourceTree = "<group>"; };
 		637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBWIFIButton.swift; sourceTree = "<group>"; };
+		6373D1F21D4950AD0086DD81 /* MimeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxProximityCircleOverlay.swift; sourceTree = "<group>"; };
 		63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LibraryBox Notifications.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63754B841D0EFAC6002B2EFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				631BDE701CFF8BD700B19B84 /* LBURLDownloadService.swift */,
 				63F7CF3F1D00E9130002C026 /* LBGoogleAPIAccessService.swift */,
 				0AD96B681D180DF900F8A838 /* LBUtilities.swift */,
+				6373D1F21D4950AD0086DD81 /* MimeType.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				631BDE711CFF8BD800B19B84 /* LBURLDownloadService.swift in Sources */,
 				63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */,
 				63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */,
+				6373D1F31D4950AD0086DD81 /* MimeType.swift in Sources */,
 				63781EFF1D393487005B711D /* LBBoxContentNavigationController.swift in Sources */,
 				63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */,
 				63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */,

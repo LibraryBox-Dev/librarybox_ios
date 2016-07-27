@@ -142,14 +142,10 @@ class LBBoxWebViewController: UIViewController
 //MARK: Delegate methods
 extension LBBoxWebViewController: UIWebViewDelegate
 {
-//    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-//        
-//        let url: NSURL = request.URL!
-//        let req: NSURLRequest = NSURLRequest(URL:url)
-//        let conn: NSURLConnection = NSURLConnection(request: req, delegate: self)!
-//        conn.start()
-//        return true
-//    }
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        return true
+    }
     
     
     func webViewDidStartLoad(webView: UIWebView){
@@ -174,7 +170,32 @@ extension LBBoxWebViewController: UIWebViewDelegate
         self.updateButtons()
         reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(doRefresh(_:)))
          self.navigationItem.rightBarButtonItem = reloadButton
-        if(error!.code != 204)
+        if(error!.code == 204)
+        {
+            
+        }
+        else if(error!.code == 102)
+        {
+            let urlString: String = (error?.userInfo["NSErrorFailingURLStringKey"])! as! String
+            print(urlString)
+            let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!) {
+                data, response, error in
+                //TODO!!!!!
+                if let httpResponse = response as? NSHTTPURLResponse {
+                    if let contentType = httpResponse.allHeaderFields["Content-Type"] as? String {
+                        print(contentType)
+                        let filename = self.getDocumentsDirectory().stringByAppendingPathComponent("tempData")
+                        
+                        data?.writeToFile(filename, atomically: true)
+                        
+                        let docController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: filename))
+                        docController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
+                    }
+                }
+            }
+            task.resume()
+        }
+        else
         {
             delay(0.1)
             {
@@ -186,7 +207,11 @@ extension LBBoxWebViewController: UIWebViewDelegate
         
     }
     
-    
+    func getDocumentsDirectory() -> NSString {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
     
 }
 
