@@ -63,11 +63,11 @@ class LBBoxWebViewController: UIViewController
         webView.stopLoading()
     }
     
-    deinit
-    {
-        webView.stopLoading()
-        webView.delegate = nil
-    }
+//    deinit
+//    {
+//        webView.stopLoading()
+//        webView.delegate = nil
+//    }
     
     func checkBoxConnection()
     {
@@ -75,12 +75,31 @@ class LBBoxWebViewController: UIViewController
         activityIndicator.startAnimating()
         LBReachabilityService.isConnectedToBox()
     }
-
+    
+    
 }
+
+//ACTIVITY VIEW CONTROLLER
+//let activityViewController = UIActivityViewController (
+//    activityItems: [(webView.request?.URL.absoluteString)! as NSString],
+//    applicationActivities: nil
+//)
+//
+//presentViewController(activityViewController, animated: true, completion: nil)
 
 //MARK: Delegate methods
 extension LBBoxWebViewController: UIWebViewDelegate
 {
+//    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+//        
+//        let url: NSURL = request.URL!
+//        let req: NSURLRequest = NSURLRequest(URL:url)
+//        let conn: NSURLConnection = NSURLConnection(request: req, delegate: self)!
+//        conn.start()
+//        return true
+//    }
+    
+    
     func webViewDidStartLoad(webView: UIWebView){
         activityIndicator.hidden = false
         activityIndicator.startAnimating()
@@ -93,10 +112,23 @@ extension LBBoxWebViewController: UIWebViewDelegate
     
     func webView(webView: UIWebView,
                  didFailLoadWithError error: NSError?){
+        activityIndicator.stopAnimating()
+        activityIndicator.hidden = true
         let alert:UIAlertController = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in self.checkBoxConnection()}))
         self.presentViewController(alert, animated: true, completion: nil)
-        activityIndicator.hidden = true
+        
     }
-
+    
+    
 }
+
+//extension LBBoxWebViewController: NSURLConnectionDelegate
+//{
+//    func connection(connection: NSURLConnection,
+//                    didReceiveResponse response: NSURLResponse)
+//    {
+//        print(response.MIMEType)
+//    }
+//
+//}

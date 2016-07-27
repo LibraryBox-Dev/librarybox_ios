@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     var window: UIWindow?
     var watchSession: WCSession?
     var containerViewController: LBContainerViewController?
+    var nav: LBBoxContentNavigationController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //set and register local notification settings
@@ -56,17 +57,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             watchSession!.activateSession()
         }
         
+        containerViewController = LBContainerViewController()
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        nav = storyboard.instantiateViewControllerWithIdentifier("BoxContentNavigationController") as? LBBoxContentNavigationController
                 
         //set root view controller of app window to LBContainerViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        containerViewController = LBContainerViewController()
-        window!.rootViewController = containerViewController
-        window!.makeKeyAndVisible()
-
+//        containerViewController = LBContainerViewController()
+//        window!.rootViewController = containerViewController
+        self.switchToMainViewController()
+        
         return true
     }
     
+    func switchToMainViewController() {
+        
+        // switch root view controllers
+        
+        window!.rootViewController = containerViewController
+        window!.makeKeyAndVisible()
+
+        
+    }
     
+    func switchToBoxViewController() {
+        
+        // switch back to view controller 1
+        
+        window!.rootViewController = nav
+        window!.makeKeyAndVisible()        
+    }
+    
+    func checkForRootViewController()
+    {
+        var root: UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
+        while ((root.presentedViewController) != nil) {
+            root = root.presentedViewController!
+        }
+        UIApplication.sharedApplication().keyWindow?.frame = UIScreen.mainScreen().bounds
+        UIApplication.sharedApplication().keyWindow?.rootViewController = root
+        UIApplication.sharedApplication().keyWindow?.makeKeyAndVisible()
+    }
     
     func application(application: UIApplication,
                      openURL url: NSURL,

@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="21" id="cyu-ev-FkV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOT IN RANGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxF-bk-4vZ">
@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="21" id="Pr8-ls-wmi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lK-vP-lc8">
@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-TR-8cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2393" y="830"/>
+            <point key="canvasLocation" x="2337" y="796"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -194,10 +194,10 @@
                                     <outlet property="delegate" destination="h2k-nN-aMG" id="WeR-u7-CZj"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CHG-0K-DAO">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CHG-0K-DAO">
                                 <rect key="frame" x="290" y="258" width="20" height="20"/>
                             </activityIndicatorView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
                                 <rect key="frame" x="0.0" y="492" width="600" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="stop" id="fmL-4W-4e7">
@@ -234,13 +234,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CHG-0K-DAO" firstAttribute="centerX" secondItem="tXh-kR-fap" secondAttribute="centerX" id="0Px-gJ-4hT"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="O3O-WC-kJK"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" id="PTL-cq-oUn"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="Y8P-mY-VwC"/>
-                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="ZoS-hB-Wug"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="gij-oI-fxP"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="hhS-qU-6Kg"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="1fM-I8-jgL" secondAttribute="bottom" id="xjl-eT-Vzq"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="1fM-I8-jgL" secondAttribute="bottom" id="4QR-Or-Yae"/>
+                            <constraint firstItem="TAo-by-DiP" firstAttribute="top" secondItem="Aj7-Ie-hLc" secondAttribute="bottom" id="7LJ-Zh-gxo"/>
+                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="cyf-5h-kiW"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="uri-9U-FEt"/>
                             <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="yhj-lS-rJg"/>
                         </constraints>
                     </view>
@@ -406,7 +403,7 @@
         <!--Box Content Navigation Controller-->
         <scene sceneID="UX8-k7-cyo">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ftf-sJ-fYB" customClass="LBBoxContentNavigationController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BoxContentNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Ftf-sJ-fYB" customClass="LBBoxContentNavigationController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HPY-Zf-1Hw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
