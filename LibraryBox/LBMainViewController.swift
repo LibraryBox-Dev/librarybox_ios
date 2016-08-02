@@ -199,13 +199,23 @@ class LBMainViewController: UIViewController {
             else if(!ranging || !monitoring)
             {
                 self.presentingErrors = true
-                //TODO: if user defaults value for first launch is not set or false then set it and set presentingErrors to false again, otherwhise show the error
-                delay(0.4){
-                    //"showAlert" function that creates an alert message with an "OK" button - from LBUtilities
-                    showAlert("No beacon sensing is available on this device at the moment.", title: "iBeacon sensing currently not possible.", fn: {
-                        self.presentingErrors = false
-                    })
+                let defaults = NSUserDefaults.standardUserDefaults()
+                if let firstLaunch = defaults.stringForKey("firstLaunch") {
+                    if(firstLaunch == "done")
+                    {
+                        delay(0.4){
+                            //"showAlert" function that creates an alert message with an "OK" button - from LBUtilities
+                            showAlert("No beacon sensing is available on this device at the moment.", title: "iBeacon sensing currently not possible.", fn: {
+                                self.presentingErrors = false
+                            })
+                        }
+                    }
                 }
+                else
+                {
+                    defaults.setObject("done", forKey: "firstLaunch")
+                }
+                
             }
         }
     }

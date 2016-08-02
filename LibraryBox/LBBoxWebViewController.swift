@@ -18,6 +18,7 @@ class LBBoxWebViewController: UIViewController
     var reloadButton: UIBarButtonItem?
     var backButton: UIBarButtonItem?
     var forwardButton: UIBarButtonItem?
+    var interactionController: UIDocumentInteractionController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,20 +177,30 @@ extension LBBoxWebViewController: UIWebViewDelegate
         }
         else if(error!.code == 102)
         {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             let urlString: String = (error?.userInfo["NSErrorFailingURLStringKey"])! as! String
             print(urlString)
             let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!) {
                 data, response, error in
-                //TODO!!!!!
                 if let httpResponse = response as? NSHTTPURLResponse {
                     if let contentType = httpResponse.allHeaderFields["Content-Type"] as? String {
                         print(contentType)
-                        let filename = self.getDocumentsDirectory().stringByAppendingPathComponent("tempData")
+                        
+                        var filePath = NSURL(string: urlString)!.lastPathComponent!
+                        if (filePath.rangeOfString(".epub.zip") != nil)
+                        {
+                            filePath = (NSURL(string: urlString)!.URLByDeletingPathExtension?.lastPathComponent)!
+                        }
+                        let filename = self.getDocumentsDirectory().stringByAppendingPathComponent(filePath)
                         
                         data?.writeToFile(filename, atomically: true)
                         
-                        let docController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: filename))
-                        docController.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
+                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                        self.interactionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: filename))
+                        delay(0.1)
+                        {
+                            self.interactionController!.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
+                        }
                     }
                 }
             }
@@ -214,13 +225,3 @@ extension LBBoxWebViewController: UIWebViewDelegate
     }
     
 }
-
-//extension LBBoxWebViewController: NSURLConnectionDelegate
-//{
-//    func connection(connection: NSURLConnection,
-//                    didReceiveResponse response: NSURLResponse)
-//    {
-//        print(response.MIMEType)
-//    }
-//
-//}

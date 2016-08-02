@@ -81,7 +81,10 @@ class LBPinningPopoverViewController: UIViewController {
     {
         if let locationForPinning = self.delegate?.currentLocation()
         {
-            HUD.show(.Progress)
+            delay(0.1)
+            {
+                HUD.show(.Progress)
+            }
             if(!self.checkForDublicatePinning(locationForPinning))
             {
                 //LBGoogleAPIAccessService.clientId() returns the client ID of the service for the app in the scope
@@ -117,7 +120,10 @@ class LBPinningPopoverViewController: UIViewController {
                         
                         //Error checking for http request
                         if (error != nil) {
-                            HUD.hide()
+                            delay(0.1)
+                            {
+                                HUD.hide()
+                            }
                             let alert:UIAlertController = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                             self.presentViewController(alert, animated: true, completion: nil)
@@ -138,7 +144,10 @@ class LBPinningPopoverViewController: UIViewController {
             }
             else
             {
-                HUD.hide()
+                delay(0.1)
+                {
+                    HUD.hide()
+                }
                 let alert:UIAlertController = UIAlertController(title: "Box already pinned", message: "The box is already pinned on the map.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
