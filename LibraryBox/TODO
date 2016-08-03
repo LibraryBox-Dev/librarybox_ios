@@ -1,7 +1,12 @@
-FIX: iBeacon sensing not possible at app start
-FIX: NSArray was mutated while enumerated on app start (e.g. KML parser when not connected to the internet)
+FIX: NSArray was mutated while enumerated (e.g. KML parser when not connected to the internet ?)
 
-* App Testing
-    * check if alert can be shown from pinning popover
 * WatchKit Testing
+
+
+
+
+VERSION 1.1
 * Accessibility
+    > http://bjmiller.me/post/62991772034/accessibility-in-ios-easier-than-you-think
+    > http://ronnqvi.st/making-drawrect-accessible/
+* Pin orange/black based on LibraryBox/PirateBox

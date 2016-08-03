@@ -21,28 +21,21 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proximity to closest box:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsf-7Y-98p">
                                 <rect key="frame" x="20" y="8" width="160" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="cyu-ev-FkV"/>
+                                    <constraint firstAttribute="height" constant="21" id="Nkf-Rq-Qkh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOT IN RANGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxF-bk-4vZ">
                                 <rect key="frame" x="20" y="31" width="160" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Pr8-ls-wmi"/>
+                                    <constraint firstAttribute="height" constant="21" id="eIr-6Y-I98"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lK-vP-lc8">
-                                <rect key="frame" x="47" y="53" width="107" height="30"/>
-                                <state key="normal" title="Mark Close Box"/>
-                                <connections>
-                                    <action selector="pinCloseBox:" destination="kgE-Fn-Cg1" eventType="touchUpInside" id="rdy-8W-IQ8"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y15-E3-ch3">
                                 <rect key="frame" x="42" y="142" width="117" height="30"/>
                                 <state key="normal" title="Add Box Address"/>
@@ -51,28 +44,35 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sfQ-D9-Emu">
-                                <rect key="frame" x="30" y="91" width="141" height="29"/>
+                                <rect key="frame" x="30" y="60" width="141" height="29"/>
                                 <segments>
                                     <segment title="LibraryBox"/>
                                     <segment title="PirateBox"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lK-vP-lc8">
+                                <rect key="frame" x="47" y="96" width="107" height="30"/>
+                                <state key="normal" title="Mark Close Box"/>
+                                <connections>
+                                    <action selector="pinCloseBox:" destination="kgE-Fn-Cg1" eventType="touchUpInside" id="rdy-8W-IQ8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4lK-vP-lc8" firstAttribute="top" secondItem="LxF-bk-4vZ" secondAttribute="bottom" constant="1" id="5wb-b2-Kvr"/>
-                            <constraint firstItem="tsf-7Y-98p" firstAttribute="centerX" secondItem="ZSO-V5-CtR" secondAttribute="centerX" id="F0z-Ls-KyZ"/>
-                            <constraint firstItem="2cv-Qu-D4z" firstAttribute="top" secondItem="Y15-E3-ch3" secondAttribute="bottom" constant="8" symbolic="YES" id="Ld7-Kc-B6T"/>
-                            <constraint firstItem="tsf-7Y-98p" firstAttribute="leading" secondItem="LxF-bk-4vZ" secondAttribute="leading" id="O6p-9l-TXi"/>
-                            <constraint firstItem="tsf-7Y-98p" firstAttribute="trailing" secondItem="LxF-bk-4vZ" secondAttribute="trailing" id="TAI-cb-PXJ"/>
-                            <constraint firstItem="tsf-7Y-98p" firstAttribute="top" secondItem="joh-YC-5ai" secondAttribute="bottom" constant="8" symbolic="YES" id="a8S-PC-dHE"/>
-                            <constraint firstItem="LxF-bk-4vZ" firstAttribute="centerX" secondItem="4lK-vP-lc8" secondAttribute="centerX" id="awz-gl-OMJ"/>
-                            <constraint firstItem="LxF-bk-4vZ" firstAttribute="top" secondItem="tsf-7Y-98p" secondAttribute="bottom" constant="2" id="j4i-ot-AKx"/>
-                            <constraint firstItem="sfQ-D9-Emu" firstAttribute="leading" secondItem="ZSO-V5-CtR" secondAttribute="leadingMargin" constant="14" id="kkX-tp-UCW"/>
-                            <constraint firstItem="sfQ-D9-Emu" firstAttribute="top" secondItem="4lK-vP-lc8" secondAttribute="bottom" constant="8" symbolic="YES" id="nyP-Cy-UlZ"/>
-                            <constraint firstItem="4lK-vP-lc8" firstAttribute="centerX" secondItem="sfQ-D9-Emu" secondAttribute="centerX" id="qbv-yY-IJx"/>
-                            <constraint firstItem="sfQ-D9-Emu" firstAttribute="centerX" secondItem="Y15-E3-ch3" secondAttribute="centerX" id="tns-As-iga"/>
-                            <constraint firstItem="tsf-7Y-98p" firstAttribute="leading" secondItem="ZSO-V5-CtR" secondAttribute="leadingMargin" constant="4" id="uwa-Ki-6ab"/>
+                            <constraint firstItem="LxF-bk-4vZ" firstAttribute="centerX" secondItem="sfQ-D9-Emu" secondAttribute="centerX" id="1La-e7-wEU"/>
+                            <constraint firstItem="sfQ-D9-Emu" firstAttribute="leading" secondItem="ZSO-V5-CtR" secondAttribute="leadingMargin" constant="14" id="EB7-34-XqZ"/>
+                            <constraint firstItem="LxF-bk-4vZ" firstAttribute="top" secondItem="tsf-7Y-98p" secondAttribute="bottom" constant="2" id="EjS-Vs-RWs"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="leading" secondItem="ZSO-V5-CtR" secondAttribute="leadingMargin" constant="4" id="GB1-lT-DNe"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="trailing" secondItem="LxF-bk-4vZ" secondAttribute="trailing" id="OVh-jj-d2E"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="top" secondItem="joh-YC-5ai" secondAttribute="bottom" constant="8" symbolic="YES" id="WYh-Vw-uEB"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="centerX" secondItem="ZSO-V5-CtR" secondAttribute="centerX" id="YFt-6q-n9P"/>
+                            <constraint firstItem="4lK-vP-lc8" firstAttribute="centerX" secondItem="Y15-E3-ch3" secondAttribute="centerX" id="eTm-S3-hL8"/>
+                            <constraint firstItem="tsf-7Y-98p" firstAttribute="leading" secondItem="LxF-bk-4vZ" secondAttribute="leading" id="mBI-wK-QYp"/>
+                            <constraint firstItem="sfQ-D9-Emu" firstAttribute="centerX" secondItem="4lK-vP-lc8" secondAttribute="centerX" id="mnY-NT-U5o"/>
+                            <constraint firstItem="sfQ-D9-Emu" firstAttribute="top" secondItem="LxF-bk-4vZ" secondAttribute="bottom" constant="8" symbolic="YES" id="nsF-2x-W0O"/>
+                            <constraint firstItem="2cv-Qu-D4z" firstAttribute="top" secondItem="Y15-E3-ch3" secondAttribute="bottom" constant="8" symbolic="YES" id="uIO-BB-LFW"/>
+                            <constraint firstItem="4lK-vP-lc8" firstAttribute="top" secondItem="sfQ-D9-Emu" secondAttribute="bottom" constant="8" symbolic="YES" id="zPz-uS-Txj"/>
                         </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="200" height="180"/>
@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfT-TR-8cQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2393" y="830"/>
+            <point key="canvasLocation" x="2337" y="796"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -194,60 +194,18 @@
                                     <outlet property="delegate" destination="h2k-nN-aMG" id="WeR-u7-CZj"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CHG-0K-DAO">
-                                <rect key="frame" x="290" y="258" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXh-kR-fap">
-                                <rect key="frame" x="0.0" y="492" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="stop" id="fmL-4W-4e7">
-                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <action selector="stop:" destination="h2k-nN-aMG" id="Ti4-95-7IW"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="29" systemItem="fixedSpace" id="NNs-Ve-Wp1"/>
-                                    <barButtonItem systemItem="refresh" id="DlK-EA-k0x">
-                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <action selector="doRefresh:" destination="h2k-nN-aMG" id="qxE-9j-0vb"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="flexibleSpace" id="DFk-s3-ZmN"/>
-                                    <barButtonItem title="◄" id="AuM-QV-d5x">
-                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <action selector="goBack:" destination="h2k-nN-aMG" id="whY-HA-hJj"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="38" systemItem="fixedSpace" id="Llf-Hv-iWk"/>
-                                    <barButtonItem title="►" id="f8d-AU-6px">
-                                        <color key="tintColor" name="selectedMenuItemColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <action selector="goForward:" destination="h2k-nN-aMG" id="N3H-lh-dPC"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="25" systemItem="fixedSpace" id="1eg-oK-0FE"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CHG-0K-DAO" firstAttribute="centerX" secondItem="tXh-kR-fap" secondAttribute="centerX" id="0Px-gJ-4hT"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="O3O-WC-kJK"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="centerY" secondItem="CHG-0K-DAO" secondAttribute="centerY" id="PTL-cq-oUn"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="Y8P-mY-VwC"/>
-                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="ZoS-hB-Wug"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="tXh-kR-fap" secondAttribute="leading" id="gij-oI-fxP"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="trailing" secondItem="tXh-kR-fap" secondAttribute="trailing" id="hhS-qU-6Kg"/>
-                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="1fM-I8-jgL" secondAttribute="bottom" id="xjl-eT-Vzq"/>
-                            <constraint firstItem="tXh-kR-fap" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="yhj-lS-rJg"/>
+                            <constraint firstAttribute="trailing" secondItem="Aj7-Ie-hLc" secondAttribute="trailing" id="1md-ep-xre"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="top" secondItem="1fM-I8-jgL" secondAttribute="bottom" id="FH4-Ji-9TE"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="leading" secondItem="FDY-9E-hMS" secondAttribute="leading" id="Vex-GE-8Nm"/>
+                            <constraint firstItem="Aj7-Ie-hLc" firstAttribute="bottom" secondItem="TAo-by-DiP" secondAttribute="top" id="YXw-ut-bfF"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="rFb-aE-Gi5"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="CHG-0K-DAO" id="wYB-gG-jP9"/>
                         <outlet property="webView" destination="Aj7-Ie-hLc" id="HKx-gf-n0x"/>
                     </connections>
                 </viewController>
@@ -406,7 +364,7 @@
         <!--Box Content Navigation Controller-->
         <scene sceneID="UX8-k7-cyo">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ftf-sJ-fYB" customClass="LBBoxContentNavigationController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BoxContentNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Ftf-sJ-fYB" customClass="LBBoxContentNavigationController" customModule="LibraryBox" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HPY-Zf-1Hw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -69,7 +69,7 @@ public class LBReachabilityService {
      */
     class func isConnectedToBox() {
         if let url = NSURL(string: "http://192.168.77.1/config.json") {
-            let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 3)
+            let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 2)
             let config = NSURLSessionConfiguration.defaultSessionConfiguration()
             let session = NSURLSession(configuration: config)
             print("CHECKING BOX CONNECTION")

@@ -32,3 +32,6 @@ func showAlert(text : NSString, title : NSString, fn:()->Void){
     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in fn()}))
     UIApplication.sharedApplication().delegate?.window!?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
 }
+
+
+

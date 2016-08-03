@@ -56,6 +56,8 @@ class LBMainViewController: UIViewController {
     var monitoring: Bool = false
     var ranging: Bool = false
     var reauthorizationNecessary:Bool = false
+    var reauthorizationCancelled: Bool = false
+    var presentingErrors: Bool = false
     var updatingBeacons: Bool = false
     
     override func viewDidLoad() {
@@ -156,30 +158,64 @@ class LBMainViewController: UIViewController {
     */
     func presentErrors()
     {
-        if(reauthorizationNecessary)
+        if(!self.presentingErrors)
         {
-            let title = "Missing Location Access"
-            let message = "Location Access (Always) is required. User location is updated when the app is active. Beacon ranging is activated when the app is active. Beacon monitoring is running when the app is active, inactive or in the background. Click Settings to update the location access settings."
-            let cancelButtonTitle = "Cancel"
-            let settingsButtonTitle = "Settings"
-            let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertActionStyle.Cancel, handler: nil)
-            let settingsAction = UIAlertAction.init(title: settingsButtonTitle, style: UIAlertActionStyle.Default) {
-                (action: UIAlertAction) -> Void in
-                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+            if(reauthorizationNecessary && !reauthorizationCancelled)
+            {
+                self.presentingErrors = true
+                let title = "Missing Location Access"
+                let message = "Location Access (Always) is required. User location is updated when the app is active. Beacon ranging is activated when the app is active. Beacon monitoring is running when the app is active, inactive or in the background. Click Settings to update the location access settings."
+                let cancelButtonTitle = "Cancel"
+                let settingsButtonTitle = "Settings"
+                let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertActionStyle.Cancel) {
+                    (action: UIAlertAction) -> Void in
+                    self.presentingErrors = false
+                    self.reauthorizationCancelled = true
+                    if(!self.ranging || !self.monitoring)
+                    {
+                        self.presentingErrors = true
+                        delay(0.4){
+                            //"showAlert" function that creates an alert message with an "OK" button - from LBUtilities
+                            showAlert("No beacon sensing is available on this device at the moment.", title: "iBeacon sensing currently not possible.", fn: {
+                                self.presentingErrors = false
+                            })
+                        }
+                    }
+                }
+
+                let settingsAction = UIAlertAction.init(title: settingsButtonTitle, style: UIAlertActionStyle.Default) {
+                    (action: UIAlertAction) -> Void in
+                    self.presentingErrors = false
+                    UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+                }
+                alertController.addAction(cancelAction);
+                alertController.addAction(settingsAction);
+                //"delay" function that enables a delay on Grand Central Dispatch - from LBUtilities
+                delay(0.4){
+                        UIApplication.sharedApplication().delegate?.window!?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+                }
             }
-            alertController.addAction(cancelAction);
-            alertController.addAction(settingsAction);
-            //"delay" function that enables a delay on Grand Central Dispatch - from LBUtilities
-            delay(0.4){
-                    UIApplication.sharedApplication().delegate?.window!?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
-            }
-        }
-        else if(!ranging || !monitoring)
-        {
-            delay(0.4){
-                //"showAlert" function that creates an alert message with an "OK" button - from LBUtilities
-                showAlert("No beacon sensing is available on this device at the moment.", title: "iBeacon sensing currently not possible.", fn: {})
+            else if(!ranging || !monitoring)
+            {
+                self.presentingErrors = true
+                let defaults = NSUserDefaults.standardUserDefaults()
+                if let firstLaunch = defaults.stringForKey("firstLaunch") {
+                    if(firstLaunch == "done")
+                    {
+                        delay(0.4){
+                            //"showAlert" function that creates an alert message with an "OK" button - from LBUtilities
+                            showAlert("No beacon sensing is available on this device at the moment.", title: "iBeacon sensing currently not possible.", fn: {
+                                self.presentingErrors = false
+                            })
+                        }
+                    }
+                }
+                else
+                {
+                    defaults.setObject("done", forKey: "firstLaunch")
+                }
+                
             }
         }
     }

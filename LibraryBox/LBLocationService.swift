@@ -97,10 +97,41 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     
     //SETUP OF BEACON REGION FOR MONITORING AND RANGING
     let beaconRegion: CLBeaconRegion = {
-        let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
-        theRegion.notifyEntryStateOnDisplay = true
-        //UNLocationNotificationTrigger(region: region, repeats: false);
-        return theRegion
+        let beaconIdentifierUserDefault: Bool = NSUserDefaults.standardUserDefaults().boolForKey("customIdentifier")
+        if(!beaconIdentifierUserDefault)
+        {
+            let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
+            theRegion.notifyEntryStateOnDisplay = true
+            //UNLocationNotificationTrigger(region: region, repeats: false);
+            return theRegion
+        }
+        else
+        {
+            if let idString: String = NSUserDefaults.standardUserDefaults().stringForKey("beaconIdentifier")
+            {
+                if let uuidString = NSUUID(UUIDString: idString)
+                {
+                    let aRegion: CLBeaconRegion = CLBeaconRegion(proximityUUID: uuidString, identifier: "Identifier")
+                    aRegion.notifyEntryStateOnDisplay = true
+                    //UNLocationNotificationTrigger(region: region, repeats: false);
+                    return aRegion
+                }
+                else
+                {
+                    let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
+                    theRegion.notifyEntryStateOnDisplay = true
+                    //UNLocationNotificationTrigger(region: region, repeats: false);
+                    return theRegion
+                }
+            }
+            else
+            {
+                let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
+                theRegion.notifyEntryStateOnDisplay = true
+                //UNLocationNotificationTrigger(region: region, repeats: false);
+                return theRegion
+            }
+        }
     }()
     
     /**

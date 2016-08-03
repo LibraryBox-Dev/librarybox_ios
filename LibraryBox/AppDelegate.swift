@@ -9,6 +9,7 @@
 import UIKit
 import WatchConnectivity
 import AeroGearOAuth2
+import AVFoundation
 
 ///The application delegate
 @UIApplicationMain
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     var window: UIWindow?
     var watchSession: WCSession?
     var containerViewController: LBContainerViewController?
+    var nav: LBBoxContentNavigationController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //set and register local notification settings
@@ -31,6 +33,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch let error as NSError {
+            print(error)
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        }
+        catch let error as NSError {
+            print(error)  
+        }
+        //self.setUserAgent()
+
+        
         //setup watchkit connectivity session, if supported
         if WCSession.isSupported() {
             watchSession = WCSession.defaultSession()
@@ -38,17 +57,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             watchSession!.activateSession()
         }
         
+        containerViewController = LBContainerViewController()
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        nav = storyboard.instantiateViewControllerWithIdentifier("BoxContentNavigationController") as? LBBoxContentNavigationController
                 
         //set root view controller of app window to LBContainerViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        containerViewController = LBContainerViewController()
-        window!.rootViewController = containerViewController
-        window!.makeKeyAndVisible()
-
+        self.switchToMainViewController()
+        
         return true
     }
     
+    func switchToMainViewController() {
+        window!.rootViewController = containerViewController
+        window!.makeKeyAndVisible()
+
+        
+    }
     
+    func switchToBoxViewController() {
+        window!.rootViewController = nav
+        window!.makeKeyAndVisible()        
+    }
     
     func application(application: UIApplication,
                      openURL url: NSURL,
@@ -61,6 +91,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         return true
     }
 
+//    func setUserAgent(){
+//        let userAgent = NSDictionary(object:  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A",forKey: "UserAgent")
+//        NSUserDefaults.standardUserDefaults().registerDefaults(userAgent as! [String : AnyObject])
+//    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

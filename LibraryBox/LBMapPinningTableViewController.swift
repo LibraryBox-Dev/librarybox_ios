@@ -130,7 +130,10 @@ class LBMapPinningTableViewController: UITableViewController
     @IBAction func pinBox(sender: UIButton) {
         if let locationForPinning = self.placemarkForPinning.location
         {
-            HUD.show(.Progress)
+            delay(0.1)
+            {
+                HUD.show(.Progress)
+            }
             let googleConfig = GoogleConfig(
                 
                 //LBGoogleAPIAccessService.clientId() returns the client ID of the service for the app in the scope
@@ -165,7 +168,10 @@ class LBMapPinningTableViewController: UITableViewController
                     
                     //Error checking for http request
                     if (error != nil) {
-                        HUD.hide()
+                        delay(0.1)
+                        {
+                            HUD.hide()
+                        }
                         let alert:UIAlertController = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                         self.presentViewController(alert, animated: true, completion: nil)
