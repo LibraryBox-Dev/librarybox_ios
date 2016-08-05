@@ -96,11 +96,12 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     var currentLoc: CLLocation!
     
     //SETUP OF BEACON REGION FOR MONITORING AND RANGING
+    //E2C56DB5-DFFB-48D2-B060-D0F5A71096E0
     let beaconRegion: CLBeaconRegion = {
         let beaconIdentifierUserDefault: Bool = NSUserDefaults.standardUserDefaults().boolForKey("customIdentifier")
         if(!beaconIdentifierUserDefault)
         {
-            let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
+            let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")!, identifier: "Identifier")
             theRegion.notifyEntryStateOnDisplay = true
             //UNLocationNotificationTrigger(region: region, repeats: false);
             return theRegion
@@ -118,7 +119,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
                 }
                 else
                 {
-                    let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
+                    let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")!, identifier: "Identifier")
                     theRegion.notifyEntryStateOnDisplay = true
                     //UNLocationNotificationTrigger(region: region, repeats: false);
                     return theRegion
@@ -126,7 +127,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             }
             else
             {
-                let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0")!, identifier: "Identifier")
+                let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")!, identifier: "Identifier")
                 theRegion.notifyEntryStateOnDisplay = true
                 //UNLocationNotificationTrigger(region: region, repeats: false);
                 return theRegion
