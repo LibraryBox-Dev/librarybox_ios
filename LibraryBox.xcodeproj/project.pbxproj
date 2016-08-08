@@ -37,6 +37,7 @@
 		63781EFB1D365807005B711D /* LBPinningPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */; };
 		63781EFF1D393487005B711D /* LBBoxContentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63781EFE1D393487005B711D /* LBBoxContentNavigationController.swift */; };
 		639E6CC91D11CF1600F7953B /* LBReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */; };
+		63A5ED8C1D58BDA400F9D96E /* LBAppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A5ED8B1D58BDA400F9D96E /* LBAppInfoViewController.swift */; };
 		63B8526F1CFB714800DCDAC7 /* LBBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */; };
 		63B852711CFB976500DCDAC7 /* LBRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */; };
 		63B852731CFBA1B000DCDAC7 /* LBPinningButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */; };
@@ -160,6 +161,7 @@
 		63A275061D2175BA00EE2CF5 /* LibraryBox Notifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "LibraryBox Notifications.entitlements"; sourceTree = "<group>"; };
 		63A275071D2175E600EE2CF5 /* LibraryBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LibraryBox.entitlements; sourceTree = "<group>"; };
 		63A275081D21765500EE2CF5 /* LibraryBox Notifications Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "LibraryBox Notifications Extension.entitlements"; sourceTree = "<group>"; };
+		63A5ED8B1D58BDA400F9D96E /* LBAppInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBAppInfoViewController.swift; sourceTree = "<group>"; };
 		63B8526E1CFB714800DCDAC7 /* LBBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxButton.swift; sourceTree = "<group>"; };
 		63B852701CFB976500DCDAC7 /* LBRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBRoundedButton.swift; sourceTree = "<group>"; };
 		63B852721CFBA1B000DCDAC7 /* LBPinningButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningButton.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */,
 				63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */,
 				63781EFE1D393487005B711D /* LBBoxContentNavigationController.swift */,
+				63A5ED8B1D58BDA400F9D96E /* LBAppInfoViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -565,7 +568,7 @@
 				TargetAttributes = {
 					63754B801D0EFAC6002B2EFE = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = M9AG4A3F6L;
+						DevelopmentTeam = 9N58VQ96WQ;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -574,7 +577,7 @@
 					};
 					63754B8C1D0EFAC6002B2EFE = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = M9AG4A3F6L;
+						DevelopmentTeam = 9N58VQ96WQ;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -583,7 +586,7 @@
 					};
 					63E33E961CF2E7A9005F6F5C = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = M9AG4A3F6L;
+						DevelopmentTeam = 9N58VQ96WQ;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -835,6 +838,7 @@
 				6373D1F31D4950AD0086DD81 /* MimeType.swift in Sources */,
 				63781EFF1D393487005B711D /* LBBoxContentNavigationController.swift in Sources */,
 				63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */,
+				63A5ED8C1D58BDA400F9D96E /* LBAppInfoViewController.swift in Sources */,
 				63E33ECF1CF2EB84005F6F5C /* LBLocationService.swift in Sources */,
 				63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */,
 				63E014FE1D01D20E00269FD6 /* LBMapPinningTableViewController.swift in Sources */,
@@ -924,10 +928,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "LibraryBox Notifications Extension/LibraryBox Notifications Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "LibraryBox Notifications Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBoxIOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -940,10 +944,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "LibraryBox Notifications Extension/LibraryBox Notifications Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "LibraryBox Notifications Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBoxIOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -957,13 +961,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "LibraryBox Notifications/LibraryBox Notifications.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = LibraryBox_Notifications_Extension;
 				INFOPLIST_FILE = "LibraryBox Notifications/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBoxIOS.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -976,13 +982,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "LibraryBox Notifications/LibraryBox Notifications.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = LibraryBox_Notifications_Extension;
 				INFOPLIST_FILE = "LibraryBox Notifications/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBoxIOS.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1084,11 +1092,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LibraryBox/LibraryBox.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LibraryBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBoxIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LibraryBox/LibraryBox-Bridging-Header.h";
@@ -1103,11 +1111,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LibraryBox/LibraryBox.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Haselberger (SG4R9N6TCM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LibraryBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.berkmancenter.LibraryBoxIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LibraryBox/LibraryBox-Bridging-Header.h";
