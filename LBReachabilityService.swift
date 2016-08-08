@@ -66,9 +66,10 @@ public class LBReachabilityService {
     
     /**
      Checks, if connected to a box by requesting the config.json file that is present at the box. If the URL can be found, a notification is posted via NSNotificationCenter that the device is connected to a box. Otherwise, a notification is sent via NSNotificationCenter that it is not connected.
+     //http://192.168.77.1/config.json
      */
     class func isConnectedToBox() {
-        if let url = NSURL(string: "http://192.168.77.1/config.json") {
+        if let url = NSURL(string: "http://librarybox.us/config.json") {
             let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 2)
             let config = NSURLSessionConfiguration.defaultSessionConfiguration()
             let session = NSURLSession(configuration: config)
