@@ -1,6 +1,6 @@
 # librarybox_ios
-Github Repository for the open source LIbraryBox iOS app
-
+LibraryBox iOS 
+An open source application for the iOS platform written in Swift
 
 ##Development
 ###Requirements
