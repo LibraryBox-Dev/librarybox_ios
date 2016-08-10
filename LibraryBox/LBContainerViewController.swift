@@ -331,6 +331,8 @@ class LBContainerViewController: UIViewController {
         {
             self.centerViewController.presentingErrors = true
             let alert:UIAlertController = UIAlertController(title: "Not connected to box", message: "You are currently not connected to a box. Please use the map and beacon ranging to find boxes in your area. Connect to the box WiFi network.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alert.popoverPresentationController?.sourceView = self.boxButton
+            alert.popoverPresentationController?.sourceRect = self.boxButton.bounds
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
                 (action: UIAlertAction) -> Void in
                 self.centerViewController.presentingErrors = false

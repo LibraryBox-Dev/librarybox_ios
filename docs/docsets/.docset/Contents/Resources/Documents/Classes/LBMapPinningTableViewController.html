@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LBMapPinningTableViewController Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/LBMapPinningTableViewController" class="dashAnchor"></a>
+    <a title="LBMapPinningTableViewController Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (40% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        LBMapPinningTableViewController Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBAppInfoViewController.html">LBAppInfoViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBeaconRangingView.html">LBBeaconRangingView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBeaconRangingViewController.html">LBBeaconRangingViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxButton.html">LBBoxButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxContentNavigationController.html">LBBoxContentNavigationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10LibraryBox27LBBoxProximityCircleOverlay">LBBoxProximityCircleOverlay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxWebViewController.html">LBBoxWebViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBContainerViewController.html">LBContainerViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBGoogleAPIAccessService.html">LBGoogleAPIAccessService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBLocationService.html">LBLocationService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBMainViewController.html">LBMainViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBMapPinningTableViewController.html">LBMapPinningTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBPinningButton.html">LBPinningButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBPinningPopoverViewController.html">LBPinningPopoverViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBReachabilityService.html">LBReachabilityService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBRoundedButton.html">LBRoundedButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBSSIDCheckingService.html">LBSSIDCheckingService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBURLDownloadService.html">LBURLDownloadService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBWIFIButton.html">LBWIFIButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v10LibraryBox17DEFAULT_MIME_TYPESS">DEFAULT_MIME_TYPE</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v10LibraryBox9mimeTypesGVs10DictionarySSSS_">mimeTypes</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/SlideOutState.html">SlideOutState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSURL.html">NSURL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox8MimeTypeFGSqSS_SS">MimeType(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox5delayFTSd7closureFT_T__T_">delay(_:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox9showAlertFTCSo8NSString5titleS0_2fnFT_T__T_">showAlert(_:title:fn:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/LBAddressPinningDelegate.html">LBAddressPinningDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBLocationServiceDelegate.html">LBLocationServiceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBMainViewControllerDelegate.html">LBMainViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBPinningPopoverDelegate.html">LBPinningPopoverDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>LBMapPinningTableViewController</h1>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController10boxAddressXwGSQCSo10UITextView_"></a>
+                    <a name="//apple_ref/swift/Property/boxAddress" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController10boxAddressXwGSQCSo10UITextView_">boxAddress</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController16boxTypeSelectionXwGSQCSo18UISegmentedControl_"></a>
+                    <a name="//apple_ref/swift/Property/boxTypeSelection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController16boxTypeSelectionXwGSQCSo18UISegmentedControl_">boxTypeSelection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController9pinButtonXwGSQCSo8UIButton_"></a>
+                    <a name="//apple_ref/swift/Property/pinButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController9pinButtonXwGSQCSo8UIButton_">pinButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController18boxAddressFeedbackXwGSQCSo7UILabel_"></a>
+                    <a name="//apple_ref/swift/Property/boxAddressFeedback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController18boxAddressFeedbackXwGSQCSo7UILabel_">boxAddressFeedback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController21currentLocationOfUserGSQCSo10CLLocation_"></a>
+                    <a name="//apple_ref/swift/Property/currentLocationOfUser" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController21currentLocationOfUserGSQCSo10CLLocation_">currentLocationOfUser</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController19currentBoxLocationsGSaPSo12MKAnnotation__"></a>
+                    <a name="//apple_ref/swift/Property/currentBoxLocations" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController19currentBoxLocationsGSaPSo12MKAnnotation__">currentBoxLocations</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController19placemarkForPinningGSQCSo11CLPlacemark_"></a>
+                    <a name="//apple_ref/swift/Property/placemarkForPinning" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController19placemarkForPinningGSQCSo11CLPlacemark_">placemarkForPinning</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController4httpGSQC12AeroGearHttp4Http_"></a>
+                    <a name="//apple_ref/swift/Property/http" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController4httpGSQC12AeroGearHttp4Http_">http</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox31LBMapPinningTableViewController8delegateGSqPS_24LBAddressPinningDelegate__"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox31LBMapPinningTableViewController8delegateGSqPS_24LBAddressPinningDelegate__">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController11viewDidLoadFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController11viewDidLoadFT_T_">viewDidLoad()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController13viewDidAppearFSbT_"></a>
+                    <a name="//apple_ref/swift/Method/viewDidAppear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController13viewDidAppearFSbT_">viewDidAppear(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController23didReceiveMemoryWarningFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/didReceiveMemoryWarning()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController23didReceiveMemoryWarningFT_T_">didReceiveMemoryWarning()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController12hideKeyboardFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/hideKeyboard()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController12hideKeyboardFT_T_">hideKeyboard()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Function to hide keyboard on tap outside of textview.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">hideKeyboard</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController24getPlacemarkFromLocationFCSo10CLLocationT_"></a>
+                    <a name="//apple_ref/swift/Method/getPlacemarkFromLocation(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController24getPlacemarkFromLocationFCSo10CLLocationT_">getPlacemarkFromLocation(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieves a placemark from a location. The address of the placemark is presented on the textview. The function validateAddressText() is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">getPlacemarkFromLocation</span><span class="p">(</span><span class="nv">location</span><span class="p">:</span> <span class="kt">CLLocation</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController23getAddressFromPlaceMarkFGSqCSo11CLPlacemark_GSqSS_"></a>
+                    <a name="//apple_ref/swift/Method/getAddressFromPlaceMark(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController23getAddressFromPlaceMarkFGSqCSo11CLPlacemark_GSqSS_">getAddressFromPlaceMark(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns an (optional) address string from a CLPlacemark.</p>
+
+<p>:returns: (optional) address string from a CLPlacemark</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">getAddressFromPlaceMark</span><span class="p">(</span><span class="nv">unsafePlaceMark</span><span class="p">:</span> <span class="kt">CLPlacemark</span><span class="p">?</span> <span class="p">)</span><span class="o">-&gt;</span><span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController6pinBoxFCSo8UIButtonT_"></a>
+                    <a name="//apple_ref/swift/Method/pinBox(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController6pinBoxFCSo8UIButtonT_">pinBox(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dismisses the view controller. In the completion handler, the Google Fusion Table service is called via REST API to set a new row record. If no authentication with a Google account happened yet, users are taken to Safari to authenticate online.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">pinBox</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController13cancelPinningFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/cancelPinning()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController13cancelPinningFT_T_">cancelPinning()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dismiss the tableview controller</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">cancelPinning</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController19validateAddressTextFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/validateAddressText()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController19validateAddressTextFT_T_">validateAddressText()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Address text in the text view is checked for validity.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">validateAddressText</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController24checkForDublicatePinningFCSo11CLPlacemarkSb"></a>
+                    <a name="//apple_ref/swift/Method/checkForDublicatePinning(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController24checkForDublicatePinningFCSo11CLPlacemarkSb">checkForDublicatePinning(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a bool signifying if the location is already annotated on the map. </p>
+
+<p>:returns: Bool signifying if the location is already annotated on the map -&gt; true if it is, false if it is not</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">checkForDublicatePinning</span><span class="p">(</span><span class="nv">place</span><span class="p">:</span> <span class="kt">CLPlacemark</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController21updateAddressFeedbackFSST_"></a>
+                    <a name="//apple_ref/swift/Method/updateAddressFeedback(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController21updateAddressFeedbackFSST_">updateAddressFeedback(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update the text label that presents the user feedback</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">updateAddressFeedback</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController23textViewDidBeginEditingFCSo10UITextViewT_"></a>
+                    <a name="//apple_ref/swift/Method/textViewDidBeginEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController23textViewDidBeginEditingFCSo10UITextViewT_">textViewDidBeginEditing(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox31LBMapPinningTableViewController21textViewDidEndEditingFCSo10UITextViewT_"></a>
+                    <a name="//apple_ref/swift/Method/textViewDidEndEditing(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox31LBMapPinningTableViewController21textViewDidEndEditingFCSo10UITextViewT_">textViewDidEndEditing(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-10)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
