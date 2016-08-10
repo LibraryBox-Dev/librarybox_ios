@@ -11,7 +11,7 @@ import WatchKit
 import WatchConnectivity
 import Foundation
 
-
+///Class to manage watch session.
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var proximityLabel: WKInterfaceLabel!
     private var defaultSession: WCSession?
