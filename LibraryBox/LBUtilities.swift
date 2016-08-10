@@ -3,7 +3,7 @@
 //  LibraryBox
 //
 //  Created by David Haselberger on 20/06/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import Foundation
