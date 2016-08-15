@@ -52,13 +52,14 @@ class LBMainViewController: UIViewController {
     //The delegate
     var delegate: LBMainViewControllerDelegate?
     
-    //Boolean variables that signify if monitoring, ranging is active or if reauthorization is necessary
+    //Boolean variables that signify if monitoring, ranging is active or if reauthorization is necessary, if beacons are updated or if a KML file is downloaded
     var monitoring: Bool = false
     var ranging: Bool = false
     var reauthorizationNecessary:Bool = false
     var reauthorizationCancelled: Bool = false
     var presentingErrors: Bool = false
     var updatingBeacons: Bool = false
+    var downloadingKML: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +99,7 @@ class LBMainViewController: UIViewController {
         nc.addObserver(self, selector: #selector(deactivateMapRelatedServices), name:UIApplicationWillTerminateNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
         nc.addObserver(self, selector: #selector(performWatchAction(_:)), name: "LBWatchNotificationName", object: nil)
-
+        nc.addObserver(self, selector: #selector(enableKMLDownload), name: "LBDownloadTaskFinished", object: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -323,11 +324,18 @@ class LBMainViewController: UIViewController {
         if fileManager.fileExistsAtPath(filePath.path!) {
             do {
                 let attributes = try fileManager.attributesOfItemAtPath(filePath.path!)
-                let creationDate = attributes["NSFileCreationDate"]
-                if let created = creationDate where fabs(created.timeIntervalSinceNow) > 300 {
+                let creationDate: NSDate = (attributes["NSFileCreationDate"] as? NSDate)!
+                let timeInterval: NSTimeInterval = 630
+                //MyMaps KML is actualized every 10 minutes, thus checking shortly after 10 minutes for a new KML file.
+                if(creationDate.timeIntervalSinceNow > timeInterval)
+                {
                     try fileManager.removeItemAtPath(filePath.path!)
                     if let URL = NSURL(string: "http://www.google.com/maps/d/kml?forcekml=1&mid=11WhHwTW0VYR-ToW7XtwS0OGiu4o") {
-                        LBURLDownloadService.load(URL)
+                        if(!self.downloadingKML)
+                        {
+                            LBURLDownloadService.load(URL)
+                            self.downloadingKML = true
+                        }
                     }
                 }
             }
@@ -336,10 +344,19 @@ class LBMainViewController: UIViewController {
             }
         } else {
             if let URL = NSURL(string: "http://www.google.com/maps/d/kml?forcekml=1&mid=11WhHwTW0VYR-ToW7XtwS0OGiu4o") {
-                LBURLDownloadService.load(URL)
+                if(!self.downloadingKML)
+                {
+                    LBURLDownloadService.load(URL)
+                    self.downloadingKML = true
+                }
             }
         }
         return filePath.absoluteString
+    }
+    
+    func enableKMLDownload()
+    {
+        self.downloadingKML = false
     }
     
 //    func addOverlays()

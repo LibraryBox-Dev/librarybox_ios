@@ -20,6 +20,7 @@ class LBURLDownloadService {
         let session = NSURLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
         let request = NSMutableURLRequest(URL: URL)
         request.HTTPMethod = "GET"
+        let nc = NSNotificationCenter.defaultCenter()
         let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if (error == nil) {
                 let statusCode = (response as! NSHTTPURLResponse).statusCode
@@ -34,11 +35,12 @@ class LBURLDownloadService {
                     return
                 }
                 data!.writeToFile(path, atomically: true)
-                let nc = NSNotificationCenter.defaultCenter()
                 nc.postNotificationName("LBDownloadSuccess", object: nil)
+                nc.postNotificationName("LBDownloadTaskFinished", object: nil)
             }
             else {
-                print("Failure: %@", error!.localizedDescription);
+                print("Failure: %@", error!.localizedDescription)
+                nc.postNotificationName("LBDownloadTaskFinished", object: nil)
             }
         })
         task.resume()
