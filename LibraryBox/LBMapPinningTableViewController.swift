@@ -245,9 +245,16 @@ class LBMapPinningTableViewController: UITableViewController
                             
                         } else
                         {
+                            if(self.currentBoxLocations.count < 1)
+                            {
+                                self.updateAddressFeedback("\u{274C} Currently no box locations available. Please try again later")
+                            }
+                            else
+                            {
                             //if a pin is found at the location, the user is informed and the pinning button not enabled
                             self.updateAddressFeedback("\u{274C} '\(currentAddress)' already on map")
                             self.pinButton.enabled = false
+                            }
                         }
                     }else
                     {
