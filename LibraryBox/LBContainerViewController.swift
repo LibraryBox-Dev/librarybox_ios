@@ -2,7 +2,7 @@
 //  LBContainerViewController.swift
 //  LibraryBox
 //
-//  Created by David on 24/05/16.
+//  Created by David Haselberger on 24/05/16.
 //  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
@@ -38,7 +38,7 @@ class LBContainerViewController: UIViewController {
     var rightViewController: LBBeaconRangingViewController?
     //var currentBoxViewController: LBBoxWebViewController?
     
-    //The y-axis offset of the center view controller when the right panel is expanded
+    ///The y-axis offset of the center view controller when the right panel is expanded
     var centerPanelExpandedOffset: CGFloat = UIScreen.mainScreen().bounds.width - 100
     
     //Buttons on the main interface
@@ -54,6 +54,9 @@ class LBContainerViewController: UIViewController {
     var presentingBoxViewController: Bool = false
     var boxButtonPressed: Bool = false
     
+    /**
+     Setup of view layout, buttons, KVO for beacon distances, notifications concerning box connection
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -152,7 +155,7 @@ class LBContainerViewController: UIViewController {
     }
     
     /**
-     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay(), send closest beacon proximity to watchkit, if session is active and closest beacon is available
+     Key-value observation for "currentFilteredBeaconSigmaDistances". If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay(), send closest beacon proximity to watchkit, if session is active and closest beacon is available. Deactivates beacon ranging after 4 runs when application is in background.
     */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "currentFilteredBeaconSigmaDistances" {
@@ -235,6 +238,9 @@ class LBContainerViewController: UIViewController {
         }
     }
     
+    /**
+     Checks connection to box.
+    */
     func checkBoxConnectionStatus()
     {
         delay(0.1)
@@ -290,17 +296,10 @@ class LBContainerViewController: UIViewController {
     }
     
     /**
-    On button click, check connection to a box. If connected, present a sheet informing the user that they need to be connected to the internet if they want to annotate a map location, otherwise present the map pinning view associated with the storyboard segue "showPinningInfo".
+    On button click, shows a popover to pin a box in the area.
     */
     @IBAction func pinningButtonClicked(sender: UIButton)
     {
-//        if(!self.connectedToBox)
-//        {
-//            self.centerViewController.performSegueWithIdentifier("showPinningInfo", sender: self)
-//        }
-//        else{
-//            self.centerViewController.performSegueWithIdentifier("showPinningInfoNotConnected", sender: self)
-//        }
         self.centerViewController.performSegueWithIdentifier("pinningPopover", sender: self)
     }
     
@@ -318,7 +317,7 @@ class LBContainerViewController: UIViewController {
     }
 
     /**
-     Sets boolean connectedToBox to false.
+     Sets boolean connectedToBox to false. If the box connection button was pressed and there is no connection to a box, presents an alert.
      */
     func setNotConnectedToBoxBool()
     {
@@ -418,7 +417,7 @@ class LBContainerViewController: UIViewController {
     
 }
 
-//MARK: Extension dealing with showing and hiding the right panel in the main interface.
+///Extension dealing with showing and hiding the right panel in the main interface.
 extension LBContainerViewController: LBMainViewControllerDelegate {
     
     func toggleRightPanel() {
@@ -495,7 +494,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     
 }
 
-//MARK: UIStoryboard extension to retrieve view controllers
+///UIStoryboard extension to retrieve view controllers
 private extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
     

@@ -2,7 +2,7 @@
 //  LBURLDownloader.swift
 //  LibraryBox
 //
-//  Created by David on 04/05/16.
+//  Created by David Haselberger on 04/05/16.
 //  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 

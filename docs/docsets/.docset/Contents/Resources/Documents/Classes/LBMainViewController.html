@@ -14,7 +14,7 @@
     <a title="LBMainViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (40% documented)</p>
+        <p><a href="../index.html"> Docs</a> (59% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -592,14 +592,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sends notification when appeared, then checks for authorization, iBeacon ranging and monitoring status</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -646,14 +646,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Storyboard segue to return to the map view from the box content (not set in the Main Storyboard)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">returnToMap</span><span class="p">(</span><span class="nv">segue</span><span class="p">:</span> <span class="kt">UIStoryboardSegue</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -700,7 +700,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Presents error messages using UIAlertController, first checks if authorization is necessary, then if ranging or monitoring is not active.</p>
+                        <p>Presents error messages using UIAlertController, first checks if authorization is necessary, then if ranging or monitoring is not active. Sets user default <q>firstLaunch</q> to <q>done</q> on first launch.</p>
 
                       </div>
                       <div class="declaration">
@@ -754,7 +754,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Called when not connected to box.</p>
+                        <p>Called when not connected to box.
+Activates updating user location, iBeacon monitoring and ranging, updates the map user interface and posts a notification that the main view appeared.</p>
 
                       </div>
                       <div class="declaration">
@@ -781,14 +782,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Posts notification that the view appeared</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">handleViewAppearance</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -808,7 +809,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Called when notified by a connected watch.</p>
+                        <p>Called when notified by a connected watch.
+Starts updating user location and beacon ranging, if the payload is <q>BeaconRanging</q>.</p>
 
                       </div>
                       <div class="declaration">
@@ -919,8 +921,6 @@
                         <p>Retrieves KML from LibraryBox Google MyMaps environment by checking if a KML file exists, if it needs to be updated and if so, downloading a new KML file using the LBURLDownloadService.
 Returns the path to the KML file.</p>
 
-<p>:returns: file path to KML file as string.</p>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -929,6 +929,11 @@ Returns the path to the KML file.</p>
                           <pre class="highlight"><code><span class="kd">func</span> <span class="nf">libraryBoxKMLDataCheckAndPath</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>file path to KML file as string.</p>
+
                       </div>
                     </section>
                   </div>
@@ -1004,16 +1009,22 @@ Returns the path to the KML file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Renders map overlays. 
+Distance to closest beacon is presented as circle overlay renderer.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">mapView</span><span class="p">(</span><span class="nv">mapView</span><span class="p">:</span> <span class="kt">MKMapView</span><span class="p">,</span> <span class="n">rendererForOverlay</span> <span class="nv">overlay</span><span class="p">:</span> <span class="kt">MKOverlay</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MKOverlayRenderer</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>map overlay renderer (MKOverlayRenderer)</p>
+
                       </div>
                     </section>
                   </div>
@@ -1116,14 +1127,14 @@ Returns the path to the KML file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets the boolean reauthorizationNecessary to false.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">userLocationServiceStartedSuccessfully</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1498,14 +1509,14 @@ Returns the path to the KML file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Sets modal presentation style for popover controller.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">adaptivePresentationStyleForPresentationController</span><span class="p">(</span><span class="nv">controller</span><span class="p">:</span> <span class="kt">UIPresentationController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIModalPresentationStyle</span></code></pre>
 
                         </div>
                       </div>
@@ -1529,14 +1540,14 @@ Returns the path to the KML file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when <q>Add Box Address</q> button pressed.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">pinAddress</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1556,16 +1567,21 @@ Returns the path to the KML file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns the current user location.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">currentLocation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CLLocation</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>current user location</p>
+
                       </div>
                     </section>
                   </div>
@@ -1583,14 +1599,14 @@ Returns the path to the KML file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when pinning was successful to update the map user interface.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">locationPinningSuccessful</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1614,14 +1630,14 @@ Returns the path to the KML file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Called when pinning was successful to update the map user interface.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBMainViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">pinningSuccessful</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
@@ -1633,7 +1649,7 @@ Returns the path to the KML file.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-10)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-15)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

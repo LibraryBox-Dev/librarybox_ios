@@ -102,11 +102,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="the LibraryBox" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-XJ-FZl">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-XJ-FZl">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">The LibraryBox Project is designed to enable the distribution of digital information to areas with little or no Internet access, even off the grid. It does so using open source software and very inexpensive hardware, allowing the distribution of digital content at a far lower cost than any other solution.
+
+LibraryBox wouldn’t be possible without the support and work of Dr. David Darts and Matthias Strubel, the support that we gathered through our Kickstarter backers, and the funding by the Knight Foundation for v2.0 of the project. The LibraryBox iOS app was written by David Haselberger as a part of the 2016 Google Summer of Code project for the Berkman Klein Center for Internet &amp; Society at Harvard University, and is the first step of the next stage in the evolution of the LibraryBox project. 
+
+The LibraryBox Project was designed and created by Jason Griffey. More information at http://jasongriffey.net.
+
+For more information about the LibraryBox Project, to download the code to build your own, or to purchase one to help support the project, visit http://librarybox.us.
+
+For information about this app, including links to the source code, please visit: http://librarybox.us/iOS/
+</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -436,7 +447,6 @@
         <!--Navigation Controller-->
         <scene sceneID="7XP-74-TiA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2FA-FH-f6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sOl-03-sre" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fat-Et-6oj">
@@ -448,6 +458,7 @@
                         <segue destination="Bvg-Fy-fDY" kind="relationship" relationship="rootViewController" id="Tux-Ks-HGC"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2FA-FH-f6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2209" y="785"/>
         </scene>

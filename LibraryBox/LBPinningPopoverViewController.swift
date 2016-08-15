@@ -2,7 +2,7 @@
 //  LBPinningPopoverViewController.swift
 //  LibraryBox
 //
-//  Created by David on 13/07/16.
+//  Created by David Haselberger on 13/07/16.
 //  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
@@ -13,6 +13,7 @@ import AeroGearHttp
 import AeroGearOAuth2
 import PKHUD
 
+///Protocol declaration for the popover delegate
 protocol LBPinningPopoverDelegate
 {
     func pinAddress()
@@ -20,6 +21,7 @@ protocol LBPinningPopoverDelegate
     func locationPinningSuccessful()
 }
 
+///Pinning popover view controller class
 class LBPinningPopoverViewController: UIViewController {
 
     @IBOutlet weak var proximityLabel: UILabel!
@@ -29,9 +31,13 @@ class LBPinningPopoverViewController: UIViewController {
     
     var delegate: LBPinningPopoverDelegate?
     var http: Http!
-    //The current box map annotations (received through "prepareForSegue" in LBMainViewController)
+    
+    ///The current box map annotations (received through "prepareForSegue" in LBMainViewController)
     var currentBoxLocations: [MKAnnotation] = []
     
+    /**
+     Adds a notification observer for the closest beacon. Initializes Http object for Google Fusion Table Rest API access.
+    */
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -42,6 +48,9 @@ class LBPinningPopoverViewController: UIViewController {
         http = Http()
     }
 
+    /**
+     Called on notification for current closest beacon. Updates the proximity string of the popover view. Button to pin close box is enabled or disabled based on beacon proximity.
+    */
     func updatePopoverUI(notification: NSNotification)
     {
         let theBeacon: CLBeacon = notification.object as! CLBeacon
@@ -77,6 +86,9 @@ class LBPinningPopoverViewController: UIViewController {
         pinCloseBoxButton.setNeedsDisplay()
     }
     
+    /**
+     Called when button "Mark Close Box" is pressed. Pins box based on Google Fusion Table Rest APi access.
+    */
     @IBAction func pinCloseBox(sender: AnyObject!)
     {
         if let locationForPinning = self.delegate?.currentLocation()
@@ -155,6 +167,9 @@ class LBPinningPopoverViewController: UIViewController {
         }
     }
     
+    /**
+    Checks for dublicate pins based on the currentBoxLocations array
+    */
     func checkForDublicatePinning(loc: CLLocation) -> Bool
     {
         var isDublicate: Bool = true
@@ -176,7 +191,9 @@ class LBPinningPopoverViewController: UIViewController {
         return isDublicate
     }
 
-    
+    /**
+    calls the delegate function pinAddress() to start pinning a box from a placemark.
+    */
     @IBAction func addAddress(sender: AnyObject!)
     {
         self.dismissViewControllerAnimated(true, completion:{

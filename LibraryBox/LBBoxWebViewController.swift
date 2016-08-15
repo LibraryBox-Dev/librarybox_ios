@@ -2,7 +2,7 @@
 //  LBBoxWebViewController.swift
 //  LibraryBox
 //
-//  Created by David on 30/05/16.
+//  Created by David Haselberger on 30/05/16.
 //  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
@@ -20,19 +20,16 @@ class LBBoxWebViewController: UIViewController
     var forwardButton: UIBarButtonItem?
     var interactionController: UIDocumentInteractionController?
     
+    /**
+     Setup of navigation bar, toolbar. Loads box content.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Box"
-//        let wifiNavBarButton = UIBarButtonItem(title: "◄", style: .Plain, target: self, action:#selector(gotoWifiSettings(_:)))
-//        self.navigationItem.leftBarButtonItem = wifiNavBarButton
         reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(doRefresh(_:)))
         self.navigationItem.rightBarButtonItem = reloadButton
         
-        
         var items = [UIBarButtonItem]()
-//        items.append(
-//            UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
-//        )
         backButton = UIBarButtonItem(title: "◄", style: .Plain, target: self, action:#selector(goBack(_:)))
         items.append(backButton!)
         items.append(
@@ -58,9 +55,6 @@ class LBBoxWebViewController: UIViewController
         wifiBarButton.customView = wifiButton
 
         items.append(wifiBarButton)
-//        items.append(
-//            UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
-//        )
         self.setToolbarItems(items, animated: false)
         self.navigationController?.toolbarHidden = false
 
@@ -84,27 +78,44 @@ class LBBoxWebViewController: UIViewController
     }
     
     
-    
+    /**
+     Redirects to iOS Wifi Settings
+    */
     @IBAction func gotoWifiSettings(sender: UIBarButtonItem) {
         UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
     }
     
+    /**
+     Content refresh.
+    */
     @IBAction func doRefresh(sender: UIBarButtonItem) {
         webView.reload()
     }
     
+    /**
+     Back to previous http address.
+    */
     @IBAction func goBack(sender: UIBarButtonItem) {
         webView.goBack()
     }
     
+    /**
+     Forward to http address.
+     */
     @IBAction func goForward(sender: UIBarButtonItem) {
         webView.goForward()
     }
     
+    /**
+     Stop loading content.
+    */
     @IBAction func stop(sender: UIBarButtonItem) {
         webView.stopLoading()
     }
     
+    /**
+     Presents activity view controller.
+    */
     @IBAction func showActivityViewController(sender: UIBarButtonItem)
     {
         let activityViewController = UIActivityViewController (
@@ -114,11 +125,17 @@ class LBBoxWebViewController: UIViewController
         self.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
+    /**
+     Checks box connection.
+    */
     func checkBoxConnection()
     {
         LBReachabilityService.isConnectedToBox()
     }
     
+    /**
+     Set navigation bar title.
+    */
     func updateTitle()
     {
         if let pageTitle: String = webView.stringByEvaluatingJavaScriptFromString("document.title")
@@ -131,6 +148,9 @@ class LBBoxWebViewController: UIViewController
         }
     }
     
+    /**
+     Enable or disable to go back and forward if possible.
+    */
     func updateButtons()
     {
         self.forwardButton!.enabled = self.webView.canGoForward
@@ -140,7 +160,7 @@ class LBBoxWebViewController: UIViewController
 }
 
 
-//MARK: Delegate methods
+///Delegate methods
 extension LBBoxWebViewController: UIWebViewDelegate
 {
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
@@ -164,6 +184,10 @@ extension LBBoxWebViewController: UIWebViewDelegate
         self.updateButtons()
     }
     
+    /**
+     Error handling.
+     If content is not loaded, checks for content type. If content type is epub.zip, deletes extension .zip. Data is stored on the device and a UIDocumentInteractionController is presented. Else, an alert is presented to the user showing the error description.
+    */
     func webView(webView: UIWebView,
                  didFailLoadWithError error: NSError?){
 
@@ -218,6 +242,11 @@ extension LBBoxWebViewController: UIWebViewDelegate
         
     }
     
+    /**
+     Returns user documents directory.
+     
+     - returns: User documents directory
+    */
     func getDocumentsDirectory() -> NSString {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         let documentsDirectory = paths[0]

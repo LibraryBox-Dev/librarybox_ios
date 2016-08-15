@@ -35,7 +35,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.berkmancenter.LibraryBox</string>
+				<string>com.berkmancenter.LibraryBoxIOS</string>
 			</array>
 		</dict>
 	</array>

@@ -2,7 +2,7 @@
 //  LBMapPinningTableViewController.swift
 //  LibraryBox
 //
-//  Created by David on 03/06/16.
+//  Created by David Haselberger on 03/06/16.
 //  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
@@ -24,7 +24,6 @@ protocol LBAddressPinningDelegate
 }
 
 ///UITableViewController class to manage static UITableView for pinning LibraryBox addresses. Checks if address in textview is valid placemark, if there is already a LibraryBox pinned to the current location - and enables to pin a location if a valid, unique address is found for pinning.
-//TODO: add libraryBox locations where no address can be specified
 class LBMapPinningTableViewController: UITableViewController
 {
     //Outlets to views in static tableview cells
@@ -33,10 +32,10 @@ class LBMapPinningTableViewController: UITableViewController
     @IBOutlet weak var pinButton: UIButton!
     @IBOutlet weak var boxAddressFeedback: UILabel!
     
-    //The current location of the user (received through "prepareForSegue" in LBMainViewController)
+    ///The current location of the user (received through "prepareForSegue" in LBMainViewController)
     var currentLocationOfUser: CLLocation!
     
-    //The current box map annotations (received through "prepareForSegue" in LBMainViewController)
+    ///The current box map annotations (received through "prepareForSegue" in LBMainViewController)
     var currentBoxLocations: [MKAnnotation] = []
     
     //A placemark that is received by checking the current location
@@ -47,6 +46,9 @@ class LBMapPinningTableViewController: UITableViewController
     
     var delegate: LBAddressPinningDelegate?
     
+    /**
+     Setup of navigation bar, gesture recognizer to hide keyboard on tapping outside of textview, pinning button. Checks if there is a current user location. If so, tries to retrieve a placemark from it.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -111,7 +113,7 @@ class LBMapPinningTableViewController: UITableViewController
     /**
      Returns an (optional) address string from a CLPlacemark.
      
-     :returns: (optional) address string from a CLPlacemark
+     - returns: (optional) address string from a CLPlacemark
     */
     func getAddressFromPlaceMark(unsafePlaceMark: CLPlacemark? )->String?{
         if let placeMark = unsafePlaceMark{
@@ -266,7 +268,7 @@ class LBMapPinningTableViewController: UITableViewController
     /**
      Returns a bool signifying if the location is already annotated on the map. 
      
-     :returns: Bool signifying if the location is already annotated on the map -> true if it is, false if it is not
+     - returns: Bool signifying if the location is already annotated on the map -> true if it is, false if it is not
      */
     func checkForDublicatePinning(place: CLPlacemark) -> Bool
     {
@@ -301,7 +303,7 @@ class LBMapPinningTableViewController: UITableViewController
 
 
 
-//MARK: Delegate functions of UITextView -> set pinButton enabled attribute to false when editing, validate the address entered when editing ended.
+///Delegate functions of UITextView -> set pinButton enabled attribute to false when editing, validate the address entered when editing ended.
 extension LBMapPinningTableViewController: UITextViewDelegate
 {
 

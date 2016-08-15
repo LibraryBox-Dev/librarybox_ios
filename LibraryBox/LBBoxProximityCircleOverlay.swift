@@ -2,7 +2,7 @@
 //  LBBoxProximityCircleOverlay.swift
 //  LibraryBox
 //
-//  Created by David on 13/06/16.
+//  Created by David Haselberger on 13/06/16.
 //  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+///Mime types - currently not used
 internal let DEFAULT_MIME_TYPE = "text/html"
 
 internal let mimeTypes = [
