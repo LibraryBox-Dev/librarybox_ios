@@ -24,6 +24,7 @@
 		635793131D50D4EC00DFF14B /* createLicense.pl in Resources */ = {isa = PBXBuildFile; fileRef = 635793121D50D4EC00DFF14B /* createLicense.pl */; };
 		636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */; };
 		637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */; };
+		6370E59A1D66612A00E77690 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6370E5991D66612A00E77690 /* CloudKit.framework */; };
 		6373D1F31D4950AD0086DD81 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373D1F21D4950AD0086DD81 /* MimeType.swift */; };
 		63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */; };
 		63754B851D0EFAC6002B2EFE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63754B831D0EFAC6002B2EFE /* Interface.storyboard */; };
@@ -141,6 +142,7 @@
 		635793121D50D4EC00DFF14B /* createLicense.pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; name = createLicense.pl; path = LicenseFolder/createLicense.pl; sourceTree = "<group>"; };
 		636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBContainerViewController.swift; sourceTree = "<group>"; };
 		637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBWIFIButton.swift; sourceTree = "<group>"; };
+		6370E5991D66612A00E77690 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6373D1F21D4950AD0086DD81 /* MimeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxProximityCircleOverlay.swift; sourceTree = "<group>"; };
 		63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LibraryBox Notifications.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6370E59A1D66612A00E77690 /* CloudKit.framework in Frameworks */,
 				63E33EC91CF2E7DA005F6F5C /* MapKit.framework in Frameworks */,
 				A53E2B2CE12506276073C068 /* Pods_LibraryBox.framework in Frameworks */,
 			);
@@ -241,6 +244,7 @@
 		041800A99B984BA586C9C5B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6370E5991D66612A00E77690 /* CloudKit.framework */,
 				7E6585F3FF2BE7F342208304 /* Pods_LibraryBox.framework */,
 				33D9481FB2FC56DAE4ECD871 /* Pods_LibraryBoxTests.framework */,
 				8D7A896C55513BE54862B959 /* Pods_LibraryBoxUITests.framework */,
@@ -599,6 +603,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
