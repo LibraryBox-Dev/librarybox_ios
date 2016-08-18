@@ -99,16 +99,19 @@ class LBMapPinningTableViewController: UITableViewController
      Retrieves a placemark from a location. The address of the placemark is presented on the textview. The function validateAddressText() is called.
     */
     func getPlacemarkFromLocation(location: CLLocation){
-        CLGeocoder().reverseGeocodeLocation(location, completionHandler:
-            {(placemarks, error) in
-                if (error != nil) {print("reverse geocode fail: \(error!.localizedDescription)")}
-                let pm = placemarks! as [CLPlacemark]
-                if pm.count > 0 {
-                    let addressString = self.getAddressFromPlaceMark(pm[0])
-                    self.boxAddress.text = addressString
-                    self.validateAddressText()
-                }
-        })
+        if let theLoc: CLLocation = location
+        {
+            CLGeocoder().reverseGeocodeLocation(theLoc, completionHandler:
+                {(placemarks, error) in
+                    if (error != nil) {print("reverse geocode fail: \(error!.localizedDescription)")}
+                    let pm = placemarks! as [CLPlacemark]
+                    if pm.count > 0 {
+                        let addressString = self.getAddressFromPlaceMark(pm[0])
+                        self.boxAddress.text = addressString
+                        self.validateAddressText()
+                    }
+            })
+        }
     }
     
     /**
