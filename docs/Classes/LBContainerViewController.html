@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LBContainerViewController Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/LBContainerViewController" class="dashAnchor"></a>
+    <a title="LBContainerViewController Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (59% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        LBContainerViewController Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBAppInfoViewController.html">LBAppInfoViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBeaconRangingView.html">LBBeaconRangingView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBeaconRangingViewController.html">LBBeaconRangingViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxButton.html">LBBoxButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxContentNavigationController.html">LBBoxContentNavigationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10LibraryBox27LBBoxProximityCircleOverlay">LBBoxProximityCircleOverlay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxWebViewController.html">LBBoxWebViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBContainerViewController.html">LBContainerViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBGoogleAPIAccessService.html">LBGoogleAPIAccessService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBLocationService.html">LBLocationService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBMainViewController.html">LBMainViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBMapPinningTableViewController.html">LBMapPinningTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBPinningButton.html">LBPinningButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBPinningPopoverViewController.html">LBPinningPopoverViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBReachabilityService.html">LBReachabilityService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBRoundedButton.html">LBRoundedButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBSSIDCheckingService.html">LBSSIDCheckingService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBURLDownloadService.html">LBURLDownloadService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBWIFIButton.html">LBWIFIButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v10LibraryBox17DEFAULT_MIME_TYPESS">DEFAULT_MIME_TYPE</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v10LibraryBox9mimeTypesGVs10DictionarySSSS_">mimeTypes</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/SlideOutState.html">SlideOutState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSURL.html">NSURL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox8MimeTypeFGSqSS_SS">MimeType(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox5delayFTSd7closureFT_T__T_">delay(_:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox9showAlertFTCSo8NSString5titleS0_2fnFT_T__T_">showAlert(_:title:fn:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/LBAddressPinningDelegate.html">LBAddressPinningDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBLocationServiceDelegate.html">LBLocationServiceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBMainViewControllerDelegate.html">LBMainViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBPinningPopoverDelegate.html">LBPinningPopoverDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>LBContainerViewController</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                </div>
+              </div>
+            <p>View controller class containing the main view controller holding the map view as well as the beacon ranging view controller that presents a right side panel showing a custom scale for beacon ranging. Manages panel presentation, user interaction by pressing map buttons and KVO for beacon sigma proximity changes.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController26centerNavigationControllerGSQCSo22UINavigationController_"></a>
+                    <a name="//apple_ref/swift/Property/centerNavigationController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController26centerNavigationControllerGSQCSo22UINavigationController_">centerNavigationController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController20centerViewControllerGSQCS_20LBMainViewController_"></a>
+                    <a name="//apple_ref/swift/Property/centerViewController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController20centerViewControllerGSQCS_20LBMainViewController_">centerViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController19beaconUpdateCounterSi"></a>
+                    <a name="//apple_ref/swift/Property/beaconUpdateCounter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController19beaconUpdateCounterSi">beaconUpdateCounter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController12currentStateOS_13SlideOutState"></a>
+                    <a name="//apple_ref/swift/Property/currentState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController12currentStateOS_13SlideOutState">currentState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController19rightViewControllerGSqCS_29LBBeaconRangingViewController_"></a>
+                    <a name="//apple_ref/swift/Property/rightViewController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController19rightViewControllerGSqCS_29LBBeaconRangingViewController_">rightViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController25centerPanelExpandedOffsetV12CoreGraphics7CGFloat"></a>
+                    <a name="//apple_ref/swift/Property/centerPanelExpandedOffset" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController25centerPanelExpandedOffsetV12CoreGraphics7CGFloat">centerPanelExpandedOffset</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The y-axis offset of the center view controller when the right panel is expanded</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">centerPanelExpandedOffset</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="kt">UIScreen</span><span class="o">.</span><span class="nf">mainScreen</span><span class="p">()</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">100</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController10wifiButtonGSQCS_12LBWIFIButton_"></a>
+                    <a name="//apple_ref/swift/Property/wifiButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController10wifiButtonGSQCS_12LBWIFIButton_">wifiButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController9boxButtonGSQCS_11LBBoxButton_"></a>
+                    <a name="//apple_ref/swift/Property/boxButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController9boxButtonGSQCS_11LBBoxButton_">boxButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController12mapPinButtonGSQCS_15LBPinningButton_"></a>
+                    <a name="//apple_ref/swift/Property/mapPinButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController12mapPinButtonGSQCS_15LBPinningButton_">mapPinButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController29rangingViewExpandedStateStoreSb"></a>
+                    <a name="//apple_ref/swift/Property/rangingViewExpandedStateStore" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController29rangingViewExpandedStateStoreSb">rangingViewExpandedStateStore</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController14connectedToBoxSb"></a>
+                    <a name="//apple_ref/swift/Property/connectedToBox" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController14connectedToBoxSb">connectedToBox</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController27presentingBoxViewControllerSb"></a>
+                    <a name="//apple_ref/swift/Property/presentingBoxViewController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController27presentingBoxViewControllerSb">presentingBoxViewController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox25LBContainerViewController16boxButtonPressedSb"></a>
+                    <a name="//apple_ref/swift/Property/boxButtonPressed" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox25LBContainerViewController16boxButtonPressedSb">boxButtonPressed</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController11viewDidLoadFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController11viewDidLoadFT_T_">viewDidLoad()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Setup of view layout, buttons, KVO for beacon distances, notifications concerning box connection</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController13viewDidAppearFSbT_"></a>
+                    <a name="//apple_ref/swift/Method/viewDidAppear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController13viewDidAppearFSbT_">viewDidAppear(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController22observeValueForKeyPathFTGSqSS_8ofObjectGSqPs9AnyObject__6changeGSqGVs10DictionarySSPS1____7contextGSpT___T_"></a>
+                    <a name="//apple_ref/swift/Method/observeValueForKeyPath(_:ofObject:change:context:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController22observeValueForKeyPathFTGSqSS_8ofObjectGSqPs9AnyObject__6changeGSqGVs10DictionarySSPS1____7contextGSpT___T_">observeValueForKeyPath(_:ofObject:change:context:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Key-value observation for <q>currentFilteredBeaconSigmaDistances</q>. If right panel is expanded, set iBeacon distances on beacon ranging view and call UI update drawing function setNeedsDisplay(), send closest beacon proximity to watchkit, if session is active and closest beacon is available. Deactivates beacon ranging after 4 runs when application is in background.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">observeValueForKeyPath</span><span class="p">(</span><span class="nv">keyPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="n">ofObject</span> <span class="nv">object</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?,</span> <span class="nv">change</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">]?,</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController24viewWillTransitionToSizeFTVSC6CGSize25withTransitionCoordinatorPSo37UIViewControllerTransitionCoordinator__T_"></a>
+                    <a name="//apple_ref/swift/Method/viewWillTransitionToSize(_:withTransitionCoordinator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController24viewWillTransitionToSizeFTVSC6CGSize25withTransitionCoordinatorPSo37UIViewControllerTransitionCoordinator__T_">viewWillTransitionToSize(_:withTransitionCoordinator:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set y-axis offset on device rotation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillTransitionToSize</span><span class="p">(</span><span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">,</span>
+                                           <span class="n">withTransitionCoordinator</span> <span class="nv">coordinator</span><span class="p">:</span> <span class="kt">UIViewControllerTransitionCoordinator</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController33showShadowForCenterViewControllerFSbT_"></a>
+                    <a name="//apple_ref/swift/Method/showShadowForCenterViewController(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController33showShadowForCenterViewControllerFSbT_">showShadowForCenterViewController(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Show shadow when panel is expanded.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">showShadowForCenterViewController</span><span class="p">(</span><span class="nv">needsToShowShadow</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController24checkBoxConnectionStatusFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/checkBoxConnectionStatus()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController24checkBoxConnectionStatusFT_T_">checkBoxConnectionStatus()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks connection to box.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">checkBoxConnectionStatus</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController17wifiButtonClickedFCSo8UIButtonT_"></a>
+                    <a name="//apple_ref/swift/Method/wifiButtonClicked(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController17wifiButtonClickedFCSo8UIButtonT_">wifiButtonClicked(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Open the Wifi Settings URL when Wifi-Button is clicked.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">wifiButtonClicked</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController16boxButtonClickedFCSo8UIButtonT_"></a>
+                    <a name="//apple_ref/swift/Method/boxButtonClicked(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController16boxButtonClickedFCSo8UIButtonT_">boxButtonClicked(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>On button click, check connection to box. If connected, present Web View Controller associated with the storyboard segue <q>boxContent</q>, otherwise present a sheet informing the user that they are not connected to a LibraryBox and how they can connect to one.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">boxButtonClicked</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController20pinningButtonClickedFCSo8UIButtonT_"></a>
+                    <a name="//apple_ref/swift/Method/pinningButtonClicked(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController20pinningButtonClickedFCSo8UIButtonT_">pinningButtonClicked(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>On button click, shows a popover to pin a box in the area.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">pinningButtonClicked</span><span class="p">(</span><span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController21setConnectedToBoxBoolFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/setConnectedToBoxBool()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController21setConnectedToBoxBoolFT_T_">setConnectedToBoxBool()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets boolean connectedToBox to true.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">setConnectedToBoxBool</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController24setNotConnectedToBoxBoolFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/setNotConnectedToBoxBool()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController24setNotConnectedToBoxBoolFT_T_">setNotConnectedToBoxBool()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets boolean connectedToBox to false. If the box connection button was pressed and there is no connection to a box, presents an alert.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">setNotConnectedToBoxBool</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController24handleMainViewAppearanceFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/handleMainViewAppearance()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController24handleMainViewAppearanceFT_T_">handleMainViewAppearance()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets button appearance and panel appearance. Starts Wifi-button animation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">handleMainViewAppearance</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewControllerd"></a>
+                    <a name="//apple_ref/swift/Method/deinit" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewControllerd">deinit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes KVO on deinit.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">deinit</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController16toggleRightPanelFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/toggleRightPanel()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController16toggleRightPanelFT_T_">toggleRightPanel()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController17collapseSidePanelFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/collapseSidePanel()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController17collapseSidePanelFT_T_">collapseSidePanel()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController27addChildSidePanelControllerFCS_29LBBeaconRangingViewControllerT_"></a>
+                    <a name="//apple_ref/swift/Method/addChildSidePanelController(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController27addChildSidePanelControllerFCS_29LBBeaconRangingViewControllerT_">addChildSidePanelController(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add view and view controller of panel to container view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">addChildSidePanelController</span><span class="p">(</span><span class="nv">sidePanelController</span><span class="p">:</span> <span class="kt"><a href="../Classes/LBBeaconRangingViewController.html">LBBeaconRangingViewController</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController27addRightPanelViewControllerFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/addRightPanelViewController()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController27addRightPanelViewControllerFT_T_">addRightPanelViewController()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController27animateCenterPanelXPositionFTV12CoreGraphics7CGFloat10completionGSQFSbT___T_"></a>
+                    <a name="//apple_ref/swift/Method/animateCenterPanelXPosition(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController27animateCenterPanelXPositionFTV12CoreGraphics7CGFloat10completionGSQFSbT___T_">animateCenterPanelXPosition(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Animates panel presentation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">animateCenterPanelXPosition</span><span class="p">(</span><span class="nv">targetPosition</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">((</span><span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span><span class="o">!</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController17animateRightPanelFSbT_"></a>
+                    <a name="//apple_ref/swift/Method/animateRightPanel(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController17animateRightPanelFSbT_">animateRightPanel(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBContainerViewController</span><span class="p">:</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox25LBContainerViewController22startScanningAnimationFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/startScanningAnimation()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox25LBContainerViewController22startScanningAnimationFT_T_">startScanningAnimation()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Starts Wifi-Button color-fade animation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">startScanningAnimation</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

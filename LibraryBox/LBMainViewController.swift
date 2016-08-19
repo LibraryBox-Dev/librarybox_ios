@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  LibraryBox
 //
-//  Created by David on 23/05/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 23/05/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import UIKit
@@ -52,13 +52,14 @@ class LBMainViewController: UIViewController {
     //The delegate
     var delegate: LBMainViewControllerDelegate?
     
-    //Boolean variables that signify if monitoring, ranging is active or if reauthorization is necessary
+    //Boolean variables that signify if monitoring, ranging is active or if reauthorization is necessary, if beacons are updated or if a KML file is downloaded
     var monitoring: Bool = false
     var ranging: Bool = false
     var reauthorizationNecessary:Bool = false
     var reauthorizationCancelled: Bool = false
     var presentingErrors: Bool = false
     var updatingBeacons: Bool = false
+    var downloadingKML: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,13 +99,16 @@ class LBMainViewController: UIViewController {
         nc.addObserver(self, selector: #selector(deactivateMapRelatedServices), name:UIApplicationWillTerminateNotification, object: nil)
         nc.addObserver(self, selector: #selector(updateMapUI), name: "LBDownloadSuccess", object: nil)
         nc.addObserver(self, selector: #selector(performWatchAction(_:)), name: "LBWatchNotificationName", object: nil)
-
+        nc.addObserver(self, selector: #selector(enableKMLDownload), name: "LBDownloadTaskFinished", object: nil)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
     
+    /**
+     Sends notification when appeared, then checks for authorization, iBeacon ranging and monitoring status
+    */
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -144,6 +148,9 @@ class LBMainViewController: UIViewController {
         }
     }
     
+    /**
+     Storyboard segue to return to the map view from the box content (not set in the Main Storyboard)
+    */
     @IBAction func returnToMap(segue: UIStoryboardSegue)
     {
         print("Back on map")
@@ -154,7 +161,7 @@ class LBMainViewController: UIViewController {
     }
     
     /**
-     Presents error messages using UIAlertController, first checks if authorization is necessary, then if ranging or monitoring is not active.
+     Presents error messages using UIAlertController, first checks if authorization is necessary, then if ranging or monitoring is not active. Sets user default "firstLaunch" to "done" on first launch.
     */
     func presentErrors()
     {
@@ -230,6 +237,7 @@ class LBMainViewController: UIViewController {
     
     /**
      Called when not connected to box.
+     Activates updating user location, iBeacon monitoring and ranging, updates the map user interface and posts a notification that the main view appeared.
     */
     func activateMapRelatedServices()
     {
@@ -243,6 +251,9 @@ class LBMainViewController: UIViewController {
         self.presentErrors()
     }
     
+    /**
+     Posts notification that the view appeared
+    */
     func handleViewAppearance()
     {
         let nc = NSNotificationCenter.defaultCenter()
@@ -251,6 +262,7 @@ class LBMainViewController: UIViewController {
     
     /**
      Called when notified by a connected watch.
+     Starts updating user location and beacon ranging, if the payload is "BeaconRanging".
      */
     func performWatchAction(notification: NSNotification)
     {
@@ -301,7 +313,7 @@ class LBMainViewController: UIViewController {
      Retrieves KML from LibraryBox Google MyMaps environment by checking if a KML file exists, if it needs to be updated and if so, downloading a new KML file using the LBURLDownloadService.
      Returns the path to the KML file.
      
-     :returns: file path to KML file as string.
+     - returns: file path to KML file as string.
      */
     func libraryBoxKMLDataCheckAndPath() -> String
     {
@@ -312,11 +324,18 @@ class LBMainViewController: UIViewController {
         if fileManager.fileExistsAtPath(filePath.path!) {
             do {
                 let attributes = try fileManager.attributesOfItemAtPath(filePath.path!)
-                let creationDate = attributes["NSFileCreationDate"]
-                if let created = creationDate where fabs(created.timeIntervalSinceNow) > 300 {
+                let creationDate: NSDate = (attributes["NSFileCreationDate"] as? NSDate)!
+                let timeInterval: NSTimeInterval = 630
+                //MyMaps KML is actualized every 10 minutes, thus checking shortly after 10 minutes for a new KML file.
+                if(creationDate.timeIntervalSinceNow > timeInterval)
+                {
                     try fileManager.removeItemAtPath(filePath.path!)
                     if let URL = NSURL(string: "http://www.google.com/maps/d/kml?forcekml=1&mid=11WhHwTW0VYR-ToW7XtwS0OGiu4o") {
-                        LBURLDownloadService.load(URL)
+                        if(!self.downloadingKML)
+                        {
+                            LBURLDownloadService.load(URL)
+                            self.downloadingKML = true
+                        }
                     }
                 }
             }
@@ -325,10 +344,19 @@ class LBMainViewController: UIViewController {
             }
         } else {
             if let URL = NSURL(string: "http://www.google.com/maps/d/kml?forcekml=1&mid=11WhHwTW0VYR-ToW7XtwS0OGiu4o") {
-                LBURLDownloadService.load(URL)
+                if(!self.downloadingKML)
+                {
+                    LBURLDownloadService.load(URL)
+                    self.downloadingKML = true
+                }
             }
         }
         return filePath.absoluteString
+    }
+    
+    func enableKMLDownload()
+    {
+        self.downloadingKML = false
     }
     
 //    func addOverlays()
@@ -369,6 +397,12 @@ class LBMainViewController: UIViewController {
 
 //MARK: mapView delegate
 extension LBMainViewController: MKMapViewDelegate {
+    /**
+     Renders map overlays. 
+     Distance to closest beacon is presented as circle overlay renderer.
+     
+     - returns: map overlay renderer (MKOverlayRenderer)
+    */
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let lineView = MKPolylineRenderer(overlay: overlay)
@@ -418,7 +452,7 @@ extension LBMainViewController: MKMapViewDelegate {
      For custom annotations
     */
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-
+        //TODO:set pin color according to box type
         return nil
     }
     
@@ -432,7 +466,7 @@ extension LBMainViewController: MKMapViewDelegate {
 }
 
 
-//MARK: location service delegate functions
+///Location service delegate functions.
 extension LBMainViewController: LBLocationServiceDelegate
 {
     /**
@@ -443,6 +477,9 @@ extension LBMainViewController: LBLocationServiceDelegate
         self.reauthorizationNecessary = true
     }
     
+    /**
+     Sets the boolean reauthorizationNecessary to false.
+    */
     func userLocationServiceStartedSuccessfully()
     {
         self.reauthorizationNecessary = false
@@ -616,30 +653,49 @@ extension LBMainViewController: LBLocationServiceDelegate
 
 extension LBMainViewController: UIPopoverPresentationControllerDelegate
 {
+    /**
+     Sets modal presentation style for popover controller.
+    */
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
     }
 }
 
+///Extension for pinning popover presentation
 extension LBMainViewController:LBPinningPopoverDelegate
 {
+    /**
+     Called when "Add Box Address" button pressed.
+    */
     func pinAddress() {
         self.performSegueWithIdentifier("showPinningInfo", sender: self)
     }
     
+    /**
+     Returns the current user location.
+     
+     - returns: current user location
+    */
     func currentLocation() -> CLLocation
     {
         return self.locationService.currentLoc
     }
     
+    /**
+     Called when pinning was successful to update the map user interface.
+    */
     func locationPinningSuccessful() {
         self.updateMapUI()
     }
 
 }
 
+///Extension for address pinning
 extension LBMainViewController:LBAddressPinningDelegate
 {
+    /**
+     Called when pinning was successful to update the map user interface.
+     */
     func pinningSuccessful() {
         self.updateMapUI()
     }

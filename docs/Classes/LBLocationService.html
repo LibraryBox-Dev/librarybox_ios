@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LBLocationService Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/LBLocationService" class="dashAnchor"></a>
+    <a title="LBLocationService Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (59% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        LBLocationService Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBAppInfoViewController.html">LBAppInfoViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBeaconRangingView.html">LBBeaconRangingView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBeaconRangingViewController.html">LBBeaconRangingViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxButton.html">LBBoxButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxContentNavigationController.html">LBBoxContentNavigationController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10LibraryBox27LBBoxProximityCircleOverlay">LBBoxProximityCircleOverlay</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBBoxWebViewController.html">LBBoxWebViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBContainerViewController.html">LBContainerViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBGoogleAPIAccessService.html">LBGoogleAPIAccessService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBLocationService.html">LBLocationService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBMainViewController.html">LBMainViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBMapPinningTableViewController.html">LBMapPinningTableViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBPinningButton.html">LBPinningButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBPinningPopoverViewController.html">LBPinningPopoverViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBReachabilityService.html">LBReachabilityService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBRoundedButton.html">LBRoundedButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBSSIDCheckingService.html">LBSSIDCheckingService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBURLDownloadService.html">LBURLDownloadService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LBWIFIButton.html">LBWIFIButton</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v10LibraryBox17DEFAULT_MIME_TYPESS">DEFAULT_MIME_TYPE</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v10LibraryBox9mimeTypesGVs10DictionarySSSS_">mimeTypes</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/SlideOutState.html">SlideOutState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSURL.html">NSURL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox8MimeTypeFGSqSS_SS">MimeType(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox5delayFTSd7closureFT_T__T_">delay(_:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10LibraryBox9showAlertFTCSo8NSString5titleS0_2fnFT_T__T_">showAlert(_:title:fn:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/LBAddressPinningDelegate.html">LBAddressPinningDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBLocationServiceDelegate.html">LBLocationServiceDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBMainViewControllerDelegate.html">LBMainViewControllerDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LBPinningPopoverDelegate.html">LBPinningPopoverDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>LBLocationService</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                </div>
+              </div>
+            <p>The core class for operations related to core location</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox17LBLocationService8delegateGSqPS_25LBLocationServiceDelegate__"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox17LBLocationService8delegateGSqPS_25LBLocationServiceDelegate__">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox17LBLocationService15locationManagerCSo17CLLocationManager"></a>
+                    <a name="//apple_ref/swift/Property/locationManager" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox17LBLocationService15locationManagerCSo17CLLocationManager">locationManager</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox17LBLocationService10currentLocGSQCSo10CLLocation_"></a>
+                    <a name="//apple_ref/swift/Property/currentLoc" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox17LBLocationService10currentLocGSQCSo10CLLocation_">currentLoc</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10LibraryBox17LBLocationService12beaconRegionCSo14CLBeaconRegion"></a>
+                    <a name="//apple_ref/swift/Property/beaconRegion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10LibraryBox17LBLocationService12beaconRegionCSo14CLBeaconRegion">beaconRegion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService31useLocationManagerNotificationsFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/useLocationManagerNotifications()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService31useLocationManagerNotificationsFT_T_">useLocationManagerNotifications()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the location manager delegate to self.  It gets called when an instance is ready to process location
+manager delegate calls.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">useLocationManagerNotifications</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService25startUpdatingUserLocationFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/startUpdatingUserLocation()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService25startUpdatingUserLocationFT_T_">startUpdatingUserLocation()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks, if user wants to use location services. If location services are enabled, user location is being updated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">startUpdatingUserLocation</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService24stopUpdatingUserLocationFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/stopUpdatingUserLocation()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService24stopUpdatingUserLocationFT_T_">stopUpdatingUserLocation()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stops updating users&rsquo; location.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">stopUpdatingUserLocation</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService25startMonitoringForBeaconsFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/startMonitoringForBeacons()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService25startMonitoringForBeaconsFT_T_">startMonitoringForBeacons()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Starts the beacon region monitoring process.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">startMonitoringForBeacons</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService15startMonitoringFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/startMonitoring()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService15startMonitoringFT_T_">startMonitoring()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Turns on monitoring (after all the checks have been passed).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">startMonitoring</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService24stopMonitoringForBeaconsFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/stopMonitoringForBeacons()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService24stopMonitoringForBeaconsFT_T_">stopMonitoringForBeacons()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stops the monitoring process.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">stopMonitoringForBeacons</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService18startBeaconRangingFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/startBeaconRanging()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService18startBeaconRangingFT_T_">startBeaconRanging()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Starts the beacon ranging process.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">startBeaconRanging</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService12startRangingFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/startRanging()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService12startRangingFT_T_">startRanging()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Turns on ranging (after all the checks have been passed).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">startRanging</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService17stopBeaconRangingFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/stopBeaconRanging()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService17stopBeaconRangingFT_T_">stopBeaconRanging()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Stops the ranging process.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">stopBeaconRanging</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService9authorizeFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/authorize()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService9authorizeFT_T_">authorize()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks the location services authorization status.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">authorize</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager14didEnterRegionCSo8CLRegion_T_"></a>
+                    <a name="//apple_ref/swift/Method/locationManager(_:didEnterRegion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager14didEnterRegionCSo8CLRegion_T_">locationManager(_:didEnterRegion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager13didExitRegionCSo8CLRegion_T_"></a>
+                    <a name="//apple_ref/swift/Method/locationManager(_:didExitRegion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager13didExitRegionCSo8CLRegion_T_">locationManager(_:didExitRegion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager17didDetermineStateOSC13CLRegionState9forRegionCSo8CLRegion_T_"></a>
+                    <a name="//apple_ref/swift/Method/locationManager(_:didDetermineState:forRegion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager17didDetermineStateOSC13CLRegionState9forRegionCSo8CLRegion_T_">locationManager(_:didDetermineState:forRegion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Start updating user location and beacon ranging when inside region otherwise turn off beacon ranging and updating user location</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">locationManager</span><span class="p">(</span><span class="nv">manager</span><span class="p">:</span> <span class="kt">CLLocationManager</span><span class="p">,</span> <span class="n">didDetermineState</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">CLRegionState</span><span class="p">,</span> <span class="n">forRegion</span> <span class="nv">region</span><span class="p">:</span> <span class="kt">CLRegion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager15didRangeBeaconsGSaCSo8CLBeacon_8inRegionCSo14CLBeaconRegion_T_"></a>
+                    <a name="//apple_ref/swift/Method/locationManager(_:didRangeBeacons:inRegion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager15didRangeBeaconsGSaCSo8CLBeacon_8inRegionCSo14CLBeaconRegion_T_">locationManager(_:didRangeBeacons:inRegion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager18didUpdateLocationsGSaCSo10CLLocation__T_"></a>
+                    <a name="//apple_ref/swift/Method/locationManager(_:didUpdateLocations:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10LibraryBox17LBLocationService15locationManagerFTCSo17CLLocationManager18didUpdateLocationsGSaCSo10CLLocation__T_">locationManager(_:didUpdateLocations:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">LBLocationService</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">CLLocationManagerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-08-15)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -2,8 +2,8 @@
 //  LBReachabilityService.swift
 //  LibraryBox
 //
-//  Created by David on 15/06/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 15/06/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import Foundation
@@ -66,9 +66,9 @@ public class LBReachabilityService {
     
     /**
      Checks, if connected to a box by requesting the config.json file that is present at the box. If the URL can be found, a notification is posted via NSNotificationCenter that the device is connected to a box. Otherwise, a notification is sent via NSNotificationCenter that it is not connected.
-     //http://192.168.77.1/config.json
      */
     class func isConnectedToBox() {
+        //http://192.168.77.1/config.json
         if let url = NSURL(string: "http://librarybox.us/config.json") {
             let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 2)
             let config = NSURLSessionConfiguration.defaultSessionConfiguration()

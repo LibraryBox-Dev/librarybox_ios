@@ -2,14 +2,14 @@
 //  NotificationController.swift
 //  LibraryBox Notifications Extension
 //
-//  Created by David on 13/06/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 13/06/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import WatchKit
 import Foundation
 
-
+///Notification Controller Class
 class NotificationController: WKUserNotificationInterfaceController {
 
     override init() {

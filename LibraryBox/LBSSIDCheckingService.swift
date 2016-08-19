@@ -2,8 +2,8 @@
 //  LBSSIDCheckingService.swift
 //  LibraryBox
 //
-//  Created by David on 30/05/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 30/05/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 //Objective-C code from StackOverflow using NetworkExtension/NEHotspotHelper class to retrieve current SSID
 //http://stackoverflow.com/questions/31555640/how-to-get-wifi-ssid-in-ios9-after-captivenetwork-is-depracted-and-calls-for-wif
@@ -29,7 +29,7 @@ class LBSSIDCheckingService {
     /**
      Returns the title of the network currently connected to.
      
-     :returns: The SSID string.
+      - returns: The SSID string.
      */
     class func fetchSSIDInfo() ->  String {
         var currentSSID = ""

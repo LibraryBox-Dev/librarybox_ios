@@ -2,8 +2,8 @@
 //  LBRoundedButton.swift
 //  LibraryBox
 //
-//  Created by David on 29/05/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 29/05/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import Foundation

@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  LibraryBox
 //
-//  Created by David on 23/05/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 23/05/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import UIKit
@@ -21,9 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     /// The main window
     var window: UIWindow?
     var watchSession: WCSession?
+    
+    ///Container view controller
     var containerViewController: LBContainerViewController?
+    
+    ///Box content navigation controller
     var nav: LBBoxContentNavigationController?
 
+    
+    /**
+     Registers user notification settings. Setup of navigation bar appearance (orange color), AVAudioSession playback, Watchkit session if available. Sets root view controller for switching between LBContainerViewController and LBBoxWebViewController navigation controller.
+    */
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //set and register local notification settings
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
@@ -68,18 +76,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         return true
     }
     
+    /**
+     Switches to LBContainerViewController
+    */
     func switchToMainViewController() {
         window!.rootViewController = containerViewController
         window!.makeKeyAndVisible()
-
-        
     }
     
+    /**
+     Switches to Box Content Navigation Controller
+     */
     func switchToBoxViewController() {
         window!.rootViewController = nav
         window!.makeKeyAndVisible()        
     }
     
+    /**
+     Posts application launch options url key notification. Returns true.
+     
+     - returns: true
+    */
     func application(application: UIApplication,
                      openURL url: NSURL,
                              sourceApplication: String?,
@@ -118,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    // WCSessionDelegate methods
+    ///WCSessionDelegate session notification
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         let nc = NSNotificationCenter.defaultCenter()
         nc.postNotificationName(AppDelegate.LBWatchNotificationName, object: self, userInfo: message)

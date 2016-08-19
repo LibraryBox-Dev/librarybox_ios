@@ -2,8 +2,8 @@
 //  LibraryBoxUITests.swift
 //  LibraryBoxUITests
 //
-//  Created by David on 23/05/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 23/05/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import XCTest

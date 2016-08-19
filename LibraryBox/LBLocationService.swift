@@ -2,14 +2,14 @@
 //  LocationService.swift
 //  LibraryBox
 //
-//  Created by David on 23/05/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 23/05/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import Foundation
 import CoreLocation
 
-//The delegate protocol of the location service. Lists the methods that a delegate should implement to be notified for all location service related operation events.
+///The delegate protocol of the location service. Lists the methods that a delegate should implement to be notified for all location service related operation events.
 protocol LBLocationServiceDelegate
 {
     /**
@@ -96,7 +96,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     var currentLoc: CLLocation!
     
     //SETUP OF BEACON REGION FOR MONITORING AND RANGING
-    //E2C56DB5-DFFB-48D2-B060-D0F5A71096E0
+    //Demo Identifier (e.g. for Raspberry Pi): E2C56DB5-DFFB-48D2-B060-D0F5A71096E0
     let beaconRegion: CLBeaconRegion = {
         let beaconIdentifierUserDefault: Bool = NSUserDefaults.standardUserDefaults().boolForKey("customIdentifier")
         if(!beaconIdentifierUserDefault)

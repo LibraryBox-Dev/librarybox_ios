@@ -24,6 +24,7 @@
 		635793131D50D4EC00DFF14B /* createLicense.pl in Resources */ = {isa = PBXBuildFile; fileRef = 635793121D50D4EC00DFF14B /* createLicense.pl */; };
 		636B6A0E1CF4844200C35C96 /* LBContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */; };
 		637019AA1CF5ADA700D3C702 /* LBWIFIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */; };
+		6370E59A1D66612A00E77690 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6370E5991D66612A00E77690 /* CloudKit.framework */; };
 		6373D1F31D4950AD0086DD81 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373D1F21D4950AD0086DD81 /* MimeType.swift */; };
 		63754B7E1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */; };
 		63754B851D0EFAC6002B2EFE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63754B831D0EFAC6002B2EFE /* Interface.storyboard */; };
@@ -45,7 +46,6 @@
 		63BA7E761CFCE36100FE2F2C /* LBBoxWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BA7E751CFCE36100FE2F2C /* LBBoxWebViewController.swift */; };
 		63BB3FA11CF3A11E00EF88E8 /* LBBeaconRangingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA01CF3A11E00EF88E8 /* LBBeaconRangingView.swift */; };
 		63BB3FA41CF3A15300EF88E8 /* LBBeaconRangingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB3FA31CF3A15300EF88E8 /* LBBeaconRangingViewController.swift */; };
-		63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 63BB3FB21CF3B38D00EF88E8 /* TODO */; };
 		63E014FE1D01D20E00269FD6 /* LBMapPinningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E014FD1D01D20E00269FD6 /* LBMapPinningTableViewController.swift */; };
 		63E33E9B1CF2E7A9005F6F5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9A1CF2E7A9005F6F5C /* AppDelegate.swift */; };
 		63E33E9D1CF2E7A9005F6F5C /* LBMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E33E9C1CF2E7A9005F6F5C /* LBMainViewController.swift */; };
@@ -142,6 +142,7 @@
 		635793121D50D4EC00DFF14B /* createLicense.pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; name = createLicense.pl; path = LicenseFolder/createLicense.pl; sourceTree = "<group>"; };
 		636B6A0D1CF4844200C35C96 /* LBContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBContainerViewController.swift; sourceTree = "<group>"; };
 		637019A91CF5ADA700D3C702 /* LBWIFIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBWIFIButton.swift; sourceTree = "<group>"; };
+		6370E5991D66612A00E77690 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6373D1F21D4950AD0086DD81 /* MimeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		63754B7D1D0EECBE002B2EFE /* LBBoxProximityCircleOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxProximityCircleOverlay.swift; sourceTree = "<group>"; };
 		63754B811D0EFAC6002B2EFE /* LibraryBox Notifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LibraryBox Notifications.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +158,7 @@
 		63754B9C1D0EFAC6002B2EFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63781EFA1D365807005B711D /* LBPinningPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBPinningPopoverViewController.swift; sourceTree = "<group>"; };
 		63781EFE1D393487005B711D /* LBBoxContentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBoxContentNavigationController.swift; sourceTree = "<group>"; };
+		638370D11D5B59AF00A4E3F5 /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = docs; sourceTree = SOURCE_ROOT; };
 		639E6CC81D11CF1600F7953B /* LBReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LBReachabilityService.swift; path = ../LBReachabilityService.swift; sourceTree = "<group>"; };
 		63A275061D2175BA00EE2CF5 /* LibraryBox Notifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "LibraryBox Notifications.entitlements"; sourceTree = "<group>"; };
 		63A275071D2175E600EE2CF5 /* LibraryBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LibraryBox.entitlements; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6370E59A1D66612A00E77690 /* CloudKit.framework in Frameworks */,
 				63E33EC91CF2E7DA005F6F5C /* MapKit.framework in Frameworks */,
 				A53E2B2CE12506276073C068 /* Pods_LibraryBox.framework in Frameworks */,
 			);
@@ -241,6 +244,7 @@
 		041800A99B984BA586C9C5B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6370E5991D66612A00E77690 /* CloudKit.framework */,
 				7E6585F3FF2BE7F342208304 /* Pods_LibraryBox.framework */,
 				33D9481FB2FC56DAE4ECD871 /* Pods_LibraryBoxTests.framework */,
 				8D7A896C55513BE54862B959 /* Pods_LibraryBoxUITests.framework */,
@@ -445,6 +449,7 @@
 		63E33ECC1CF2E882005F6F5C /* Supporting FIles */ = {
 			isa = PBXGroup;
 			children = (
+				638370D11D5B59AF00A4E3F5 /* docs */,
 				0AD96B6F1D1AF2DE00F8A838 /* README.md */,
 				63BB3FAD1CF3B04E00EF88E8 /* LibraryBox-Bridging-Header.h */,
 				63E33EA61CF2E7A9005F6F5C /* Info.plist */,
@@ -600,6 +605,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
 						};
 					};
 					63E33EAA1CF2E7A9005F6F5C = {
@@ -662,7 +670,6 @@
 				635793111D50D39200DFF14B /* Thanks.license in Resources */,
 				6316D6961D082C9F00C68EBF /* Podfile in Resources */,
 				63E33EA51CF2E7A9005F6F5C /* LaunchScreen.storyboard in Resources */,
-				63BB3FB31CF3B38D00EF88E8 /* TODO in Resources */,
 				63401BC01D50DC49008C26BD /* Settings.bundle in Resources */,
 				6357930B1D50D2C000DFF14B /* PKHUD.license in Resources */,
 				6357930D1D50D2FB00DFF14B /* MaterialDesignIcons.license in Resources */,

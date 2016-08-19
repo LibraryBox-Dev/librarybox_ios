@@ -2,8 +2,8 @@
 //  InterfaceController.swift
 //  LibraryBox Notifications Extension
 //
-//  Created by David on 13/06/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 13/06/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 
@@ -11,7 +11,7 @@ import WatchKit
 import WatchConnectivity
 import Foundation
 
-
+///Class to manage watch session.
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var proximityLabel: WKInterfaceLabel!
     private var defaultSession: WCSession?
@@ -19,6 +19,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     let myInterval:NSTimeInterval = 15.0
     private var isUpdatingUI:Bool = false
     
+    /**
+     Sets proximity label and activates session. Calls function self.sendUIUpdateRequest().
+    */
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         self.proximityLabel.setText("No box in range")
@@ -43,7 +46,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.didDeactivate()
     }
     
-    
+    /**
+     Starts a timer to update the user interface.
+    */
     func startTimer()
     {
         if(timer != nil)
@@ -61,6 +66,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         isUpdatingUI = true
     }
     
+    /**
+     Stops timer.
+    */
     func endTimer(){
         if(timer != nil)
         {
@@ -70,6 +78,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         }
     }
     
+    /**
+     Sends a session message with payload "BeaconRanging".
+    */
     func sendUIUpdateRequest()
     {
         if defaultSession!.reachable != true {
@@ -80,9 +91,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     
-    // WCSessionDelegate methods
+    ///WCSessionDelegate method
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         if let closestBeaconState = message["ClosestBeaconProximity"] {
+            //Sets proximity label text
             self.proximityLabel.setText(closestBeaconState as? String)
         }
     }

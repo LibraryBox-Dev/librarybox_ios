@@ -2,18 +2,19 @@
 //  LBMapPinningTableViewController.swift
 //  LibraryBox
 //
-//  Created by David on 03/06/16.
-//  Copyright © 2016 Berkman Center. All rights reserved.
+//  Created by David Haselberger on 03/06/16.
+//  Copyright © 2016 Evenly Distributed LLC. All rights reserved.
 //
 
 import Foundation
 import UIKit
 import CoreLocation
 import AddressBookUI
+import CloudKit
 
 //AeroGearOAuth2 library used for authenticating to Google Fusion Table Service
-import AeroGearHttp
-import AeroGearOAuth2
+//import AeroGearHttp
+//import AeroGearOAuth2
 
 import PKHUD
 
@@ -24,7 +25,6 @@ protocol LBAddressPinningDelegate
 }
 
 ///UITableViewController class to manage static UITableView for pinning LibraryBox addresses. Checks if address in textview is valid placemark, if there is already a LibraryBox pinned to the current location - and enables to pin a location if a valid, unique address is found for pinning.
-//TODO: add libraryBox locations where no address can be specified
 class LBMapPinningTableViewController: UITableViewController
 {
     //Outlets to views in static tableview cells
@@ -33,20 +33,23 @@ class LBMapPinningTableViewController: UITableViewController
     @IBOutlet weak var pinButton: UIButton!
     @IBOutlet weak var boxAddressFeedback: UILabel!
     
-    //The current location of the user (received through "prepareForSegue" in LBMainViewController)
+    ///The current location of the user (received through "prepareForSegue" in LBMainViewController)
     var currentLocationOfUser: CLLocation!
     
-    //The current box map annotations (received through "prepareForSegue" in LBMainViewController)
+    ///The current box map annotations (received through "prepareForSegue" in LBMainViewController)
     var currentBoxLocations: [MKAnnotation] = []
     
     //A placemark that is received by checking the current location
     var placemarkForPinning: CLPlacemark!
 
     //The http request of AeroGearOAuth2
-    var http: Http!
+    //var http: Http!
     
     var delegate: LBAddressPinningDelegate?
     
+    /**
+     Setup of navigation bar, gesture recognizer to hide keyboard on tapping outside of textview, pinning button. Checks if there is a current user location. If so, tries to retrieve a placemark from it.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,7 +75,7 @@ class LBMapPinningTableViewController: UITableViewController
         }
         
         //Instantiate http class of AeroGearHttp framework and assign to variable http.
-        http = Http()
+        //http = Http()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -96,22 +99,25 @@ class LBMapPinningTableViewController: UITableViewController
      Retrieves a placemark from a location. The address of the placemark is presented on the textview. The function validateAddressText() is called.
     */
     func getPlacemarkFromLocation(location: CLLocation){
-        CLGeocoder().reverseGeocodeLocation(location, completionHandler:
-            {(placemarks, error) in
-                if (error != nil) {print("reverse geocode fail: \(error!.localizedDescription)")}
-                let pm = placemarks! as [CLPlacemark]
-                if pm.count > 0 {
-                    let addressString = self.getAddressFromPlaceMark(pm[0])
-                    self.boxAddress.text = addressString
-                    self.validateAddressText()
-                }
-        })
+        if let theLoc: CLLocation = location
+        {
+            CLGeocoder().reverseGeocodeLocation(theLoc, completionHandler:
+                {(placemarks, error) in
+                    if (error != nil) {print("reverse geocode fail: \(error!.localizedDescription)")}
+                    let pm = placemarks! as [CLPlacemark]
+                    if pm.count > 0 {
+                        let addressString = self.getAddressFromPlaceMark(pm[0])
+                        self.boxAddress.text = addressString
+                        self.validateAddressText()
+                    }
+            })
+        }
     }
     
     /**
      Returns an (optional) address string from a CLPlacemark.
      
-     :returns: (optional) address string from a CLPlacemark
+     - returns: (optional) address string from a CLPlacemark
     */
     func getAddressFromPlaceMark(unsafePlaceMark: CLPlacemark? )->String?{
         if let placeMark = unsafePlaceMark{
@@ -134,65 +140,128 @@ class LBMapPinningTableViewController: UITableViewController
             {
                 HUD.show(.Progress)
             }
-            let googleConfig = GoogleConfig(
-                
-                //LBGoogleAPIAccessService.clientId() returns the client ID of the service for the app in the scope
-                clientId: LBGoogleAPIAccessService.clientId(),
-                scopes:["https://www.googleapis.com/auth/fusiontables"])
-            let gdModule =  OAuth2Module(config: googleConfig)
-            self.http.authzModule = gdModule
-            
-            //If access is granted, a new row is set in the Fusion Table associated with LibraryBox locations
-            gdModule.requestAccess { (response:AnyObject?, error:NSError?) -> Void in
-                
-                //The acces API key of the app to the service
-                let accessKey:String = LBGoogleAPIAccessService.accessKey()
-                
-                //The content of the Description column in the Fusion Table row
-                let addressTitle:String = self.getAddressFromPlaceMark(self.placemarkForPinning)!
-                
-                //The content of the type column in the Fusion Table row
-                let type:String = self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
-                
-                //The SQL query to add the new row in Fusion Table (INSERT INTO table-id (Column, *) VALUES (Value for column, *)
-                let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)',\(locationForPinning.coordinate.latitude),\(locationForPinning.coordinate.longitude),'\(type)');"
-                
-                //Transfer sqlQuery string to a URL query string
-                let queryURL: String = sqlQuery.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                
-                //The complete URL path string for the Fusion Table query
-                let pathString:String = "https://www.googleapis.com/fusiontables/v2/query?sql=INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Location, Type) VALUES ('\(addressTitle)', '\(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude)', '\(type)');&key=\(accessKey)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-                
-                //The http request to the REST API of the Fusion Table service
-                self.http.request(.POST, path: pathString, parameters: ["sql":queryURL, "key":accessKey], credential: nil, responseSerializer: StringResponseSerializer(), completionHandler: {(response, error) in
-                    
-                    //Error checking for http request
-                    if (error != nil) {
-                        delay(0.1)
-                        {
-                            HUD.hide()
-                        }
-                        let alert:UIAlertController = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                        self.presentViewController(alert, animated: true, completion: nil)
-                        print("Error uploading file: \(error)")
-                    } else {
-                        HUD.flash(.Success, delay: 1.0)
-                        self.delegate?.pinningSuccessful()
-                        delay(2.0)
-                        {
-                            HUD.hide()
-                            print("Successfully posted: " + response!.description)
-                            self.dismissViewControllerAnimated(true, completion:{
-                            })
-                        }
-                    }
-                })
+            let recordType: String = "BoxLocations"
+            let myRecord = CKRecord(recordType: recordType)
+            if let recordAddress: String = self.getAddressFromPlaceMark(self.placemarkForPinning)!
+            {
+                if(!recordAddress.isEmpty)
+                {
+                    myRecord.setObject(recordAddress, forKey:"Address")
+                }
             }
+            if let type:String = self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
+            {
+                    if(!type.isEmpty)
+                    {
+                        myRecord.setObject(type, forKey:"BoxType")
+                    }
+            }
+            if let location: CLLocation = locationForPinning
+            {
+                myRecord.setObject(location, forKey:"Location")
+            }
+            let publicDatabase = CKContainer.defaultContainer().publicCloudDatabase
+            publicDatabase.saveRecord(myRecord) { record, error in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if error == nil{
+                        print("success")
+                    }
+                    
+                    if let error = error where error.code == 14 {
+                        publicDatabase.fetchRecordWithID(myRecord.recordID) {
+                            rec, nsError  in
+                            
+                            if let rec = rec {
+                                for key in myRecord.allKeys() {
+                                    rec[key] = myRecord[key]
+                                    //                                rec.setObject(myRecord.objectForKey(key), forKey:"key")
+                                }
+                                //
+                                publicDatabase.saveRecord(myRecord) {
+                                    record, error in
+                                    
+                                    self.processResult(rec, error: nsError)
+                                    
+                                }
+                            }
+                        }
+                    } else {
+                        self.processResult(record, error: error)
+                    }
+                    
+                }
+            }
+//            let googleConfig = GoogleConfig(
+//
+//                //LBGoogleAPIAccessService.clientId() returns the client ID of the service for the app in the scope
+//                clientId: LBGoogleAPIAccessService.clientId(),
+//                scopes:["https://www.googleapis.com/auth/fusiontables"])
+//            let gdModule =  OAuth2Module(config: googleConfig)
+//            self.http.authzModule = gdModule
+//            
+//            //If access is granted, a new row is set in the Fusion Table associated with LibraryBox locations
+//            gdModule.requestAccess { (response:AnyObject?, error:NSError?) -> Void in
+//                
+//                //The acces API key of the app to the service
+//                let accessKey:String = LBGoogleAPIAccessService.accessKey()
+//                
+//                //The content of the Description column in the Fusion Table row
+//                let addressTitle:String = self.getAddressFromPlaceMark(self.placemarkForPinning)!
+//                
+//                //The content of the type column in the Fusion Table row
+//                let type:String = self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
+//                
+//                //The SQL query to add the new row in Fusion Table (INSERT INTO table-id (Column, *) VALUES (Value for column, *)
+//                let sqlQuery:String = "INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Latitude, Longitude, Type) VALUES ('\(addressTitle)',\(locationForPinning.coordinate.latitude),\(locationForPinning.coordinate.longitude),'\(type)');"
+//                
+//                //Transfer sqlQuery string to a URL query string
+//                let queryURL: String = sqlQuery.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//                
+//                //The complete URL path string for the Fusion Table query
+//                let pathString:String = "https://www.googleapis.com/fusiontables/v2/query?sql=INSERT INTO 1ICTFk4jdIZIneeHOvhWOcvsZxma_jSqcAWNwuRlK (Description, Location, Type) VALUES ('\(addressTitle)', '\(locationForPinning.coordinate.latitude), \(locationForPinning.coordinate.longitude)', '\(type)');&key=\(accessKey)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+//                
+//                //The http request to the REST API of the Fusion Table service
+//                self.http.request(.POST, path: pathString, parameters: ["sql":queryURL, "key":accessKey], credential: nil, responseSerializer: StringResponseSerializer(), completionHandler: {(response, error) in
+//                    
+//                    //Error checking for http request
+//                    if (error != nil) {
+//                        delay(0.1)
+//                        {
+//                            HUD.hide()
+//                        }
+//                        let alert:UIAlertController = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
+//                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+//                        self.presentViewController(alert, animated: true, completion: nil)
+//                        print("Error uploading file: \(error)")
+//                    } else {
+//                        HUD.flash(.Success, delay: 1.0)
+//                        self.delegate?.pinningSuccessful()
+//                        delay(2.0)
+//                        {
+//                            HUD.hide()
+//                            print("Successfully posted: " + response!.description)
+//                            self.dismissViewControllerAnimated(true, completion:{
+//                            })
+//                        }
+//                    }
+//                })
+//            }
         }
         
     }
     
+    func processResult(record: CKRecord?, error: NSError?) {
+
+            HUD.flash(.Success, delay: 1.0)
+            self.delegate?.pinningSuccessful()
+            delay(2.0)
+            {
+                HUD.hide()
+                print("Successfully posted!")
+                self.dismissViewControllerAnimated(true, completion:{
+                })
+            }
+    }
     
     /**
      Dismiss the tableview controller
@@ -243,9 +312,16 @@ class LBMapPinningTableViewController: UITableViewController
                             
                         } else
                         {
+                            if(self.currentBoxLocations.count < 1)
+                            {
+                                self.updateAddressFeedback("\u{274C} Currently no box locations available. Please try again later")
+                            }
+                            else
+                            {
                             //if a pin is found at the location, the user is informed and the pinning button not enabled
                             self.updateAddressFeedback("\u{274C} '\(currentAddress)' already on map")
                             self.pinButton.enabled = false
+                            }
                         }
                     }else
                     {
@@ -266,7 +342,7 @@ class LBMapPinningTableViewController: UITableViewController
     /**
      Returns a bool signifying if the location is already annotated on the map. 
      
-     :returns: Bool signifying if the location is already annotated on the map -> true if it is, false if it is not
+     - returns: Bool signifying if the location is already annotated on the map -> true if it is, false if it is not
      */
     func checkForDublicatePinning(place: CLPlacemark) -> Bool
     {
@@ -301,7 +377,7 @@ class LBMapPinningTableViewController: UITableViewController
 
 
 
-//MARK: Delegate functions of UITextView -> set pinButton enabled attribute to false when editing, validate the address entered when editing ended.
+///Delegate functions of UITextView -> set pinButton enabled attribute to false when editing, validate the address entered when editing ended.
 extension LBMapPinningTableViewController: UITextViewDelegate
 {
 
