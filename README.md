@@ -1,6 +1,7 @@
 # librarybox_ios
 LibraryBox iOS 
 An open source application for the iOS platform written in Swift
+* [LibraryBox iOS is part of the LibraryBox Project](http://librarybox.us/iOS/)
 
 ## Development
 ### Requirements
