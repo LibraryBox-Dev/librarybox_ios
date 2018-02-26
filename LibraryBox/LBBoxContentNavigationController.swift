@@ -15,11 +15,11 @@ class LBBoxContentNavigationController: UINavigationController
     /**
      Dismisses the view controller.
     */
-    override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
+    override func dismiss(animated flag: Bool, completion: (() -> Void)?) {
         print("dismissing")
         if((self.presentedViewController) != nil)
         {
-            super.dismissViewControllerAnimated(flag, completion: completion)
+            super.dismiss(animated: flag, completion: completion)
         }
     } 
 }

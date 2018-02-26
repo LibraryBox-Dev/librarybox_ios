@@ -42,28 +42,28 @@ class LBPinningPopoverViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updatePopoverUI(_:)), name: "LBCurrentClosestBeacon", object: nil)
-        pinCloseBoxButton.userInteractionEnabled = false
-        pinCloseBoxButton.selected = false
-        addAddressButton.selected = true
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updatePopoverUI(notification:)), name: NSNotification.Name(rawValue: "LBCurrentClosestBeacon"), object: nil)
+        pinCloseBoxButton.isUserInteractionEnabled = false
+        pinCloseBoxButton.isSelected = false
+        addAddressButton.isSelected = true
     //    http = Http()
     }
 
     /**
      Called on notification for current closest beacon. Updates the proximity string of the popover view. Button to pin close box is enabled or disabled based on beacon proximity.
     */
-    func updatePopoverUI(notification: NSNotification)
+    @objc func updatePopoverUI(notification: NSNotification)
     {
         let theBeacon: CLBeacon = notification.object as! CLBeacon
         var proximityString: String = "NOT IN RANGE"
         switch theBeacon.proximity {
-        case .Far:
+        case .far:
             proximityString = "FAR"
-        case .Near:
+        case .near:
             proximityString = "NEAR"
-        case .Immediate:
+        case .immediate:
             proximityString = "CLOSE"
-        case .Unknown:
+        case .unknown:
             proximityString = "NOT IN RANGE"
         }
         let beaconAccuracy = Int(theBeacon.accuracy)
@@ -71,18 +71,18 @@ class LBPinningPopoverViewController: UIViewController {
         proximityLabel.text = proximityStringAppearance
         if(proximityString == "NEAR")
         {
-            pinCloseBoxButton.userInteractionEnabled = true
-            pinCloseBoxButton.selected = true
+            pinCloseBoxButton.isUserInteractionEnabled = true
+            pinCloseBoxButton.isSelected = true
         }
         else if(proximityString == "CLOSE")
         {
-            pinCloseBoxButton.userInteractionEnabled = true
-            pinCloseBoxButton.selected = true
+            pinCloseBoxButton.isUserInteractionEnabled = true
+            pinCloseBoxButton.isSelected = true
         }
         else
         {
-            pinCloseBoxButton.userInteractionEnabled = false
-            pinCloseBoxButton.selected = false
+            pinCloseBoxButton.isUserInteractionEnabled = false
+            pinCloseBoxButton.isSelected = false
         }
         pinCloseBoxButton.setNeedsDisplay()
     }
@@ -94,15 +94,15 @@ class LBPinningPopoverViewController: UIViewController {
     {
         if let locationForPinning = self.delegate?.currentLocation()
         {
-            delay(0.1)
+            delay(delay: 0.1)
             {
-                HUD.show(.Progress)
+                HUD.show(.progress)
             }
-            if(!self.checkForDublicatePinning(locationForPinning))
+            if(!self.checkForDublicatePinning(loc: locationForPinning))
             {
-                delay(0.1)
+                delay(delay: 0.1)
                 {
-                    HUD.show(.Progress)
+                    HUD.show(.progress)
                 }
                 let recordType: String = "BoxLocations"
                 let myRecord = CKRecord(recordType: recordType)
@@ -113,44 +113,50 @@ class LBPinningPopoverViewController: UIViewController {
 //                        myRecord.setObject(recordAddress, forKey:"Address")
 //                    }
 //                }
-                if let type:String = self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
+                if let type:String = self.boxTypeSelection.titleForSegment(at: self.boxTypeSelection.selectedSegmentIndex)!
                 {
                     if(!type.isEmpty)
                     {
-                        myRecord.setObject(type, forKey:"BoxType")
+                        myRecord.setObject(type as CKRecordValue, forKey:"BoxType")
                     }
                 }
                 if let location: CLLocation = locationForPinning
                 {
                     myRecord.setObject(location, forKey:"Location")
                 }
-                let publicDatabase = CKContainer.defaultContainer().publicCloudDatabase
-                publicDatabase.saveRecord(myRecord) { record, error in
-                    dispatch_async(dispatch_get_main_queue()) {
+                let publicDatabase = CKContainer.default().publicCloudDatabase
+                publicDatabase.save(myRecord) { record, error in
+                    DispatchQueue.main.async() {
                         if error == nil{
                             print("success")
                         }
-                        
-                        if let error = error where error.code == 14 {
-                            publicDatabase.fetchRecordWithID(myRecord.recordID) {
-                                rec, nsError  in
-                                
-                                if let rec = rec {
-                                    for key in myRecord.allKeys() {
-                                        rec[key] = myRecord[key]
-                                        //                                rec.setObject(myRecord.objectForKey(key), forKey:"key")
-                                    }
-                                    //
-                                    publicDatabase.saveRecord(myRecord) {
-                                        record, error in
+                        if(error != nil)
+                        {
+                            if let error = error as NSError? {
+                                if(error.code == 14)
+                                {
+                                    publicDatabase.fetch(withRecordID: myRecord.recordID) {
+                                        rec, nsError  in
                                         
-                                        self.processResult(rec, error: nsError)
-                                        
+                                        if let rec = rec {
+                                            for key in myRecord.allKeys() {
+                                                rec[key] = myRecord[key]
+                                                //                                rec.setObject(myRecord.objectForKey(key), forKey:"key")
+                                            }
+                                            //
+                                            publicDatabase.save(myRecord) {
+                                                record, error in
+                                                
+                                                self.processResult(record: rec, error: nsError! as NSError)
+                                                
+                                            }
+                                        }
                                     }
                                 }
                             }
-                        } else {
-                            self.processResult(record, error: error)
+                        }
+                        else {
+                            self.processResult(record: record, error: error! as NSError)
                         }
                         
                     }
@@ -215,26 +221,26 @@ class LBPinningPopoverViewController: UIViewController {
             }
             else
             {
-                delay(0.1)
+                delay(delay: 0.1)
                 {
                     HUD.hide()
                 }
-                let alert:UIAlertController = UIAlertController(title: "Box already pinned", message: "The box is already pinned on the map.", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let alert:UIAlertController = UIAlertController(title: "Box already pinned", message: "The box is already pinned on the map.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
     func processResult(record: CKRecord?, error: NSError?) {
         
-        HUD.flash(.Success, delay: 1.0)
+        HUD.flash(.success, delay: 1.0)
         self.delegate?.locationPinningSuccessful()
-        delay(2.0)
+        delay(delay: 2.0)
         {
             HUD.hide()
             print("Successfully posted!")
-            self.dismissViewControllerAnimated(true, completion:{
+            self.dismiss(animated: true, completion:{
             })
         }
     }
@@ -249,7 +255,7 @@ class LBPinningPopoverViewController: UIViewController {
         {
             let locationOfPlace = loc
             let pinLoc = CLLocation(latitude: boxLoc.coordinate.latitude, longitude: boxLoc.coordinate.longitude)
-            let distance = locationOfPlace.distanceFromLocation(pinLoc)
+            let distance = locationOfPlace.distance(from: pinLoc)
             if (distance < 5)
             {
                 isDublicate = true
@@ -268,7 +274,7 @@ class LBPinningPopoverViewController: UIViewController {
     */
     @IBAction func addAddress(sender: AnyObject!)
     {
-        self.dismissViewControllerAnimated(true, completion:{
+        self.dismiss(animated: true, completion:{
             self.delegate?.pinAddress()
         })
     }

@@ -368,18 +368,19 @@ class LBContainerViewController: UIViewController {
             }
         else if (!self.connectedToBox && self.presentingBoxViewController)
         {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                print("to map")
+            DispatchQueue.main.async(
+                execute: {
+                    print("to map")
                 //self.centerViewController.presentedViewController!.performSegueWithIdentifier("returnToMap", sender: self)
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.switchToMainViewController()
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.switchToMainViewController()
             })
-            self.wifiButton.hidden = false
-            self.boxButton.hidden = false
-            self.mapPinButton.hidden = false
+            self.wifiButton.isHidden = false
+            self.boxButton.isHidden = false
+            self.mapPinButton.isHidden = false
             if(rangingViewExpandedStateStore == true)
             {
-                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                centerPanelExpandedOffset = UIScreen.main.bounds.width - 100
                 self.toggleRightPanel()
                 rangingViewExpandedStateStore = false
             }
@@ -391,12 +392,12 @@ class LBContainerViewController: UIViewController {
         }
         else if(!self.connectedToBox && !self.presentingBoxViewController)
         {
-            self.wifiButton.hidden = false
-            self.boxButton.hidden = false
-            self.mapPinButton.hidden = false
+            self.wifiButton.isHidden = false
+            self.boxButton.isHidden = false
+            self.mapPinButton.isHidden = false
             if(rangingViewExpandedStateStore == true)
             {
-                centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                centerPanelExpandedOffset = UIScreen.main.bounds.width - 100
                 self.toggleRightPanel()
                 rangingViewExpandedStateStore = false
             }
@@ -430,9 +431,9 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
         }
         else{
             self.wifiButton.turnOnBGOpacity()
-            centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+            centerPanelExpandedOffset = UIScreen.main.bounds.width - 100
         }
-        self.animateRightPanel(notExpanded)
+        self.animateRightPanel(shouldExpand: notExpanded)
     }
     
     func collapseSidePanel() {
@@ -448,16 +449,16 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
      Add view and view controller of panel to container view.
     */
     func addChildSidePanelController(sidePanelController: LBBeaconRangingViewController) {
-        view.insertSubview(sidePanelController.view, atIndex: 0)
+        view.insertSubview(sidePanelController.view, at: 0)
         self.addChildViewController(sidePanelController)
-        sidePanelController.didMoveToParentViewController(self)
+        sidePanelController.didMove(toParentViewController: self)
     }
     
     
     func addRightPanelViewController() {
         if (self.rightViewController == nil) {
             self.rightViewController = UIStoryboard.rightPanelViewController()
-            self.addChildSidePanelController(self.rightViewController!)
+            self.addChildSidePanelController(sidePanelController: self.rightViewController!)
         }
     }
     
@@ -465,7 +466,7 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
      Animates panel presentation.
     */
     func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
             self.centerNavigationController.view.frame.origin.x = targetPosition
             }, completion: completion)
     }
@@ -473,13 +474,13 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
     func animateRightPanel(shouldExpand: Bool) {
         if (shouldExpand) {
             currentState = .RightPanelExpanded
-            animateCenterPanelXPosition(-CGRectGetWidth(centerNavigationController.view.frame) + centerPanelExpandedOffset)
+            animateCenterPanelXPosition(targetPosition: -centerNavigationController.view.frame.width + centerPanelExpandedOffset)
         } else {
-            animateCenterPanelXPosition(0) { _ in
+            animateCenterPanelXPosition(targetPosition: 0) { _ in
                 self.currentState = .Collapsed
                 self.rightViewController!.view.removeFromSuperview()
                 self.rightViewController = nil;
-                self.centerPanelExpandedOffset = UIScreen.mainScreen().bounds.width - 100
+                self.centerPanelExpandedOffset = UIScreen.main.bounds.width - 100
             }
         }
     }
@@ -496,18 +497,18 @@ extension LBContainerViewController: LBMainViewControllerDelegate {
 
 ///UIStoryboard extension to retrieve view controllers
 private extension UIStoryboard {
-    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
     
     class func rightPanelViewController() -> LBBeaconRangingViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("BeaconRangingViewController") as? LBBeaconRangingViewController
+        return mainStoryboard().instantiateViewController(withIdentifier: "BeaconRangingViewController") as? LBBeaconRangingViewController
     }
     
     class func centerViewController() -> LBMainViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("MainViewController") as? LBMainViewController
+        return mainStoryboard().instantiateViewController(withIdentifier: "MainViewController") as? LBMainViewController
     }
     
     class func boxViewController() -> LBBoxWebViewController? {
-        return mainStoryboard().instantiateViewControllerWithIdentifier("BoxViewController") as? LBBoxWebViewController
+        return mainStoryboard().instantiateViewController(withIdentifier: "BoxViewController") as? LBBoxWebViewController
     }
     
 }

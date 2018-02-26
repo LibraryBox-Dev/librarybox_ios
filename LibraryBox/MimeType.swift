@@ -118,22 +118,22 @@ internal let mimeTypes = [
 ]
 
 internal func MimeType(ext: String?) -> String {
-    if ext != nil && mimeTypes.contains({ $0.0 == ext!.lowercaseString }) {
-        return mimeTypes[ext!.lowercaseString]!
+    if ext != nil && mimeTypes.contains(where: { $0.0 == ext!.lowercased() }) {
+        return mimeTypes[ext!.lowercased()]!
     }
     return DEFAULT_MIME_TYPE
 }
 
 extension NSURL {
     public func mimeType() -> String {
-        return MimeType(self.pathExtension)
+        return MimeType(ext: self.pathExtension)
     }
 }
 
 
 extension NSString {
     public func mimeType() -> String {
-        return MimeType(self.pathExtension)
+        return MimeType(ext: self.pathExtension)
     }
 }
 

@@ -98,28 +98,28 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     //SETUP OF BEACON REGION FOR MONITORING AND RANGING
     //Demo Identifier (e.g. for Raspberry Pi): E2C56DB5-DFFB-48D2-B060-D0F5A71096E0
     let beaconRegion: CLBeaconRegion = {
-        let beaconIdentifierUserDefault: Bool = NSUserDefaults.standardUserDefaults().boolForKey("customIdentifier")
+        let beaconIdentifierUserDefault: Bool = UserDefaults.standard.bool(forKey: "customIdentifier")
         if(!beaconIdentifierUserDefault)
         {
-            let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")!, identifier: "Identifier")
+            let theRegion = CLBeaconRegion(proximityUUID: NSUUID(uuidString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")! as UUID, identifier: "Identifier")
             theRegion.notifyEntryStateOnDisplay = true
             //UNLocationNotificationTrigger(region: region, repeats: false);
             return theRegion
         }
         else
         {
-            if let idString: String = NSUserDefaults.standardUserDefaults().stringForKey("beaconIdentifier")
+            if let idString: String = UserDefaults.standard.string(forKey: "beaconIdentifier")
             {
-                if let uuidString = NSUUID(UUIDString: idString)
+                if let uuidString = NSUUID(uuidString: idString)
                 {
-                    let aRegion: CLBeaconRegion = CLBeaconRegion(proximityUUID: uuidString, identifier: "Identifier")
+                    let aRegion: CLBeaconRegion = CLBeaconRegion(proximityUUID: uuidString as UUID, identifier: "Identifier")
                     aRegion.notifyEntryStateOnDisplay = true
                     //UNLocationNotificationTrigger(region: region, repeats: false);
                     return aRegion
                 }
                 else
                 {
-                    let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")!, identifier: "Identifier")
+                    let theRegion = CLBeaconRegion(proximityUUID: NSUUID(uuidString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")! as UUID, identifier: "Identifier")
                     theRegion.notifyEntryStateOnDisplay = true
                     //UNLocationNotificationTrigger(region: region, repeats: false);
                     return theRegion
@@ -127,7 +127,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             }
             else
             {
-                let theRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")!, identifier: "Identifier")
+                let theRegion = CLBeaconRegion(proximityUUID: NSUUID(uuidString: "55B38AF2-0A1B-4072-97D1-4579109ED6CD")! as UUID, identifier: "Identifier")
                 theRegion.notifyEntryStateOnDisplay = true
                 //UNLocationNotificationTrigger(region: region, repeats: false);
                 return theRegion
@@ -150,16 +150,16 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     {
         useLocationManagerNotifications()
         switch CLLocationManager.authorizationStatus() {
-        case .AuthorizedAlways:
+        case .authorizedAlways:
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.pausesLocationUpdatesAutomatically = false
             locationManager.allowsBackgroundLocationUpdates = true
             locationManager.startUpdatingLocation()
             delegate?.userLocationServiceStartedSuccessfully()
-        case .AuthorizedWhenInUse, .Denied, .Restricted:
+        case .authorizedWhenInUse, .denied, .restricted:
             print("Couldn't turn on user location: Required Location Access (Always) missing.")
             delegate?.userLocationServiceFailedToStartDueToAuthorization()
-        case .NotDetermined:
+        case .notDetermined:
             locationManager.requestAlwaysAuthorization()
         }
     }
@@ -186,18 +186,18 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             return
         }
         
-        if !(CLLocationManager.isMonitoringAvailableForClass(CLBeaconRegion)) {
+        if !(CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self)) {
             print("Couldn't turn on region monitoring: Region monitoring is not available for CLBeaconRegion class.")
             delegate?.monitoringFailedToStart()
             return
         }
         switch CLLocationManager.authorizationStatus() {
-        case .AuthorizedAlways:
+        case .authorizedAlways:
             startMonitoring()
-        case .AuthorizedWhenInUse, .Denied, .Restricted:
+        case .authorizedWhenInUse, .denied, .restricted:
             print("Couldn't turn on monitoring: Required Location Access (Always) missing.")
             delegate?.monitoringFailedToStartDueToAuthorization()
-        case .NotDetermined:
+        case .notDetermined:
             locationManager.requestAlwaysAuthorization()
         }
     }
@@ -206,7 +206,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
      Turns on monitoring (after all the checks have been passed).
      */
     func startMonitoring() {
-        locationManager.startMonitoringForRegion(beaconRegion)
+        locationManager.startMonitoring(for: beaconRegion)
         print("Monitoring turned on for region: \(beaconRegion)")
         delegate?.monitoringStartedSuccessfully()
     }
@@ -215,7 +215,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
      Stops the monitoring process.
      */
     func stopMonitoringForBeacons() {
-        locationManager.stopMonitoringForRegion(beaconRegion)
+        locationManager.stopMonitoring(for: beaconRegion)
         print("Turned off monitoring")
         delegate?.monitoringStoppedSuccessfully()
     }
@@ -241,12 +241,12 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             return
         }
         switch CLLocationManager.authorizationStatus() {
-        case .AuthorizedAlways, .AuthorizedWhenInUse:
+        case .authorizedAlways, .authorizedWhenInUse:
             startRanging()
-        case .Denied, .Restricted:
+        case .denied, .restricted:
             print("Couldn't turn on ranging: Required Location Access (When In Use) missing.")
             delegate?.rangingFailedToStartDueToAuthorization()
-        case .NotDetermined:
+        case .notDetermined:
             locationManager.requestAlwaysAuthorization()
         }
         
@@ -256,7 +256,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
      Turns on ranging (after all the checks have been passed).
      */
     func startRanging() {
-        locationManager.startRangingBeaconsInRegion(beaconRegion)
+        locationManager.startRangingBeacons(in: beaconRegion)
         print("Ranging turned on for beacons in region: \(beaconRegion)")
         delegate?.rangingStartedSuccessfully()
     }
@@ -269,7 +269,7 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
             print("Didn't turn off ranging: Ranging already off.")
             return
         }
-        locationManager.stopRangingBeaconsInRegion(beaconRegion)
+        locationManager.stopRangingBeacons(in: beaconRegion)
         delegate?.rangingStoppedSuccessfully()
         print("Turned off ranging.")
     }
@@ -280,16 +280,13 @@ class LBLocationService: NSObject, CLLocationManagerDelegate
     func authorize()
     {
         switch CLLocationManager.authorizationStatus() {
-        case .AuthorizedAlways:
+        case .authorizedAlways:
             break
-        case .AuthorizedWhenInUse, .Denied, .Restricted:
+        case .authorizedWhenInUse, .denied, .restricted:
             print("Couldn't turn on monitoring: Required Location Access (Always) missing.")
             delegate?.monitoringFailedToStartDueToAuthorization()
-        case .NotDetermined:
-            if(locationManager.respondsToSelector(#selector(CLLocationManager.requestAlwaysAuthorization))) {
+        case .notDetermined:
                 locationManager.requestAlwaysAuthorization()
-            }
-            
         }
     }
 }
@@ -304,15 +301,15 @@ extension LBLocationService
         /**
          Start ranging on entering beacon range
          */
-        locationManager.startRangingBeaconsInRegion(beaconRegion)
-        delegate?.monitoringDetectedEnteringRegion(region as! CLBeaconRegion)
+        locationManager.startRangingBeacons(in: beaconRegion)
+        delegate?.monitoringDetectedEnteringRegion(region: region as! CLBeaconRegion)
     }
     
     func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
         /**
          Stop ranging on exiting beacon range
          */
-        locationManager.stopRangingBeaconsInRegion(beaconRegion)
+        locationManager.stopRangingBeacons(in: beaconRegion)
         print("Exited region: \(region)")
     }
     
@@ -323,15 +320,15 @@ extension LBLocationService
         var stateString: String
         
         switch state {
-        case .Inside:
+        case .inside:
             stateString = "inside"
             self.startUpdatingUserLocation()
             self.startBeaconRanging()
-        case .Outside:
+        case .outside:
             stateString = "outside"
             self.stopBeaconRanging()
             self.stopUpdatingUserLocation()
-        case .Unknown:
+        case .unknown:
             stateString = "unknown"
             self.stopBeaconRanging()
             self.stopUpdatingUserLocation()
@@ -347,7 +344,7 @@ extension LBLocationService
                          didRangeBeacons beacons: [CLBeacon],
                                          inRegion region: CLBeaconRegion)
     {
-        delegate?.rangingBeaconsInRange(beacons, inRegion: region)
+        delegate?.rangingBeaconsInRange(beacons: beacons, inRegion: region)
     }
 }
 
@@ -355,6 +352,6 @@ extension LBLocationService
 {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLoc = locations.last
-        delegate?.userLocationChangedTo(currentLoc)
+        delegate?.userLocationChangedTo(location: currentLoc)
     }
 }

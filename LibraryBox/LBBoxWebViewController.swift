@@ -33,30 +33,30 @@ class LBBoxWebViewController: UIViewController
         backButton = UIBarButtonItem(title: "◄", style: .Plain, target: self, action:#selector(goBack(_:)))
         items.append(backButton!)
         items.append(
-            UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         )
         forwardButton = UIBarButtonItem(title: "►", style: .Plain, target: self, action:#selector(goForward(_:)))
         items.append(forwardButton!)
         items.append(
-            UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         )
         items.append(
             UIBarButtonItem(barButtonSystemItem: .Action, target: self, action:#selector(showActivityViewController(_:)))
         )
         items.append(
-            UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         )
-        let wifi = UIImage(named: "wifinotification")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let wifi = UIImage(named: "wifinotification")!.imageWithRenderingMode(UIImageRenderingMode.alwaysTemplate)
         let wifiButton = UIButton()
         wifiButton.frame = CGRectMake(0, 0, 22, 22)
-        wifiButton.setImage(wifi, forState: .Normal)
+        wifiButton.setImage(wifi, for: .Normal)
         wifiButton.addTarget(self, action: #selector(gotoWifiSettings(_:)), forControlEvents: .TouchUpInside)
         let wifiBarButton = UIBarButtonItem()
         wifiBarButton.customView = wifiButton
 
         items.append(wifiBarButton)
         self.setToolbarItems(items, animated: false)
-        self.navigationController?.toolbarHidden = false
+        self.navigationController?.isToolbarHidden = false
 
         
         webView.delegate = self
@@ -138,7 +138,7 @@ class LBBoxWebViewController: UIViewController
     */
     func updateTitle()
     {
-        if let pageTitle: String = webView.stringByEvaluatingJavaScriptFromString("document.title")
+        if let pageTitle: String = webView.stringByEvaluatingJavaScript(from: "document.title")
         {
             self.navigationItem.title = pageTitle
         }
@@ -153,8 +153,8 @@ class LBBoxWebViewController: UIViewController
     */
     func updateButtons()
     {
-        self.forwardButton!.enabled = self.webView.canGoForward
-        self.backButton!.enabled = self.webView.canGoBack
+        self.forwardButton!.isEnabled = self.webView.canGoForward
+        self.backButton!.isEnabled = self.webView.canGoBack
     }
     
 }
@@ -163,21 +163,21 @@ class LBBoxWebViewController: UIViewController
 ///Delegate methods
 extension LBBoxWebViewController: UIWebViewDelegate
 {
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    private func webView(webView: UIWebView, shouldStartLoadWithRequest request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         
         return true
     }
     
     
-    func webViewDidStartLoad(webView: UIWebView){
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func webViewDidStartLoad(_ webView: UIWebView){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.updateButtons()
         reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: #selector(stop(_:)))
          self.navigationItem.rightBarButtonItem = reloadButton
     }
     
-    func webViewDidFinishLoad(webView: UIWebView){
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func webViewDidFinishLoad(_ webView: UIWebView){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(doRefresh(_:)))
          self.navigationItem.rightBarButtonItem = reloadButton
         self.updateTitle()
@@ -191,7 +191,7 @@ extension LBBoxWebViewController: UIWebViewDelegate
     func webView(webView: UIWebView,
                  didFailLoadWithError error: NSError?){
 
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         self.updateButtons()
         reloadButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(doRefresh(_:)))
          self.navigationItem.rightBarButtonItem = reloadButton
@@ -201,29 +201,29 @@ extension LBBoxWebViewController: UIWebViewDelegate
         }
         else if(error!.code == 102)
         {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             let urlString: String = (error?.userInfo["NSErrorFailingURLStringKey"])! as! String
             print(urlString)
-            let task = NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!) {
+            let task = URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL) {
                 data, response, error in
-                if let httpResponse = response as? NSHTTPURLResponse {
+                if let httpResponse = response as? HTTPURLResponse {
                     if let contentType = httpResponse.allHeaderFields["Content-Type"] as? String {
                         print(contentType)
                         
                         var filePath = NSURL(string: urlString)!.lastPathComponent!
                         if (filePath.rangeOfString(".epub.zip") != nil)
                         {
-                            filePath = (NSURL(string: urlString)!.URLByDeletingPathExtension?.lastPathComponent)!
+                            filePath = (NSURL(string: urlString)!.deletingPathExtension?.lastPathComponent)!
                         }
-                        let filename = self.getDocumentsDirectory().stringByAppendingPathComponent(filePath)
+                        let filename = self.getDocumentsDirectory().appendingPathComponent(filePath)
                         
                         data?.writeToFile(filename, atomically: true)
                         
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                        self.interactionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: filename))
-                        delay(0.1)
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.interactionController = UIDocumentInteractionController(url: NSURL(fileURLWithPath: filename) as URL)
+                        delay(delay: 0.1)
                         {
-                            self.interactionController!.presentOpenInMenuFromRect(CGRectZero, inView: self.view, animated: true)
+                            self.interactionController!.presentOpenInMenu(from: CGRect.zero, in: self.view, animated: true)
                         }
                     }
                 }
@@ -232,11 +232,11 @@ extension LBBoxWebViewController: UIWebViewDelegate
         }
         else
         {
-            delay(0.1)
+            delay(delay: 0.1)
             {
-                let alert:UIAlertController = UIAlertController(title: "Error", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in self.checkBoxConnection()}))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let alert:UIAlertController = UIAlertController(title: "Error", message: "\(String(describing: error))", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(alert: UIAlertAction!) in self.checkBoxConnection()}))
+                self.present(alert, animated: true, completion: nil)
             }
         }
         
@@ -248,9 +248,9 @@ extension LBBoxWebViewController: UIWebViewDelegate
      - returns: User documents directory
     */
     func getDocumentsDirectory() -> NSString {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
-        return documentsDirectory
+        return documentsDirectory as NSString
     }
     
 }

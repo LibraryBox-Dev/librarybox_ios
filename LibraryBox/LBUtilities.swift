@@ -10,27 +10,24 @@ import Foundation
 
 
 ///Utility functions (used e. g. in LBMainViewController)
-
+//
 /**
  GCD Delay function
  */
-func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
+func delay(delay: Double, closure: @escaping () -> ()) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+        closure()
+    }
 }
 
 
 /**
  Presents an alert via UIAlertController
  */
-func showAlert(text : NSString, title : NSString, fn:()->Void){
-    let alert = UIAlertController(title: title as String, message: text as String, preferredStyle: UIAlertControllerStyle.Alert)
-    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(alert: UIAlertAction!) in fn()}))
-    UIApplication.sharedApplication().delegate?.window!?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+func showAlert(text : NSString, title : NSString, fn:@escaping ()->Void){
+    let alert = UIAlertController(title: title as String, message: text as String, preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(alert: UIAlertAction!) in fn()}))
+    UIApplication.shared.delegate?.window!?.rootViewController?.present(alert, animated: true, completion: nil)
 }
 
 

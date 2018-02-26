@@ -14,7 +14,7 @@ class LBAppInfoViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(doneViewing))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(doneViewing))
         self.navigationItem.rightBarButtonItem = doneButton
         self.navigationItem.title = "LibraryBox Info"
 
@@ -22,7 +22,7 @@ class LBAppInfoViewController: UIViewController
     
     @IBAction func doneViewing()
     {
-        self.dismissViewControllerAnimated(true, completion:{
+        self.dismiss(animated: true, completion:{
             
         })
         
