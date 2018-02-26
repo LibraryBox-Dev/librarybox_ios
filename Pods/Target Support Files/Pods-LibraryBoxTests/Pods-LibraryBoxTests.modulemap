@@ -1,6 +1,0 @@
-framework module Pods_LibraryBoxTests {
-  umbrella header "Pods-LibraryBoxTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

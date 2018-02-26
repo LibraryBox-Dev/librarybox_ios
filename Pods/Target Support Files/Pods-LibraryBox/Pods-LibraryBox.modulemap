@@ -1,6 +1,0 @@
-framework module Pods_LibraryBox {
-  umbrella header "Pods-LibraryBox-umbrella.h"
-
-  export *
-  module * { export * }
-}
