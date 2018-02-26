@@ -1,9 +1,12 @@
 # librarybox_ios
+
 LibraryBox iOS 
 An open source application for the iOS platform written in Swift
 
 ##Development
+
 ###Requirements
+
 
 If you wish to build LibraryBox iOS yourself, you will need the following components:
 
@@ -18,6 +21,7 @@ After cloning the repository, run the following commands inside the repository r
 pod install
 ```
 to install dependencies (AeroGearHttp, AeroGearOAuth2)
+
 
 ##Google Summer of Code 2016 Development 
 * [LibraryBox iOS Project Proposal](https://summerofcode.withgoogle.com/projects/#6529072016392192)
