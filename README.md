@@ -1,6 +1,6 @@
 # librarybox_ios
 
-LibraryBox iOS 
+[LibraryBox iOS](http://librarybox.us/iOS/)
 An open source application for the iOS platform written in Swift
 
 ## Development
