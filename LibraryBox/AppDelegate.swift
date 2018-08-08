@@ -14,6 +14,18 @@ import AVFoundation
 ///The application delegate
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
 
     /// The notification name for watch-related operations
     static let LBWatchNotificationName = "LBWatchNotificationName"
@@ -34,12 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     */
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //set and register local notification settings
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        let settings = UIUserNotificationSettings(types: [.alert, .badge , .sound], categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(settings)
         
         UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 140.0/255.0, blue: 0.0/255.0, alpha: 1.0)
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         
         
         do {
@@ -60,17 +72,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
         //setup watchkit connectivity session, if supported
         if WCSession.isSupported() {
-            watchSession = WCSession.defaultSession()
+            watchSession = WCSession.default
             watchSession!.delegate = self
-            watchSession!.activateSession()
+            watchSession!.activate()
         }
         
         containerViewController = LBContainerViewController()
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        nav = storyboard.instantiateViewControllerWithIdentifier("BoxContentNavigationController") as? LBBoxContentNavigationController
+        nav = storyboard.instantiateViewController(withIdentifier: "BoxContentNavigationController") as? LBBoxContentNavigationController
                 
         //set root view controller of app window to LBContainerViewController()
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         self.switchToMainViewController()
         
         return true
@@ -101,10 +113,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
                      openURL url: NSURL,
                              sourceApplication: String?,
                              annotation: AnyObject) -> Bool {
-        let notification = NSNotification(name: AGAppLaunchedWithURLNotification,
+        let notification = NSNotification(name: NSNotification.Name(rawValue: AGAppLaunchedWithURLNotification),
                                           object:nil,
-                                          userInfo:[UIApplicationLaunchOptionsURLKey:url])
-        NSNotificationCenter.defaultCenter().postNotification(notification)
+                                          userInfo:[UIApplicationLaunchOptionsKey.url:url])
+        NotificationCenter.default.post(notification as Notification)
         return true
     }
 
@@ -137,8 +149,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     
     ///WCSessionDelegate session notification
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.postNotificationName(AppDelegate.LBWatchNotificationName, object: self, userInfo: message)
+        let nc = NotificationCenter.default
+        nc.post(name: NSNotification.Name(rawValue: AppDelegate.LBWatchNotificationName), object: self)
     }
 
 }

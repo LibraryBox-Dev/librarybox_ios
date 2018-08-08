@@ -20,17 +20,19 @@ public class LBReachabilityService {
     */
     class func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
-        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
-        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
-            SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, UnsafePointer($0))
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
         }
         var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
         if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
             return false
         }
-        let isReachable = flags == .Reachable
-        let needsConnection = flags == .ConnectionRequired
+        let isReachable = flags == .reachable
+        let needsConnection = flags == .connectionRequired
         return isReachable && !needsConnection
     }
     
@@ -44,19 +46,19 @@ public class LBReachabilityService {
         var status:Bool = false
         
         let url = NSURL(string: "https://google.com")
-        let request = NSMutableURLRequest(URL: url!)
-        request.HTTPMethod = "HEAD"
-        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData
+        var request = URLRequest(url: url! as URL)
+        request.httpMethod = "HEAD"
+        request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 10.0
-        var response:NSURLResponse?
+        var response:URLResponse?
         do {
             //deprecated function in iOS9
-            let _ = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response) as NSData?
+            let _ = try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &response) as NSData?
         }
         catch let error as NSError {
             print(error.localizedDescription)
         }
-        if let httpResponse = response as? NSHTTPURLResponse {
+        if let httpResponse = response as? HTTPURLResponse {
             if httpResponse.statusCode == 200 {
                 status = true
             }
@@ -70,29 +72,29 @@ public class LBReachabilityService {
     class func isConnectedToBox() {
         //http://192.168.77.1/config.json
         if let url = NSURL(string: "http://librarybox.us/config.json") {
-            let request = NSMutableURLRequest(URL: url, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 2)
-            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-            let session = NSURLSession(configuration: config)
+            let request = URLRequest(url: url as URL, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 2)
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config)
             print("CHECKING BOX CONNECTION")
-            let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
                 if (error == nil) {
-                    if let httpResponse = response as? NSHTTPURLResponse {
+                    if let httpResponse = response as? HTTPURLResponse {
                         print("Status code: (\(httpResponse.statusCode))")
-                        let nc = NSNotificationCenter.defaultCenter()
+                        let nc = NotificationCenter.default
                         if (httpResponse.statusCode == 200)
                         {
-                            nc.postNotificationName("LBConnectedToBox", object: nil)
+                            nc.post(name: NSNotification.Name(rawValue: "LBConnectedToBox"), object: nil)
                             print("connected")
                         }
                         else
                         {
-                            nc.postNotificationName("LBNotConnectedToBox", object: nil)
+                            nc.post(name: NSNotification.Name(rawValue: "LBNotConnectedToBox"), object: nil)
                             print("not connected")
                         }
                     }
                 }else
                 {
-                    NSNotificationCenter.defaultCenter().postNotificationName("LBNotConnectedToBox", object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LBNotConnectedToBox"), object: nil)
                     print("Failure: %@", error!.localizedDescription);
                 }
             })

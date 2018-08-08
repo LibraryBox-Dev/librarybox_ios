@@ -54,7 +54,7 @@ class LBMapPinningTableViewController: UITableViewController
         super.viewDidLoad()
         
         //Navigation bar setup
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(cancelPinning))
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(cancelPinning))
         self.navigationItem.rightBarButtonItem = cancelButton
         self.navigationItem.title = "Box Address"
         
@@ -63,7 +63,7 @@ class LBMapPinningTableViewController: UITableViewController
         self.tableView.addGestureRecognizer(gestureRecognizer)
         
         //Sets pinning button enabled boolean to false.
-        self.pinButton.enabled = false
+        self.pinButton.isEnabled = false
         
         //Sets the delegate of the textview to self.
         self.boxAddress.delegate = self
@@ -71,14 +71,14 @@ class LBMapPinningTableViewController: UITableViewController
         //check if there is a current location of the user. If so, try to get a placemark for the location.
         if currentLocationOfUser != nil
         {
-            self.getPlacemarkFromLocation(currentLocationOfUser)
+            self.getPlacemarkFromLocation(location: currentLocationOfUser)
         }
         
         //Instantiate http class of AeroGearHttp framework and assign to variable http.
         //http = Http()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -106,7 +106,7 @@ class LBMapPinningTableViewController: UITableViewController
                     if (error != nil) {print("reverse geocode fail: \(error!.localizedDescription)")}
                     let pm = placemarks! as [CLPlacemark]
                     if pm.count > 0 {
-                        let addressString = self.getAddressFromPlaceMark(pm[0])
+                        let addressString = self.getAddressFromPlaceMark(unsafePlaceMark: pm[0])
                         self.boxAddress.text = addressString
                         self.validateAddressText()
                     }
@@ -123,7 +123,7 @@ class LBMapPinningTableViewController: UITableViewController
         if let placeMark = unsafePlaceMark{
             if let address=placeMark.addressDictionary?["FormattedAddressLines"] as? [String]
             {
-                let addressString = address.joinWithSeparator(",")
+                let addressString = address.joined(separator: ",")
                 return addressString
             }
         }
@@ -136,39 +136,39 @@ class LBMapPinningTableViewController: UITableViewController
     @IBAction func pinBox(sender: UIButton) {
         if let locationForPinning = self.placemarkForPinning.location
         {
-            delay(0.1)
+            delay(delay: 0.1)
             {
-                HUD.show(.Progress)
+                HUD.show(.progress)
             }
             let recordType: String = "BoxLocations"
             let myRecord = CKRecord(recordType: recordType)
-            if let recordAddress: String = self.getAddressFromPlaceMark(self.placemarkForPinning)!
+            if let recordAddress: String = self.getAddressFromPlaceMark(unsafePlaceMark: self.placemarkForPinning)!
             {
                 if(!recordAddress.isEmpty)
                 {
-                    myRecord.setObject(recordAddress, forKey:"Address")
+                    myRecord.setObject(recordAddress as CKRecordValue, forKey:"Address")
                 }
             }
-            if let type:String = self.boxTypeSelection.titleForSegmentAtIndex(self.boxTypeSelection.selectedSegmentIndex)!
+            if let type:String = self.boxTypeSelection.titleForSegment(at: self.boxTypeSelection.selectedSegmentIndex)!
             {
                     if(!type.isEmpty)
                     {
-                        myRecord.setObject(type, forKey:"BoxType")
+                        myRecord.setObject(type as CKRecordValue, forKey:"BoxType")
                     }
             }
             if let location: CLLocation = locationForPinning
             {
                 myRecord.setObject(location, forKey:"Location")
             }
-            let publicDatabase = CKContainer.defaultContainer().publicCloudDatabase
-            publicDatabase.saveRecord(myRecord) { record, error in
-                dispatch_async(dispatch_get_main_queue()) {
+            let publicDatabase = CKContainer.default().publicCloudDatabase
+            publicDatabase.save(myRecord) { record, error in
+                DispatchQueue.main.async() {
                     if error == nil{
                         print("success")
                     }
                     
                     if let error = error where error.code == 14 {
-                        publicDatabase.fetchRecordWithID(myRecord.recordID) {
+                        publicDatabase.fetch(withRecordID: myRecord.recordID) {
                             rec, nsError  in
                             
                             if let rec = rec {
@@ -177,16 +177,16 @@ class LBMapPinningTableViewController: UITableViewController
                                     //                                rec.setObject(myRecord.objectForKey(key), forKey:"key")
                                 }
                                 //
-                                publicDatabase.saveRecord(myRecord) {
+                                publicDatabase.save(myRecord) {
                                     record, error in
                                     
-                                    self.processResult(rec, error: nsError)
+                                    self.processResult(record: rec, error: nsError as! NSError)
                                     
                                 }
                             }
                         }
                     } else {
-                        self.processResult(record, error: error)
+                        self.processResult(record: record, error: error as! NSError)
                     }
                     
                 }
@@ -252,13 +252,13 @@ class LBMapPinningTableViewController: UITableViewController
     
     func processResult(record: CKRecord?, error: NSError?) {
 
-            HUD.flash(.Success, delay: 1.0)
+        HUD.flash(.success, delay: 1.0)
             self.delegate?.pinningSuccessful()
-            delay(2.0)
+        delay(delay: 2.0)
             {
                 HUD.hide()
                 print("Successfully posted!")
-                self.dismissViewControllerAnimated(true, completion:{
+                self.dismiss(animated: true, completion:{
                 })
             }
     }
@@ -268,7 +268,7 @@ class LBMapPinningTableViewController: UITableViewController
     */
     @IBAction func cancelPinning()
     {
-        self.dismissViewControllerAnimated(true, completion:{
+        self.dismiss(animated: true, completion:{
             
         })
 
@@ -283,10 +283,10 @@ class LBMapPinningTableViewController: UITableViewController
         let addressText = self.boxAddress.text
         
         //Data detection for text view string -> addresses found are added to an array of String dictionaries
-        let types: NSTextCheckingType = [.Address]
+        let types: NSTextCheckingResult.CheckingType = [.address]
         let detector = try? NSDataDetector(types: types.rawValue)
-        var addresses: [[String:String]] = []
-        detector?.enumerateMatchesInString(addressText, options: [], range: NSMakeRange(0, (addressText as NSString).length)) { (result, flags, _) in
+        var addresses: [[NSTextCheckingKey:String]] = []
+        detector?.enumerateMatches(in: addressText!, options: [], range: NSMakeRange(0, (addressText as! NSString).length)) { (result, flags, _) in
             addresses.append((result?.addressComponents)!)
             print(result?.addressComponents)
         }
@@ -300,42 +300,42 @@ class LBMapPinningTableViewController: UITableViewController
                 if pm.count > 0 {
                     
                     //if more placemarks can be found, use the first one found
-                    if let currentAddress = self.getAddressFromPlaceMark(pm[0])
+                    if let currentAddress = self.getAddressFromPlaceMark(unsafePlaceMark: pm[0])
                     {
                         
                         //check if the placemark is already pinned on the map, if not update feedback label and enable the pinning button
-                        if !self.checkForDublicatePinning(pm[0])
+                        if !self.checkForDublicatePinning(place: pm[0])
                         {
-                            self.updateAddressFeedback("\u{2705} '\(currentAddress)' valid")
+                            self.updateAddressFeedback(text: "\u{2705} '\(currentAddress)' valid")
                             self.placemarkForPinning = pm[0]
-                            self.pinButton.enabled = true
+                            self.pinButton.isEnabled = true
                             
                         } else
                         {
                             if(self.currentBoxLocations.count < 1)
                             {
-                                self.updateAddressFeedback("\u{274C} Currently no box locations available. Please try again later")
+                                self.updateAddressFeedback(text: "\u{274C} Currently no box locations available. Please try again later")
                             }
                             else
                             {
                             //if a pin is found at the location, the user is informed and the pinning button not enabled
-                            self.updateAddressFeedback("\u{274C} '\(currentAddress)' already on map")
-                            self.pinButton.enabled = false
+                                self.updateAddressFeedback(text: "\u{274C} '\(currentAddress)' already on map")
+                                self.pinButton.isEnabled = false
                             }
                         }
                     }else
                     {
                         //if no valid placemark can be retrieved, the user is informed and the pinning button not enabled
-                        self.updateAddressFeedback("\u{274C} No valid address found")
-                        self.pinButton.enabled = false
+                        self.updateAddressFeedback(text: "\u{274C} No valid address found")
+                        self.pinButton.isEnabled = false
                     }
                 }
             })
         }else
         {
             //if no  address can be retrieved, the user is informed and the pinning button not enabled
-            self.updateAddressFeedback("\u{274C} No valid address found")
-            self.pinButton.enabled = false
+            self.updateAddressFeedback(text: "\u{274C} No valid address found")
+            self.pinButton.isEnabled = false
         }
     }
     
@@ -351,15 +351,17 @@ class LBMapPinningTableViewController: UITableViewController
         {
             let locationOfPlace = place.location
             let pinLoc = CLLocation(latitude: boxLoc.coordinate.latitude, longitude: boxLoc.coordinate.longitude)
-            let distance = locationOfPlace?.distanceFromLocation(pinLoc)
-            if (distance < 15)
+            if let distance = locationOfPlace?.distance(from: pinLoc)
             {
-                isDublicate = true
-                break
-            }
-            else
-            {
-                isDublicate = false
+                if (distance < 15.0)
+                {
+                    isDublicate = true
+                    break
+                }
+                else
+                {
+                    isDublicate = false
+                }
             }
         }
         return isDublicate
@@ -382,7 +384,7 @@ extension LBMapPinningTableViewController: UITextViewDelegate
 {
 
     func textViewDidBeginEditing(textView: UITextView) {
-        self.pinButton.enabled = false
+        self.pinButton.isEnabled = false
     }
     
     

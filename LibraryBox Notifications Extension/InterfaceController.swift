@@ -13,22 +13,26 @@ import Foundation
 
 ///Class to manage watch session.
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
     @IBOutlet var proximityLabel: WKInterfaceLabel!
     private var defaultSession: WCSession?
-    private var timer: NSTimer?
-    let myInterval:NSTimeInterval = 15.0
+    private var timer: Timer?
+    let myInterval:TimeInterval = 15.0
     private var isUpdatingUI:Bool = false
     
     /**
      Sets proximity label and activates session. Calls function self.sendUIUpdateRequest().
     */
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         self.proximityLabel.setText("No box in range")
         if WCSession.isSupported() {
-            defaultSession = WCSession.defaultSession()
+            defaultSession = WCSession.default
             defaultSession!.delegate = self
-            defaultSession!.activateSession()
+            defaultSession!.activate()
         }
         self.sendUIUpdateRequest()
         // Configure interface objects here.
@@ -53,12 +57,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     {
         if(timer != nil)
         {
-            if (timer!.valid) {
+            if (timer!.isValid) {
                 timer!.invalidate()
                 timer = nil
             }
         }
-        timer = NSTimer.scheduledTimerWithTimeInterval(myInterval,
+        timer = Timer.scheduledTimer(timeInterval: myInterval,
                                                        target: self,
                                                        selector: #selector(InterfaceController.sendUIUpdateRequest),
                                                        userInfo: myInterval,
@@ -81,18 +85,18 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     /**
      Sends a session message with payload "BeaconRanging".
     */
-    func sendUIUpdateRequest()
+    @objc func sendUIUpdateRequest()
     {
-        if defaultSession!.reachable != true {
+        if defaultSession!.isReachable != true {
             return
         }
-        let payload = ["BeaconRanging": NSNumber(bool: true)]
+        let payload = ["BeaconRanging": NSNumber(value: true)]
         defaultSession!.sendMessage(payload, replyHandler: nil, errorHandler: nil)
     }
     
     
     ///WCSessionDelegate method
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         if let closestBeaconState = message["ClosestBeaconProximity"] {
             //Sets proximity label text
             self.proximityLabel.setText(closestBeaconState as? String)

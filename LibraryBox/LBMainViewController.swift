@@ -597,14 +597,14 @@ extension LBMainViewController: LBLocationServiceDelegate
             if(!self.updatingBeacons)
             {
                 self.updatingBeacons = true
-                self.currentBeacons = beacons.sort({ $0.accuracy < $1.accuracy})
+                self.currentBeacons = beacons.sorted(by: { $0.accuracy < $1.accuracy})
                 if(self.currentBeacons.count > 0)
                 {
                     self.closestBeacon = self.currentBeacons[0]
                 }
                 let sortedBeacons = self.currentBeacons
                 let filterFactor: Double = 0.2
-                for (index, value) in sortedBeacons.enumerate()
+                for (index, value) in sortedBeacons.enumerated()
                 {
                     if (index < 20)
                     {
@@ -633,20 +633,20 @@ extension LBMainViewController: LBLocationServiceDelegate
         {
             //Set distance radius of circular user location overlay in meters
             switch myBeacon.proximity {
-            case .Far:
+            case .far:
                 distanceRadius = 80.0
-            case .Near:
+            case .near:
                 distanceRadius = 15.0
-            case .Immediate:
+            case .immediate:
                 distanceRadius = 5.0
-            case .Unknown:
+            case .unknown:
                 distanceRadius = 5.0
             }
             
             //Update overlay
             self.removeOverlays()
-            let circle = LBBoxProximityCircleOverlay(centerCoordinate: location.coordinate, radius: distanceRadius as CLLocationDistance)
-            self.mapView.addOverlay(circle)
+            let circle = LBBoxProximityCircleOverlay(center: location.coordinate, radius: distanceRadius as CLLocationDistance)
+            self.mapView.add(circle)
         }
     }
 }
@@ -657,7 +657,7 @@ extension LBMainViewController: UIPopoverPresentationControllerDelegate
      Sets modal presentation style for popover controller.
     */
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.None
+        return UIModalPresentationStyle.none
     }
 }
 
@@ -668,7 +668,7 @@ extension LBMainViewController:LBPinningPopoverDelegate
      Called when "Add Box Address" button pressed.
     */
     func pinAddress() {
-        self.performSegueWithIdentifier("showPinningInfo", sender: self)
+        self.performSegue(withIdentifier: "showPinningInfo", sender: self)
     }
     
     /**
